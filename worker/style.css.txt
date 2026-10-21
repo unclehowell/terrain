@@ -56,3 +56,19 @@ canvas#c{position:absolute;inset:0;width:100%;height:100%;display:block;outline:
 #ptt.on{background:var(--gold);color:#111}
 .micnote{margin:0;font-size:14px;color:var(--gold);text-align:center}
 .micnote[hidden]{display:none}
+
+#rmbtn.on{background:var(--gold);color:#111}
+#rmleg{position:absolute;top:54px;right:10px;z-index:3;display:flex;flex-wrap:wrap;justify-content:flex-end;gap:6px 10px;max-width:min(420px,calc(100% - 20px));background:rgba(0,0,0,.6);color:#fff;border-radius:12px;padding:8px 10px;font-size:12px}
+#rmleg[hidden]{display:none}
+#rmleg .lg{display:inline-flex;align-items:center;gap:5px}
+#rmleg .lg i{display:inline-block;width:11px;height:11px;border-radius:3px}
+#rmleg .rmb{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;width:100%}
+#rmleg .tbtn{min-height:32px;padding:4px 10px;font-size:11px}
+#rmlist{width:100%;max-height:min(40vh,300px);overflow:auto;display:flex;flex-direction:column;gap:4px;margin-top:4px}
+#rmlist[hidden]{display:none}
+#rmlist b{font-size:13px;color:var(--gold)}
+#rmlist p{margin:0}
+#rmlist button{text-align:left;background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:6px 8px;font:13px var(--font);cursor:pointer}
+#rmlist button.over{border-color:#e53935}
+.upd{color:var(--mut);font-size:14px}
+@media (max-width:480px){#rmleg{top:50px;right:8px;left:8px;max-width:none;justify-content:flex-start}#rmleg .rmb{justify-content:flex-start}}

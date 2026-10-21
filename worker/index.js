@@ -5,6 +5,7 @@ const INITIAL = JSON.parse(INITIAL_TXT);
 import HTML from "./index.html";
 import APP from "./app.js.txt";
 import CSS from "./style.css.txt";
+import { loadRoadmap, loadSop, roadmapQuery } from "./roadmap.js";
 
 const HOST = "terrain.bucklerfamily.estate";
 const LLM = "@cf/meta/llama-3.3-70b-instruct-fp8-fast";
@@ -45,7 +46,7 @@ const cookie = (v, age) => `terrain_admin=${v}; Path=/; Max-Age=${age}; HttpOnly
 async function getJ(env, key) { const o = await env.BUCKET.get(key); return o ? o.json() : null; }
 const putJ = (env, key, v, meta) => env.BUCKET.put(key, JSON.stringify(v), { httpMetadata: { contentType: "application/json" }, customMetadata: meta });
 async function load(env) { return (await getJ(env, "state.json")) || { scene: JSON.parse(JSON.stringify(INITIAL)), undo: [], redo: [], log: [] }; }
-async function store(env, st) { st.scene.rev = (st.scene.rev || 0) + 1; st.scene.updated = new Date().toISOString(); await putJ(env, "state.json", st); }
+async function store(env, st) { st.rev = Math.max(st.rev || 0, st.scene.rev || 0) + 1; st.scene.rev = st.rev; st.scene.updated = new Date().toISOString(); await putJ(env, "state.json", st); }
 const ipKey = ip => ip.replace(/[^0-9a-fA-F:.]/g, "").slice(0, 64) || "x";
 async function hits(env, ip, kind, win) { const a = (await getJ(env, `rl/${kind}/${ipKey(ip)}.json`)) || []; return a.filter(t => t > now() - win).length; }
 async function hit(env, ip, kind) { const k = `rl/${kind}/${ipKey(ip)}.json`; const a = ((await getJ(env, k)) || []).filter(t => t > now() - 3600); a.push(now()); await putJ(env, k, a.slice(-500)); }
@@ -151,11 +152,14 @@ async function agent(env, st, text, history) {
 // ---------- static agent-readability files ----------
 const ROBOTS = `User-agent: *\nAllow: /\nDisallow: /api/\n\nSitemap: https://${HOST}/sitemap.xml\n`;
 const SITEMAP = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://${HOST}/</loc><changefreq>daily</changefreq></url><url><loc>https://${HOST}/llms.txt</loc></url></urlset>\n`;
-const LLMS = `# Terrain · Cedwyn Estate in 3D\n\n> A live 3D landscape of the Cedwyn Estate and Great House Farm (Tŷ Mawr), Llandough: every Great House Farm site is a building on the path, with the farmhouse, barn, fields, pond and St Dochdwy's churchyard to the south. The owner edits it by voice; visitors can look around.\n\n## Pages\n- [Terrain](https://${HOST}/): the 3D scene (orbit, zoom, walk; tap a building to open its site).\n\n## Data (read-only JSON)\n- [Current scene](https://${HOST}/agent/scene.json): every object (id, name, kind, position, colour, link) plus time of day and weather.\n- [Saved versions](https://${HOST}/agent/versions.json): names and dates of saved versions.\n- [Tools](https://${HOST}/agent/tools.json): the read-only WebMCP tools this site registers.\n\n## Related\n- [Cedwyn Estate 3D walk](https://bucklerfamily.estate/3d/)\n- [Base camp](https://bucklerfamily.estate/cedwyn/)\n`;
-const AGENT_TOOLS = { site: HOST, version: "1.0.0", tools: [
+const LLMS = `# Terrain · Cedwyn Estate in 3D\n\n> A live 3D landscape of the Cedwyn Estate and Great House Farm (Tŷ Mawr), Llandough: every Great House Farm site is a building on the path, with the farmhouse, barn, fields, pond and St Dochdwy's churchyard to the south. The owner edits it by voice; visitors can look around, open the Roadmap layer and ask by voice what is due or where a trail stands.\n\n## Pages\n- [Terrain](https://${HOST}/): the 3D scene (orbit, zoom, walk; tap a building to open its site).\n\n## Data (read-only JSON)\n- [Current scene](https://${HOST}/agent/scene.json): every object (id, name, kind, position, colour, link) plus time of day and weather.\n- [Saved versions](https://${HOST}/agent/versions.json): names and dates of saved versions.\n- [Roadmap](https://${HOST}/agent/roadmap.json): one disclosure trail per institution, eleven steps each from request to court, with status and date.\n- [Trigger-event procedure](https://${HOST}/agent/sop.json): the branching steps, gates, routes and outcomes.\n- [Due](https://${HOST}/agent/due.json?days=7): steps falling due in the next N days.\n- [Published changes](https://github.com/unclehowell/terrain/commits/main/data/scene.json): each editing session committed to data/scene.json.\n- [Tools](https://${HOST}/agent/tools.json): the read-only WebMCP tools this site registers.\n\n## Related\n- [Cedwyn Estate 3D walk](https://bucklerfamily.estate/3d/)\n- [Base camp](https://bucklerfamily.estate/cedwyn/)\n`;
+const AGENT_TOOLS = { site: HOST, version: "1.3.0", tools: [
   { name: "get_scene", description: "The current 3D scene: every object with id, name, kind, position, colour and link, plus time of day and weather.", endpoint: "/agent/scene.json", inputSchema: { type: "object", properties: {} } },
   { name: "list_versions", description: "Saved versions of the scene, newest first.", endpoint: "/agent/versions.json", inputSchema: { type: "object", properties: {} } },
-  { name: "search_objects", description: "Find objects in the scene by name or kind.", endpoint: "/agent/search.json", inputSchema: { type: "object", properties: { q: { type: "string" } }, required: ["q"] } } ] };
+  { name: "search_objects", description: "Find objects in the scene by name or kind.", endpoint: "/agent/search.json", inputSchema: { type: "object", properties: { q: { type: "string" } }, required: ["q"] } },
+  { name: "get_roadmap", description: "The disclosure roadmap: one trail per institution with its eleven escalation steps (request to court), each step's status and date.", endpoint: "/agent/roadmap.json", inputSchema: { type: "object", properties: {} } },
+  { name: "get_trigger_sop", description: "The trigger-event procedure as a branching graph of steps, gates, routes and outcomes.", endpoint: "/agent/sop.json", inputSchema: { type: "object", properties: {} } },
+  { name: "list_due", description: "Roadmap steps falling due in the next N days (0 = today).", endpoint: "/agent/due.json", inputSchema: { type: "object", properties: { days: { type: "integer", minimum: 0, maximum: 90 } } } } ] };
 const MCP = { name: "Terrain · Cedwyn Estate in 3D", url: `https://${HOST}/`, readOnly: true, tools: AGENT_TOOLS.tools.map(t => ({ name: t.name, description: t.description, endpoint: `https://${HOST}${t.endpoint}`, method: "GET", inputSchema: t.inputSchema })) };
 const FAVICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#000"/><path d="M6 50 L24 22 L34 36 L42 26 L58 50 Z" fill="#f2c94c"/></svg>`;
 const publicScene = sc => ({ ...sc, meta: { version: sc.meta && sc.meta.version, camera_seq: sc.meta && sc.meta.camera_seq, last: sc.meta && sc.meta.last } });
@@ -174,6 +178,33 @@ function cleanStt(t, prompt) {
   const w = t.split(" "); if (w.length > 8) { const seen = {}; let rep = 0; for (let i = 0; i + 3 <= w.length; i++) { const g = w.slice(i, i + 3).join(" ").toLowerCase(); seen[g] = (seen[g] || 0) + 1; if (seen[g] >= 3) rep++; } if (rep) return ""; }
   return t;
 }
+
+
+// ---------- roadmap (read-only, open to everyone) ----------
+const londonDay = () => new Date().toLocaleDateString("en-CA", { timeZone: "Europe/London" });
+const RM_HINT = /\b(due|deadlines?|coming up|upcoming|trails?|route|lane|steps?|stage|roadmap|sop|trigger|tribunal|court|ico|fly|take me|zoom)\b/i;
+const RM_HINT_ADMIN = /\b(due|deadlines?|coming up|upcoming|trails?|roadmap|steps?|stage|sop|trigger (event|route|plan))\b/i;
+async function rmAnswer(env, ctx, text, admin) {
+  if (!(admin ? RM_HINT_ADMIN : RM_HINT).test(text)) return null;
+  try { const rm = await loadRoadmap(env, ctx); return roadmapQuery(text, rm, londonDay()); } catch (e) { return null; }
+}
+
+// ---------- admin sessions -> GitHub publish queue ----------
+// R2 session.json: { open: {id, started, last, edits[]}, closed: [{id, reason, started, closed, edits[]}] }.
+// A session closes on lock, on the 4 h cookie timeout, or after 10 min with no edit. A GitHub Action in the repo
+// polls /api/publish/pending and commits data/scene.json for each closed session it has not recorded yet.
+const IDLE_S = 600;
+function closeOpen(ss, reason, at) { if (ss.open && ss.open.edits.length) { ss.closed = (ss.closed || []).concat([{ ...ss.open, reason, closed: new Date((at || now()) * 1000).toISOString() }]).slice(-20); } ss.open = null; return ss; }
+async function sessGet(env) { return (await getJ(env, "session.json")) || { open: null, closed: [] }; }
+async function noteEdit(env, says) {
+  const ss = await sessGet(env); const t = now();
+  if (ss.open && t - ss.open.last > IDLE_S) closeOpen(ss, t - ss.open.started > SESSION_S ? "timeout" : "idle", ss.open.last + IDLE_S);
+  if (!ss.open) ss.open = { id: new Date(t * 1000).toISOString().replace(/[-:]/g, "").slice(0, 15) + "-" + crypto.randomUUID().slice(0, 6), started: t, last: t, edits: [] };
+  for (let s of says) if (s) { s = String(s).replace(/\s+/g, " ").trim().replace(/^Undone\.?$/, "Undid the last change.").replace(/^Redone\.?$/, "Redid the last change."); ss.open.edits.push(s.slice(0, 160)); }
+  ss.open.edits = ss.open.edits.slice(-60); ss.open.last = t; await putJ(env, "session.json", ss);
+}
+async function sessClose(env, reason) { const ss = await sessGet(env); if (!ss.open) return; closeOpen(ss, reason); await putJ(env, "session.json", ss); }
+async function sessSweep(env) { const ss = await sessGet(env); const t = now(); if (ss.open && t - ss.open.last > IDLE_S) { closeOpen(ss, t - ss.open.started > SESSION_S ? "timeout" : "idle", ss.open.last + IDLE_S); await putJ(env, "session.json", ss); } return ss; }
 
 export default {
   async fetch(req, env, ctx) {
@@ -195,32 +226,38 @@ export default {
         if (p === "/agent/search.json") { const st = await load(env); const q = norm(url.searchParams.get("q") || ""); return J({ q, results: st.scene.objects.filter(o => !q || norm([o.name, o.kind, o.species, ...(o.aliases || [])].join(" ")).includes(q)).slice(0, 50) }, 200, { "access-control-allow-origin": "*" }); }
         if (p === "/api/versions" || p === "/agent/versions.json") { const rows = (await versionsList(env)).slice(0, 50); return J({ versions: rows.map(r => ({ name: r.name, label: r.label, saved: new Date(r.at * 1000).toISOString() })) }, 200, { "access-control-allow-origin": "*" }); }
         if (p === "/api/session") return J({ admin: await isAdmin(env, req) });
+        if (p === "/api/roadmap" || p === "/agent/roadmap.json") return J(await loadRoadmap(env, ctx), 200, { "access-control-allow-origin": "*", "cache-control": "public, max-age=120" });
+        if (p === "/api/sop" || p === "/agent/sop.json") return J(await loadSop(env, ctx), 200, { "access-control-allow-origin": "*", "cache-control": "public, max-age=120" });
+        if (p === "/agent/due.json") { const days = Math.min(90, Math.max(0, Number(url.searchParams.get("days") || 7))); const q = days === 0 ? "what is due today" : days <= 7 ? "what is due this week" : "what is coming up this month"; const r = roadmapQuery(q, await loadRoadmap(env, ctx), londonDay()); return J({ today: londonDay(), days, say: r && r.say, items: r && r.view.items || [] }, 200, { "access-control-allow-origin": "*", "cache-control": "public, max-age=120" }); }
+        if (p === "/api/publish/pending") { const ss = await sessSweep(env); const st = await load(env); return J({ closed: ss.closed || [], open: ss.open ? { id: ss.open.id, edits: ss.open.edits.length, idle_s: now() - ss.open.last } : null, rev: st.scene.rev || 0, updated: st.scene.updated || null, scene: publicScene(st.scene) }, 200, { "cache-control": "no-store" }); }
         return new Response("Not found", { status: 404, headers: { "content-type": "text/plain", ...SEC } });
       }
       if (req.method !== "POST") return J({ error: "method" }, 405);
       const admin = await isAdmin(env, req);
-      if (p === "/api/logout") return J({ ok: true, admin: false }, 200, { "set-cookie": cookie("", 0) });
+      if (p === "/api/logout") { if (admin) await sessClose(env, "locked"); return J({ ok: true, admin: false }, 200, { "set-cookie": cookie("", 0) }); }
       if (p === "/api/agent") {
         const b = await readJson(req); const text = String(b.text || "").trim();
         if (b.hello) return J({ admin, say: admin ? "You're still in. What do you want to change?" : "Alright, it's Tab. What's the passphrase?" });
         if (!text) return J({ admin, say: "Didn't catch that. Say it again?" });
         if (!admin) {
+          const ra = await rmAnswer(env, ctx, text, false); if (ra) return J({ admin: false, say: ra.say, view: ra.view });
           const n = await hits(env, ip, "pass", WINDOW_S);
           if (n >= MAX_TRIES) return J({ admin: false, locked: true, say: "That's too many goes. Try again in ten minutes. You can still look around." });
-          if (await passMatches(env, text)) { const tok = await mkSession(env); ctx.waitUntil(logEdit(env, "unlock", ip)); return J({ admin: true, unlocked: true, say: "You're in. Full control. What are we building?" }, 200, { "set-cookie": cookie(tok, SESSION_S) }); }
+          if (await passMatches(env, text)) { const tok = await mkSession(env); ctx.waitUntil(sessSweep(env)); ctx.waitUntil(logEdit(env, "unlock", ip)); return J({ admin: true, unlocked: true, say: "You're in. Full control. What are we building?" }, 200, { "set-cookie": cookie(tok, SESSION_S) }); }
           await hit(env, ip, "pass"); const left = MAX_TRIES - n - 1; ctx.waitUntil(logEdit(env, "wrong-pass", ip));
           return J({ admin: false, say: left > 0 ? "No, that's not it. Have another go." : "That's not it, and that's five goes. Try again in ten minutes. You can still look around." });
         }
+        const ra = await rmAnswer(env, ctx, text, true); if (ra) return J({ admin: true, say: ra.say, view: ra.view });
         const st = await load(env);
         if (b.selected) { const so = resolve(st.scene, String(b.selected)); if (so) { st.scene.meta = st.scene.meta || {}; st.scene.meta.last = so.id; } }
         const r = await agent(env, st, text, b.history);
-        if (r.results.length) { await store(env, st); ctx.waitUntil(logEdit(env, "voice", JSON.stringify({ text, results: r.results.map(x => [x.tool, x.args, x.ok]) }))); }
+        if (r.results.length) { await store(env, st); await noteEdit(env, r.results.filter(x => x.ok !== false).map(x => x.say)); ctx.waitUntil(logEdit(env, "voice", JSON.stringify({ text, results: r.results.map(x => [x.tool, x.args, x.ok]) }))); }
         return J({ admin: true, say: r.say, results: r.results, scene: publicScene(st.scene) });
       }
       if (p === "/api/tool") {
         if (!admin) return J({ error: "locked", say: "Say the passphrase first." }, 401);
         const b = await readJson(req); if (!TOOL_NAMES.has(b.name)) return J({ error: "unknown tool" }, 400);
-        const st = await load(env); const r = await execTool(env, st, b.name, b.args || {}); await store(env, st); ctx.waitUntil(logEdit(env, "tool", JSON.stringify([b.name, b.args, r.ok])));
+        const st = await load(env); const r = await execTool(env, st, b.name, b.args || {}); await store(env, st); if (r.ok !== false) await noteEdit(env, [r.say || b.name]); ctx.waitUntil(logEdit(env, "tool", JSON.stringify([b.name, b.args, r.ok])));
         return J({ ...r, scene: publicScene(st.scene) });
       }
       if (p === "/api/tts") {

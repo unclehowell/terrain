@@ -12,7 +12,7 @@
 <link rel="canonical" href="https://terrain.bucklerfamily.estate/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate" type="application/json" href="/agent/scene.json" title="Current scene (data)">
-<link rel="stylesheet" href="/style.css?v=1.2.2">
+<link rel="stylesheet" href="/style.css?v=1.4.2">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"Terrain · Cedwyn Estate in 3D","url":"https://terrain.bucklerfamily.estate/","inLanguage":"en-GB","publisher":{"@id":"https://bucklerfamily.estate/#org"}},{"@type":"Organization","@id":"https://bucklerfamily.estate/#org","name":"Williams–Buckler family","url":"https://bucklerfamily.estate/"}]}</script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 <script src="https://bucklerfamily.estate/ghf-lang/ghf-webmcp.js" defer></script>
@@ -23,8 +23,11 @@
   <h1 class="vh">Terrain · Cedwyn Estate in 3D</h1>
   <canvas id="c" aria-label="3D view of the Cedwyn Estate and Great House Farm" tabindex="0"></canvas>
   <div id="tl"><span id="mode" class="chip">View only</span></div>
-  <div id="tr"><button id="walk" class="tbtn" type="button" aria-pressed="false">Walk</button><button id="home" class="tbtn" type="button" aria-label="Reset view">⌂</button></div>
+  <div id="tr"><button id="rmbtn" class="tbtn" type="button" aria-pressed="false">Roadmap</button><button id="walk" class="tbtn" type="button" aria-pressed="false">Walk</button><button id="home" class="tbtn" type="button" aria-label="Reset view">⌂</button></div>
   <div id="card" role="dialog" aria-live="polite" hidden><button id="cardx" class="x" type="button" aria-label="Close">×</button><b id="cardt"></b><p id="cardd"></p><a id="cardl" class="tbtn gold" target="_blank" rel="noopener">Open site</a></div>
+  <div id="rmleg" hidden><span class="lg"><i style="background:#43b649"></i>Done</span><span class="lg"><i style="background:#e53935"></i>Missed</span><span class="lg"><i style="background:#f2c94c"></i>Next</span><span class="lg"><i style="background:#9aa3ad"></i>Later</span><span class="lg"><i style="background:#ffd54a;border-radius:50% 50% 2px 2px"></i>Today</span>
+    <span class="rmb"><button id="rmdue" class="tbtn" type="button">Due this week</button><button id="rmsop" class="tbtn" type="button">Trigger SOP</button><button id="rmall" class="tbtn" type="button">All trails</button></span>
+    <div id="rmlist" hidden></div></div>
   <div id="admin" hidden>
     <button class="tbtn" type="button" data-t="undo">Undo</button><button class="tbtn" type="button" data-t="redo">Redo</button><button class="tbtn" type="button" id="save">Save</button><button class="tbtn" type="button" id="vers">Versions</button><button class="tbtn" type="button" id="lock">Lock</button>
     <div id="vlist" hidden></div>
@@ -43,8 +46,10 @@
 <section class="about">
   <h2>Cedwyn Estate in 3D</h2>
   <p>Every Great House Farm site stands as a building on the stone path. Tŷ Mawr farmhouse, the barn, the fields, the pond and St Dochdwy's churchyard lie to the south. Drag to look around, pinch or scroll to zoom, and tap a building to open its site. The scene is live: changes appear here as they are made.</p>
-  <p><a href="https://bucklerfamily.estate/3d/">First-person walk</a> · <a href="/agent/scene.json">Scene data</a></p>
+  <p>Tap <b>Roadmap</b> for the disclosure trails: one path per institution from Tŷ Mawr, climbing from the first request through the deadline, internal review, the ICO, the Tribunal, complaint and the pre-action letter to court. Branches show where a reply ends a trail or opens the trigger event procedure; red crosses mark routes that close. The walker on each trail stands at today's date.</p>
+  <p id="upd" class="upd"></p>
+  <p><a href="https://bucklerfamily.estate/3d/">First-person walk</a> · <a href="/agent/scene.json">Scene data</a> · <a href="/api/roadmap">Roadmap data</a> · <a href="https://github.com/unclehowell/terrain/commits/main/data/scene.json">Published changes</a></p>
 </section>
-<script type="module" src="/app.js?v=1.3.0"></script>
+<script type="module" src="/app.js?v=1.4.2"></script>
 </body>
 </html>

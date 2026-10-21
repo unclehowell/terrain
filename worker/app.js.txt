@@ -1,4 +1,4 @@
-// terrain.bucklerfamily.estate — 3D scene renderer + voice call client. — Sion's Tab agent
+// terrain.bucklerfamily.estate — 3D scene renderer + voice call client.
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 const $ = id => document.getElementById(id);
@@ -163,8 +163,18 @@ const BUILD = { building, tree, fence, wall, path, water, field, label, marker, 
 const world = new THREE.Group(); scene.add(world);
 let SCENE = null, camSeq = -1, firstCam = true; const pickables = [];
 function disposeGroup(g) { g.traverse(o => { if (o.isSprite && o.material.map) { o.material.map.dispose(); o.material.dispose(); } if (o.geometry && !Object.values(G).includes(o.geometry)) o.geometry.dispose(); }); }
+// "Last updated" line under the scene, plus the latest published commit of data/scene.json.
+let PUB = null;
+function fmtWhen(iso) { const d = new Date(iso); if (isNaN(d)) return ""; return d.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/London" }) + ", " + d.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", timeZone: "Europe/London" }); }
+function showUpdated(sc) {
+  const el = document.getElementById("upd"); if (!el) return;
+  const w = sc && sc.updated ? fmtWhen(sc.updated) : ""; el.textContent = w ? "Last updated " + w + "." : "";
+  if (PUB) { el.append(" "); const a = document.createElement("a"); a.href = PUB.url; a.target = "_blank"; a.rel = "noopener"; a.textContent = "Published " + fmtWhen(PUB.at); el.append(a); el.append("."); }
+}
+fetch("https://api.github.com/repos/unclehowell/terrain/commits?path=data/scene.json&per_page=1").then(r => r.ok ? r.json() : []).then(a => { if (a && a[0]) { PUB = { url: a[0].html_url, at: a[0].commit.committer.date }; showUpdated(SCENE); } }).catch(() => {});
+
 function render(sc) {
-  SCENE = sc; lamps.length = 0; pickables.length = 0;
+  SCENE = sc; lamps.length = 0; pickables.length = 0; showUpdated(sc);
   disposeGroup(world); world.clear();
   for (const o of sc.objects) {
     const fn = BUILD[o.kind]; if (!fn) continue; let g;
@@ -172,23 +182,24 @@ function render(sc) {
     if (o.pos) { g.position.set(o.pos[0], o.kind === "label" ? (o.pos[1] || 4) : 0, o.pos[2]); g.rotation.y = -((o.rot || 0) * Math.PI / 180); const s = o.scale || 1; g.scale.set(s, s, s); }
     g.userData.id = o.id; world.add(g); if (!["path", "field", "label"].includes(o.kind) || o.kind === "field" && o.aliases) pickables.push(g);
   }
-  applyEnv(sc.env || {});
+  applyEnv(sc.env || {}); if (RM_ON) { scene.fog.near = Math.max(scene.fog.near, 260); scene.fog.far = Math.max(scene.fog.far, 1200); }
   const seq = (sc.meta && sc.meta.camera_seq) || 0;
   if (sc.env && sc.env.camera && (firstCam || seq !== camSeq)) { flyTo(sc.env.camera, firstCam ? 0 : 1600); }
   camSeq = seq; firstCam = false;
 }
 let fly = null;
-function flyTo(c, ms) { if (walking) setWalk(false); const p0 = camera.position.clone(), t0 = controls.target.clone(), t1 = new THREE.Vector3(...c.target), p1 = new THREE.Vector3(...c.pos);
-  const asp = stage.clientWidth / Math.max(1, stage.clientHeight); if (asp < 1.1) p1.sub(t1).multiplyScalar(Math.min(2.1, 1.1 / Math.max(asp, 0.4))).add(t1); if (!ms) { camera.position.copy(p1); controls.target.copy(t1); return; } fly = { p0, t0, p1, t1, s: performance.now(), ms }; }
+function flyTo(c, ms, raw) { if (walking) setWalk(false); const p0 = camera.position.clone(), t0 = controls.target.clone(), t1 = new THREE.Vector3(...c.target), p1 = new THREE.Vector3(...c.pos);
+  const asp = stage.clientWidth / Math.max(1, stage.clientHeight); if (asp < 1.1 && !raw) p1.sub(t1).multiplyScalar(Math.min(2.1, 1.1 / Math.max(asp, 0.4))).add(t1); if (!ms) { camera.position.copy(p1); controls.target.copy(t1); return; } fly = { p0, t0, p1, t1, s: performance.now(), ms }; }
 
 // ---------- picking ----------
 const ray = new THREE.Raycaster(), ptr = new THREE.Vector2(); let down = null; let SELECTED = null;
 canvas.addEventListener("pointerdown", e => { down = { x: e.clientX, y: e.clientY, t: performance.now() }; });
 canvas.addEventListener("pointerup", e => { if (!down || walking) return; const moved = Math.hypot(e.clientX - down.x, e.clientY - down.y); if (moved > 8 || performance.now() - down.t > 600) return;
   const r = canvas.getBoundingClientRect(); ptr.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1); ray.setFromCamera(ptr, camera);
+  if (RM_ON && rmPick()) return;
   const hit = ray.intersectObjects(pickables, true)[0]; if (!hit) { closeCard(); return; } let g = hit.object; while (g && !g.userData.id) g = g.parent; if (!g) return;
   const o = SCENE.objects.find(x => x.id === g.userData.id); if (o) openCard(o); });
-function openCard(o) { SELECTED = o.id; $("cardt").textContent = o.name || o.id; const kind = o.kind === "tree" ? (o.species || "") + " tree" : o.kind; $("cardd").textContent = (o.label && o.label.tag ? o.label.tag + " · " : "") + kind + (ADMIN ? " · say “this” to change it" : ""); const l = $("cardl"); if (o.url) { l.href = o.url; l.hidden = false; } else l.hidden = true; $("card").hidden = false; }
+function openCard(o) { SELECTED = o.id; $("cardt").textContent = o.name || o.id; const kind = o.kind === "tree" ? (o.species || "") + " tree" : o.kind; $("cardd").textContent = (o.label && o.label.tag ? o.label.tag + " · " : "") + kind + (ADMIN ? " · say “this” to change it" : ""); const l = $("cardl"); l.textContent = "Open site"; if (o.url) { l.href = o.url; l.hidden = false; } else l.hidden = true; $("card").hidden = false; }
 function closeCard() { $("card").hidden = true; SELECTED = null; }
 $("cardx").onclick = closeCard;
 $("home").onclick = () => SCENE && flyTo(SCENE.env.camera || { pos: [42, 34, 92], target: [0, 0, 28] }, 1200);
@@ -219,8 +230,131 @@ renderer.setAnimationLoop(() => {
     camera.position.x += (-Math.sin(yaw) * f + Math.cos(yaw) * st) * sp; camera.position.z += (-Math.cos(yaw) * f - Math.sin(yaw) * st) * sp; camera.position.y = 1.7; camera.rotation.set(pitch, yaw, 0, "YXZ"); }
   else controls.update();
   if (precip) { const a = precip.geometry.attributes.position, v = precip.userData.kind === "snow" ? 4 : 38; for (let i = 0; i < a.count; i++) { let y = a.getY(i) - v * dt; if (y < 0) y += 90; a.setY(i, y); } a.needsUpdate = true; precip.position.set(camera.position.x, 0, camera.position.z); }
+  if (rmHL) rmHL.children.forEach(o => { if (o.userData.pulse) { const s = 1 + 0.25 * Math.sin(performance.now() / 220); o.scale.set(s, s, s); } });
   renderer.render(scene, camera);
 });
+
+
+// ---------- roadmap layer: one trail per institution from Tŷ Mawr, climbing request → court ----------
+const pad2 = n => String(n).padStart(2, "0"); const _d = new Date(); const TODAY = _d.getFullYear() + "-" + pad2(_d.getMonth() + 1) + "-" + pad2(_d.getDate());
+const groundH = (x, z) => { const r = Math.hypot(x, z); return (r > 170 ? Math.pow((r - 170) / 120, 1.6) * (8 + 7 * Math.sin(x * 0.013) * Math.cos(z * 0.011)) : 0) + (r > 120 ? Math.sin(x * 0.05) * Math.cos(z * 0.04) * 0.6 : 0); };
+const RMG = new THREE.Group(); RMG.visible = false; scene.add(RMG);
+const FH = [0, 34], RR = n => 50 + n * 13, HS = 1.7;
+const SC = { done: "#43b649", missed: "#e53935", pending: "#f2c94c", "not yet reached": "#9aa3ad", na: "#5b5f66", spurOk: "#43b649", spurTrig: "#ffb000", sop: "#ffb000", route: "#5aa9ff", gate: "#f2994a", deadend: "#e53935", outcome: "#43b649" };
+const SAY = { done: "done", missed: "missed", pending: "coming up", "not yet reached": "not reached yet", na: "closed on this route" };
+var RM = null, SOP = null, RM_ON = false, rmHL = null; const RMPICK = []; const WP = []; let LANEPOS = {};
+const dummy = new THREE.Object3D();
+function inst(geo, color, n, opts = {}) { const m = new THREE.MeshLambertMaterial({ color: 0xffffff, transparent: !!opts.op, opacity: opts.op || 1, emissive: opts.em ? new THREE.Color(opts.em) : undefined, emissiveIntensity: opts.ei || 0 }); const im = new THREE.InstancedMesh(geo, m, Math.max(1, n)); im.count = 0; im.userData.data = []; return im; }
+function putSeg(im, a, b, w, h, color, data) { const dx = b.x - a.x, dy = b.y - a.y, dz = b.z - a.z, len = Math.hypot(dx, dz), L3 = Math.hypot(dx, dy, dz); dummy.position.set((a.x + b.x) / 2, (a.y + b.y) / 2, (a.z + b.z) / 2); dummy.rotation.set(0, 0, 0); dummy.rotation.order = "YZX"; dummy.rotation.y = -Math.atan2(dz, dx); dummy.rotation.z = Math.atan2(dy, len); dummy.scale.set(L3 + 0.2, h, w); dummy.updateMatrix(); const i = im.count++; im.setMatrixAt(i, dummy.matrix); im.setColorAt(i, new THREE.Color(color)); im.userData.data[i] = data; }
+function putAt(im, p, s, color, data, sy) { dummy.position.copy(p); dummy.rotation.set(0, 0, 0); dummy.scale.set(s, sy || s, s); dummy.updateMatrix(); const i = im.count++; im.setMatrixAt(i, dummy.matrix); im.setColorAt(i, new THREE.Color(color)); im.userData.data[i] = data; }
+function rmLabel(text, color, w, sub) { const c = document.createElement("canvas"); c.width = 512; c.height = sub ? 120 : 84; const x = c.getContext("2d"); x.fillStyle = "rgba(0,0,0,.78)"; x.beginPath(); x.roundRect ? x.roundRect(3, 3, 506, c.height - 6, 18) : x.rect(3, 3, 506, c.height - 6); x.fill(); x.strokeStyle = color; x.lineWidth = 4; x.stroke();
+  x.fillStyle = color; x.textAlign = "center"; x.textBaseline = "middle"; let fs = 40; const t = String(text).toUpperCase(); x.font = `700 ${fs}px Barlow, Arial`; while (fs > 18 && x.measureText(t).width > 480) { fs -= 2; x.font = `700 ${fs}px Barlow, Arial`; } x.fillText(t, 256, sub ? 42 : 44);
+  if (sub) { x.fillStyle = "#fff"; x.font = "600 26px Barlow, Arial"; x.fillText(String(sub).slice(0, 34), 256, 88); }
+  const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace; const s = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, depthWrite: false, fog: false })); s.scale.set(w, w * c.height / 512, 1); return s; }
+const fmtD = d => { if (!d) return "no date yet"; const a = new Date(d + "T12:00:00"); return a.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }); };
+const shortN = l => String(l.name).replace(/\s*\(.*?\)\s*/g, " ").replace(/ - .*$/, "").trim();
+function lanePoint(i, n, th) { const wob = 0.035 * Math.sin(n * 0.9 + i * 1.7); const a = th + (n ? wob : 0), r = RR(n); const x = FH[0] + Math.cos(a) * r, z = FH[1] + Math.sin(a) * r; return new THREE.Vector3(x, Math.max(n * HS, groundH(x, z) + 0.35) + 0.25, z); }
+function buildRoadmap() {
+  RMG.clear(); RMPICK.length = 0; WP.length = 0; LANEPOS = {};
+  if (!RM) return;
+  const lanes = RM.lanes.slice().sort((a, b) => (b.anchored - a.anchored) || (b.counts.emails - a.counts.emails));
+  const N = lanes.length, order = []; lanes.forEach((l, k) => { const off = Math.ceil(k / 2) * (k % 2 ? 1 : -1); order.push([l, off]); });
+  const span = Math.PI * 0.98, stepA = span / Math.max(1, N - 1);
+  const segS = inst(G.box, 0, N * 16), segT = inst(G.box, 0, N * 16, { op: 0.42 }), posts = inst(G.cyl, 0, N * 13), wps = inst(G.cyl, 0, N * 16, { em: "#222", ei: 0.4 }), xs = inst(G.box, 0, N * 6), men = inst(G.cone, 0, N), heads = inst(G.sph, 0, N), flags = inst(G.box, 0, N * 4, { em: "#333", ei: 0.5 });
+  for (const [l, off] of order) {
+    const th = Math.PI / 2 + off * stepA, i = lanes.indexOf(l); const pts = [lanePoint(i, 0, th)]; for (let n = 1; n <= 11; n++) pts.push(lanePoint(i, n, th));
+    LANEPOS[l.id] = { th, pts, lane: l };
+    for (let n = 1; n <= 11; n++) { const s = l.steps[n - 1] || { status: "not yet reached" }; const tr = s.status === "not yet reached" || !l.anchored; putSeg(tr ? segT : segS, pts[n - 1], pts[n], 1.05, 0.22, SC[s.status] || SC["not yet reached"], { t: "seg", lane: l.id, n });
+      const p = pts[n]; const big = s.status === "pending" || s.status === "missed" ? 1.0 : 0.8; putAt(wps, new THREE.Vector3(p.x, p.y + 0.25, p.z), big * 1.6, SC[s.status] || SC["not yet reached"], { t: "wp", lane: l.id, n }, 0.5); WP.push({ lane: l.id, n, p });
+      const gh = groundH(p.x, p.z); if (p.y - gh > 1.2 && n % 2 === 0) { dummy.position.set(p.x, (p.y + gh) / 2, p.z); dummy.rotation.set(0, 0, 0); dummy.scale.set(0.22, p.y - gh, 0.22); dummy.updateMatrix(); const k = posts.count++; posts.setMatrixAt(k, dummy.matrix); posts.setColorAt(k, new THREE.Color("#6b5a48")); }
+      if (s.status === "na") { for (const r of [0.785, -0.785]) { dummy.position.set(p.x, p.y + 1.3, p.z); dummy.rotation.set(0, th, r); dummy.scale.set(2.2, 0.32, 0.32); dummy.updateMatrix(); const k = xs.count++; xs.setMatrixAt(k, dummy.matrix); xs.setColorAt(k, new THREE.Color(SC.deadend)); xs.userData.data[k] = { t: "dead", lane: l.id, n }; } } }
+    // branches where outcomes split
+    const br = (from, dth, len, color, data) => { const a = pts[from], d = new THREE.Vector3(Math.cos(th + dth), 0, Math.sin(th + dth)); const b = a.clone().add(d.multiplyScalar(len)); b.y = Math.max(a.y + 0.6, groundH(b.x, b.z) + 0.4); putSeg(l.anchored ? segS : segT, a, b, 0.6, 0.16, color, data); putAt(flags, new THREE.Vector3(b.x, b.y + 0.9, b.z), 1, color, data, 1.2); };
+    br(2, -0.30, 8, SC.spurOk, { t: "branch", lane: l.id, n: 2, k: "disclosed" });
+    br(2, 0.30, 8, SC.spurTrig, { t: "branch", lane: l.id, n: 2, k: "trigger" });
+    br(7, -0.22, 8, SC.spurOk, { t: "branch", lane: l.id, n: 7, k: "upheld" });
+    br(8, 0.22, 7, SC.spurOk, { t: "branch", lane: l.id, n: 8, k: "won" });
+    // today: the walker stands at today's date along the trail
+    const tp = todayPoint(l, pts); putAt(men, new THREE.Vector3(tp.x, tp.y + 1.1, tp.z), 1, "#ffd54a", { t: "today", lane: l.id }, 2.0); putAt(heads, new THREE.Vector3(tp.x, tp.y + 2.45, tp.z), 0.42, "#ffe9a8", { t: "today", lane: l.id });
+    if (l.anchored) { const e = pts[11]; const lab = rmLabel(shortN(l), "#f2c94c", 10, (l.next && l.next.label ? "Next: " + l.next.label : "")); lab.position.set(e.x, e.y + 4.2, e.z); RMG.add(lab); }
+  }
+  for (const im of [segS, segT, posts, wps, xs, men, heads, flags]) { im.instanceMatrix.needsUpdate = true; if (im.instanceColor) im.instanceColor.needsUpdate = true; im.computeBoundingSphere && im.computeBoundingSphere(); RMG.add(im); }
+  RMPICK.push(wps, flags, xs, men, segS, segT);
+  // trailhead arc round Tŷ Mawr and the rung labels
+  const arc = new THREE.Mesh(new THREE.TorusGeometry(RR(0), 0.6, 6, 80, Math.PI), new THREE.MeshLambertMaterial({ color: 0xc9b48a })); arc.rotation.x = Math.PI / 2; arc.position.set(FH[0], 0.35, FH[1]); RMG.add(arc);
+  const head = rmLabel("Tŷ Mawr · trailhead", "#ffffff", 14, "one trail per institution"); head.position.set(FH[0], 9, FH[1] + RR(0) + 4); RMG.add(head);
+  const g0 = Math.PI / 2 - (Math.ceil((N - 1) / 2) + 1.6) * stepA;
+  for (let n = 1; n <= 11; n++) { const st = RM.steps[n - 1]; const a = Math.min(g0, -0.02), r = RR(n); const x = FH[0] + Math.cos(a) * r, z = FH[1] + Math.sin(a) * r; const lab = rmLabel(n + " · " + st.label, n === 11 ? "#ff8a80" : "#cfd8dc", 9); lab.position.set(x, Math.max(n * HS, groundH(x, z)) + 3, z); RMG.add(lab); }
+  buildSop();
+}
+function todayPoint(l, pts) {
+  const ax = [null].concat(l.steps.map(s => s.axis || s.date));
+  if (!ax[1] || TODAY <= ax[1]) return pts[l.anchored && ax[1] && TODAY < ax[1] ? 0 : 1].clone();
+  for (let n = 1; n < 11; n++) { const a = ax[n], b = ax[n + 1]; if (a && b && TODAY >= a && TODAY < b) { const f = (new Date(TODAY) - new Date(a)) / Math.max(1, new Date(b) - new Date(a)); return pts[n].clone().lerp(pts[n + 1], Math.min(1, Math.max(0, f))); } }
+  return pts[11].clone();
+}
+// the trigger-event SOP: a separate branching route from the trailhead to the reopening routes
+const SOPPOS = {};
+function buildSop() {
+  if (!SOP) return; const rows = { sop: 0 }; "abcdefg".split("").forEach((c, k) => rows["route-" + c] = k + 1);
+  const groups = {}; for (const n of SOP.nodes) { const k = n.phase + "|" + n.lane; (groups[k] = groups[k] || []).push(n); }
+  const SX = 66, SZ = 8;
+  for (const [k, arr] of Object.entries(groups)) arr.forEach((n, j) => { const row = rows[n.lane] || 0; const x = SX + n.phase * 19 + (row ? (j * 9) : 0), z = SZ - row * 15 + (row ? 0 : (j - (arr.length - 1) / 2) * 9); SOPPOS[n.id] = new THREE.Vector3(x, Math.max(1.2 + n.phase * 1.7, groundH(x, z) + 0.5), z); });
+  const seg = inst(G.box, 0, SOP.edges.length + 2), nodes = inst(G.cyl, 0, SOP.nodes.length, { em: "#222", ei: 0.5 }), xs = inst(G.box, 0, SOP.nodes.length * 2);
+  const kc = n => n.kind === "deadend" ? SC.deadend : n.kind === "outcome" ? SC.outcome : n.kind === "gate" ? SC.gate : n.kind === "route" ? SC.route : SC.sop;
+  for (const e of SOP.edges) { const a = SOPPOS[e.from], b = SOPPOS[e.to]; if (!a || !b) continue; const tn = SOP.nodes.find(n => n.id === e.to); putSeg(seg, a, b, 0.9, 0.2, tn ? kc(tn) : SC.sop, { t: "edge", from: e.from, to: e.to, label: e.label }); }
+  const start = SOPPOS.T0, ring = new THREE.Vector3(FH[0] + RR(0), 0.4, FH[1]); if (start) { const mid = new THREE.Vector3((ring.x + start.x) / 2, 0.6, ring.z); putSeg(seg, ring, mid, 0.9, 0.2, SC.sop, { t: "edge", from: "trailhead", to: "T0", label: "trigger found" }); putSeg(seg, mid, start, 0.9, 0.2, SC.sop, { t: "edge", from: "trailhead", to: "T0", label: "trigger found" }); }
+  for (const n of SOP.nodes) { const p = SOPPOS[n.id]; putAt(nodes, new THREE.Vector3(p.x, p.y + 0.3, p.z), n.kind === "start" ? 2.6 : n.kind === "gate" ? 2.2 : 1.8, kc(n), { t: "sop", id: n.id }, 0.6);
+    if (n.kind === "deadend") for (const r of [0.785, -0.785]) { dummy.position.set(p.x, p.y + 1.6, p.z); dummy.rotation.set(0, 0, r); dummy.scale.set(2.4, 0.34, 0.34); dummy.updateMatrix(); const k = xs.count++; xs.setMatrixAt(k, dummy.matrix); xs.setColorAt(k, new THREE.Color(SC.deadend)); xs.userData.data[k] = { t: "sop", id: n.id }; }
+    const lab = rmLabel(n.label, kc(n), n.kind === "start" ? 12 : 9, n.deadline && n.deadline.kind === "legal" ? "Time limit: " + (n.deadline.days != null ? n.deadline.days + " days" : "see rule") : ""); lab.position.set(p.x, p.y + (n.kind === "deadend" ? 4.6 : 3.6), p.z); RMG.add(lab); }
+  const title = rmLabel("Trigger event SOP", SC.sop, 16, SOP.trigger && SOP.trigger.confirmed ? "clocks running from " + SOP.trigger.t0 : "clocks on standby"); title.position.set(SX + 40, 16, SZ + 16); RMG.add(title);
+  for (const im of [seg, nodes, xs]) { im.instanceMatrix.needsUpdate = true; if (im.instanceColor) im.instanceColor.needsUpdate = true; im.computeBoundingSphere && im.computeBoundingSphere(); RMG.add(im); }
+  RMPICK.push(nodes, xs, seg);
+}
+function rmCard(d) {
+  const l = d.lane && LANEPOS[d.lane] && LANEPOS[d.lane].lane; const link = $("cardl"); let title = "", text = "", url = null, lt = "Open record";
+  if (d.t === "wp" || d.t === "seg" || d.t === "dead") { const s = l.steps[d.n - 1]; title = shortN(l); text = `Step ${d.n} of 11 · ${s.label} · ${fmtD(s.date)}${s.dk === "p" && s.date ? " (projected)" : ""} · ${SAY[s.status] || s.status}${s.status === "pending" && s.date && s.date < TODAY ? " · due now" : ""}.${s.basis ? " " + s.basis.charAt(0).toUpperCase() + s.basis.slice(1) : ""}${!l.anchored ? " No statutory clock started with this body yet." : ""}`; url = s.link || (l.lead && l.lead.url) || null; }
+  else if (d.t === "branch") { const B = { disclosed: ["Disclosed", "If they disclose in full by the deadline, this trail ends here: answered."], trigger: ["Trigger found", "If the reply shows dishonest evidence, a concealed record or government involvement, leave this trail and follow the Trigger event SOP route."], upheld: ["Decision for us", "If the ICO orders disclosure and the body complies, the trail ends here."], won: ["Tribunal win", "If the Tribunal orders disclosure, the trail ends here."] }[d.k]; title = shortN(l) + " · " + B[0]; text = B[1]; }
+  else if (d.t === "today") { const nx = l.steps.find(s => s.status === "pending") || l.steps.find(s => s.status === "not yet reached"); title = shortN(l) + " · today"; text = `Today, ${fmtD(TODAY)}.${nx ? " Next: " + nx.label + ", " + fmtD(nx.date) + "." : ""} ${l.counts.emails} emails, ${l.counts.missed} deadlines missed.`; url = l.lead && l.lead.url; }
+  else if (d.t === "sop" || d.t === "edge") { const n = SOP.nodes.find(x => x.id === (d.id || d.to)); if (!n) return; title = n.label; text = (n.text || "") + (n.deadline ? " Time: " + n.deadline.rule + (n.deadline.kind === "legal" ? " (set by law)." : " (our target).") : "") + (n.owner ? " Owner: " + n.owner + "." : ""); url = n.link || SOP.page; lt = "Open SOP"; }
+  $("cardt").textContent = title; $("cardd").textContent = text; if (url) { link.href = url; link.textContent = lt; link.hidden = false; } else link.hidden = true; $("card").hidden = false; SELECTED = null;
+}
+function rmPick() { const hits = ray.intersectObjects(RMPICK, false); for (const h of hits) { const d = h.object.userData.data && h.object.userData.data[h.instanceId]; if (d) { rmCard(d); return true; } } return false; }
+function camFor(p, th, dist) { const out = new THREE.Vector3(Math.cos(th), 0, Math.sin(th)); return { pos: [p.x - out.x * dist * 0.9 + out.z * dist * 0.35, p.y + dist * 0.75, p.z - out.z * dist * 0.9 - out.x * dist * 0.35], target: [p.x, p.y, p.z] }; }
+function highlight(laneId, n) {
+  if (rmHL) { RMG.remove(rmHL); rmHL.traverse(o => o.geometry && o.geometry !== G.box && o.geometry.dispose()); rmHL = null; } if (!laneId || !LANEPOS[laneId]) return;
+  const L = LANEPOS[laneId]; rmHL = new THREE.Group(); const m = new THREE.MeshBasicMaterial({ color: 0xfff176, transparent: true, opacity: 0.55, depthWrite: false });
+  for (let k = 1; k < L.pts.length; k++) { const a = L.pts[k - 1], b = L.pts[k]; const s = new THREE.Mesh(G.box, m); const dx = b.x - a.x, dy = b.y - a.y, dz = b.z - a.z, len = Math.hypot(dx, dz); s.position.set((a.x + b.x) / 2, (a.y + b.y) / 2 + 0.15, (a.z + b.z) / 2); s.rotation.order = "YZX"; s.rotation.y = -Math.atan2(dz, dx); s.rotation.z = Math.atan2(dy, len); s.scale.set(Math.hypot(dx, dy, dz) + 0.3, 0.3, 2.0); rmHL.add(s); }
+  if (n) { const p = L.pts[n]; const ring = new THREE.Mesh(new THREE.TorusGeometry(2.4, 0.28, 8, 32), new THREE.MeshBasicMaterial({ color: 0xffffff })); ring.rotation.x = Math.PI / 2; ring.position.set(p.x, p.y + 0.5, p.z); ring.userData.pulse = true; rmHL.add(ring); }
+  RMG.add(rmHL);
+}
+function setLayer(on) {
+  RM_ON = on; RMG.visible = on; $("rmbtn").setAttribute("aria-pressed", on); $("rmbtn").classList.toggle("on", on); $("rmleg").hidden = !on; if (!on) { $("rmlist").hidden = true; highlight(null); }
+  camera.far = on ? 1600 : 900; camera.updateProjectionMatrix(); controls.maxDistance = on ? 620 : 320;
+  if (on) { scene.fog.near = Math.max(scene.fog.near, 260); scene.fog.far = Math.max(scene.fog.far, 1200); } else applyEnv((SCENE && SCENE.env) || {});
+}
+const OVERVIEW = { pos: [-150, 210, 330], target: [20, 0, 90] }; let SOPVIEW = { pos: [60, 120, 150], target: [140, 0, -30] };
+function fitSopView() { const v = Object.values(SOPPOS); if (!v.length) return; const b = new THREE.Box3(); v.forEach(p => b.expandByPoint(p)); const c = b.getCenter(new THREE.Vector3()), s = b.getSize(new THREE.Vector3());
+  const asp = innerWidth / Math.max(1, innerHeight);
+  if (asp < 0.8) { const d = Math.max(s.x * 0.62, s.z / asp * 0.55); SOPVIEW = { pos: [c.x - d * 0.95, c.y + d * 0.9, c.z + d * 0.12], target: [c.x + s.x * 0.06, c.y, c.z] }; }
+  else { const d = Math.max(s.x / Math.min(asp, 1.6), s.z) * 0.8; SOPVIEW = { pos: [c.x, c.y + d * 0.85, c.z + d * 0.75], target: [c.x, c.y, c.z - 4] }; } }
+async function loadRoadmapData() { if (RM) return; try { const [a, b] = await Promise.all([fetch("/api/roadmap").then(r => r.json()), fetch("/api/sop").then(r => r.json())]); RM = a; SOP = b; buildRoadmap(); fitSopView(); $("rmdue").textContent = "Due this week (" + dueList(7).length + ")"; } catch (e) { console.warn("roadmap", e); } }
+function dueList(days) { if (!RM) return []; const end = new Date(Date.now() + days * 864e5); const E = end.getFullYear() + "-" + pad2(end.getMonth() + 1) + "-" + pad2(end.getDate()); const out = []; for (const l of RM.lanes) { if (!l.anchored) continue; for (const s of l.steps) if (s.status === "pending" && s.date && s.date <= E) out.push({ lane: l.id, name: shortN(l), n: s.n, label: s.label, date: s.date < TODAY ? TODAY : s.date, overdue: s.date < TODAY }); } return out.sort((a, b) => a.date.localeCompare(b.date) || a.n - b.n); }
+function showList(items, title) { const box = $("rmlist"); box.innerHTML = ""; const h = document.createElement("b"); h.textContent = title; box.appendChild(h); if (!items.length) { const p = document.createElement("p"); p.textContent = "Nothing due."; box.appendChild(p); }
+  for (const it of items) { const bt = document.createElement("button"); bt.type = "button"; bt.textContent = `${it.overdue ? "Due now" : fmtD(it.date)} · ${it.name} · ${it.label}`; if (it.overdue) bt.classList.add("over"); bt.onclick = () => view({ action: "step", lane: it.lane, step: it.n }); box.appendChild(bt); } box.hidden = false; }
+async function view(v) {
+  if (!v) return; await loadRoadmapData(); if (!RM) return; if (!RM_ON) setLayer(true);
+  if (v.action === "layer") { flyTo(OVERVIEW, 1600, true); return; }
+  if (v.action === "due") { showList(v.items || dueList(v.days || 7), (v.days === 0 ? "Due today" : v.days === 30 ? "Due in the next 30 days" : "Due this week") + ` (${(v.items || []).length})`); highlight(null); flyTo(OVERVIEW, 1600, true); return; }
+  if (v.action === "sop") { flyTo(SOPVIEW, 1600, true); return; }
+  if (v.action === "trail" || v.action === "step") { const L = LANEPOS[v.lane]; if (!L) return; const n = Math.min(11, Math.max(1, v.step || 1)); highlight(v.lane, n); const p = L.pts[n]; flyTo(camFor(p, L.th, (v.action === "trail" ? 64 : 36) * (innerWidth < innerHeight ? 1.15 : 1)), 1700, true); rmCard({ t: "wp", lane: v.lane, n }); }
+}
+window.terrainView = view;
+$("rmbtn").onclick = async () => { if (RM_ON) { setLayer(false); flyTo((SCENE && SCENE.env.camera) || { pos: [42, 34, 92], target: [0, 0, 28] }, 1400); return; } await loadRoadmapData(); setLayer(true); flyTo(OVERVIEW, 1800, true); };
+$("rmdue").onclick = () => { const b = $("rmlist"); if (!b.hidden) { b.hidden = true; return; } showList(dueList(7), "Due this week (" + dueList(7).length + ")"); };
+$("rmsop").onclick = () => view({ action: "sop" });
+$("rmall").onclick = () => { highlight(null); flyTo(OVERVIEW, 1400, true); };
+if (/[?&]layer=roadmap/.test(location.search)) setTimeout(() => $("rmbtn").click(), 600);
 
 // ---------- scene sync ----------
 async function loadScene(force) { try { const r = await fetch("/api/scene" + (SCENE && !force ? "?rev=" + SCENE.rev : ""), { cache: "no-store" }); const j = await r.json(); if (!j.same) render(j); } catch (e) {} }
