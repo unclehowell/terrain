@@ -1,0 +1,23 @@
+name: Publish scene
+# Commits data/scene.json after each admin editing session on terrain.bucklerfamily.estate closes
+# (lock, 4 h timeout, or 10 min idle). Uses this repo's own GITHUB_TOKEN; no stored secret. — Sion's Tab agent
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: publish-scene
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Publish closed editing sessions
+        run: node .github/scripts/publish-scene.mjs
