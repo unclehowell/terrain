@@ -1,0 +1,42 @@
+name: Terrain quality checks
+on:
+  push:
+    branches:
+      - "terrain/**"
+  pull_request:
+    paths:
+      - "worker/**"
+      - "test/**"
+      - "package.json"
+      - ".github/workflows/terrain-quality.yml"
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Check worker modules
+        run: |
+          node --check worker/index.js
+          node --check worker/scene-ops.js
+          node --input-type=module --check < worker/app.js.txt
+      - name: Run scene operation tests
+        run: npm test
+      - name: Validate scene object kinds
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import { KINDS, presetFor } from './worker/scene-ops.js';
+          const scene = JSON.parse(fs.readFileSync('./worker/initial-scene.json', 'utf8'));
+          const unknown = [...new Set(scene.objects.map(o => o.kind).filter(k => !KINDS.includes(k)))];
+          if (unknown.length) throw new Error('Unknown kinds in initial scene: ' + unknown.join(', '));
+          for (const name of ['farmhouse', 'barn', 'oak', 'hedge', 'flower', 'gate', 'sheep', 'tractor', 'well', 'statue', 'ruin', 'sign']) {
+            if (!presetFor(name)) throw new Error('Missing preset: ' + name);
+          }
+          console.log('Validated ' + scene.objects.length + ' existing scene objects and extended object presets.');
+          NODE
