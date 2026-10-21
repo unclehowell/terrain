@@ -1,6 +1,6 @@
 // scene-ops.js — pure scene-graph operations for terrain.bucklerfamily.estate (no I/O). — Sion's Tab agent
-export const KINDS = ["building", "tree", "fence", "wall", "path", "water", "field", "label", "marker", "rock", "lamp", "bench"];
-export const TEXTURES = ["plain", "stone", "brick", "wood", "plaster", "slate", "glass", "metal", "thatch", "gravel", "grass"];
+export const KINDS = ["building", "tree", "fence", "wall", "hedge", "path", "water", "field", "label", "sign", "marker", "rock", "lamp", "bench", "shrub", "flower", "gate", "animal", "vehicle", "well", "statue", "ruin"];
+export const TEXTURES = ["plain", "stone", "brick", "wood", "plaster", "slate", "glass", "metal", "thatch", "gravel", "grass", "bark", "moss", "soil"];
 export const TIMES = { dawn: 6.5, morning: 9, day: 12, noon: 12, afternoon: 15, evening: 18, dusk: 19.5, sunset: 19.5, night: 23, midnight: 0 };
 export const WEATHER = ["clear", "cloudy", "fog", "rain", "snow", "storm"];
 const NAMED = {
@@ -62,12 +62,18 @@ export function radius(o) {
   if (o.kind === "field") { const sz = o.size || [20, 20]; return Math.max(sz[0], sz[1]) / 2 * s; }
   if (o.kind === "water") return (o.radius || 4) * s;
   if (o.kind === "tree") return (o.height || 8) * 0.35 * s;
+  if (o.kind === "field") { const sz = o.size || [20, 20]; return Math.max(sz[0], sz[1]) / 2 * s; }
+  if (o.kind === "hedge" || o.kind === "wall" || o.kind === "fence" || o.kind === "path") { if (o.points) { const c = center(o); return Math.max(...o.points.map(p => Math.hypot(p[0] - c[0], p[1] - c[1]))); } return 3 * s; }
+  if (o.kind === "vehicle") return 2.8 * s;
+  if (o.kind === "animal") return 1.3 * s;
+  if (o.kind === "shrub" || o.kind === "flower") return 1.1 * s;
+  if (o.kind === "gate" || o.kind === "well" || o.kind === "statue" || o.kind === "sign" || o.kind === "ruin") return 2 * s;
   if (o.points) { const c = center(o); return Math.max(...o.points.map(p => Math.hypot(p[0] - c[0], p[1] - c[1]))); }
   return 1.5 * s;
 }
 function freeSpot(scene, near, r0, avoidId) {
   const [cx, cz] = center(near); const base = radius(near) + r0 + 1.5;
-  const solid = scene.objects.filter(o => o.id !== avoidId && ["building", "tree", "water", "rock", "lamp", "bench", "marker"].includes(o.kind));
+  const solid = scene.objects.filter(o => o.id !== avoidId && ["building", "tree", "water", "rock", "lamp", "bench", "marker", "hedge", "shrub", "animal", "vehicle", "well", "statue", "ruin"].includes(o.kind));
   for (let ring = 0; ring < 6; ring++) for (let k = 0; k < 12; k++) {
     const a = (k / 12) * Math.PI * 2 + ring * 0.37 + 0.6, d = base + ring * 2.5;
     const x = cx + Math.cos(a) * d, z = cz + Math.sin(a) * d;
@@ -101,13 +107,16 @@ const PRESET = {
   building: { kind: "building", roof: "gable", size: [6, 4, 5], color: "#c8c8c8", roofColor: "#4d5862", texture: "plain" },
   tree: { kind: "tree", species: "oak", height: 8 }, oak: { kind: "tree", species: "oak", height: 9 }, pine: { kind: "tree", species: "pine", height: 10 },
   yew: { kind: "tree", species: "yew", height: 7 }, birch: { kind: "tree", species: "birch", height: 9 }, willow: { kind: "tree", species: "willow", height: 8 },
-  ash: { kind: "tree", species: "oak", height: 10 }, beech: { kind: "tree", species: "oak", height: 11 }, apple: { kind: "tree", species: "oak", height: 5 }, hedge: { kind: "wall", color: "#2f5a2a", height: 1.4 },
+  ash: { kind: "tree", species: "ash", height: 10 }, beech: { kind: "tree", species: "beech", height: 11 }, apple: { kind: "tree", species: "apple", height: 5 }, chestnut: { kind: "tree", species: "chestnut", height: 12 }, hawthorn: { kind: "tree", species: "hawthorn", height: 5 }, holly: { kind: "tree", species: "holly", height: 5 }, hedge: { kind: "hedge", color: "#2f5a2a", height: 1.4 }, shrub: { kind: "shrub", color: "#426d35", height: 1.4 }, flower: { kind: "flower", color: "#c85b72", height: 0.9 }, flowers: { kind: "flower", color: "#c85b72", height: 0.9 },
   pond: { kind: "water", radius: 4 }, lake: { kind: "water", radius: 10 }, water: { kind: "water", radius: 4 }, field: { kind: "field", size: [20, 20], color: "#4f7f3a" },
   meadow: { kind: "field", size: [20, 20], color: "#6b8f3a" }, garden: { kind: "field", size: [10, 8], color: "#5a8f3a" }, fence: { kind: "fence", color: "#8b5a2b", height: 1.3 },
   wall: { kind: "wall", color: "#8a8d8f", height: 1.3, texture: "stone" }, path: { kind: "path", width: 1.6, color: "#8a7f70", texture: "gravel" }, road: { kind: "path", width: 5, color: "#3a3d40" },
-  track: { kind: "path", width: 3, color: "#6b5a45", texture: "gravel" }, label: { kind: "label", color: "#f2c94c" }, sign: { kind: "label", color: "#f2c94c" },
+  track: { kind: "path", width: 3, color: "#6b5a45", texture: "gravel" }, label: { kind: "label", color: "#f2c94c" }, sign: { kind: "sign", color: "#8b5a2b", text: "SIGN" },
   marker: { kind: "marker", color: "#e53935" }, pin: { kind: "marker", color: "#e53935" }, flag: { kind: "marker", color: "#c8102e" }, rock: { kind: "rock", color: "#7d7f80" },
   stone: { kind: "rock", color: "#9a978f" }, boulder: { kind: "rock", color: "#7d7f80", size: 2 }, lamp: { kind: "lamp", color: "#f2c94c" }, bench: { kind: "bench", color: "#8b5a2b" },
+  gate: { kind: "gate", color: "#8b5a2b", height: 1.6 }, animal: { kind: "animal", species: "sheep", color: "#e7e1d4" }, sheep: { kind: "animal", species: "sheep", color: "#e7e1d4" }, cow: { kind: "animal", species: "cow", color: "#e7e1d4" }, horse: { kind: "animal", species: "horse", color: "#694a32" }, dog: { kind: "animal", species: "dog", color: "#a77d52" }, chicken: { kind: "animal", species: "chicken", color: "#f0e5d0" },
+  vehicle: { kind: "vehicle", species: "cart", color: "#8b5a2b" }, cart: { kind: "vehicle", species: "cart", color: "#8b5a2b" }, wagon: { kind: "vehicle", species: "wagon", color: "#8b5a2b" }, tractor: { kind: "vehicle", species: "tractor", color: "#536e35" },
+  well: { kind: "well", color: "#8a8d8f" }, statue: { kind: "statue", color: "#7f8781" }, monument: { kind: "statue", color: "#7f8781" }, ruin: { kind: "ruin", color: "#8a8d8f", texture: "stone" }, ruins: { kind: "ruin", color: "#8a8d8f", texture: "stone" },
 };
 export function presetFor(kind, species) {
   const k = norm(kind).replace(/ tree$/, "").replace(/s$/, "");
@@ -127,7 +136,7 @@ export function apply(scene, name, a = {}) {
       const made = [];
       for (let i = 0; i < count; i++) {
         const oo = JSON.parse(JSON.stringify(o));
-        const nm = a.name || (a.text && (oo.kind === "label") ? a.text : null) || ((a.species ? a.species + " " : "") + (norm(a.kind) || oo.kind)).replace(/^(\w)/, c => c.toUpperCase());
+        const baseName = a.species && oo.kind === "tree" ? a.species + " tree" : a.species && ["animal", "vehicle"].includes(oo.kind) ? a.species : (a.species ? a.species + " " : "") + (norm(a.kind) || oo.kind); const nm = a.name || (a.text && ["label", "sign"].includes(oo.kind) ? a.text : null) || baseName.replace(/^(\w)/, c => c.toUpperCase());
         oo.id = newId(scene, oo.kind, nm); oo.name = count > 1 ? nm + " " + (i + 1) : nm;
         if (a.color && parseColor(a.color)) oo.color = parseColor(a.color);
         if (a.roof_color && parseColor(a.roof_color)) oo.roofColor = parseColor(a.roof_color);
@@ -136,9 +145,9 @@ export function apply(scene, name, a = {}) {
         if (a.height) { if (oo.kind === "building") { oo.size = oo.size || [6, 4, 5]; oo.size[1] = num(a.height, oo.size[1]); } else oo.height = num(a.height, oo.height || 2); }
         if (a.width || a.length) { if (oo.kind === "building") { oo.size = oo.size || [6, 4, 5]; oo.size[0] = num(a.width, oo.size[0]); oo.size[2] = num(a.length, oo.size[2]); } else if (oo.kind === "field") oo.size = [num(a.width, 20), num(a.length, a.width || 20)]; else if (oo.kind === "path") oo.width = num(a.width, oo.width); }
         if (a.radius && oo.kind === "water") oo.radius = num(a.radius, 4);
-        if (oo.kind === "label" || a.text) oo.text = String(a.text || a.name || "Label").slice(0, 60);
+        if (oo.kind === "label" || oo.kind === "sign" || a.text) oo.text = String(a.text || a.name || oo.text || "Label").slice(0, 60);
         const from = a.from ? need(a.from) : null, to = a.to ? need(a.to) : null;
-        if (["fence", "wall", "path"].includes(oo.kind)) {
+        if (["fence", "wall", "hedge", "path"].includes(oo.kind)) {
           if (Array.isArray(a.points) && a.points.length > 1) oo.points = a.points.map(p => [num(p[0], 0), num(p[1], 0)]);
           else if (from && to) { oo.points = [center(from), center(to)]; }
           else if (a.around || a.near) { const t = need(a.around || a.near); const [cx, cz] = center(t); const rr = radius(t) + 2; oo.points = [[cx - rr, cz - rr], [cx + rr, cz - rr], [cx + rr, cz + rr], [cx - rr, cz + rr], [cx - rr, cz - rr]]; if (oo.kind === "fence" && a.around) oo.points.splice(4, 1, [cx - rr, cz - rr + 0.01]); }
@@ -153,6 +162,7 @@ export function apply(scene, name, a = {}) {
           oo.pos = [r2(x), oo.kind === "label" ? num(a.y, 4) : 0, r2(z)];
           oo.rot = num(a.rotation, 0); oo.scale = num(a.scale, 1);
         }
+        if (a.species && ["tree", "animal", "vehicle"].includes(oo.kind)) oo.species = norm(a.species);
         if (oo.kind === "tree" && a.height === undefined) oo.height = r2((oo.height || 8) * (0.85 + ((scene.objects.length * 37 + i * 11) % 30) / 100));
         scene.objects.push(oo); made.push(oo); touch(oo.id);
       }

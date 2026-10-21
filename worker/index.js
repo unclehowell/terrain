@@ -46,7 +46,7 @@ const cookie = (v, age) => `terrain_admin=${v}; Path=/; Max-Age=${age}; HttpOnly
 async function getJ(env, key) { const o = await env.BUCKET.get(key); return o ? o.json() : null; }
 const putJ = (env, key, v, meta) => env.BUCKET.put(key, JSON.stringify(v), { httpMetadata: { contentType: "application/json" }, customMetadata: meta });
 async function load(env) { return (await getJ(env, "state.json")) || { scene: JSON.parse(JSON.stringify(INITIAL)), undo: [], redo: [], log: [] }; }
-async function store(env, st) { st.rev = Math.max(st.rev || 0, st.scene.rev || 0) + 1; st.scene.rev = st.rev; st.scene.updated = new Date().toISOString(); await putJ(env, "state.json", st); }
+async function store(env, st) { st.rev = Math.max(st.rev || 0, st.scene.rev || 0) + 1; st.scene.rev = st.rev; st.scene.updated = new Date().toISOString(); await putJ(env, "state.json", st, { rev: String(st.rev), updated: st.scene.updated }); }
 const ipKey = ip => ip.replace(/[^0-9a-fA-F:.]/g, "").slice(0, 64) || "x";
 async function hits(env, ip, kind, win) { const a = (await getJ(env, `rl/${kind}/${ipKey(ip)}.json`)) || []; return a.filter(t => t > now() - win).length; }
 async function hit(env, ip, kind) { const k = `rl/${kind}/${ipKey(ip)}.json`; const a = ((await getJ(env, k)) || []).filter(t => t > now() - 3600); a.push(now()); await putJ(env, k, a.slice(-500)); }
@@ -79,7 +79,7 @@ async function execTool(env, st, name, args) {
 const S = (props, req = []) => ({ type: "object", properties: props, required: req });
 const ref = d => ({ type: "string", description: d || "object id from the scene list, or its name" });
 const TOOLS = [
-  ["add_object", "Add new objects: buildings (farmhouse, house, cottage, barn, church, chapel, tower, shed, stable, greenhouse, castle), trees (species oak, pine, yew, birch, willow), fences, walls, hedges, paths, roads, ponds, fields, labels/signs, markers/flags, rocks, lamps, benches.", S({ kind: { type: "string" }, species: { type: "string", description: "tree species" }, name: { type: "string" }, text: { type: "string", description: "words on a label/sign" }, near: ref("put it next to this object"), direction: { type: "string", description: "north/south/east/west of the near object" }, distance: { type: "number" }, from: ref("start object for a path/fence/wall"), to: ref("end object for a path/fence/wall"), around: ref("enclose this object (fence/wall/hedge)"), count: { type: "number" }, color: { type: "string" }, roof_color: { type: "string" }, texture: { type: "string", enum: TEXTURES }, roof: { type: "string", enum: ["gable", "flat", "dome", "tower", "portico", "awning"] }, height: { type: "number" }, width: { type: "number" }, length: { type: "number" }, x: { type: "number" }, z: { type: "number" } }, ["kind"])],
+  ["add_object", "Add detailed 3D objects: buildings (farmhouse, house, cottage, barn, church, chapel, tower, shed, stable, greenhouse, castle), trees (oak, pine, yew, birch, willow, ash, beech, apple, chestnut, hawthorn, holly), fences, stone walls, hedges, paths, roads, ponds, fields, labels and physical signposts, markers/flags, rocks/boulders, lamps, benches, shrubs, flower clumps, wooden gates, animals (sheep, cow, horse, dog, chicken), carts/wagons/tractors, wells, statues and ruined stonework.", S({ kind: { type: "string" }, species: { type: "string", description: "tree species, farm animal or vehicle type" }, name: { type: "string" }, text: { type: "string", description: "words on a label/sign" }, near: ref("put it next to this object"), direction: { type: "string", description: "north/south/east/west of the near object" }, distance: { type: "number" }, from: ref("start object for a path/fence/wall"), to: ref("end object for a path/fence/wall"), around: ref("enclose this object (fence/wall/hedge)"), count: { type: "number" }, color: { type: "string" }, roof_color: { type: "string" }, texture: { type: "string", enum: TEXTURES }, roof: { type: "string", enum: ["gable", "flat", "dome", "tower", "portico", "awning", "hip"] }, height: { type: "number" }, width: { type: "number" }, length: { type: "number" }, x: { type: "number" }, z: { type: "number" } }, ["kind"])],
   ["move_object", "Move an object: next to another object, or a distance in a compass direction (north, south, east, west, left, right).", S({ target: ref(), near: ref("move it next to this"), direction: { type: "string" }, distance: { type: "number", description: "metres" }, x: { type: "number" }, z: { type: "number" } }, ["target"])],
   ["rotate_object", "Turn an object by degrees (positive = clockwise from above).", S({ target: ref(), degrees: { type: "number" } }, ["target", "degrees"])],
   ["scale_object", "Make an object bigger or smaller by a factor (2 = twice the size, 0.5 = half).", S({ target: ref(), factor: { type: "number" } }, ["target", "factor"])],
@@ -125,8 +125,6 @@ function quick(text) {
   if (/^(reset|start (again|over)|reset (it|everything|the scene|the estate)|back to (the )?original)$/.test(t)) return [{ name: "reset_scene", arguments: {} }];
   return null;
 }
-const isQuota = e => /4006|daily free allocation|neurons/i.test(String(e && e.message || e));
-const QUOTA_SAY = "I can't take free-form edits right now; they come back at 1am UK time. Undo, redo, save and restore still work, and so do the buttons.";
 async function agent(env, st, text, history) {
   const results = []; let said = "";
   const q = quick(text);
@@ -138,9 +136,7 @@ async function agent(env, st, text, history) {
       for (const h of (Array.isArray(history) ? history.slice(-6) : [])) if (h && (h.role === "user" || h.role === "assistant") && typeof h.content === "string") msgs.push({ role: h.role, content: h.content.slice(0, 400) });
       msgs.push({ role: "user", content: text.slice(0, 600) });
       if (round > 0) msgs.push({ role: "assistant", content: "Done so far: " + results.map(r => `${r.tool}(${JSON.stringify(r.args)})`).join("; ") }, { role: "user", content: "Do any part of my request that is NOT done yet with tool calls. If everything is done, reply with just the word DONE." });
-      let out;
-      try { out = await env.AI.run(LLM, { messages: msgs, tools: TOOLS, max_tokens: 600, temperature: 0.2 }); }
-      catch (e) { if (results.length) break; if (isQuota(e)) return { say: QUOTA_SAY, results }; throw e; }
+      const out = await env.AI.run(LLM, { messages: msgs, tools: TOOLS, max_tokens: 600, temperature: 0.2 });
       const { calls, text: t } = parseCalls(out);
       const fresh = calls.filter(c => !results.some(r => r.tool === c.name && JSON.stringify(r.args) === JSON.stringify(c.arguments)));
       if (!fresh.length) { if (round === 0) said = t; break; }
@@ -186,8 +182,8 @@ function cleanStt(t, prompt) {
 
 // ---------- roadmap (read-only, open to everyone) ----------
 const londonDay = () => new Date().toLocaleDateString("en-CA", { timeZone: "Europe/London" });
-const RM_HINT = /\b(due|deadlines?|coming up|upcoming|trails?|route|lane|steps?|stage|roadmap|sop|trigger|tribunal|court|ico|fly|take me|zoom|this week|next week|this month|today)\b/i;
-const RM_HINT_ADMIN = /\b(due|deadlines?|coming up|upcoming|trails?|roadmap|steps?|stage|sop|trigger (event|route|plan)|what (do|s on) (this|next) week)\b/i;
+const RM_HINT = /\b(due|deadlines?|coming up|upcoming|trails?|route|lane|steps?|stage|roadmap|sop|trigger|tribunal|court|ico|fly|take me|zoom)\b/i;
+const RM_HINT_ADMIN = /\b(due|deadlines?|coming up|upcoming|trails?|roadmap|steps?|stage|sop|trigger (event|route|plan))\b/i;
 async function rmAnswer(env, ctx, text, admin) {
   if (!(admin ? RM_HINT_ADMIN : RM_HINT).test(text)) return null;
   try { const rm = await loadRoadmap(env, ctx); return roadmapQuery(text, rm, londonDay()); } catch (e) { return null; }
@@ -226,7 +222,7 @@ export default {
         if (p === "/llms.txt") return T(LLMS, "text/plain; charset=utf-8");
         if (p === "/agent/tools.json") return J(AGENT_TOOLS, 200, { "access-control-allow-origin": "*" });
         if (p === "/.well-known/mcp.json") return J(MCP, 200, { "access-control-allow-origin": "*" });
-        if (p === "/api/scene" || p === "/agent/scene.json") { const st = await load(env); const since = Number(url.searchParams.get("rev")); if (since && since === st.scene.rev) return J({ same: true, rev: since }); return J(publicScene(st.scene), 200, { "access-control-allow-origin": "*" }); }
+        if (p === "/api/scene" || p === "/agent/scene.json") { const since = Number(url.searchParams.get("rev")); if (since) { const head = await env.BUCKET.head("state.json"); const storedRev = head && head.customMetadata && Number(head.customMetadata.rev); if (storedRev && storedRev === since) return J({ same: true, rev: since }, 200, { "access-control-allow-origin": "*" }); } const st = await load(env); if (since && since === st.scene.rev) return J({ same: true, rev: since }, 200, { "access-control-allow-origin": "*" }); return J(publicScene(st.scene), 200, { "access-control-allow-origin": "*" }); }
         if (p === "/agent/search.json") { const st = await load(env); const q = norm(url.searchParams.get("q") || ""); return J({ q, results: st.scene.objects.filter(o => !q || norm([o.name, o.kind, o.species, ...(o.aliases || [])].join(" ")).includes(q)).slice(0, 50) }, 200, { "access-control-allow-origin": "*" }); }
         if (p === "/api/versions" || p === "/agent/versions.json") { const rows = (await versionsList(env)).slice(0, 50); return J({ versions: rows.map(r => ({ name: r.name, label: r.label, saved: new Date(r.at * 1000).toISOString() })) }, 200, { "access-control-allow-origin": "*" }); }
         if (p === "/api/session") return J({ admin: await isAdmin(env, req) });
@@ -269,7 +265,6 @@ export default {
         const b = await readJson(req); const text = String(b.text || "").replace(/\s+/g, " ").trim().slice(0, 420); if (!text) return J({ error: "empty" }, 400);
         ctx.waitUntil(hit(env, ip, "tts"));
         const out = await env.AI.run(TTS, { text, speaker: VOICE, encoding: "mp3" }, { returnRawResponse: true });
-        if (out instanceof Response && (!out.ok || /json/.test(out.headers.get("content-type") || ""))) return J({ error: "tts unavailable" }, 503);
         if (out instanceof Response) return new Response(out.body, { headers: { "content-type": out.headers.get("content-type") || "audio/mpeg", "cache-control": "no-store", ...SEC } });
         if (out && out.audio) { const bin = Uint8Array.from(atob(out.audio), c => c.charCodeAt(0)); return new Response(bin, { headers: { "content-type": "audio/mpeg", ...SEC } }); }
         return new Response(out, { headers: { "content-type": "audio/mpeg", ...SEC } });
@@ -279,14 +274,11 @@ export default {
         const buf = await req.arrayBuffer(); if (buf.byteLength > 3_000_000 || buf.byteLength < 600) return J({ text: "", note: "empty" });
         ctx.waitUntil(hit(env, ip, "stt"));
         let bin = ""; const u8 = new Uint8Array(buf); for (let i = 0; i < u8.length; i += 0x8000) bin += String.fromCharCode(...u8.subarray(i, i + 0x8000));
-        const prompt = "Tŷ Mawr, Llandough, farmhouse, churchyard, ICO, HMLR, roadmap, trail, what's due." + (env.STT_HINT ? " " + env.STT_HINT : "");
+        const prompt = "Tŷ Mawr, Llandough, farmhouse, churchyard, ICO, HMLR." + (env.STT_HINT ? " " + env.STT_HINT : "");
         let out;
-        try {
-          try { out = await env.AI.run(STT, { audio: btoa(bin), language: "en", vad_filter: true, initial_prompt: prompt }); }
-          catch (e) { if (isQuota(e)) throw e; out = await env.AI.run(STT, { audio: btoa(bin), language: "en", initial_prompt: prompt }); }
-        } catch (e) { if (isQuota(e)) return J({ text: "", quota: true }); throw e; }
-        if (out && typeof out.text === "function") { let body = ""; try { body = await out.text(); } catch (e) {} if (isQuota(body)) return J({ text: "", quota: true }); try { out = JSON.parse(body); } catch (e) { out = {}; } if (out && out.result) out = out.result; }
-        return J({ text: cleanStt(out && typeof out.text === "string" ? out.text : "", prompt), bytes: buf.byteLength });
+        try { out = await env.AI.run(STT, { audio: btoa(bin), language: "en", vad_filter: true, initial_prompt: prompt }); }
+        catch (e) { out = await env.AI.run(STT, { audio: btoa(bin), language: "en", initial_prompt: prompt }); }
+        return J({ text: cleanStt(out && out.text || "", prompt), bytes: buf.byteLength });
       }
       return J({ error: "not found" }, 404);
     } catch (e) { return J({ error: "server", say: "Something went wrong on my side. Try that again?", detail: String(e && e.message || e).slice(0, 200) }, 500); }
