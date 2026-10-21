@@ -114,7 +114,7 @@ function parseCalls(out) {
 const NUMW = { one: "1", two: "2", three: "3", four: "4", five: "5", six: "6", seven: "7", eight: "8", nine: "9", ten: "10" };
 function quick(text) {
   const t = norm(text).replace(/^(ok(ay)?|right|tab|please|can you|could you|now) /g, "").replace(/ please$/, "");
-  if (/^(undo|undo that|undo it|go back|take that back|scrap that|reverse that)( please)?$/.test(t)) return [{ name: "undo", arguments: {} }];
+  if (/^(undo|undo that|undo it|un do that|and do that|undo this|go back|take that back|scrap that|reverse that)( please)?$/.test(t)) return [{ name: "undo", arguments: {} }];
   const u = /^undo (the )?last (\w+)( changes?)?$/.exec(t); if (u) return [{ name: "undo", arguments: { steps: Number(NUMW[u[2]] || u[2]) || 1 } }];
   if (/^(redo|redo that|redo it|put it back)$/.test(t)) return [{ name: "redo", arguments: {} }];
   let m = /^save (this |it |the scene |that )?(as )?(version )?(called |named )?(.+)$/.exec(t); if (m && !/^(it|this)$/.test(m[5])) return [{ name: "save_version", arguments: { name: (m[3] ? "version " : "") + m[5] } }];
@@ -161,6 +161,19 @@ const FAVICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><re
 const publicScene = sc => ({ ...sc, meta: { version: sc.meta && sc.meta.version, camera_seq: sc.meta && sc.meta.camera_seq, last: sc.meta && sc.meta.last } });
 
 async function readJson(req, max = 20000) { const t = await req.text(); if (t.length > max) throw new Error("too big"); return t ? JSON.parse(t) : {}; }
+
+
+// Whisper on short clips can echo its prompt or invent filler; drop those.
+function cleanStt(t, prompt) {
+  t = String(t || "").replace(/\s+/g, " ").trim(); if (!t) return "";
+  const low = t.toLowerCase();
+  const parts = prompt.toLowerCase().split(/[,.]/).map(s => s.trim()).filter(s => s.length > 3);
+  let echo = 0; for (const s of parts) { const n = low.split(s).length - 1; if (n >= 2) echo += n; }
+  if (echo >= 3) return "";
+  if (/^(thank you|thanks for watching|thanks|you|bye|okay|\.|subtitles by.*)[.!?]*$/i.test(t)) return "";
+  const w = t.split(" "); if (w.length > 8) { const seen = {}; let rep = 0; for (let i = 0; i + 3 <= w.length; i++) { const g = w.slice(i, i + 3).join(" ").toLowerCase(); seen[g] = (seen[g] || 0) + 1; if (seen[g] >= 3) rep++; } if (rep) return ""; }
+  return t;
+}
 
 export default {
   async fetch(req, env, ctx) {
@@ -220,12 +233,15 @@ export default {
         return new Response(out, { headers: { "content-type": "audio/mpeg", ...SEC } });
       }
       if (p === "/api/stt") {
-        const lim = admin ? 400 : 30; if (await hits(env, ip, "stt", WINDOW_S) >= lim) return J({ error: "slow down" }, 429);
-        const buf = await req.arrayBuffer(); if (buf.byteLength > 2_000_000 || buf.byteLength < 800) return J({ text: "" });
+        const lim = admin ? 600 : 60; if (await hits(env, ip, "stt", WINDOW_S) >= lim) return J({ error: "slow down", text: "" }, 429);
+        const buf = await req.arrayBuffer(); if (buf.byteLength > 3_000_000 || buf.byteLength < 600) return J({ text: "", note: "empty" });
         ctx.waitUntil(hit(env, ip, "stt"));
         let bin = ""; const u8 = new Uint8Array(buf); for (let i = 0; i < u8.length; i += 0x8000) bin += String.fromCharCode(...u8.subarray(i, i + 0x8000));
-        const out = await env.AI.run(STT, { audio: btoa(bin), language: "en", initial_prompt: "Voice commands for a 3D landscape editor. Names: Tŷ Mawr, Great House Farm, St Dochdwy's churchyard, Llandough, Cedwyn Estate, farmhouse, barn, oak tree." });
-        return J({ text: (out && out.text || "").trim() });
+        const prompt = "Tŷ Mawr, Llandough, farmhouse, churchyard, ICO, HMLR." + (env.STT_HINT ? " " + env.STT_HINT : "");
+        let out;
+        try { out = await env.AI.run(STT, { audio: btoa(bin), language: "en", vad_filter: true, initial_prompt: prompt }); }
+        catch (e) { out = await env.AI.run(STT, { audio: btoa(bin), language: "en", initial_prompt: prompt }); }
+        return J({ text: cleanStt(out && out.text || "", prompt), bytes: buf.byteLength });
       }
       return J({ error: "not found" }, 404);
     } catch (e) { return J({ error: "server", say: "Something went wrong on my side. Try that again?", detail: String(e && e.message || e).slice(0, 200) }, 500); }

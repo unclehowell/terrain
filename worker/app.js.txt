@@ -238,22 +238,28 @@ $("vers").onclick = async () => { const v = $("vlist"); if (!v.hidden) { v.hidde
 $("lock").onclick = async () => { await fetch("/api/logout", { method: "POST" }); setAdmin(false); capA("Locked. View only."); };
 
 // ---------- voice call ----------
-const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-let call = false, busy = false, rec = null, speaking = false, lastSaid = "", spokeEnd = 0, history = [], queue = [], stream = null, vad = null;
+// Listening = microphone → MediaRecorder (audio/mp4 on iPhone, webm/opus on Chrome) or a WAV recorder → /api/stt (Whisper) → agent.
+// No reliance on the browser's own speech recognition, which many phones lack.
+const UA = navigator.userAgent || "";
+const INAPP = /WhatsApp|FBAN|FBAV|FB_IAB|Instagram|Line\/|MicroMessenger|Snapchat|; wv\)|GSA\//i.test(UA);
+const OPEN_MSG = "Open in Safari or Chrome and allow the microphone";
+let call = false, busy = false, speaking = false, lastSaid = "", spokeEnd = 0, history = [], queue = [], stream = null;
+let micSrc = null, an = null, vadT = null, rec = null, recAt = 0, voicedMs = 0, quietMs = 0, inSpeech = false, holding = false, floor = 0.006, sending = 0;
 const st = t => { $("st").textContent = t; $("st").classList.toggle("live", call); };
-const capU = t => { $("capu").textContent = t ? "“" + t + "”" : ""; };
+const capU = t => { $("capu").textContent = t ? (/^Heard:|^Hearing/.test(t) ? t : "Heard: “" + t + "”") : ""; };
 function capA(t) { $("capa").textContent = t || ""; }
+function micNote(t) { const n = $("micnote"); n.textContent = t || ""; n.hidden = !t; }
 function wordsOf(s) { return String(s).toLowerCase().replace(/[^a-z0-9 ]/g, " ").split(/\s+/).filter(Boolean); }
-function isEcho(t) { if (!lastSaid) return false; if (!speaking && performance.now() - spokeEnd > 1200) return false; const a = wordsOf(t), b = new Set(wordsOf(lastSaid)); if (!a.length) return true; return a.filter(w => b.has(w)).length / a.length > 0.6; }
+function isEcho(t) { if (!lastSaid) return false; if (!speaking && performance.now() - spokeEnd > 1500) return false; const a = wordsOf(t), b = new Set(wordsOf(lastSaid)); if (!a.length) return true; return a.filter(w => b.has(w)).length / a.length > 0.6; }
 let actx = null, srcNode = null;
 function stopSpeaking() { if (speaking) { try { srcNode && srcNode.stop(); } catch (e) {} speaking = false; spokeEnd = performance.now(); try { speechSynthesis.cancel(); } catch (e) {} } }
 async function speak(text) {
   capA(text); lastSaid = text; if (!call) return;
   try { const r = await fetch("/api/tts", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ text }) }); if (!r.ok) throw new Error("tts " + r.status);
-    const ab = await r.arrayBuffer(); if (!call) return; if (!actx) throw new Error("no audio");
+    const ab = await r.arrayBuffer(); if (!call) return; if (!actx) throw new Error("no audio"); try { await actx.resume(); } catch (e) {}
     const buf = await actx.decodeAudioData(ab); const s = actx.createBufferSource(); s.buffer = buf; s.connect(actx.destination); srcNode = s; speaking = true; st(ADMIN ? "Admin · talking" : "Talking");
     await new Promise(res => { s.onended = res; s.start(); }); if (srcNode === s) srcNode = null; }
-  catch (e) { try { const u = new SpeechSynthesisUtterance(text); const v = speechSynthesis.getVoices().find(v => /en-GB/i.test(v.lang) && /male|daniel|arthur|george|oliver/i.test(v.name)) || speechSynthesis.getVoices().find(v => /en-GB/i.test(v.lang)); if (v) u.voice = v; speaking = true; speechSynthesis.speak(u); await new Promise(res => { u.onend = u.onerror = res; }); } catch (e2) {} }
+  catch (e) { try { const u = new SpeechSynthesisUtterance(text); const v = speechSynthesis.getVoices().find(v => /en-GB/i.test(v.lang)); if (v) u.voice = v; speaking = true; speechSynthesis.speak(u); await new Promise(res => { u.onend = u.onerror = res; setTimeout(res, 12000); }); } catch (e2) {} }
   speaking = false; spokeEnd = performance.now(); if (call) st(ADMIN ? "Admin · listening" : "Listening");
 }
 async function utter(text) {
@@ -265,41 +271,86 @@ async function utter(text) {
     const j = await r.json();
     if (j.unlocked || j.admin !== undefined) setAdmin(!!j.admin);
     if (j.scene) render(j.scene);
+    if (j.view && window.terrainView) window.terrainView(j.view);
     if (ADMIN && !j.unlocked) { history.push({ role: "user", content: text }, { role: "assistant", content: j.say || "" }); }
+    if (j.locked) micNote("");
     busy = false; speak(j.say || "Hmm.");
   } catch (e) { busy = false; speak("Lost you for a second. Say that again?"); }
   if (queue.length) utter(queue.shift());
 }
-function startRec() {
-  if (!SR) return startVad();
-  rec = new SR(); rec.lang = "en-GB"; rec.continuous = true; rec.interimResults = true;
-  rec.onresult = e => { for (let i = e.resultIndex; i < e.results.length; i++) { const r = e.results[i], t = r[0].transcript.trim(); if (!t) continue;
-    if (!r.isFinal) { if (speaking && wordsOf(t).length >= 2 && !isEcho(t)) stopSpeaking(); if (!speaking) capU(t + "…"); continue; }
-    if (isEcho(t)) continue; utter(t); } };
-  rec.onerror = e => { if (e.error === "not-allowed" || e.error === "service-not-allowed") { rec = null; startVad(); } };
-  rec.onend = () => { if (call && rec) setTimeout(() => { try { rec && rec.start(); } catch (e) {} }, 200); };
-  try { rec.start(); } catch (e) {}
+// --- recorders ---
+function pickMime() {
+  if (!window.MediaRecorder) return null;
+  const q = new URLSearchParams(location.search).get("mime");
+  for (const m of [q, "audio/webm;codecs=opus", "audio/mp4", "audio/mp4;codecs=mp4a.40.2", "audio/webm", "audio/ogg;codecs=opus", "audio/aac"].filter(Boolean)) { try { if (MediaRecorder.isTypeSupported(m)) return m; } catch (e) {} }
+  return "";
 }
-// fallback listening: voice-activity detection + server transcription
-function startVad() {
-  if (!stream || !window.MediaRecorder) { st("Voice isn't supported here, so type below"); return; }
-  const ac = new (window.AudioContext || window.webkitAudioContext)(), src = ac.createMediaStreamSource(stream), an = ac.createAnalyser(); an.fftSize = 1024; src.connect(an);
-  const buf = new Float32Array(an.fftSize); let mr = null, chunks = [], voiced = 0, quiet = 0;
-  vad = setInterval(() => { an.getFloatTimeDomainData(buf); let s = 0; for (const v of buf) s += v * v; const rms = Math.sqrt(s / buf.length), thr = speaking ? 0.06 : 0.02;
-    if (rms > thr) { voiced += 50; quiet = 0; if (speaking && voiced > 300) stopSpeaking(); if (!mr && !speaking && voiced >= 150) { chunks = []; mr = new MediaRecorder(stream); mr.ondataavailable = e => chunks.push(e.data); mr.onstop = async () => { const b = new Blob(chunks, { type: mr.mimeType || "audio/webm" }); mr = null; if (b.size < 2000) return; st("Thinking"); try { const j = await (await fetch("/api/stt", { method: "POST", body: b })).json(); if (j.text) utter(j.text); else st("Listening"); } catch (e) {} }; mr.start(); } }
-    else { quiet += 50; if (quiet > 300) voiced = 0; if (mr && quiet > 900) mr.stop(); } }, 50);
-  vad.ac = ac;
+let MIME = null;
+function wavOf(parts, rate) {
+  let n = 0; for (const p of parts) n += p.length; const ratio = rate / 16000, out = new Int16Array(Math.floor(n / ratio)); let all = new Float32Array(n), o = 0; for (const p of parts) { all.set(p, o); o += p.length; }
+  for (let i = 0; i < out.length; i++) { const s = all[Math.floor(i * ratio)]; out[i] = Math.max(-1, Math.min(1, s)) * 0x7fff; }
+  const b = new ArrayBuffer(44 + out.length * 2), v = new DataView(b), w = (o, s) => { for (let i = 0; i < s.length; i++) v.setUint8(o + i, s.charCodeAt(i)); };
+  w(0, "RIFF"); v.setUint32(4, 36 + out.length * 2, true); w(8, "WAVEfmt "); v.setUint32(16, 16, true); v.setUint16(20, 1, true); v.setUint16(22, 1, true); v.setUint32(24, 16000, true); v.setUint32(28, 32000, true); v.setUint16(32, 2, true); v.setUint16(34, 16, true); w(36, "data"); v.setUint32(40, out.length * 2, true);
+  new Int16Array(b, 44).set(out); return new Blob([b], { type: "audio/wav" });
 }
+function newRec() {
+  if (MIME !== null) {
+    let mr; try { mr = MIME ? new MediaRecorder(stream, { mimeType: MIME }) : new MediaRecorder(stream); } catch (e) { mr = new MediaRecorder(stream); }
+    const ch = []; mr.ondataavailable = e => { if (e.data && e.data.size) ch.push(e.data); };
+    return { start() { try { mr.start(500); } catch (e) { mr.start(); } }, stop() { return new Promise(res => { mr.onstop = () => res(new Blob(ch, { type: mr.mimeType || MIME || "audio/webm" })); try { mr.stop(); } catch (e) { res(new Blob(ch)); } }); } };
+  }
+  const sp = actx.createScriptProcessor(4096, 1, 1), g = actx.createGain(); g.gain.value = 0; const parts = [];
+  sp.onaudioprocess = e => parts.push(new Float32Array(e.inputBuffer.getChannelData(0)));
+  return { start() { micSrc.connect(sp); sp.connect(g); g.connect(actx.destination); }, stop() { try { micSrc.disconnect(sp); sp.disconnect(); g.disconnect(); } catch (e) {} return Promise.resolve(wavOf(parts, actx.sampleRate)); } };
+}
+function arm() { if (!stream || !call) return; rec = newRec(); recAt = performance.now(); rec.start(); }
+async function disarm() { const r = rec; rec = null; if (!r) return null; return r.stop(); }
+async function sendClip(blob, ms) {
+  if (!blob || blob.size < 600 || ms < 250) return;
+  sending++; st("Hearing you"); capU("Hearing you…");
+  try {
+    const r = await fetch("/api/stt", { method: "POST", headers: { "content-type": blob.type || "application/octet-stream" }, body: blob });
+    const j = await r.json(); const t = (j.text || "").trim();
+    if (!t || isEcho(t)) { capU(t ? "" : "Heard: (nothing clear, say it again)"); if (!busy) st(ADMIN ? "Admin · listening" : "Listening"); }
+    else utter(t);
+  } catch (e) { capU("Heard: (connection dropped, say it again)"); }
+  sending--;
+}
+// --- voice-activity detection + level meter ---
+const fbuf = new Float32Array(1024);
+function tick() {
+  if (!an) return; an.getFloatTimeDomainData(fbuf); let s = 0; for (const v of fbuf) s += v * v; const rms = Math.sqrt(s / fbuf.length);
+  $("lvlb").style.width = Math.min(100, Math.round(Math.sqrt(rms / 0.25) * 100)) + "%"; $("lvl").classList.toggle("hot", inSpeech || holding);
+  if (holding) return;
+  const thr = speaking ? Math.max(0.08, floor * 6) : Math.max(0.012, floor * 3);
+  if (rms > thr) { voicedMs += 40; quietMs = 0; if (!inSpeech && voicedMs >= 160) { inSpeech = true; if (speaking) { stopSpeaking(); disarm(); arm(); } if (!busy) { st("Hearing you"); capU("Hearing you…"); } } }
+  else { if (!inSpeech) { voicedMs = Math.max(0, voicedMs - 40); floor = Math.min(0.05, Math.max(0.002, floor * 0.97 + rms * 0.03)); } else quietMs += 40; }
+  const dur = performance.now() - recAt;
+  if (inSpeech && (quietMs >= 850 || dur > 15000)) { const ms = voicedMs; inSpeech = false; voicedMs = 0; quietMs = 0; disarm().then(b => sendClip(b, ms)); arm(); }
+  else if (!inSpeech && voicedMs === 0 && dur > 8000 && rec) { const old = rec; rec = null; arm(); setTimeout(() => old.stop(), 300); }
+}
+async function startListening() {
+  MIME = pickMime();
+  try { const src = actx.createMediaStreamSource(stream); micSrc = src; an = actx.createAnalyser(); an.fftSize = 1024; src.connect(an); } catch (e) { micNote(OPEN_MSG); return; }
+  $("vrow").hidden = false; arm(); vadT = setInterval(tick, 40);
+}
+function pttDown(e) { if (!call || !stream) return; e.preventDefault(); holding = true; stopSpeaking(); inSpeech = false; voicedMs = 0; disarm(); arm(); st("Recording, let go to send"); capU("Hearing you…"); $("ptt").classList.add("on"); }
+function pttUp(e) { if (!holding) return; e && e.preventDefault(); holding = false; $("ptt").classList.remove("on"); const ms = performance.now() - recAt; disarm().then(b => sendClip(b, ms)); arm(); }
 async function startCall() {
-  call = true; $("call").textContent = "End call"; $("call").classList.remove("gold"); $("call").classList.add("red"); $("tx").hidden = false; st("Connecting");
+  call = true; $("call").textContent = "End call"; $("call").classList.remove("gold"); $("call").classList.add("red"); $("tx").hidden = false; st("Connecting"); micNote(INAPP ? OPEN_MSG : "");
   try { actx = actx || new (window.AudioContext || window.webkitAudioContext)(); actx.resume(); const b = actx.createBuffer(1, 1, 22050), s = actx.createBufferSource(); s.buffer = b; s.connect(actx.destination); s.start(); } catch (e) {}
-  try { stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true } }); } catch (e) { st("Microphone blocked. You can type below"); }
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) micNote(OPEN_MSG);
+  else { try { stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true, channelCount: 1 } }); micNote(""); } catch (e) { stream = null; micNote(OPEN_MSG); } }
+  if (stream) { try { await actx.resume(); } catch (e) {} await startListening(); }
   let hello = "Alright, it's Tab. What's the passphrase?";
   try { hello = (await (await fetch("/api/agent", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ hello: true }) })).json()).say || hello; } catch (e) {}
-  startRec(); await speak(hello);
+  if (!stream) hello += " Type it below.";
+  await speak(hello);
 }
-function endCall() { call = false; stopSpeaking(); if (rec) { const r = rec; rec = null; try { r.abort(); } catch (e) {} } if (vad) { clearInterval(vad); try { vad.ac.close(); } catch (e) {} vad = null; } if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }
-  $("call").textContent = "Start call"; $("call").classList.add("gold"); $("call").classList.remove("red"); $("tx").hidden = true; st(""); capU(""); }
+function endCall() { call = false; stopSpeaking(); holding = false; inSpeech = false; if (vadT) { clearInterval(vadT); vadT = null; } disarm(); try { micSrc && micSrc.disconnect(); } catch (e) {} micSrc = null; an = null; if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }
+  $("vrow").hidden = true; $("call").textContent = "Start call"; $("call").classList.add("gold"); $("call").classList.remove("red"); $("tx").hidden = true; st(""); capU(""); }
+$("ptt").addEventListener("pointerdown", pttDown); ["pointerup", "pointercancel", "pointerleave"].forEach(ev => $("ptt").addEventListener(ev, pttUp));
+$("ptt").addEventListener("contextmenu", e => e.preventDefault());
 $("call").onclick = () => call ? endCall() : startCall();
 $("tx").onsubmit = e => { e.preventDefault(); const v = $("txi").value; $("txi").value = ""; utter(v); };
-window.terrain = { utter, tool, render: () => SCENE, flyTo };
+window.terrain = { utter, tool, render: () => SCENE, flyTo, voice: () => ({ MIME, floor, inSpeech, sending, stream: !!stream, rec: !!rec }) };
