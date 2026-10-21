@@ -115,7 +115,7 @@ const PRESET = {
   marker: { kind: "marker", color: "#e53935" }, pin: { kind: "marker", color: "#e53935" }, flag: { kind: "marker", color: "#c8102e" }, rock: { kind: "rock", color: "#7d7f80" },
   stone: { kind: "rock", color: "#9a978f" }, boulder: { kind: "rock", color: "#7d7f80", size: 2 }, lamp: { kind: "lamp", color: "#f2c94c" }, bench: { kind: "bench", color: "#8b5a2b" },
   gate: { kind: "gate", color: "#8b5a2b", height: 1.6 }, animal: { kind: "animal", species: "sheep", color: "#e7e1d4" }, sheep: { kind: "animal", species: "sheep", color: "#e7e1d4" }, cow: { kind: "animal", species: "cow", color: "#e7e1d4" }, horse: { kind: "animal", species: "horse", color: "#694a32" }, dog: { kind: "animal", species: "dog", color: "#a77d52" }, chicken: { kind: "animal", species: "chicken", color: "#f0e5d0" },
-  cart: { kind: "vehicle", species: "cart", color: "#8b5a2b" }, wagon: { kind: "vehicle", species: "wagon", color: "#8b5a2b" }, tractor: { kind: "vehicle", species: "tractor", color: "#536e35" },
+  vehicle: { kind: "vehicle", species: "cart", color: "#8b5a2b" }, cart: { kind: "vehicle", species: "cart", color: "#8b5a2b" }, wagon: { kind: "vehicle", species: "wagon", color: "#8b5a2b" }, tractor: { kind: "vehicle", species: "tractor", color: "#536e35" },
   well: { kind: "well", color: "#8a8d8f" }, statue: { kind: "statue", color: "#7f8781" }, monument: { kind: "statue", color: "#7f8781" }, ruin: { kind: "ruin", color: "#8a8d8f", texture: "stone" }, ruins: { kind: "ruin", color: "#8a8d8f", texture: "stone" },
 };
 export function presetFor(kind, species) {
@@ -145,7 +145,7 @@ export function apply(scene, name, a = {}) {
         if (a.height) { if (oo.kind === "building") { oo.size = oo.size || [6, 4, 5]; oo.size[1] = num(a.height, oo.size[1]); } else oo.height = num(a.height, oo.height || 2); }
         if (a.width || a.length) { if (oo.kind === "building") { oo.size = oo.size || [6, 4, 5]; oo.size[0] = num(a.width, oo.size[0]); oo.size[2] = num(a.length, oo.size[2]); } else if (oo.kind === "field") oo.size = [num(a.width, 20), num(a.length, a.width || 20)]; else if (oo.kind === "path") oo.width = num(a.width, oo.width); }
         if (a.radius && oo.kind === "water") oo.radius = num(a.radius, 4);
-        if (oo.kind === "label" || a.text) oo.text = String(a.text || a.name || "Label").slice(0, 60);
+        if (oo.kind === "label" || oo.kind === "sign" || a.text) oo.text = String(a.text || a.name || oo.text || "Label").slice(0, 60);
         const from = a.from ? need(a.from) : null, to = a.to ? need(a.to) : null;
         if (["fence", "wall", "hedge", "path"].includes(oo.kind)) {
           if (Array.isArray(a.points) && a.points.length > 1) oo.points = a.points.map(p => [num(p[0], 0), num(p[1], 0)]);
