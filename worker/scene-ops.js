@@ -136,7 +136,7 @@ export function apply(scene, name, a = {}) {
       const made = [];
       for (let i = 0; i < count; i++) {
         const oo = JSON.parse(JSON.stringify(o));
-        const nm = a.name || (a.text && (oo.kind === "label") ? a.text : null) || ((a.species ? a.species + " " : "") + (norm(a.kind) || oo.kind)).replace(/^(\w)/, c => c.toUpperCase());
+        const baseName = a.species && oo.kind === "tree" ? a.species + " tree" : a.species && ["animal", "vehicle"].includes(oo.kind) ? a.species : (a.species ? a.species + " " : "") + (norm(a.kind) || oo.kind); const nm = a.name || (a.text && ["label", "sign"].includes(oo.kind) ? a.text : null) || baseName.replace(/^(\w)/, c => c.toUpperCase());
         oo.id = newId(scene, oo.kind, nm); oo.name = count > 1 ? nm + " " + (i + 1) : nm;
         if (a.color && parseColor(a.color)) oo.color = parseColor(a.color);
         if (a.roof_color && parseColor(a.roof_color)) oo.roofColor = parseColor(a.roof_color);
