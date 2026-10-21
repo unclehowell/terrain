@@ -646,11 +646,11 @@ function stopSpeaking() { if (speaking) { try { srcNode && srcNode.stop(); } cat
 async function speak(text) {
   capA(text); lastSaid = text; if (!call) return;
   if (VW.tts) { try { await deviceSpeak(text); speaking = false; spokeEnd = performance.now(); if (call) st(ADMIN ? "Admin · listening" : "Listening"); return; } catch (e) { console.warn("device tts", e); } }
-  try { const r = await fetch("/api/tts", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ text }) }); if (!r.ok) throw new Error("tts " + r.status);
+  try { if (Date.now() < TTS_DOWN) throw new Error("tts resting"); const r = await fetch("/api/tts", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ text }) }); if (!r.ok) { if (r.status === 503 || r.status === 429) TTS_DOWN = Date.now() + 600000; throw new Error("tts " + r.status); }
     const ab = await r.arrayBuffer(); if (!call) return; if (!actx) throw new Error("no audio"); try { await actx.resume(); } catch (e) {}
     const buf = await actx.decodeAudioData(ab); const s = actx.createBufferSource(); s.buffer = buf; s.connect(actx.destination); srcNode = s; speaking = true; st(ADMIN ? "Admin · talking" : "Talking");
     await new Promise(res => { s.onended = res; s.start(); }); if (srcNode === s) srcNode = null; }
-  catch (e) { try { const u = new SpeechSynthesisUtterance(text); const v = speechSynthesis.getVoices().find(v => /en-GB/i.test(v.lang)); if (v) u.voice = v; speaking = true; speechSynthesis.speak(u); await new Promise(res => { u.onend = u.onerror = res; setTimeout(res, 12000); }); } catch (e2) {} }
+  catch (e) { try { const u = new SpeechSynthesisUtterance(text); const vs = speechSynthesis.getVoices(), v = vs.find(v => /en-GB/i.test(v.lang) && /daniel|arthur|george|oliver|male/i.test(v.name)) || vs.find(v => /en-GB/i.test(v.lang)); if (v) u.voice = v; u.lang = "en-GB"; speaking = true; speechSynthesis.speak(u); await new Promise(res => { u.onend = u.onerror = res; setTimeout(res, 12000); }); } catch (e2) {} }
   speaking = false; spokeEnd = performance.now(); if (call) st(ADMIN ? "Admin · listening" : "Listening");
 }
 async function utter(text) {
@@ -711,11 +711,12 @@ async function sendClip(blob, ms) {
   sending--;
 }
 // ---------- on-device voice (Whisper + Kokoro in a worker, weights cached by the browser) ----------
+let TTS_DOWN = 0;
 const VW = { w: null, stt: false, tts: false, llm: null, loading: "", seq: 0, wait: {}, bytes: {}, total: {} };
 const VKEY = "terrain.voice";
 function vw() {
   if (VW.w) return VW.w;
-  try { VW.w = new Worker("/voice-worker.js?v=1.5.1", { type: "module" }); } catch (e) { return null; }
+  try { VW.w = new Worker("/voice-worker.js?v=1.5.2", { type: "module" }); } catch (e) { return null; }
   VW.w.onmessage = e => { const m = e.data || {};
     if (m.type === "progress") { const k = m.what + ":" + m.file; if (m.total) { VW.total[k] = m.total; VW.bytes[k] = m.loaded; } if (m.done && VW.total[k]) VW.bytes[k] = VW.total[k]; vProg(m.what); return; }
     if (m.type === "warm") { VW.warmMs = m.ms; return; }
@@ -731,7 +732,7 @@ async function loadDeviceStt() {
   const r = await vAsk({ type: "load-stt" }); VW.loading = ""; $("vprog").hidden = true;
   if (r.type !== "ready") { $("vdl").textContent = "Voice download failed, tap to retry"; console.warn(r.error); return false; }
   VW.stt = true; VW.loadMs = Math.round(performance.now() - t0); try { localStorage.setItem(VKEY, "device"); } catch (e) {}
-  $("vdl").hidden = true; $("vtts").hidden = !!VW.tts; if (BSR) { const b = BSR; BSR = null; try { b.stop(); } catch (e) {} if (call && stream && !vadT) { $("vrow").hidden = false; arm(); vadT = setInterval(tick, 40); } }
+  $("vdl").hidden = true; $("vtts").hidden = !!VW.tts || !(navigator.gpu || (navigator.hardwareConcurrency || 0) >= 8); if (BSR) { const b = BSR; BSR = null; try { b.stop(); } catch (e) {} if (call && stream && !vadT) { $("vrow").hidden = false; arm(); vadT = setInterval(tick, 40); } }
   micNote(""); vPill(); return true;
 }
 async function loadDeviceTts() {
