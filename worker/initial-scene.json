@@ -1,0 +1,1246 @@
+{
+ "version": 1,
+ "rev": 1,
+ "env": {
+  "time": "afternoon",
+  "weather": "clear",
+  "camera": {
+   "pos": [
+    42,
+    34,
+    92
+   ],
+   "target": [
+    0,
+    0,
+    28
+   ]
+  }
+ },
+ "objects": [
+  {
+   "id": "site_wiki",
+   "name": "Legal Wiki",
+   "kind": "building",
+   "roof": "portico",
+   "pos": [
+    -28.5,
+    0,
+    -7.2
+   ],
+   "rot": -0.0,
+   "scale": 1,
+   "size": [
+    5.6,
+    3.4,
+    4.6
+   ],
+   "color": "#1B4D6A",
+   "roofColor": "#0F9DF0",
+   "texture": "plain",
+   "label": {
+    "n": 1,
+    "title": "The Legal Wiki",
+    "tag": "START HERE"
+   },
+   "url": "https://greathousefarmwiki.wordpress.com/",
+   "aliases": [
+    "wiki",
+    "start here"
+   ]
+  },
+  {
+   "id": "site_story",
+   "name": "Story",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -9.5,
+    0,
+    7.2
+   ],
+   "rot": 180.0,
+   "scale": 1,
+   "size": [
+    5.6,
+    3.4,
+    4.6
+   ],
+   "color": "#6A3A1B",
+   "roofColor": "#F1721E",
+   "texture": "plain",
+   "label": {
+    "n": 2,
+    "title": "The Story",
+    "tag": "TIMELINE"
+   },
+   "url": "https://bpvsbuckler.bucklerfamily.estate/",
+   "aliases": [
+    "story",
+    "timeline"
+   ]
+  },
+  {
+   "id": "site_maps",
+   "name": "Map Room",
+   "kind": "building",
+   "roof": "dome",
+   "pos": [
+    9.5,
+    0,
+    -7.2
+   ],
+   "rot": -0.0,
+   "scale": 1,
+   "size": [
+    5.6,
+    3.4,
+    4.6
+   ],
+   "color": "#6A2B22",
+   "roofColor": "#FF8F7A",
+   "texture": "plain",
+   "label": {
+    "n": 3,
+    "title": "The Map Room",
+    "tag": "TITLE MAP"
+   },
+   "url": "https://maps.bucklerfamily.estate/",
+   "aliases": [
+    "maps",
+    "title map"
+   ]
+  },
+  {
+   "id": "site_chess",
+   "name": "Chessboard",
+   "kind": "building",
+   "roof": "flat",
+   "pos": [
+    34.05,
+    0,
+    4.59
+   ],
+   "rot": -129.6,
+   "scale": 1,
+   "size": [
+    5.6,
+    3.4,
+    4.6
+   ],
+   "color": "#3D2614",
+   "roofColor": "#D9AE7E",
+   "texture": "plain",
+   "label": {
+    "n": 4,
+    "title": "The Chessboard",
+    "tag": "TWO RECORDS"
+   },
+   "url": "https://chess.bucklerfamily.estate/",
+   "aliases": [
+    "chess",
+    "two records"
+   ]
+  },
+  {
+   "id": "site_fcg",
+   "name": "FCG · Security Clearance",
+   "kind": "building",
+   "roof": "portico",
+   "pos": [
+    22.95,
+    0,
+    -18.41
+   ],
+   "rot": 129.6,
+   "scale": 1,
+   "size": [
+    5.6,
+    3.4,
+    4.6
+   ],
+   "color": "#4A1B6A",
+   "roofColor": "#C274F6",
+   "texture": "plain",
+   "label": {
+    "n": 5,
+    "title": "FCG · Security Clearance",
+    "tag": "CLEARANCE"
+   },
+   "url": "https://fcg.bucklerfamily.estate/",
+   "aliases": [
+    "fcg",
+    "clearance"
+   ]
+  },
+  {
+   "id": "site_csscpsg",
+   "name": "Grammar House (CSSCPSGP)",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    9.5,
+    0,
+    -30.2
+   ],
+   "rot": 0.0,
+   "scale": 1,
+   "size": [
+    5.6,
+    3.4,
+    4.6
+   ],
+   "color": "#364E13",
+   "roofColor": "#92DB24",
+   "texture": "plain",
+   "label": {
+    "n": 6,
+    "title": "The Grammar House (CSSCPSGP)",
+    "tag": "STRUCTURE"
+   },
+   "url": "https://csscpsg.bucklerfamily.estate/",
+   "aliases": [
+    "csscpsg",
+    "structure"
+   ]
+  },
+  {
+   "id": "site_records",
+   "name": "Primary Records",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -9.5,
+    0,
+    -15.8
+   ],
+   "rot": -180.0,
+   "scale": 1,
+   "size": [
+    5.6,
+    3.4,
+    4.6
+   ],
+   "color": "#215214",
+   "roofColor": "#48DB24",
+   "texture": "plain",
+   "label": {
+    "n": 7,
+    "title": "Primary Records",
+    "tag": "REGISTER"
+   },
+   "url": "https://records.bucklerfamily.estate/",
+   "aliases": [
+    "records",
+    "register"
+   ]
+  },
+  {
+   "id": "site_wayback",
+   "name": "Wayback Vault",
+   "kind": "building",
+   "roof": "tower",
+   "pos": [
+    -22.95,
+    0,
+    -27.59
+   ],
+   "rot": -50.4,
+   "scale": 1,
+   "size": [
+    3.6,
+    7.5,
+    4.6
+   ],
+   "color": "#144E52",
+   "roofColor": "#0FE1F0",
+   "texture": "plain",
+   "label": {
+    "n": 8,
+    "title": "The Wayback Vault",
+    "tag": "ARCHIVE"
+   },
+   "url": "https://wayback.bucklerfamily.estate/",
+   "aliases": [
+    "wayback",
+    "archive"
+   ]
+  },
+  {
+   "id": "site_email",
+   "name": "Post Office",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -34.05,
+    0,
+    -50.59
+   ],
+   "rot": 50.4,
+   "scale": 1,
+   "size": [
+    5.6,
+    3.4,
+    4.6
+   ],
+   "color": "#145227",
+   "roofColor": "#24DB5B",
+   "texture": "plain",
+   "label": {
+    "n": 9,
+    "title": "The Post Office",
+    "tag": "CORRESPONDENCE"
+   },
+   "url": "https://email.bucklerfamily.estate/",
+   "aliases": [
+    "email",
+    "correspondence"
+   ]
+  },
+  {
+   "id": "site_authorities",
+   "name": "Public Authorities",
+   "kind": "building",
+   "roof": "flat",
+   "pos": [
+    -9.5,
+    0,
+    -31.0
+   ],
+   "rot": 180.0,
+   "scale": 1,
+   "size": [
+    5.6,
+    3.4,
+    4.6
+   ],
+   "color": "#263238",
+   "roofColor": "#B0BEC5",
+   "texture": "plain",
+   "label": {
+    "n": 10,
+    "title": "Public Authorities",
+    "tag": "WHO WAS ASKED"
+   },
+   "url": "https://authorities.bucklerfamily.estate/",
+   "aliases": [
+    "authorities",
+    "who was asked"
+   ],
+   "enemy": true
+  },
+  {
+   "id": "enemy_camp_fence",
+   "name": "Enemy camp fence",
+   "kind": "fence",
+   "points": [
+    [
+     -6.3,
+     -40.0
+    ],
+    [
+     -0.5,
+     -40.0
+    ],
+    [
+     -0.5,
+     -22.0
+    ],
+    [
+     -18.5,
+     -22.0
+    ],
+    [
+     -18.5,
+     -40.0
+    ],
+    [
+     -12.7,
+     -40.0
+    ]
+   ],
+   "color": "#6b2b2b",
+   "height": 2.2,
+   "aliases": [
+    "enemy camp"
+   ]
+  },
+  {
+   "id": "enemy_camp_sign",
+   "name": "Enemy camp sign",
+   "kind": "label",
+   "pos": [
+    -9.5,
+    3.3,
+    -40.3
+   ],
+   "text": "ENEMY CAMP",
+   "color": "#ff6b6b",
+   "rot": 180.0
+  },
+  {
+   "id": "site_dartboard",
+   "name": "Disclosure Dartboard",
+   "kind": "building",
+   "roof": "dome",
+   "pos": [
+    9.5,
+    0,
+    -53.2
+   ],
+   "rot": -0.0,
+   "scale": 1,
+   "size": [
+    5.6,
+    3.4,
+    4.6
+   ],
+   "color": "#671B6A",
+   "roofColor": "#EE4EF4",
+   "texture": "plain",
+   "label": {
+    "n": 11,
+    "title": "The Disclosure Dartboard",
+    "tag": "DISCLOSURE"
+   },
+   "url": "https://dartboard.bucklerfamily.estate/",
+   "aliases": [
+    "dartboard",
+    "disclosure"
+   ]
+  },
+  {
+   "id": "site_qa",
+   "name": "Q&A Hall",
+   "kind": "building",
+   "roof": "tower",
+   "pos": [
+    34.05,
+    0,
+    -41.41
+   ],
+   "rot": -129.6,
+   "scale": 1,
+   "size": [
+    3.6,
+    7.5,
+    4.6
+   ],
+   "color": "#14523F",
+   "roofColor": "#24DBA4",
+   "texture": "plain",
+   "label": {
+    "n": 12,
+    "title": "The Q&A Hall",
+    "tag": "FOI"
+   },
+   "url": "https://qa.bucklerfamily.estate/",
+   "aliases": [
+    "qa",
+    "foi"
+   ]
+  },
+  {
+   "id": "site_clerk",
+   "name": "Council House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    22.95,
+    0,
+    -64.41
+   ],
+   "rot": 129.6,
+   "scale": 1,
+   "size": [
+    5.6,
+    3.4,
+    4.6
+   ],
+   "color": "#1B4D6A",
+   "roofColor": "#0F9DF0",
+   "texture": "plain",
+   "label": {
+    "n": 13,
+    "title": "The Council House",
+    "tag": "LOCAL COUNCIL"
+   },
+   "url": "https://clerk.bucklerfamily.estate/",
+   "aliases": [
+    "clerk",
+    "local council"
+   ]
+  },
+  {
+   "id": "site_chamber",
+   "name": "Council Chamber",
+   "kind": "building",
+   "roof": "flat",
+   "pos": [
+    9.5,
+    0,
+    -76.2
+   ],
+   "rot": 0.0,
+   "scale": 1,
+   "size": [
+    5.6,
+    3.4,
+    4.6
+   ],
+   "color": "#484912",
+   "roofColor": "#D5DB24",
+   "texture": "plain",
+   "label": {
+    "n": 14,
+    "title": "The Council Chamber",
+    "tag": "22 OCT 2026"
+   },
+   "url": "https://2026-10-22.bucklerfamily.estate/",
+   "aliases": [
+    "chamber",
+    "22 oct 2026"
+   ]
+  },
+  {
+   "id": "site_review",
+   "name": "Independent Review",
+   "kind": "building",
+   "roof": "dome",
+   "pos": [
+    -9.5,
+    0,
+    -61.8
+   ],
+   "rot": -180.0,
+   "scale": 1,
+   "size": [
+    5.6,
+    3.4,
+    4.6
+   ],
+   "color": "#1B1D6A",
+   "roofColor": "#878BF7",
+   "texture": "plain",
+   "label": {
+    "n": 15,
+    "title": "Independent Review",
+    "tag": "CHECKS"
+   },
+   "url": "https://review.bucklerfamily.estate/",
+   "aliases": [
+    "review",
+    "checks"
+   ]
+  },
+  {
+   "id": "site_research",
+   "name": "Research Library",
+   "kind": "building",
+   "roof": "dome",
+   "pos": [
+    -22.95,
+    0,
+    -73.59
+   ],
+   "rot": -50.4,
+   "scale": 1,
+   "size": [
+    5.6,
+    3.4,
+    4.6
+   ],
+   "color": "#301B6A",
+   "roofColor": "#A182F7",
+   "texture": "plain",
+   "label": {
+    "n": 16,
+    "title": "The Research Library",
+    "tag": "SEARCH"
+   },
+   "url": "https://research.bucklerfamily.estate/",
+   "aliases": [
+    "research",
+    "search"
+   ]
+  },
+  {
+   "id": "site_kissed_frogs",
+   "name": "Kissed Frogs",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -34.05,
+    0,
+    -96.59
+   ],
+   "rot": 50.4,
+   "scale": 1,
+   "size": [
+    5.6,
+    3.4,
+    4.6
+   ],
+   "color": "#1B4D6A",
+   "roofColor": "#0F9DF0",
+   "texture": "plain",
+   "label": {
+    "n": 17,
+    "title": "Kissed Frogs",
+    "tag": "LEADS SET ASIDE"
+   },
+   "url": "https://greathousefarmwiki.wordpress.com/anomalies-register/bpvsbuckler-archive-research-leads/#kissed-frogs-register",
+   "aliases": [
+    "kissed-frogs",
+    "leads set aside"
+   ]
+  },
+  {
+   "id": "site_projects",
+   "name": "Project Office",
+   "kind": "building",
+   "roof": "flat",
+   "pos": [
+    -9.5,
+    0,
+    -84.8
+   ],
+   "rot": 180.0,
+   "scale": 1,
+   "size": [
+    5.6,
+    3.4,
+    4.6
+   ],
+   "color": "#1B356A",
+   "roofColor": "#6695F5",
+   "texture": "plain",
+   "label": {
+    "n": 18,
+    "title": "The Project Office",
+    "tag": "PRINCE2"
+   },
+   "url": "https://projects.bucklerfamily.estate/",
+   "aliases": [
+    "projects",
+    "prince2"
+   ]
+  },
+  {
+   "id": "site_film",
+   "name": "Film House",
+   "kind": "building",
+   "roof": "flat",
+   "pos": [
+    9.5,
+    0,
+    -99.2
+   ],
+   "rot": -0.0,
+   "scale": 1,
+   "size": [
+    5.6,
+    3.4,
+    4.6
+   ],
+   "color": "#6A1B50",
+   "roofColor": "#F55CC2",
+   "texture": "plain",
+   "label": {
+    "n": 19,
+    "title": "The Film House",
+    "tag": "FILMS & REELS"
+   },
+   "url": "https://www.facebook.com/901925066346636",
+   "aliases": [
+    "film",
+    "films & reels"
+   ]
+  },
+  {
+   "id": "site_album",
+   "name": "Farm Album",
+   "kind": "building",
+   "roof": "tower",
+   "pos": [
+    34.05,
+    0,
+    -87.41
+   ],
+   "rot": -129.6,
+   "scale": 1,
+   "size": [
+    3.6,
+    7.5,
+    4.6
+   ],
+   "color": "#6A1B50",
+   "roofColor": "#F55CC2",
+   "texture": "plain",
+   "label": {
+    "n": 20,
+    "title": "The Farm Album",
+    "tag": "PHOTOGRAPHS"
+   },
+   "url": "https://fb.bucklerfamily.estate/",
+   "aliases": [
+    "album",
+    "photographs"
+   ]
+  },
+  {
+   "id": "site_campus",
+   "name": "Estate Campus",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    22.95,
+    0,
+    -110.41
+   ],
+   "rot": 129.6,
+   "scale": 1,
+   "size": [
+    5.6,
+    3.4,
+    4.6
+   ],
+   "color": "#0A0A0A",
+   "roofColor": "#F2C94C",
+   "texture": "plain",
+   "label": {
+    "n": 21,
+    "title": "The Estate Campus",
+    "tag": "THE FIRST MAP"
+   },
+   "url": "https://bucklerfamily.estate/campus/",
+   "aliases": [
+    "campus",
+    "the first map"
+   ]
+  },
+  {
+   "id": "site_accounts",
+   "name": "Counting House",
+   "kind": "building",
+   "roof": "portico",
+   "pos": [
+    9.5,
+    0,
+    -122.2
+   ],
+   "rot": 0.0,
+   "scale": 1,
+   "size": [
+    5.6,
+    3.4,
+    4.6
+   ],
+   "color": "#6A1B38",
+   "roofColor": "#F56197",
+   "texture": "plain",
+   "label": {
+    "n": 22,
+    "title": "The Counting House",
+    "tag": "PUBLIC ACCOUNTS"
+   },
+   "url": "https://accounts.bucklerfamily.estate/",
+   "aliases": [
+    "accounts",
+    "public accounts"
+   ]
+  },
+  {
+   "id": "site_apps",
+   "name": "Case Office",
+   "kind": "building",
+   "roof": "dome",
+   "pos": [
+    -9.5,
+    0,
+    -107.8
+   ],
+   "rot": -180.0,
+   "scale": 1,
+   "size": [
+    5.6,
+    3.4,
+    4.6
+   ],
+   "color": "#6A1B1B",
+   "roofColor": "#FF5252",
+   "texture": "plain",
+   "label": {
+    "n": 23,
+    "title": "The Case Office",
+    "tag": "YOUR OWN CASE"
+   },
+   "url": "https://app.bucklerfamily.estate/",
+   "aliases": [
+    "apps",
+    "your own case"
+   ]
+  },
+  {
+   "id": "site_shop",
+   "name": "Gift Shop & Marketplace",
+   "kind": "building",
+   "roof": "awning",
+   "pos": [
+    -28.5,
+    0,
+    -122.2
+   ],
+   "rot": 0.0,
+   "scale": 1,
+   "size": [
+    5.6,
+    3.4,
+    4.6
+   ],
+   "color": "#0A0A0A",
+   "roofColor": "#F2C94C",
+   "texture": "plain",
+   "label": {
+    "n": 24,
+    "title": "Gift Shop & Marketplace",
+    "tag": "JOURNEY'S END"
+   },
+   "url": "https://bucklerfamily.estate/#shop",
+   "aliases": [
+    "shop",
+    "journey's end"
+   ]
+  },
+  {
+   "id": "stone_path",
+   "name": "Stepping-stone path",
+   "kind": "path",
+   "points": [
+    [
+     -28.5,
+     14
+    ],
+    [
+     -28.5,
+     0
+    ],
+    [
+     -9.5,
+     0
+    ],
+    [
+     9.5,
+     0
+    ],
+    [
+     28.5,
+     0
+    ],
+    [
+     28.5,
+     -23
+    ],
+    [
+     9.5,
+     -23
+    ],
+    [
+     -9.5,
+     -23
+    ],
+    [
+     -28.5,
+     -23
+    ],
+    [
+     -28.5,
+     -46
+    ],
+    [
+     -9.5,
+     -46
+    ],
+    [
+     9.5,
+     -46
+    ],
+    [
+     28.5,
+     -46
+    ],
+    [
+     28.5,
+     -69
+    ],
+    [
+     9.5,
+     -69
+    ],
+    [
+     -9.5,
+     -69
+    ],
+    [
+     -28.5,
+     -69
+    ],
+    [
+     -28.5,
+     -92
+    ],
+    [
+     -9.5,
+     -92
+    ],
+    [
+     9.5,
+     -92
+    ],
+    [
+     28.5,
+     -92
+    ],
+    [
+     28.5,
+     -115
+    ],
+    [
+     9.5,
+     -115
+    ],
+    [
+     -9.5,
+     -115
+    ],
+    [
+     -28.5,
+     -115
+    ]
+   ],
+   "width": 1.6,
+   "color": "#4a4d52",
+   "texture": "stone"
+  },
+  {
+   "id": "farmhouse",
+   "name": "Tŷ Mawr farmhouse (Great House Farm)",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    0,
+    0,
+    34
+   ],
+   "rot": 0,
+   "scale": 1,
+   "size": [
+    12,
+    5.5,
+    6
+   ],
+   "color": "#e9e2d0",
+   "roofColor": "#3b4148",
+   "texture": "plaster",
+   "chimneys": 2,
+   "aliases": [
+    "ty mawr",
+    "great house farm",
+    "farmhouse",
+    "farm house",
+    "the farm",
+    "house"
+   ]
+  },
+  {
+   "id": "farm_barn",
+   "name": "Farm barn",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -13,
+    0,
+    38
+   ],
+   "rot": 90,
+   "scale": 1,
+   "size": [
+    10,
+    5,
+    6
+   ],
+   "color": "#7a4b32",
+   "roofColor": "#4a4d52",
+   "texture": "stone",
+   "aliases": [
+    "barn"
+   ]
+  },
+  {
+   "id": "farmyard_wall",
+   "name": "Farmyard wall",
+   "kind": "wall",
+   "points": [
+    [
+     -20,
+     29
+    ],
+    [
+     -20,
+     44
+    ],
+    [
+     8,
+     44
+    ]
+   ],
+   "color": "#8a8d8f",
+   "height": 1.2,
+   "texture": "stone"
+  },
+  {
+   "id": "church",
+   "name": "St Dochdwy's Church",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    0,
+    0,
+    62
+   ],
+   "rot": 0,
+   "scale": 1,
+   "size": [
+    6,
+    6,
+    14
+   ],
+   "color": "#9a978f",
+   "roofColor": "#3a3f45",
+   "texture": "stone",
+   "tower": true,
+   "aliases": [
+    "church",
+    "st dochdwy",
+    "saint dochdwy",
+    "dochdwy"
+   ]
+  },
+  {
+   "id": "churchyard",
+   "name": "St Dochdwy's churchyard",
+   "kind": "field",
+   "pos": [
+    0,
+    0,
+    62
+   ],
+   "size": [
+    30,
+    26
+   ],
+   "color": "#3f6b3a",
+   "aliases": [
+    "churchyard",
+    "graveyard",
+    "cemetery"
+   ]
+  },
+  {
+   "id": "churchyard_wall",
+   "name": "Churchyard wall",
+   "kind": "wall",
+   "points": [
+    [
+     -15,
+     49
+    ],
+    [
+     -2,
+     49
+    ]
+   ],
+   "color": "#8a8d8f",
+   "height": 1.4,
+   "texture": "stone",
+   "aliases": [
+    "churchyard wall"
+   ]
+  },
+  {
+   "id": "churchyard_wall_2",
+   "name": "Churchyard wall (east)",
+   "kind": "wall",
+   "points": [
+    [
+     2,
+     49
+    ],
+    [
+     15,
+     49
+    ],
+    [
+     15,
+     75
+    ],
+    [
+     -15,
+     75
+    ],
+    [
+     -15,
+     49
+    ]
+   ],
+   "color": "#8a8d8f",
+   "height": 1.4,
+   "texture": "stone"
+  },
+  {
+   "id": "farm_field_west",
+   "name": "West field",
+   "kind": "field",
+   "pos": [
+    -36,
+    0,
+    40
+   ],
+   "size": [
+    24,
+    30
+   ],
+   "color": "#6b8f3a",
+   "aliases": [
+    "west field"
+   ]
+  },
+  {
+   "id": "farm_field_east",
+   "name": "East field",
+   "kind": "field",
+   "pos": [
+    32,
+    0,
+    40
+   ],
+   "size": [
+    24,
+    30
+   ],
+   "color": "#a39a4a",
+   "crop": "wheat",
+   "aliases": [
+    "east field",
+    "wheat field"
+   ]
+  },
+  {
+   "id": "farm_pond",
+   "name": "Farm pond",
+   "kind": "water",
+   "pos": [
+    15,
+    0,
+    24
+   ],
+   "radius": 4,
+   "color": "#2d6a8a",
+   "aliases": [
+    "pond",
+    "water"
+   ]
+  },
+  {
+   "id": "oak_1",
+   "name": "Old oak",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    -9,
+    0,
+    24
+   ],
+   "height": 9,
+   "color": "#2f5a2a"
+  },
+  {
+   "id": "yew_1",
+   "name": "Churchyard yew",
+   "kind": "tree",
+   "species": "yew",
+   "pos": [
+    10,
+    0,
+    70
+   ],
+   "height": 7,
+   "color": "#1f3f22",
+   "aliases": [
+    "yew"
+   ]
+  },
+  {
+   "id": "pine_1",
+   "name": "Pine",
+   "kind": "tree",
+   "species": "pine",
+   "pos": [
+    22,
+    0,
+    10
+   ],
+   "height": 10,
+   "color": "#24472a"
+  },
+  {
+   "id": "farm_sign",
+   "name": "Great House Farm sign",
+   "kind": "label",
+   "pos": [
+    0,
+    6.5,
+    22
+   ],
+   "text": "GREAT HOUSE FARM · TŶ MAWR",
+   "color": "#f2c94c",
+   "rot": 0
+  },
+  {
+   "id": "farm_lane",
+   "name": "Farm lane",
+   "kind": "path",
+   "points": [
+    [
+     0,
+     14
+    ],
+    [
+     0,
+     30.5
+    ]
+   ],
+   "width": 3,
+   "color": "#6b5a45",
+   "texture": "gravel"
+  },
+  {
+   "id": "church_lane",
+   "name": "Church lane",
+   "kind": "path",
+   "points": [
+    [
+     0,
+     37.5
+    ],
+    [
+     0,
+     55
+    ]
+   ],
+   "width": 2,
+   "color": "#6b5a45",
+   "texture": "gravel"
+  }
+ ]
+}

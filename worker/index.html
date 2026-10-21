@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Terrain · Cedwyn Estate in 3D</title>
+<meta name="description" content="The Cedwyn Estate and Great House Farm (Tŷ Mawr), Llandough, as a live 3D landscape. Orbit, zoom and walk; tap a building to open its site.">
+<meta property="og:title" content="Terrain · Cedwyn Estate in 3D">
+<meta property="og:description" content="The Cedwyn Estate and Great House Farm (Tŷ Mawr) as a live 3D landscape.">
+<meta property="og:url" content="https://terrain.bucklerfamily.estate/">
+<meta name="theme-color" content="#000000">
+<link rel="canonical" href="https://terrain.bucklerfamily.estate/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate" type="application/json" href="/agent/scene.json" title="Current scene (data)">
+<link rel="stylesheet" href="/style.css?v=1.1.2">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"Terrain · Cedwyn Estate in 3D","url":"https://terrain.bucklerfamily.estate/","inLanguage":"en-GB","publisher":{"@id":"https://bucklerfamily.estate/#org"}},{"@type":"Organization","@id":"https://bucklerfamily.estate/#org","name":"Williams–Buckler family","url":"https://bucklerfamily.estate/"}]}</script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script src="https://bucklerfamily.estate/ghf-lang/ghf-webmcp.js" defer></script>
+<script src="https://bucklerfamily.estate/ghf-lang/ghf-boot.js?v=2.1.1"></script>
+</head>
+<body>
+<main id="stage" aria-label="3D landscape">
+  <h1 class="vh">Terrain · Cedwyn Estate in 3D</h1>
+  <canvas id="c" aria-label="3D view of the Cedwyn Estate and Great House Farm" tabindex="0"></canvas>
+  <div id="tl"><span id="mode" class="chip">View only</span></div>
+  <div id="tr"><button id="walk" class="btn" type="button" aria-pressed="false">Walk</button><button id="home" class="btn" type="button" aria-label="Reset view">⌂</button></div>
+  <div id="card" role="dialog" aria-live="polite" hidden><button id="cardx" class="x" type="button" aria-label="Close">×</button><b id="cardt"></b><p id="cardd"></p><a id="cardl" class="btn gold" target="_blank" rel="noopener">Open site</a></div>
+  <div id="admin" hidden>
+    <button class="btn" type="button" data-t="undo">Undo</button><button class="btn" type="button" data-t="redo">Redo</button><button class="btn" type="button" id="save">Save</button><button class="btn" type="button" id="vers">Versions</button><button class="btn" type="button" id="lock">Lock</button>
+    <div id="vlist" hidden></div>
+  </div>
+  <div id="cap" aria-live="polite"><p id="capu"></p><p id="capa"></p></div>
+  <div id="bar">
+    <button id="call" class="btn gold big" type="button">Start call</button>
+    <span id="st" class="st" aria-live="polite"></span>
+    <form id="tx" hidden autocomplete="off"><label class="vh" for="txi">Say it in text</label><input id="txi" type="text" placeholder="Or type here" enterkeyhint="send" maxlength="500"><button class="btn" type="submit">Send</button></form>
+  </div>
+  <div id="joy" hidden><div id="knob"></div></div>
+  <noscript><p class="ns">The 3D view needs JavaScript and WebGL. The scene data is at <a href="/agent/scene.json">/agent/scene.json</a>.</p></noscript>
+</main>
+<section class="about">
+  <h2>Cedwyn Estate in 3D</h2>
+  <p>Every Great House Farm site stands as a building on the stone path. Tŷ Mawr farmhouse, the barn, the fields, the pond and St Dochdwy's churchyard lie to the south. Drag to look around, pinch or scroll to zoom, and tap a building to open its site. The scene is live: changes appear here as they are made.</p>
+  <p><a href="https://bucklerfamily.estate/3d/">First-person walk</a> · <a href="/agent/scene.json">Scene data</a></p>
+</section>
+<script type="module" src="/app.js?v=1.1.2"></script>
+</body>
+</html>
