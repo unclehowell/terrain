@@ -445,10 +445,23 @@ async function sendClip(blob, ms) {
   try {
     const r = await fetch("/api/stt", { method: "POST", headers: { "content-type": blob.type || "application/octet-stream" }, body: blob });
     const j = await r.json(); const t = (j.text || "").trim();
+    if (j.quota) { sending--; browserStt(); return; }
     if (!t || isEcho(t)) { capU(t ? "" : "Heard: (nothing clear, say it again)"); if (!busy) st(ADMIN ? "Admin · listening" : "Listening"); }
     else utter(t);
   } catch (e) { capU("Heard: (connection dropped, say it again)"); }
   sending--;
+}
+// Server transcription unavailable (daily limit): hand over to the browser's own recogniser where there is one.
+let BSR = null;
+function browserStt() {
+  if (BSR || !call) return; const R = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!R) { micNote("Voice input is paused until 1am UK time. Type below."); capU(""); return; }
+  if (vadT) { clearInterval(vadT); vadT = null; } disarm(); $("vrow").hidden = true;
+  const r = new R(); BSR = r; r.lang = "en-GB"; r.continuous = true; r.interimResults = true;
+  r.onresult = e => { for (let i = e.resultIndex; i < e.results.length; i++) { const x = e.results[i]; if (!x.isFinal) { if (speaking) stopSpeaking(); capU("Heard: “" + x[0].transcript + "”"); continue; } const t = x[0].transcript.trim(); if (t && !isEcho(t)) utter(t); } };
+  r.onerror = ev => { if (ev.error === "not-allowed" || ev.error === "service-not-allowed") { micNote(OPEN_MSG); BSR = null; } };
+  r.onend = () => { if (BSR === r && call) { try { r.start(); } catch (e) {} } };
+  try { r.start(); st(ADMIN ? "Admin · listening" : "Listening"); } catch (e) { BSR = null; }
 }
 // --- voice-activity detection + level meter ---
 const fbuf = new Float32Array(1024);
@@ -481,7 +494,7 @@ async function startCall() {
   if (!stream) hello += " Type it below.";
   await speak(hello);
 }
-function endCall() { call = false; stopSpeaking(); holding = false; inSpeech = false; if (vadT) { clearInterval(vadT); vadT = null; } disarm(); try { micSrc && micSrc.disconnect(); } catch (e) {} micSrc = null; an = null; if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }
+function endCall() { call = false; if (BSR) { const r = BSR; BSR = null; try { r.stop(); } catch (e) {} } stopSpeaking(); holding = false; inSpeech = false; if (vadT) { clearInterval(vadT); vadT = null; } disarm(); try { micSrc && micSrc.disconnect(); } catch (e) {} micSrc = null; an = null; if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }
   $("vrow").hidden = true; $("call").textContent = "Start call"; $("call").classList.add("gold"); $("call").classList.remove("red"); $("tx").hidden = true; st(""); capU(""); }
 $("ptt").addEventListener("pointerdown", pttDown); ["pointerup", "pointercancel", "pointerleave"].forEach(ev => $("ptt").addEventListener(ev, pttUp));
 $("ptt").addEventListener("contextmenu", e => e.preventDefault());

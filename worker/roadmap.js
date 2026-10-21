@@ -92,7 +92,7 @@ export function dueWindow(rm, today, days) {
 // Returns null when the words are not a roadmap question.
 export function roadmapQuery(text, rm, today) {
   const t = n8(text);
-  const dueQ = /\b(what s|whats|what is|what are|anything|tell me what s|show me what s|show me what is|list)\b.*\b(due|coming up|upcoming|next)\b|\b(due|deadlines?) (this|next) (week|month|fortnight)\b|^(what s|whats) (due|next|coming up)/.test(t);
+  const dueQ = /\b(what s|whats|what is|what are|anything|tell me what s|show me what s|show me what is|list)\b.*\b(due|coming up|upcoming|next)\b|\b(due|deadlines?) (this|next) (week|month|fortnight)\b|^(what s|whats) (due|next|coming up)|^(what s|whats|what) (do|dew|is due|s due)? ?(this|next) (week|month|fortnight)|\bwhat (do|dew) (today|this week)\b/.test(t);
   if (dueQ) {
     const days = /\btoday\b/.test(t) ? 0 : /\bmonth\b/.test(t) ? 30 : /\bfortnight|two weeks\b/.test(t) ? 14 : 7;
     const items = dueWindow(rm, today, days);
@@ -100,7 +100,7 @@ export function roadmapQuery(text, rm, today) {
     const head = items.slice(0, 4).map(i => `${i.name}, ${lc(i.label)}, ${i.overdue ? "due now" : spokenDate(i.date, today)}`).join("; ");
     return { say: `${items.length} thing${items.length > 1 ? "s" : ""} ${days ? (days === 7 ? "this week" : `in the next ${days} days`) : "today"}. ${head}${items.length > 4 ? ", and " + (items.length - 4) + " more on screen." : "."}`, view: { action: "due", items: items.slice(0, 40), days } };
   }
-  if (/\b(sop|trigger (event|route|plan|map)|trigger event sop|event sop)\b/.test(t) && /\b(show|open|fly|go|take me|zoom|where)\b/.test(t)) return { say: "Here's the trigger-event route. It starts at the trigger, runs through the gates, and splits into the routes to an outcome.", view: { action: "sop" } };
+  if (/\b(sop|trigger (event|route|plan|map)|trigger event sop|event sop)\b/.test(t) && (/\b(show|so|open|fly|go|take me|zoom|where)\b/.test(t) || /\b(route|sop|plan)\s*$/.test(t))) return { say: "Here's the trigger-event route. It starts at the trigger, runs through the gates, and splits into the routes to an outcome.", view: { action: "sop" } };
   const trailQ = /\b(show|open|find|highlight|take me|fly|go|zoom|where|what s happening|how s|status)\b/.test(t) && /\b(trail|path|route|lane|step|stage|roadmap)\b/.test(t) || /\b(fly|take me|zoom) to\b/.test(t) && stepOf(t) != null;
   let stripped = t; for (const [, re] of STEP_WORDS) stripped = stripped.replace(re, " ");
   const lane = findLane(rm, stripped) || findLane(rm, text);

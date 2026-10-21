@@ -125,6 +125,8 @@ function quick(text) {
   if (/^(reset|start (again|over)|reset (it|everything|the scene|the estate)|back to (the )?original)$/.test(t)) return [{ name: "reset_scene", arguments: {} }];
   return null;
 }
+const isQuota = e => /4006|daily free allocation|neurons/i.test(String(e && e.message || e));
+const QUOTA_SAY = "I can't take free-form edits right now; they come back at 1am UK time. Undo, redo, save and restore still work, and so do the buttons.";
 async function agent(env, st, text, history) {
   const results = []; let said = "";
   const q = quick(text);
@@ -136,7 +138,9 @@ async function agent(env, st, text, history) {
       for (const h of (Array.isArray(history) ? history.slice(-6) : [])) if (h && (h.role === "user" || h.role === "assistant") && typeof h.content === "string") msgs.push({ role: h.role, content: h.content.slice(0, 400) });
       msgs.push({ role: "user", content: text.slice(0, 600) });
       if (round > 0) msgs.push({ role: "assistant", content: "Done so far: " + results.map(r => `${r.tool}(${JSON.stringify(r.args)})`).join("; ") }, { role: "user", content: "Do any part of my request that is NOT done yet with tool calls. If everything is done, reply with just the word DONE." });
-      const out = await env.AI.run(LLM, { messages: msgs, tools: TOOLS, max_tokens: 600, temperature: 0.2 });
+      let out;
+      try { out = await env.AI.run(LLM, { messages: msgs, tools: TOOLS, max_tokens: 600, temperature: 0.2 }); }
+      catch (e) { if (results.length) break; if (isQuota(e)) return { say: QUOTA_SAY, results }; throw e; }
       const { calls, text: t } = parseCalls(out);
       const fresh = calls.filter(c => !results.some(r => r.tool === c.name && JSON.stringify(r.args) === JSON.stringify(c.arguments)));
       if (!fresh.length) { if (round === 0) said = t; break; }
@@ -182,8 +186,8 @@ function cleanStt(t, prompt) {
 
 // ---------- roadmap (read-only, open to everyone) ----------
 const londonDay = () => new Date().toLocaleDateString("en-CA", { timeZone: "Europe/London" });
-const RM_HINT = /\b(due|deadlines?|coming up|upcoming|trails?|route|lane|steps?|stage|roadmap|sop|trigger|tribunal|court|ico|fly|take me|zoom)\b/i;
-const RM_HINT_ADMIN = /\b(due|deadlines?|coming up|upcoming|trails?|roadmap|steps?|stage|sop|trigger (event|route|plan))\b/i;
+const RM_HINT = /\b(due|deadlines?|coming up|upcoming|trails?|route|lane|steps?|stage|roadmap|sop|trigger|tribunal|court|ico|fly|take me|zoom|this week|next week|this month|today)\b/i;
+const RM_HINT_ADMIN = /\b(due|deadlines?|coming up|upcoming|trails?|roadmap|steps?|stage|sop|trigger (event|route|plan)|what (do|s on) (this|next) week)\b/i;
 async function rmAnswer(env, ctx, text, admin) {
   if (!(admin ? RM_HINT_ADMIN : RM_HINT).test(text)) return null;
   try { const rm = await loadRoadmap(env, ctx); return roadmapQuery(text, rm, londonDay()); } catch (e) { return null; }
@@ -265,6 +269,7 @@ export default {
         const b = await readJson(req); const text = String(b.text || "").replace(/\s+/g, " ").trim().slice(0, 420); if (!text) return J({ error: "empty" }, 400);
         ctx.waitUntil(hit(env, ip, "tts"));
         const out = await env.AI.run(TTS, { text, speaker: VOICE, encoding: "mp3" }, { returnRawResponse: true });
+        if (out instanceof Response && (!out.ok || /json/.test(out.headers.get("content-type") || ""))) return J({ error: "tts unavailable" }, 503);
         if (out instanceof Response) return new Response(out.body, { headers: { "content-type": out.headers.get("content-type") || "audio/mpeg", "cache-control": "no-store", ...SEC } });
         if (out && out.audio) { const bin = Uint8Array.from(atob(out.audio), c => c.charCodeAt(0)); return new Response(bin, { headers: { "content-type": "audio/mpeg", ...SEC } }); }
         return new Response(out, { headers: { "content-type": "audio/mpeg", ...SEC } });
@@ -274,11 +279,14 @@ export default {
         const buf = await req.arrayBuffer(); if (buf.byteLength > 3_000_000 || buf.byteLength < 600) return J({ text: "", note: "empty" });
         ctx.waitUntil(hit(env, ip, "stt"));
         let bin = ""; const u8 = new Uint8Array(buf); for (let i = 0; i < u8.length; i += 0x8000) bin += String.fromCharCode(...u8.subarray(i, i + 0x8000));
-        const prompt = "Tŷ Mawr, Llandough, farmhouse, churchyard, ICO, HMLR." + (env.STT_HINT ? " " + env.STT_HINT : "");
+        const prompt = "Tŷ Mawr, Llandough, farmhouse, churchyard, ICO, HMLR, roadmap, trail, what's due." + (env.STT_HINT ? " " + env.STT_HINT : "");
         let out;
-        try { out = await env.AI.run(STT, { audio: btoa(bin), language: "en", vad_filter: true, initial_prompt: prompt }); }
-        catch (e) { out = await env.AI.run(STT, { audio: btoa(bin), language: "en", initial_prompt: prompt }); }
-        return J({ text: cleanStt(out && out.text || "", prompt), bytes: buf.byteLength });
+        try {
+          try { out = await env.AI.run(STT, { audio: btoa(bin), language: "en", vad_filter: true, initial_prompt: prompt }); }
+          catch (e) { if (isQuota(e)) throw e; out = await env.AI.run(STT, { audio: btoa(bin), language: "en", initial_prompt: prompt }); }
+        } catch (e) { if (isQuota(e)) return J({ text: "", quota: true }); throw e; }
+        if (out && typeof out.text === "function") { let body = ""; try { body = await out.text(); } catch (e) {} if (isQuota(body)) return J({ text: "", quota: true }); try { out = JSON.parse(body); } catch (e) { out = {}; } if (out && out.result) out = out.result; }
+        return J({ text: cleanStt(out && typeof out.text === "string" ? out.text : "", prompt), bytes: buf.byteLength });
       }
       return J({ error: "not found" }, 404);
     } catch (e) { return J({ error: "server", say: "Something went wrong on my side. Try that again?", detail: String(e && e.message || e).slice(0, 200) }, 500); }
