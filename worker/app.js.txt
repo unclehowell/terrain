@@ -387,7 +387,7 @@ function sign(o) {
   return g;
 }
 const BUILD = { building, tree, fence, wall, hedge, path, water, field, label, sign, marker, rock, lamp, bench, shrub, flower, gate, animal, vehicle, well, statue, ruin };
-const BUILD = { building, tree, fence, wall, path, water, field, label, marker, rock, lamp, bench };
+// The full object builder registry is declared below.
 
 // ---------- the world ----------
 const world = new THREE.Group(); scene.add(world);
