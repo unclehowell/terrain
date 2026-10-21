@@ -1,0 +1,41 @@
+// terrain.bucklerfamily.estate: on-device voice. Whisper (speech to text) and Kokoro (text to speech) in a Web Worker.
+// Weights come from the Hugging Face CDN once and are kept in the browser's Cache Storage.
+const TF = "https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.8.1/dist/transformers.min.js";
+const KK = "https://cdn.jsdelivr.net/npm/kokoro-js@1.2.1/dist/kokoro.web.js";
+const STT_MODEL = "onnx-community/whisper-tiny.en", TTS_MODEL = "onnx-community/Kokoro-82M-v1.0-ONNX";
+let asr = null, tts = null, ttsVoice = "bm_george";
+const prog = what => p => {
+  if (p.status === "progress") postMessage({ type: "progress", what, file: p.file, loaded: p.loaded || 0, total: p.total || 0 });
+  else if (p.status === "done") postMessage({ type: "progress", what, file: p.file, done: true });
+};
+onmessage = async e => {
+  const m = e.data || {};
+  try {
+    if (m.type === "load-stt") {
+      if (!asr) {
+        const { pipeline, env } = await import(TF);
+        env.allowLocalModels = false; env.useBrowserCache = true;
+        if (env.backends && env.backends.onnx && env.backends.onnx.wasm) env.backends.onnx.wasm.numThreads = self.crossOriginIsolated ? Math.min(4, navigator.hardwareConcurrency || 2) : 1;
+        asr = await pipeline("automatic-speech-recognition", STT_MODEL, { device: "wasm", dtype: "q8", progress_callback: prog("stt") });
+        const t0 = performance.now(); await asr(new Float32Array(8000)); postMessage({ type: "warm", what: "stt", ms: Math.round(performance.now() - t0) });
+      }
+      postMessage({ type: "ready", what: "stt", device: "wasm", id: m.id });
+    } else if (m.type === "stt") {
+      if (!asr) throw new Error("stt not loaded");
+      const t0 = performance.now(); const out = await asr(m.audio, { return_timestamps: false });
+      postMessage({ type: "text", id: m.id, text: String((out && out.text) || "").trim(), ms: Math.round(performance.now() - t0) });
+    } else if (m.type === "load-tts") {
+      if (!tts) {
+        const { KokoroTTS } = await import(KK);
+        tts = await KokoroTTS.from_pretrained(TTS_MODEL, { dtype: "q8", device: "wasm", progress_callback: prog("tts") });
+        if (m.voice) ttsVoice = m.voice;
+      }
+      postMessage({ type: "ready", what: "tts", device: "wasm", id: m.id });
+    } else if (m.type === "tts") {
+      if (!tts) throw new Error("tts not loaded");
+      const t0 = performance.now(); const a = await tts.generate(String(m.text || "").slice(0, 400), { voice: m.voice || ttsVoice });
+      const audio = a.audio instanceof Float32Array ? a.audio : new Float32Array(a.audio);
+      postMessage({ type: "audio", id: m.id, audio, rate: a.sampling_rate || 24000, ms: Math.round(performance.now() - t0) }, [audio.buffer]);
+    }
+  } catch (err) { postMessage({ type: "error", id: m.id, what: m.type, error: String(err && err.message || err).slice(0, 300) }); }
+};

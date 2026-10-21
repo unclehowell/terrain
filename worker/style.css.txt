@@ -72,3 +72,10 @@ canvas#c{position:absolute;inset:0;width:100%;height:100%;display:block;outline:
 #rmlist button.over{border-color:#e53935}
 .upd{color:var(--mut);font-size:14px}
 @media (max-width:480px){#rmleg{top:50px;right:8px;left:8px;max-width:none;justify-content:flex-start}#rmleg .rmb{justify-content:flex-start}}
+
+#vdev{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-items:center;margin-top:4px}
+#vdev .tbtn{font-size:12px;padding:6px 10px}
+#vprog{width:140px;height:6px;accent-color:#f2c94c}
+.vpill{font-size:11px;padding:3px 8px;border-radius:999px;background:#1d2228;color:#cfd6dd;border:1px solid #39424b;white-space:nowrap}
+.vpill[data-mode="On-device"]{background:#173a1f;color:#a8e6b0;border-color:#2f7a3d}
+.vpill[data-mode="Browser"]{background:#3a3217;color:#f2dc8a;border-color:#7a6a2f}

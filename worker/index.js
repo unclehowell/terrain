@@ -1,10 +1,11 @@
 // terrain.bucklerfamily.estate — Worker: static app, scene API, passphrase gate, voice agent. — Sion's Tab agent
-import { apply, summary, resolve, norm, KINDS, TEXTURES, WEATHER } from "./scene-ops.js";
+import { apply, summary, resolve, norm, parseColor, KINDS, TEXTURES, WEATHER } from "./scene-ops.js";
 import INITIAL_TXT from "./initial-scene.json";
 const INITIAL = JSON.parse(INITIAL_TXT);
 import HTML from "./index.html";
 import APP from "./app.js.txt";
 import CSS from "./style.css.txt";
+import VOICE_WORKER from "./voice-worker.js.txt";
 import { loadRoadmap, loadSop, roadmapQuery } from "./roadmap.js";
 
 const HOST = "terrain.bucklerfamily.estate";
@@ -125,9 +126,73 @@ function quick(text) {
   if (/^(reset|start (again|over)|reset (it|everything|the scene|the estate)|back to (the )?original)$/.test(t)) return [{ name: "reset_scene", arguments: {} }];
   return null;
 }
+// Deterministic intents: common edits handled without the LLM (no AI allowance used).
+const TEX_WORDS = { stone: "stone", brick: "brick", wood: "wood", wooden: "wood", timber: "wood", plaster: "plaster", rendered: "plaster", slate: "slate", glass: "glass", metal: "metal", tin: "metal", thatch: "thatch", thatched: "thatch", gravel: "gravel", grass: "grass", plain: "plain" };
+const TIME_WORDS = { dawn: "dawn", sunrise: "dawn", morning: "morning", day: "day", daytime: "day", noon: "day", midday: "day", afternoon: "afternoon", evening: "evening", dusk: "dusk", sunset: "dusk", night: "night", nighttime: "night", midnight: "night" };
+const WX_WORDS = { rain: "rain", raining: "rain", rainy: "rain", fog: "fog", foggy: "fog", misty: "fog", mist: "fog", snow: "snow", snowing: "snow", snowy: "snow", storm: "storm", stormy: "storm", cloudy: "cloudy", overcast: "cloudy", clear: "clear", sunny: "clear", "clear skies": "clear" };
+const DIRS = { north: "north", south: "south", east: "east", west: "west", left: "west", right: "east", up: "north", down: "south" };
+function intent(text, scene) {
+  let t = norm(text).replace(/^(ok(ay)?|right|tab|please|can you|could you|now|and|so) /g, "").replace(/ please$/, "").replace(/^(i want|i d like|let s) (you to )?/, "");
+  const R = s => { s = String(s || "").replace(/^(the|a|an) /, "").trim(); return s && resolve(scene, s) ? s : null; };
+  let m;
+  // time / weather
+  if ((m = /^(make it|set it to|change it to|go to|switch to|it s|set the time to|time to) (.+)$/.exec(t)) || (m = /^()(dawn|sunrise|morning|daytime|midday|noon|afternoon|evening|dusk|sunset|night|nighttime|midnight)$/.exec(t))) {
+    const w = m[2].replace(/^(a |an )/, "").trim();
+    if (TIME_WORDS[w]) return [{ name: "set_time_of_day", arguments: { time: TIME_WORDS[w] } }];
+    if (WX_WORDS[w]) return [{ name: "set_weather", arguments: { weather: WX_WORDS[w] } }];
+  }
+  if ((m = /^(let it |make it |start )?(rain|snow|storm)( please)?$/.exec(t))) return [{ name: "set_weather", arguments: { weather: m[2] } }];
+  if (/^(clear (the )?(skies|sky|weather)|stop the (rain|snow)|sun out)$/.test(t)) return [{ name: "set_weather", arguments: { weather: "clear" } }];
+  // camera
+  if ((m = /^(show me|look at|take me to|go to|fly to|zoom (in )?(on|to)|move the camera to|focus on) (the )?(.+?)( from above| from the ground| close up| up close)?$/.exec(t))) {
+    const tgt = m[5]; const view = /above/.test(m[6] || "") ? "overhead" : /ground/.test(m[6] || "") ? "ground" : m[6] ? "close" : undefined;
+    if (/^(whole|entire|full) (estate|scene|map|farm)$|^(everything|the estate|estate)$/.test(tgt)) return [{ name: "set_camera", arguments: { view: "wide" } }];
+    if (R(tgt)) return [{ name: "set_camera", arguments: { target: tgt, ...(view ? { view } : {}) } }];
+  }
+  // delete
+  if ((m = /^(delete|remove|get rid of|take away|knock down|demolish) (the )?(.+)$/.exec(t)) && R(m[3])) return [{ name: "delete_object", arguments: { target: m[3] } }];
+  // rotate
+  if ((m = /^(turn|rotate|spin) (the )?(.+?) (by )?(\d+|ninety|forty five|a hundred and eighty) degrees( (clockwise|anticlockwise|counterclockwise|left|right))?$/.exec(t)) && R(m[3])) {
+    const n = { ninety: 90, "forty five": 45, "a hundred and eighty": 180 }[m[5]] || Number(m[5]); const neg = /anti|counter|left/.test(m[7] || "");
+    return [{ name: "rotate_object", arguments: { target: m[3], degrees: neg ? -n : n } }];
+  }
+  // scale
+  if ((m = /^make (the )?(.+?) (twice as big|twice the size|double the size|double size|bigger|larger|smaller|half the size|half as big|three times as big|much bigger|much smaller)$/.exec(t)) && R(m[2])) {
+    const f = { "twice as big": 2, "twice the size": 2, "double the size": 2, "double size": 2, bigger: 1.4, larger: 1.4, smaller: 0.7, "half the size": 0.5, "half as big": 0.5, "three times as big": 3, "much bigger": 2, "much smaller": 0.5 }[m[3]];
+    return [{ name: "scale_object", arguments: { target: m[2], factor: f } }];
+  }
+  // move
+  if ((m = /^move (the )?(.+?) (\d+|one|two|three|four|five|six|seven|eight|nine|ten|twenty|fifty) (metres|meters|m|yards) (to the )?(north|south|east|west|left|right|up|down)$/.exec(t)) && R(m[2])) {
+    const n = Number(NUMW[m[3]] || { twenty: 20, fifty: 50 }[m[3]] || m[3]); return [{ name: "move_object", arguments: { target: m[2], direction: DIRS[m[6]], distance: n } }];
+  }
+  if ((m = /^move (the )?(.+?) (next to|beside|by|near|over to) (the )?(.+)$/.exec(t)) && R(m[2]) && R(m[5])) return [{ name: "move_object", arguments: { target: m[2], near: m[5] } }];
+  // colour / material: "make the barn red", "paint the farmhouse roof slate grey", "make the church stone"
+  if ((m = /^(make|paint|colour|color|turn|change) (the )?(.+?) (roof )?(to |into )?(.+)$/.exec(t))) {
+    let target = m[3], roof = !!m[4], val = m[6].trim();
+    if (/ roof$/.test(target)) { target = target.replace(/ roof$/, ""); roof = true; }
+    if (R(target)) {
+      if (TEX_WORDS[val] && !roof && !/^(stone grey|stone gray|slate grey|slate gray)$/.test(val)) return [{ name: "set_texture", arguments: { target, texture: TEX_WORDS[val] } }];
+      if (parseColor(val)) return [{ name: "set_color", arguments: { target, color: val, ...(roof ? { part: "roof" } : {}) } }];
+    }
+  }
+  // add: "add an oak tree by the farmhouse", "put a bench near the pond"
+  if ((m = /^(add|put|place|build|plant) (a|an|another|one|two|three|four|five) (.+?)( (by|near|next to|beside|north of|south of|east of|west of) (the )?(.+))?$/.exec(t))) {
+    const count = Number(NUMW[m[2]] || 1) || 1; let what = m[3].trim(); const rel = m[5] || "", near = m[7];
+    const sp = /^(oak|pine|yew|birch|willow)( tree)?s?$/.exec(what); const kindMap = { tree: "tree", trees: "tree", bench: "bench", benches: "bench", lamp: "lamp", lamps: "lamp", "lamp post": "lamp", rock: "rock", rocks: "rock", boulder: "rock", flag: "marker", marker: "marker", pond: "water", cottage: "building", house: "building", barn: "building", shed: "building", stable: "building", chapel: "building", church: "building", tower: "building", greenhouse: "building", castle: "building" };
+    const kind = sp ? "tree" : kindMap[what];
+    if (kind && (!near || R(near))) {
+      const args = { kind, ...(sp ? { species: sp[1] } : {}), ...(kind === "building" ? { name: what.replace(/^\w/, c => c.toUpperCase()) } : {}), ...(count > 1 ? { count } : {}) };
+      if (near) { args.near = near; const d = /^(north|south|east|west) of$/.exec(rel); if (d) args.direction = d[1]; }
+      return [{ name: "add_object", arguments: args }];
+    }
+  }
+  return null;
+}
+const isQuota = e => /4006|daily free allocation|neurons/i.test(String(e && e.message || e));
+const QUOTA_SAY = "I can't take free-form edits right now; they come back at 1am UK time. Undo, redo, save and restore still work, and so do the buttons.";
 async function agent(env, st, text, history) {
   const results = []; let said = "";
-  const q = quick(text);
+  const q = quick(text) || intent(text, st.scene);
   if (q) { for (const c of q) { const r = await execTool(env, st, c.name, c.arguments); results.push({ tool: c.name, args: c.arguments, ok: r.ok, say: r.say }); } }
   else {
     const multi = /\b(and|then|also)\b|[,;]/.test(text);
@@ -136,7 +201,9 @@ async function agent(env, st, text, history) {
       for (const h of (Array.isArray(history) ? history.slice(-6) : [])) if (h && (h.role === "user" || h.role === "assistant") && typeof h.content === "string") msgs.push({ role: h.role, content: h.content.slice(0, 400) });
       msgs.push({ role: "user", content: text.slice(0, 600) });
       if (round > 0) msgs.push({ role: "assistant", content: "Done so far: " + results.map(r => `${r.tool}(${JSON.stringify(r.args)})`).join("; ") }, { role: "user", content: "Do any part of my request that is NOT done yet with tool calls. If everything is done, reply with just the word DONE." });
-      const out = await env.AI.run(LLM, { messages: msgs, tools: TOOLS, max_tokens: 600, temperature: 0.2 });
+      let out;
+      try { out = await env.AI.run(LLM, { messages: msgs, tools: TOOLS, max_tokens: 600, temperature: 0.2 }); }
+      catch (e) { if (results.length) break; if (isQuota(e)) return { say: QUOTA_SAY, results, needLLM: true }; throw e; }
       const { calls, text: t } = parseCalls(out);
       const fresh = calls.filter(c => !results.some(r => r.tool === c.name && JSON.stringify(r.args) === JSON.stringify(c.arguments)));
       if (!fresh.length) { if (round === 0) said = t; break; }
@@ -182,8 +249,8 @@ function cleanStt(t, prompt) {
 
 // ---------- roadmap (read-only, open to everyone) ----------
 const londonDay = () => new Date().toLocaleDateString("en-CA", { timeZone: "Europe/London" });
-const RM_HINT = /\b(due|deadlines?|coming up|upcoming|trails?|route|lane|steps?|stage|roadmap|sop|trigger|tribunal|court|ico|fly|take me|zoom)\b/i;
-const RM_HINT_ADMIN = /\b(due|deadlines?|coming up|upcoming|trails?|roadmap|steps?|stage|sop|trigger (event|route|plan))\b/i;
+const RM_HINT = /\b(due|deadlines?|coming up|upcoming|trails?|route|lane|steps?|stage|roadmap|sop|trigger|tribunal|court|ico|fly|take me|zoom|this week|next week|this month|today)\b/i;
+const RM_HINT_ADMIN = /\b(due|deadlines?|coming up|upcoming|trails?|roadmap|steps?|stage|sop|trigger (event|route|plan)|what (do|s on) (this|next) week)\b/i;
 async function rmAnswer(env, ctx, text, admin) {
   if (!(admin ? RM_HINT_ADMIN : RM_HINT).test(text)) return null;
   try { const rm = await loadRoadmap(env, ctx); return roadmapQuery(text, rm, londonDay()); } catch (e) { return null; }
@@ -215,6 +282,7 @@ export default {
       if (req.method === "GET" || req.method === "HEAD") {
         if (p === "/" || p === "/index.html") return T(HTML, "text/html; charset=utf-8", { "cache-control": "no-cache" });
         if (p === "/app.js") return T(APP, "text/javascript; charset=utf-8", { "cache-control": "public, max-age=300" });
+        if (p === "/voice-worker.js") return T(VOICE_WORKER, "text/javascript; charset=utf-8", { "cache-control": "public, max-age=300" });
         if (p === "/style.css") return T(CSS, "text/css; charset=utf-8", { "cache-control": "public, max-age=300" });
         if (p === "/favicon.svg" || p === "/favicon.ico") return T(FAVICON, "image/svg+xml", { "cache-control": "public, max-age=86400" });
         if (p === "/robots.txt") return T(ROBOTS, "text/plain; charset=utf-8");
@@ -252,7 +320,7 @@ export default {
         if (b.selected) { const so = resolve(st.scene, String(b.selected)); if (so) { st.scene.meta = st.scene.meta || {}; st.scene.meta.last = so.id; } }
         const r = await agent(env, st, text, b.history);
         if (r.results.length) { await store(env, st); await noteEdit(env, r.results.filter(x => x.ok !== false).map(x => x.say)); ctx.waitUntil(logEdit(env, "voice", JSON.stringify({ text, results: r.results.map(x => [x.tool, x.args, x.ok]) }))); }
-        return J({ admin: true, say: r.say, results: r.results, scene: publicScene(st.scene) });
+        return J({ admin: true, say: r.say, results: r.results, needLLM: !!r.needLLM, scene: publicScene(st.scene) });
       }
       if (p === "/api/tool") {
         if (!admin) return J({ error: "locked", say: "Say the passphrase first." }, 401);
@@ -265,6 +333,7 @@ export default {
         const b = await readJson(req); const text = String(b.text || "").replace(/\s+/g, " ").trim().slice(0, 420); if (!text) return J({ error: "empty" }, 400);
         ctx.waitUntil(hit(env, ip, "tts"));
         const out = await env.AI.run(TTS, { text, speaker: VOICE, encoding: "mp3" }, { returnRawResponse: true });
+        if (out instanceof Response && (!out.ok || /json/.test(out.headers.get("content-type") || ""))) return J({ error: "tts unavailable" }, 503);
         if (out instanceof Response) return new Response(out.body, { headers: { "content-type": out.headers.get("content-type") || "audio/mpeg", "cache-control": "no-store", ...SEC } });
         if (out && out.audio) { const bin = Uint8Array.from(atob(out.audio), c => c.charCodeAt(0)); return new Response(bin, { headers: { "content-type": "audio/mpeg", ...SEC } }); }
         return new Response(out, { headers: { "content-type": "audio/mpeg", ...SEC } });
@@ -274,11 +343,14 @@ export default {
         const buf = await req.arrayBuffer(); if (buf.byteLength > 3_000_000 || buf.byteLength < 600) return J({ text: "", note: "empty" });
         ctx.waitUntil(hit(env, ip, "stt"));
         let bin = ""; const u8 = new Uint8Array(buf); for (let i = 0; i < u8.length; i += 0x8000) bin += String.fromCharCode(...u8.subarray(i, i + 0x8000));
-        const prompt = "Tŷ Mawr, Llandough, farmhouse, churchyard, ICO, HMLR." + (env.STT_HINT ? " " + env.STT_HINT : "");
+        const prompt = "Tŷ Mawr, Llandough, farmhouse, churchyard, ICO, HMLR, roadmap, trail, what's due." + (env.STT_HINT ? " " + env.STT_HINT : "");
         let out;
-        try { out = await env.AI.run(STT, { audio: btoa(bin), language: "en", vad_filter: true, initial_prompt: prompt }); }
-        catch (e) { out = await env.AI.run(STT, { audio: btoa(bin), language: "en", initial_prompt: prompt }); }
-        return J({ text: cleanStt(out && out.text || "", prompt), bytes: buf.byteLength });
+        try {
+          try { out = await env.AI.run(STT, { audio: btoa(bin), language: "en", vad_filter: true, initial_prompt: prompt }); }
+          catch (e) { if (isQuota(e)) throw e; out = await env.AI.run(STT, { audio: btoa(bin), language: "en", initial_prompt: prompt }); }
+        } catch (e) { if (isQuota(e)) return J({ text: "", quota: true }); throw e; }
+        if (out && typeof out.text === "function") { let body = ""; try { body = await out.text(); } catch (e) {} if (isQuota(body)) return J({ text: "", quota: true }); try { out = JSON.parse(body); } catch (e) { out = {}; } if (out && out.result) out = out.result; }
+        return J({ text: cleanStt(out && typeof out.text === "string" ? out.text : "", prompt), bytes: buf.byteLength });
       }
       return J({ error: "not found" }, 404);
     } catch (e) { return J({ error: "server", say: "Something went wrong on my side. Try that again?", detail: String(e && e.message || e).slice(0, 200) }, 500); }

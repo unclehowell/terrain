@@ -13,7 +13,7 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="alternate" type="application/json" href="/agent/scene.json" title="Current scene (data)">
-<link rel="stylesheet" href="/style.css?v=1.5.0">
+<link rel="stylesheet" href="/style.css?v=1.5.1">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"Terrain · Cedwyn Estate in 3D","url":"https://terrain.bucklerfamily.estate/","inLanguage":"en-GB","publisher":{"@id":"https://bucklerfamily.estate/#org"}},{"@type":"Organization","@id":"https://bucklerfamily.estate/#org","name":"Williams–Buckler family","url":"https://bucklerfamily.estate/"}]}</script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 <script src="https://bucklerfamily.estate/ghf-lang/ghf-webmcp.js" defer></script>
@@ -37,7 +37,8 @@
     <div id="cap" aria-live="polite"><p id="capu"></p><p id="capa"></p></div>
     <button id="call" class="tbtn gold big" type="button">Start call</button>
     <span id="st" class="st" aria-live="polite"></span>
-    <div id="vrow" hidden><span id="lvl" aria-label="Microphone level"><i id="lvlb"></i></span><button id="ptt" class="tbtn" type="button">Hold to talk</button></div>
+    <div id="vrow" hidden><span id="lvl" aria-label="Microphone level"><i id="lvlb"></i></span><button id="ptt" class="tbtn" type="button">Hold to talk</button><span id="vpill" class="vpill" hidden>Server</span></div>
+    <div id="vdev"><button id="vdl" class="tbtn" type="button" hidden>Download voice (41 MB, once)</button><button id="vtts" class="tbtn" type="button" hidden>Natural voice (92 MB)</button><button id="vllm" class="tbtn" type="button" hidden>Edit model (300 MB, WebGPU)</button><progress id="vprog" max="1" value="0" hidden></progress></div>
     <p id="micnote" class="micnote" role="alert" hidden></p>
     <form id="tx" hidden autocomplete="off"><label class="vh" for="txi">Say it in text</label><input id="txi" type="text" placeholder="Or type here" enterkeyhint="send" maxlength="500"><button class="tbtn" type="submit">Send</button></form>
   </div>
@@ -51,6 +52,6 @@
   <p id="upd" class="upd"></p>
   <p><a href="https://bucklerfamily.estate/3d/">First-person walk</a> · <a href="/agent/scene.json">Scene data</a> · <a href="/api/roadmap">Roadmap data</a> · <a href="https://github.com/unclehowell/terrain/commits/main/data/scene.json">Published changes</a></p>
 </section>
-<script type="module" src="/app.js?v=1.5.0"></script>
+<script type="module" src="/app.js?v=1.5.1"></script>
 </body>
 </html>

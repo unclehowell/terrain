@@ -645,6 +645,7 @@ let actx = null, srcNode = null;
 function stopSpeaking() { if (speaking) { try { srcNode && srcNode.stop(); } catch (e) {} speaking = false; spokeEnd = performance.now(); try { speechSynthesis.cancel(); } catch (e) {} } }
 async function speak(text) {
   capA(text); lastSaid = text; if (!call) return;
+  if (VW.tts) { try { await deviceSpeak(text); speaking = false; spokeEnd = performance.now(); if (call) st(ADMIN ? "Admin · listening" : "Listening"); return; } catch (e) { console.warn("device tts", e); } }
   try { const r = await fetch("/api/tts", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ text }) }); if (!r.ok) throw new Error("tts " + r.status);
     const ab = await r.arrayBuffer(); if (!call) return; if (!actx) throw new Error("no audio"); try { await actx.resume(); } catch (e) {}
     const buf = await actx.decodeAudioData(ab); const s = actx.createBufferSource(); s.buffer = buf; s.connect(actx.destination); srcNode = s; speaking = true; st(ADMIN ? "Admin · talking" : "Talking");
@@ -662,6 +663,7 @@ async function utter(text) {
     if (j.unlocked || j.admin !== undefined) setAdmin(!!j.admin);
     if (j.scene) render(j.scene);
     if (j.view && window.terrainView) window.terrainView(j.view);
+    if (j.needLLM) { if (VW.llm) { const s = await deviceEdit(text); if (s) j.say = s; } else if (navigator.gpu) { $("vllm").hidden = false; } }
     if (ADMIN && !j.unlocked) { history.push({ role: "user", content: text }, { role: "assistant", content: j.say || "" }); }
     if (j.locked) micNote("");
     busy = false; speak(j.say || "Hmm.");
@@ -698,13 +700,89 @@ async function disarm() { const r = rec; rec = null; if (!r) return null; return
 async function sendClip(blob, ms) {
   if (!blob || blob.size < 600 || ms < 250) return;
   sending++; st("Hearing you"); capU("Hearing you…");
+  if (VW.stt) { try { const t = (await deviceStt(blob)).replace(/^\s*\[.*?\]\s*$/, "").trim(); sending--; if (!t || isEcho(t) || /^(\(|\[)/.test(t)) { capU(t ? "" : "Heard: (nothing clear, say it again)"); if (!busy) st(ADMIN ? "Admin · listening" : "Listening"); } else utter(t); return; } catch (e) { console.warn("device stt", e); } }
   try {
     const r = await fetch("/api/stt", { method: "POST", headers: { "content-type": blob.type || "application/octet-stream" }, body: blob });
     const j = await r.json(); const t = (j.text || "").trim();
+    if (j.quota) { sending--; browserStt(); return; }
     if (!t || isEcho(t)) { capU(t ? "" : "Heard: (nothing clear, say it again)"); if (!busy) st(ADMIN ? "Admin · listening" : "Listening"); }
     else utter(t);
   } catch (e) { capU("Heard: (connection dropped, say it again)"); }
   sending--;
+}
+// ---------- on-device voice (Whisper + Kokoro in a worker, weights cached by the browser) ----------
+const VW = { w: null, stt: false, tts: false, llm: null, loading: "", seq: 0, wait: {}, bytes: {}, total: {} };
+const VKEY = "terrain.voice";
+function vw() {
+  if (VW.w) return VW.w;
+  try { VW.w = new Worker("/voice-worker.js?v=1.5.1", { type: "module" }); } catch (e) { return null; }
+  VW.w.onmessage = e => { const m = e.data || {};
+    if (m.type === "progress") { const k = m.what + ":" + m.file; if (m.total) { VW.total[k] = m.total; VW.bytes[k] = m.loaded; } if (m.done && VW.total[k]) VW.bytes[k] = VW.total[k]; vProg(m.what); return; }
+    if (m.type === "warm") { VW.warmMs = m.ms; return; }
+    const cb = VW.wait[m.id]; if (cb) { delete VW.wait[m.id]; cb(m); } };
+  VW.w.onerror = e => { console.warn("voice worker", e.message); };
+  return VW.w;
+}
+function vAsk(msg, transfer) { const w = vw(); if (!w) return Promise.resolve({ type: "error", error: "no worker" }); const id = ++VW.seq; return new Promise(res => { VW.wait[id] = res; w.postMessage({ ...msg, id }, transfer || []); }); }
+function vProg(what) { let l = 0, t = 0; for (const k in VW.total) if (k.startsWith(what + ":")) { l += VW.bytes[k] || 0; t += VW.total[k]; } const p = $("vprog"); if (!p) return; p.hidden = false; if (t) { p.max = t; p.value = l; } $("vdl").textContent = (what === "tts" ? "Natural voice " : "Voice ") + (t ? Math.round(l / 1e6) + " of " + Math.round(t / 1e6) + " MB" : "starting…"); }
+function vPill() { const p = $("vpill"); if (!p) return; const mode = VW.stt ? "On-device" : BSR ? "Browser" : "Server"; p.textContent = mode + (VW.tts ? " · natural voice" : ""); p.dataset.mode = mode; }
+async function loadDeviceStt() {
+  if (VW.stt || VW.loading) return VW.stt; VW.loading = "stt"; const t0 = performance.now();
+  const r = await vAsk({ type: "load-stt" }); VW.loading = ""; $("vprog").hidden = true;
+  if (r.type !== "ready") { $("vdl").textContent = "Voice download failed, tap to retry"; console.warn(r.error); return false; }
+  VW.stt = true; VW.loadMs = Math.round(performance.now() - t0); try { localStorage.setItem(VKEY, "device"); } catch (e) {}
+  $("vdl").hidden = true; $("vtts").hidden = !!VW.tts; if (BSR) { const b = BSR; BSR = null; try { b.stop(); } catch (e) {} if (call && stream && !vadT) { $("vrow").hidden = false; arm(); vadT = setInterval(tick, 40); } }
+  micNote(""); vPill(); return true;
+}
+async function loadDeviceTts() {
+  if (VW.tts || VW.loading) return VW.tts; VW.loading = "tts";
+  const r = await vAsk({ type: "load-tts" }); VW.loading = ""; $("vprog").hidden = true;
+  if (r.type !== "ready") { $("vtts").textContent = "Natural voice failed, tap to retry"; console.warn(r.error); return false; }
+  VW.tts = true; try { localStorage.setItem(VKEY + ".tts", "1"); } catch (e) {} $("vtts").hidden = true; vPill(); return true;
+}
+async function to16k(blob) {
+  const ab = await blob.arrayBuffer(); const ctx = actx || new (window.AudioContext || window.webkitAudioContext)();
+  const buf = await new Promise((res, rej) => { const p = ctx.decodeAudioData(ab, res, rej); if (p && p.then) p.then(res, rej); });
+  const len = Math.max(1, Math.ceil(buf.duration * 16000)); const off = new OfflineAudioContext(1, len, 16000); const s = off.createBufferSource(); s.buffer = buf; s.connect(off.destination); s.start();
+  return (await off.startRendering()).getChannelData(0);
+}
+async function deviceStt(blob) { const pcm = await to16k(blob); const r = await vAsk({ type: "stt", audio: pcm }, [pcm.buffer]); if (r.type !== "text") throw new Error(r.error || "stt"); VW.lastSttMs = r.ms; return r.text; }
+async function deviceSpeak(text) {
+  const r = await vAsk({ type: "tts", text }); if (r.type !== "audio" || !actx) throw new Error(r.error || "tts");
+  const b = actx.createBuffer(1, r.audio.length, r.rate); b.copyToChannel(r.audio, 0); const s = actx.createBufferSource(); s.buffer = b; s.connect(actx.destination); srcNode = s; speaking = true; st(ADMIN ? "Admin · talking" : "Talking");
+  await new Promise(res => { s.onended = res; s.start(); }); if (srcNode === s) srcNode = null;
+}
+// Free-form edits when the server's model is unavailable: a small in-browser model (WebGPU only) turns words into tool calls.
+const WEBLLM = "https://esm.run/@mlc-ai/web-llm@0.2.86", LLM_ID = "Qwen2.5-0.5B-Instruct-q4f16_1-MLC";
+async function loadDeviceLlm() {
+  if (VW.llm || !navigator.gpu) return VW.llm; const b = $("vllm"); b.textContent = "Edit model starting…";
+  try { const webllm = await import(WEBLLM); VW.llm = await webllm.CreateMLCEngine(LLM_ID, { initProgressCallback: p => { b.textContent = "Edit model " + Math.round((p.progress || 0) * 100) + "%"; } }); b.hidden = true; try { localStorage.setItem(VKEY + ".llm", "1"); } catch (e) {} }
+  catch (e) { b.textContent = "Edit model failed, tap to retry"; console.warn(e); VW.llm = null; }
+  return VW.llm;
+}
+const LLM_TOOLS = "set_color{target,color,part?:walls|roof} set_texture{target,texture:stone|brick|wood|plaster|slate|glass|metal|thatch} add_object{kind:building|tree|fence|wall|path|water|field|label|marker|rock|lamp|bench,species?,name?,near?,direction?,count?,color?} move_object{target,near?|direction,distance} rotate_object{target,degrees} scale_object{target,factor} delete_object{target} rename_object{target,name} set_time_of_day{time:dawn|morning|day|afternoon|evening|dusk|night} set_weather{weather:clear|cloudy|fog|rain|snow|storm} set_camera{target?,view?:close|overhead|ground|wide}";
+async function deviceEdit(text) {
+  const eng = VW.llm; if (!eng) return null;
+  const names = (SCENE ? SCENE.objects : []).filter(o => o.name).slice(0, 60).map(o => o.name).join("; ");
+  const sys = "You turn a spoken request about a 3D farm scene into tool calls. Tools: " + LLM_TOOLS + ". Objects: " + names + ". Reply with JSON only: {\"calls\":[{\"name\":\"...\",\"arguments\":{...}}]}. Use object names exactly as listed.";
+  const out = await eng.chat.completions.create({ messages: [{ role: "system", content: sys }, { role: "user", content: text }], temperature: 0.1, max_tokens: 300, response_format: { type: "json_object" } });
+  let calls = []; try { calls = JSON.parse(out.choices[0].message.content).calls || []; } catch (e) { return null; }
+  const says = []; for (const c of calls.slice(0, 4)) { const r = await tool(c.name, c.arguments || {}, true); if (r && r.say) says.push(r.say); }
+  return says.length ? says.join(" ") : null;
+}
+
+// Server transcription unavailable (daily limit): hand over to the browser's own recogniser where there is one.
+let BSR = null;
+function browserStt() {
+  if (BSR || !call) return; const R = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!VW.stt && $("vdl")) $("vdl").hidden = false;
+  if (!R) { micNote("Server voice is resting until 1am UK time. Tap Download voice to run it on this device, or type below."); capU(""); return; }
+  if (vadT) { clearInterval(vadT); vadT = null; } disarm(); $("vrow").hidden = true;
+  const r = new R(); BSR = r; r.lang = "en-GB"; r.continuous = true; r.interimResults = true;
+  r.onresult = e => { for (let i = e.resultIndex; i < e.results.length; i++) { const x = e.results[i]; if (!x.isFinal) { if (speaking) stopSpeaking(); capU("Heard: “" + x[0].transcript + "”"); continue; } const t = x[0].transcript.trim(); if (t && !isEcho(t)) utter(t); } };
+  r.onerror = ev => { if (ev.error === "not-allowed" || ev.error === "service-not-allowed") { micNote(OPEN_MSG); BSR = null; } };
+  r.onend = () => { if (BSR === r && call) { try { r.start(); } catch (e) {} } };
+  try { r.start(); st(ADMIN ? "Admin · listening" : "Listening"); } catch (e) { BSR = null; } vPill();
 }
 // --- voice-activity detection + level meter ---
 const fbuf = new Float32Array(1024);
@@ -732,15 +810,20 @@ async function startCall() {
   if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) micNote(OPEN_MSG);
   else { try { stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true, channelCount: 1 } }); micNote(""); } catch (e) { stream = null; micNote(OPEN_MSG); } }
   if (stream) { try { await actx.resume(); } catch (e) {} await startListening(); }
+  let pref = null; try { pref = localStorage.getItem(VKEY); } catch (e) {}
+  $("vdl").hidden = VW.stt; $("vpill").hidden = false; vPill();
+  if (pref === "device" && !VW.stt) loadDeviceStt().then(() => { let t = null; try { t = localStorage.getItem(VKEY + ".tts"); } catch (e) {} if (t) loadDeviceTts(); });
+  if (navigator.gpu && !VW.llm) { let l = null; try { l = localStorage.getItem(VKEY + ".llm"); } catch (e) {} if (l) loadDeviceLlm(); }
   let hello = "Alright, it's Tab. What's the passphrase?";
   try { hello = (await (await fetch("/api/agent", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ hello: true }) })).json()).say || hello; } catch (e) {}
   if (!stream) hello += " Type it below.";
   await speak(hello);
 }
-function endCall() { call = false; stopSpeaking(); holding = false; inSpeech = false; if (vadT) { clearInterval(vadT); vadT = null; } disarm(); try { micSrc && micSrc.disconnect(); } catch (e) {} micSrc = null; an = null; if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }
+function endCall() { call = false; if (BSR) { const r = BSR; BSR = null; try { r.stop(); } catch (e) {} } stopSpeaking(); holding = false; inSpeech = false; if (vadT) { clearInterval(vadT); vadT = null; } disarm(); try { micSrc && micSrc.disconnect(); } catch (e) {} micSrc = null; an = null; if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }
   $("vrow").hidden = true; $("call").textContent = "Start call"; $("call").classList.add("gold"); $("call").classList.remove("red"); $("tx").hidden = true; st(""); capU(""); }
+$("vdl").onclick = () => loadDeviceStt(); $("vtts").onclick = () => loadDeviceTts(); $("vllm").onclick = () => loadDeviceLlm();
 $("ptt").addEventListener("pointerdown", pttDown); ["pointerup", "pointercancel", "pointerleave"].forEach(ev => $("ptt").addEventListener(ev, pttUp));
 $("ptt").addEventListener("contextmenu", e => e.preventDefault());
 $("call").onclick = () => call ? endCall() : startCall();
 $("tx").onsubmit = e => { e.preventDefault(); const v = $("txi").value; $("txi").value = ""; utter(v); };
-window.terrain = { utter, tool, render: () => SCENE, flyTo, voice: () => ({ MIME, floor, inSpeech, sending, stream: !!stream, rec: !!rec }) };
+window.terrain = { utter, tool, render: () => SCENE, flyTo, voice: () => ({ MIME, floor, inSpeech, sending, stream: !!stream, rec: !!rec, device: { stt: VW.stt, tts: VW.tts, llm: !!VW.llm, loadMs: VW.loadMs, warmMs: VW.warmMs, lastSttMs: VW.lastSttMs, bytes: Object.values(VW.total).reduce((x, y) => x + y, 0) }, bsr: !!BSR }), loadDeviceStt, loadDeviceTts, deviceStt };
