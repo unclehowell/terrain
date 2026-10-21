@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "rev": 19,
+  "rev": 54,
   "env": {
     "time": "afternoon",
     "weather": "clear",
@@ -18,192 +18,6 @@
     }
   },
   "objects": [
-    {
-      "id": "site_wiki",
-      "name": "Legal Wiki",
-      "kind": "building",
-      "roof": "portico",
-      "pos": [
-        -28.5,
-        0,
-        -7.2
-      ],
-      "rot": 0,
-      "scale": 1,
-      "size": [
-        5.6,
-        3.4,
-        4.6
-      ],
-      "color": "#1B4D6A",
-      "roofColor": "#0F9DF0",
-      "texture": "plain",
-      "label": {
-        "n": 1,
-        "title": "The Legal Wiki",
-        "tag": "START HERE"
-      },
-      "url": "https://greathousefarmwiki.wordpress.com/",
-      "aliases": [
-        "wiki",
-        "start here"
-      ]
-    },
-    {
-      "id": "site_story",
-      "name": "Story",
-      "kind": "building",
-      "roof": "gable",
-      "pos": [
-        -9.5,
-        0,
-        7.2
-      ],
-      "rot": 180,
-      "scale": 1,
-      "size": [
-        5.6,
-        3.4,
-        4.6
-      ],
-      "color": "#6A3A1B",
-      "roofColor": "#F1721E",
-      "texture": "plain",
-      "label": {
-        "n": 2,
-        "title": "The Story",
-        "tag": "TIMELINE"
-      },
-      "url": "https://bpvsbuckler.bucklerfamily.estate/",
-      "aliases": [
-        "story",
-        "timeline"
-      ]
-    },
-    {
-      "id": "site_maps",
-      "name": "Map Room",
-      "kind": "building",
-      "roof": "dome",
-      "pos": [
-        9.5,
-        0,
-        -7.2
-      ],
-      "rot": 0,
-      "scale": 1,
-      "size": [
-        5.6,
-        3.4,
-        4.6
-      ],
-      "color": "#6A2B22",
-      "roofColor": "#FF8F7A",
-      "texture": "plain",
-      "label": {
-        "n": 3,
-        "title": "The Map Room",
-        "tag": "TITLE MAP"
-      },
-      "url": "https://maps.bucklerfamily.estate/",
-      "aliases": [
-        "maps",
-        "title map"
-      ]
-    },
-    {
-      "id": "site_chess",
-      "name": "Chessboard",
-      "kind": "building",
-      "roof": "flat",
-      "pos": [
-        34.05,
-        0,
-        4.59
-      ],
-      "rot": -129.6,
-      "scale": 1,
-      "size": [
-        5.6,
-        3.4,
-        4.6
-      ],
-      "color": "#3D2614",
-      "roofColor": "#D9AE7E",
-      "texture": "plain",
-      "label": {
-        "n": 4,
-        "title": "The Chessboard",
-        "tag": "TWO RECORDS"
-      },
-      "url": "https://chess.bucklerfamily.estate/",
-      "aliases": [
-        "chess",
-        "two records"
-      ]
-    },
-    {
-      "id": "site_fcg",
-      "name": "FCG · Security Clearance",
-      "kind": "building",
-      "roof": "portico",
-      "pos": [
-        22.95,
-        0,
-        -18.41
-      ],
-      "rot": 129.6,
-      "scale": 1,
-      "size": [
-        5.6,
-        3.4,
-        4.6
-      ],
-      "color": "#4A1B6A",
-      "roofColor": "#C274F6",
-      "texture": "plain",
-      "label": {
-        "n": 5,
-        "title": "FCG · Security Clearance",
-        "tag": "CLEARANCE"
-      },
-      "url": "https://fcg.bucklerfamily.estate/",
-      "aliases": [
-        "fcg",
-        "clearance"
-      ]
-    },
-    {
-      "id": "site_csscpsg",
-      "name": "Grammar House (CSSCPSGP)",
-      "kind": "building",
-      "roof": "gable",
-      "pos": [
-        9.5,
-        0,
-        -30.2
-      ],
-      "rot": 0,
-      "scale": 1,
-      "size": [
-        5.6,
-        3.4,
-        4.6
-      ],
-      "color": "#364E13",
-      "roofColor": "#92DB24",
-      "texture": "plain",
-      "label": {
-        "n": 6,
-        "title": "The Grammar House (CSSCPSGP)",
-        "tag": "STRUCTURE"
-      },
-      "url": "https://csscpsg.bucklerfamily.estate/",
-      "aliases": [
-        "csscpsg",
-        "structure"
-      ]
-    },
     {
       "id": "site_records",
       "name": "Primary Records",
@@ -923,60 +737,6 @@
       "texture": "stone"
     },
     {
-      "id": "farmhouse",
-      "name": "Tŷ Mawr farmhouse (Great House Farm)",
-      "kind": "building",
-      "roof": "gable",
-      "pos": [
-        0,
-        0,
-        34
-      ],
-      "rot": 0,
-      "scale": 1,
-      "size": [
-        12,
-        5.5,
-        6
-      ],
-      "color": "#e9e2d0",
-      "roofColor": "#3b4148",
-      "texture": "plaster",
-      "chimneys": 2,
-      "aliases": [
-        "ty mawr",
-        "great house farm",
-        "farmhouse",
-        "farm house",
-        "the farm",
-        "house"
-      ]
-    },
-    {
-      "id": "farm_barn",
-      "name": "Farm barn",
-      "kind": "building",
-      "roof": "gable",
-      "pos": [
-        -13,
-        0,
-        38
-      ],
-      "rot": 90,
-      "scale": 1,
-      "size": [
-        10,
-        5,
-        6
-      ],
-      "color": "#c0392b",
-      "roofColor": "#4a4d52",
-      "texture": "stone",
-      "aliases": [
-        "barn"
-      ]
-    },
-    {
       "id": "farmyard_wall",
       "name": "Farmyard wall",
       "kind": "wall",
@@ -1110,10 +870,11 @@
         24,
         30
       ],
-      "color": "#6b8f3a",
+      "color": "#9a978f",
       "aliases": [
         "west field"
-      ]
+      ],
+      "texture": "stone"
     },
     {
       "id": "farm_field_east",
@@ -1162,7 +923,8 @@
         24
       ],
       "height": 9,
-      "color": "#2f5a2a"
+      "color": "#b8963e",
+      "texture": "thatch"
     },
     {
       "id": "yew_1",
@@ -1175,10 +937,11 @@
         70
       ],
       "height": 7,
-      "color": "#1f3f22",
+      "color": "#b8963e",
       "aliases": [
         "yew"
-      ]
+      ],
+      "texture": "thatch"
     },
     {
       "id": "pine_1",
@@ -1191,7 +954,8 @@
         10
       ],
       "height": 10,
-      "color": "#24472a"
+      "color": "#8b5a2b",
+      "texture": "wood"
     },
     {
       "id": "farm_sign",
@@ -1241,12 +1005,134 @@
       "width": 2,
       "color": "#6b5a45",
       "texture": "gravel"
+    },
+    {
+      "kind": "marker",
+      "id": "hill",
+      "name": "Hill",
+      "pos": [
+        0,
+        0,
+        -16
+      ],
+      "rot": 0,
+      "scale": 1
+    },
+    {
+      "kind": "water",
+      "radius": 4,
+      "id": "pond",
+      "name": "Pond",
+      "pos": [
+        0,
+        0,
+        54
+      ],
+      "rot": 0,
+      "scale": 1
+    },
+    {
+      "kind": "tree",
+      "species": "oak",
+      "height": 9,
+      "id": "oak_tree",
+      "name": "Oak tree",
+      "pos": [
+        30,
+        0,
+        34
+      ],
+      "rot": 0,
+      "scale": 1
+    },
+    {
+      "kind": "path",
+      "width": 1.6,
+      "color": "#8a7f70",
+      "texture": "gravel",
+      "id": "path",
+      "name": "Path",
+      "points": [
+        [
+          0,
+          34
+        ],
+        [
+          0,
+          62
+        ]
+      ]
+    },
+    {
+      "kind": "tree",
+      "species": "oak",
+      "height": 9,
+      "id": "oak_tree_2",
+      "name": "Oak tree",
+      "pos": [
+        10,
+        0,
+        65
+      ],
+      "rot": 0,
+      "scale": 1
+    },
+    {
+      "kind": "marker",
+      "id": "button",
+      "name": "Button",
+      "text": "Full screen",
+      "pos": [
+        30,
+        0,
+        27.35
+      ],
+      "rot": 0,
+      "scale": 1
+    },
+    {
+      "kind": "marker",
+      "id": "button_2",
+      "name": "Button",
+      "pos": [
+        30,
+        0,
+        27.35
+      ],
+      "rot": 0,
+      "scale": 1
+    },
+    {
+      "kind": "marker",
+      "id": "button_3",
+      "name": "Button",
+      "pos": [
+        30,
+        0,
+        27.35
+      ],
+      "rot": 0,
+      "scale": 1
+    },
+    {
+      "kind": "marker",
+      "color": "#e53935",
+      "id": "dragon",
+      "name": "dragon",
+      "texture": "plain",
+      "pos": [
+        3.71,
+        0,
+        2.54
+      ],
+      "rot": 0,
+      "scale": 10
     }
   ],
   "meta": {
-    "version": "original",
+    "version": "0",
     "camera_seq": 22414,
-    "last": "farm_barn"
+    "last": "dragon"
   },
-  "updated": "2026-10-21T21:36:14.485Z"
+  "updated": "2026-10-21T21:56:18.533Z"
 }
