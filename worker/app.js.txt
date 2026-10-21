@@ -77,10 +77,13 @@ function texture(kind) {
   else if (kind === "gravel" || kind === "grass") { for (let i = 0; i < 500; i++) { x.fillStyle = `rgba(0,0,0,${rnd() * 0.18})`; x.fillRect(rnd() * 128, rnd() * 128, 2, 2); } }
   else if (kind === "glass") { x.fillStyle = "rgba(255,255,255,.4)"; for (let i = 0; i < 4; i++) x.fillRect(i * 32 + 2, 0, 3, 128); x.fillRect(0, 62, 128, 3); }
   else if (kind === "metal") { for (let i = 0; i < 16; i++) { x.beginPath(); x.moveTo(i * 8, 0); x.lineTo(i * 8, 128); x.stroke(); } }
+  else if (kind === "bark") { x.strokeStyle = "rgba(35,24,15,.28)"; x.lineWidth = 2; for (let i = 0; i < 18; i++) { const xx = i * 7 + rnd() * 4; x.beginPath(); x.moveTo(xx, 0); x.bezierCurveTo(xx + rnd() * 8 - 4, 40, xx + rnd() * 8 - 4, 80, xx + rnd() * 8 - 4, 128); x.stroke(); } }
+  else if (kind === "moss") { for (let i = 0; i < 900; i++) { x.fillStyle = `rgba(${20 + Math.floor(rnd()*55)},${45 + Math.floor(rnd()*90)},${15 + Math.floor(rnd()*35)},${0.08 + rnd()*0.22})`; x.beginPath(); x.arc(rnd()*128,rnd()*128,0.6+rnd()*2.1,0,Math.PI*2); x.fill(); } }
+  else if (kind === "soil") { for (let i = 0; i < 650; i++) { x.fillStyle = `rgba(${45 + Math.floor(rnd()*50)},${28 + Math.floor(rnd()*42)},${12 + Math.floor(rnd()*25)},${0.05 + rnd()*0.18})`; x.fillRect(rnd()*128,rnd()*128,1+rnd()*3,1+rnd()*2); } }
   const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.colorSpace = THREE.SRGBColorSpace; return (TEXC[kind] = t);
 }
 // Fine, tileable ground detail adds visual texture without adding geometry or draw calls.
-groundMat.map = texture("grass"); groundMat.map.repeat.set(72, 72); groundMat.map.needsUpdate = true;
+groundMat.map = texture("grass"); groundMat.map.repeat.set(72, 72); groundMat.map.needsUpdate = true; groundMat.needsUpdate = true;
 const MATC = {};
 function mat(color, tex, rep = 1, emissive) {
   const k = [color, tex, rep, emissive].join("|"); if (MATC[k]) return MATC[k];
@@ -341,7 +344,7 @@ function animal(o) {
 function vehicle(o) {
   const sp=(o.species||"cart").toLowerCase(),g=new THREE.Group(),wood=mat(o.color||"#8b5a2b","wood"),iron=mat("#3f4140","metal");
   if(sp==="tractor"){
-    const green=mat(o.color||"#536e35"),black=mat("#262626","rubber"==="rubber"?"plain":"plain");
+    const green=mat(o.color||"#536e35"),black=mat("#262626","plain");
     g.add(mesh(G.box,green,1.4,0.82,1.8,0,0.85,0));
     g.add(mesh(G.box,green,1.1,0.72,0.95,0,1.55,-0.4));
     g.add(mesh(G.box,mat("#9bb5be","glass"),0.82,0.48,0.06,0,1.58,0.1));
