@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "rev": 54,
+  "rev": 59,
   "env": {
     "time": "afternoon",
     "weather": "clear",
@@ -1130,9 +1130,9 @@
     }
   ],
   "meta": {
-    "version": "0",
+    "version": "original",
     "camera_seq": 22414,
     "last": "dragon"
   },
-  "updated": "2026-10-21T21:56:18.533Z"
+  "updated": "2026-10-21T22:51:47.973Z"
 }

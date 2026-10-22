@@ -1,54 +1,21 @@
 {
   "published": [
     "20261021T213614-eee60d",
-    "20261021T213823-e01f48"
+    "20261021T213823-e01f48",
+    "20261021T222010-45220f",
+    "20261021T222152-f08472",
+    "20261021T225148-96cdd3"
   ],
-  "rev": 54,
-  "updated": "2026-10-21T21:56:18.533Z",
+  "rev": 59,
+  "updated": "2026-10-21T22:51:47.973Z",
   "last": {
-    "id": "20261021T213823-e01f48",
-    "started": 1792618703,
-    "last": 1792619779,
+    "id": "20261021T225148-96cdd3",
+    "started": 1792623108,
+    "last": 1792623108,
     "edits": [
-      "Undone.",
-      "Saved versions: original, version one.",
-      "The Tŷ Mawr farmhouse is stone now.",
-      "Added a hill by the Tŷ Mawr farmhouse.",
-      "The West field is stone now.",
-      "Added a pond by the Tŷ Mawr farmhouse.",
-      "Added an oak tree by the Tŷ Mawr farmhouse.",
-      "Added a path from the Tŷ Mawr farmhouse to St Dochdwy's Church.",
-      "Removed the Farm barn.",
-      "Removed the Tŷ Mawr farmhouse.",
-      "The West field is stone now.",
-      "The Old oak is wood now.",
-      "The Old oak is wood now.",
-      "The Churchyard yew is wood now.",
-      "The Pine is wood now.",
-      "The Old oak is thatch now.",
-      "The Churchyard yew is thatch now.",
-      "Added an oak tree by the Churchyard yew.",
-      "Added a button by the Oak tree.",
-      "Added a button by the Button.",
-      "Added a button by the Button.",
-      "Moved the Button next to the Oak tree.",
-      "Moved the Button next to the Oak tree.",
-      "Moved the Button next to the Oak tree.",
-      "Moved the Button next to the Oak tree.",
-      "Removed the Legal Wiki.",
-      "Removed the Story.",
-      "Removed the Map Room.",
-      "Removed the Chessboard.",
-      "Removed the FCG · Security Clearance.",
-      "Removed the Grammar House.",
-      "Added a dragon.",
-      "Made the Dragon bigger.",
-      "Removed the Dragon.",
-      "Added a dragon.",
-      "Made the dragon bigger.",
-      "Saved as \"0\"."
+      "Restored \"0\"."
     ],
     "reason": "idle",
-    "closed": "2026-10-21T22:06:19.000Z"
+    "closed": "2026-10-21T23:01:48.000Z"
   }
 }
