@@ -7,13 +7,13 @@
   "camera": {
    "pos": [
     95,
-    115,
-    190
+    145,
+    215
    ],
    "target": [
-    -10,
+    -5,
     0,
-    5
+    0
    ]
   }
  },
@@ -24,32 +24,32 @@
    "kind": "fence",
    "points": [
     [
-     50.2,
-     -97
+     -25.8,
+     -104
     ],
     [
-     56,
-     -97
+     -20,
+     -104
     ],
     [
-     68,
-     -97
+     -8,
+     -104
     ],
     [
-     68,
-     -79
+     -8,
+     -86
     ],
     [
-     44,
-     -79
+     -32,
+     -86
     ],
     [
-     44,
-     -97
+     -32,
+     -104
     ],
     [
-     50.2,
-     -97
+     -25.8,
+     -104
     ]
    ],
    "color": "#6b2b2b",
@@ -63,9 +63,9 @@
    "name": "Enemy camp sign",
    "kind": "label",
    "pos": [
-    56,
+    -20,
     3.3,
-    -78.7
+    -85.7
    ],
    "text": "ENEMY CAMP",
    "color": "#ff6b6b",
@@ -397,11 +397,11 @@
    "kind": "building",
    "roof": "portico",
    "pos": [
-    58.74,
+    -12.72,
     0,
-    -29.78
+    -25.25
    ],
-   "rot": -21.8,
+   "rot": -8.53,
    "scale": 1,
    "size": [
     5.6,
@@ -428,11 +428,11 @@
    "kind": "building",
    "roof": "gable",
    "pos": [
-    -123.44,
+    30.31,
     0,
-    -58.57
+    -23.6
    ],
-   "rot": 229.4,
+   "rot": 9.73,
    "scale": 1,
    "size": [
     5.6,
@@ -459,11 +459,11 @@
    "kind": "building",
    "roof": "dome",
    "pos": [
-    -92.56,
+    62.78,
     0,
-    -53.43
+    0.37
    ],
-   "rot": 49.4,
+   "rot": 50.71,
    "scale": 1,
    "size": [
     5.6,
@@ -490,11 +490,11 @@
    "kind": "building",
    "roof": "flat",
    "pos": [
-    -98.94,
+    60.73,
     0,
-    -30.4
+    43.18
    ],
-   "rot": 242.78,
+   "rot": 251.08,
    "scale": 1,
    "size": [
     5.6,
@@ -521,11 +521,11 @@
    "kind": "building",
    "roof": "portico",
    "pos": [
-    -58.87,
+    72.48,
     0,
-    22.46
+    77.31
    ],
-   "rot": 82.41,
+   "rot": 256.37,
    "scale": 1,
    "size": [
     5.6,
@@ -552,11 +552,11 @@
    "kind": "building",
    "roof": "gable",
    "pos": [
-    -56.68,
+    97.18,
     0,
-    93.15
+    96.02
    ],
-   "rot": 247.22,
+   "rot": 76.37,
    "scale": 1,
    "size": [
     5.6,
@@ -583,11 +583,11 @@
    "kind": "building",
    "roof": "gable",
    "pos": [
-    -28.9,
+    -72.57,
     0,
-    115.44
+    -22.26
    ],
-   "rot": 209.05,
+   "rot": -90.99,
    "scale": 1,
    "size": [
     5.6,
@@ -614,11 +614,11 @@
    "kind": "building",
    "roof": "tower",
    "pos": [
-    1.84,
+    -52.89,
     0,
-    109.53
+    -46.61
    ],
-   "rot": 29.05,
+   "rot": 89.01,
    "scale": 1,
    "size": [
     3.6,
@@ -645,11 +645,11 @@
    "kind": "building",
    "roof": "gable",
    "pos": [
-    -1.81,
+    -72.82,
     0,
-    129.89
+    -52.16
    ],
-   "rot": 190.39,
+   "rot": -77.59,
    "scale": 1,
    "size": [
     5.6,
@@ -676,9 +676,9 @@
    "kind": "building",
    "roof": "flat",
    "pos": [
-    56,
+    -20,
     0,
-    -88
+    -95
    ],
    "rot": 180,
    "scale": 1,
@@ -708,11 +708,11 @@
    "kind": "building",
    "roof": "dome",
    "pos": [
-    25.42,
+    -48.03,
     0,
-    114.44
+    -71.28
    ],
-   "rot": 10.39,
+   "rot": 102.41,
    "scale": 1,
    "size": [
     5.6,
@@ -739,11 +739,11 @@
    "kind": "building",
    "roof": "tower",
    "pos": [
-    45.4,
+    -62.5,
     0,
-    138.54
+    -99.04
    ],
-   "rot": 190.39,
+   "rot": -77.59,
    "scale": 1,
    "size": [
     3.6,
@@ -770,11 +770,11 @@
    "kind": "building",
    "roof": "gable",
    "pos": [
-    59.25,
+    -50.55,
     0,
-    120.98
+    -125.98
    ],
-   "rot": -4.29,
+   "rot": -64.09,
    "scale": 1,
    "size": [
     5.6,
@@ -801,11 +801,11 @@
    "kind": "building",
    "roof": "flat",
    "pos": [
-    -97.11,
+    -27.28,
     0,
-    -93.93
+    -128.57
    ],
-   "rot": -29.05,
+   "rot": 129.81,
    "scale": 1,
    "size": [
     5.6,
@@ -832,11 +832,11 @@
    "kind": "building",
    "roof": "dome",
    "pos": [
-    -72.11,
+    -70.82,
     0,
-    -85.64
+    17.02
    ],
-   "rot": 162.82,
+   "rot": 261.57,
    "scale": 1,
    "size": [
     5.6,
@@ -863,11 +863,11 @@
    "kind": "building",
    "roof": "dome",
    "pos": [
-    -54.96,
+    -54.78,
     0,
-    -111.45
+    121.02
    ],
-   "rot": -17.18,
+   "rot": 246.8,
    "scale": 1,
    "size": [
     5.6,
@@ -894,11 +894,11 @@
    "kind": "building",
    "roof": "gable",
    "pos": [
-    -26.25,
+    -34.43,
     0,
-    -99.81
+    121.64
    ],
-   "rot": 162.82,
+   "rot": 33.69,
    "scale": 1,
    "size": [
     5.6,
@@ -925,11 +925,11 @@
    "kind": "building",
    "roof": "flat",
    "pos": [
-    -22.08,
+    40.66,
     0,
-    -121.58
+    161.87
    ],
-   "rot": -12.23,
+   "rot": 146.31,
    "scale": 1,
    "size": [
     5.6,
@@ -956,11 +956,11 @@
    "kind": "building",
    "roof": "flat",
    "pos": [
-    5.53,
+    48.65,
     0,
-    -107.5
+    130.59
    ],
-   "rot": 167.77,
+   "rot": -33.69,
    "scale": 1,
    "size": [
     5.6,
@@ -987,11 +987,11 @@
    "kind": "building",
    "roof": "tower",
    "pos": [
-    24.84,
+    80.6,
     0,
-    -131.74
+    135.24
    ],
-   "rot": -12.23,
+   "rot": 146.31,
    "scale": 1,
    "size": [
     3.6,
@@ -1018,11 +1018,11 @@
    "kind": "building",
    "roof": "gable",
    "pos": [
-    41.14,
+    83.52,
     0,
-    -115.27
+    107.36
    ],
-   "rot": 173.35,
+   "rot": -36.87,
    "scale": 1,
    "size": [
     5.6,
@@ -1049,11 +1049,11 @@
    "kind": "building",
    "roof": "portico",
    "pos": [
-    62.7,
+    115.68,
     0,
-    -137.52
+    110.24
    ],
-   "rot": -6.65,
+   "rot": 143.13,
    "scale": 1,
    "size": [
     5.6,
@@ -1080,11 +1080,11 @@
    "kind": "building",
    "roof": "dome",
    "pos": [
-    88.81,
+    143.72,
     0,
-    -120.83
+    61.21
    ],
-   "rot": 173.35,
+   "rot": -35.54,
    "scale": 1,
    "size": [
     5.6,
@@ -1111,11 +1111,11 @@
    "kind": "building",
    "roof": "awning",
    "pos": [
-    100.98,
+    175.81,
     0,
-    -141.75
+    64.84
    ],
-   "rot": 5.71,
+   "rot": 144.46,
    "scale": 1,
    "size": [
     5.6,
@@ -1137,65 +1137,65 @@
    ]
   },
   {
-   "id": "ll_penlan_road",
-   "name": "Penlan Road (B4267)",
+   "id": "ll_leckwith_road",
+   "name": "Leckwith Road (B4267)",
    "kind": "path",
    "points": [
     [
-     -120,
-     -70
+     -62,
+     8
     ],
     [
-     -90,
-     -35
+     -63,
+     -50
     ],
     [
-     -72,
-     0
+     -52,
+     -100
     ],
     [
-     -66,
-     45
+     -35,
+     -135
     ],
     [
-     -45,
-     95
-    ],
-    [
-     0,
-     120
-    ],
-    [
-     60,
-     131
-    ],
-    [
-     100,
-     128
+     -10,
+     -165
     ]
    ],
    "width": 5.5,
    "color": "#3a3d40"
   },
   {
-   "id": "ll_leckwith_road",
-   "name": "Leckwith Road",
+   "id": "ll_penlan_road",
+   "name": "Penlan Road (B4267)",
    "kind": "path",
    "points": [
     [
-     -120,
-     -70
+     -62,
+     8
     ],
     [
-     -135,
-     -105
+     -58,
+     35
     ],
     [
-     -150,
-     -145
+     -60,
+     62
+    ],
+    [
+     -55,
+     95
+    ],
+    [
+     -40,
+     130
+    ],
+    [
+     -10,
+     150
     ]
    ],
-   "width": 5,
+   "width": 5.5,
    "color": "#3a3d40"
   },
   {
@@ -1204,28 +1204,36 @@
    "kind": "path",
    "points": [
     [
-     -120,
-     -70
+     -62,
+     8
     ],
     [
-     -75,
-     -95
+     -35,
+     -12
     ],
     [
-     -20,
-     -112
+     5,
+     -18
     ],
     [
      40,
-     -125
+     -12
     ],
     [
-     100,
-     -132
+     58,
+     10
     ],
     [
-     140,
-     -128
+     70,
+     40
+    ],
+    [
+     82,
+     75
+    ],
+    [
+     90,
+     108
     ]
    ],
    "width": 5,
@@ -1237,24 +1245,24 @@
    "kind": "path",
    "points": [
     [
-     140,
-     -128
+     30,
+     156
+    ],
+    [
+     90,
+     116
+    ],
+    [
+     118,
+     95
     ],
     [
      150,
-     -70
-    ],
-    [
-     150,
-     0
-    ],
-    [
-     145,
      70
     ],
     [
-     130,
-     120
+     185,
+     45
     ]
    ],
    "width": 7,
@@ -1266,48 +1274,23 @@
    "kind": "path",
    "points": [
     [
-     30,
-     155
-    ],
-    [
-     100,
-     128
-    ],
-    [
-     158,
-     100
-    ]
-   ],
-   "width": 7,
-   "color": "#3a3d40"
-  },
-  {
-   "id": "ll_lewis_road",
-   "name": "Lewis Road",
-   "kind": "path",
-   "points": [
-    [
-     -81,
-     -18
+     -95,
+     172
     ],
     [
      -40,
-     -8
+     160
     ],
     [
-     0,
-     -6
+     -10,
+     150
     ],
     [
-     40,
-     -12
-    ],
-    [
-     80,
-     -28
+     30,
+     156
     ]
    ],
-   "width": 4.5,
+   "width": 7,
    "color": "#3a3d40"
   },
   {
@@ -1316,15 +1299,15 @@
    "kind": "path",
    "points": [
     [
-     -72,
-     0
+     -60.8,
+     16
     ],
     [
-     -45,
-     10
+     -35,
+     17
     ],
     [
-     -20,
+     -10,
      14
     ],
     [
@@ -1341,37 +1324,16 @@
    "kind": "path",
    "points": [
     [
-     8,
-     -6
+     5,
+     -18
     ],
     [
-     8,
-     -28
-    ],
-    [
-     2,
+     5,
      -44
-    ]
-   ],
-   "width": 4,
-   "color": "#3a3d40"
-  },
-  {
-   "id": "ll_spencer_drive",
-   "name": "Spencer Drive",
-   "kind": "path",
-   "points": [
-    [
-     -69,
-     22
     ],
     [
-     -90,
-     32
-    ],
-    [
-     -100,
-     44
+     -2,
+     -62
     ]
    ],
    "width": 4,
@@ -1383,16 +1345,16 @@
    "kind": "path",
    "points": [
     [
-     -66,
-     48
+     -57,
+     100
     ],
     [
-     -100,
-     60
+     -95,
+     112
     ],
     [
-     -132,
-     66
+     -130,
+     118
     ]
    ],
    "width": 4,
@@ -1404,12 +1366,12 @@
    "kind": "path",
    "points": [
     [
-     -72,
-     4
+     -60,
+     74
     ],
     [
-     -98,
-     6
+     -72,
+     74
     ]
    ],
    "width": 4.5,
@@ -1421,12 +1383,12 @@
    "kind": "path",
    "points": [
     [
-     56,
-     -70
+     -52,
+     -98
     ],
     [
-     56,
-     -128
+     -32,
+     -95
     ]
    ],
    "width": 3,
@@ -1434,14 +1396,178 @@
    "texture": "gravel"
   },
   {
+   "id": "ll_river_ely_1",
+   "name": "River Ely",
+   "kind": "path",
+   "points": [
+    [
+     -55,
+     -170
+    ],
+    [
+     -33.12,
+     -152.17
+    ]
+   ],
+   "width": 12,
+   "color": "#2f6f9f"
+  },
+  {
+   "id": "ll_river_ely_2",
+   "name": "River Ely",
+   "kind": "path",
+   "points": [
+    [
+     -17.73,
+     -140.84
+    ],
+    [
+     5,
+     -125
+    ],
+    [
+     35,
+     -92
+    ],
+    [
+     60,
+     -50
+    ],
+    [
+     72,
+     -10
+    ],
+    [
+     84,
+     28
+    ],
+    [
+     98,
+     66
+    ],
+    [
+     110.62,
+     89.44
+    ]
+   ],
+   "width": 12,
+   "color": "#2f6f9f"
+  },
+  {
+   "id": "ll_river_ely_3",
+   "name": "River Ely",
+   "kind": "path",
+   "points": [
+    [
+     133.34,
+     93.12
+    ],
+    [
+     150,
+     94
+    ],
+    [
+     195,
+     82
+    ]
+   ],
+   "width": 12,
+   "color": "#2f6f9f"
+  },
+  {
+   "id": "ll_bridge_1_a",
+   "name": "Bridge parapet",
+   "kind": "wall",
+   "points": [
+    [
+     -30.12,
+     -135.78
+    ],
+    [
+     -16.04,
+     -152.68
+    ]
+   ],
+   "color": "#8a8d8f",
+   "height": 1,
+   "texture": "stone"
+  },
+  {
+   "id": "ll_bridge_1_b",
+   "name": "Bridge parapet",
+   "kind": "wall",
+   "points": [
+    [
+     -35.11,
+     -139.94
+    ],
+    [
+     -21.03,
+     -156.84
+    ]
+   ],
+   "color": "#8a8d8f",
+   "height": 1,
+   "texture": "stone"
+  },
+  {
+   "id": "ll_label_leckwith_bridge",
+   "name": "Leckwith Bridge",
+   "kind": "label",
+   "pos": [
+    -13.58,
+    4,
+    -146.31
+   ],
+   "text": "LECKWITH BRIDGE",
+   "color": "#ffffff",
+   "rot": 0
+  },
+  {
+   "id": "ll_bridge_2_a",
+   "name": "Bridge parapet",
+   "kind": "wall",
+   "points": [
+    [
+     115.01,
+     102.41
+    ],
+    [
+     132.35,
+     88.87
+    ]
+   ],
+   "color": "#8a8d8f",
+   "height": 1,
+   "texture": "stone"
+  },
+  {
+   "id": "ll_bridge_2_b",
+   "name": "Bridge parapet",
+   "kind": "wall",
+   "points": [
+    [
+     110.09,
+     96.11
+    ],
+    [
+     127.42,
+     82.56
+    ]
+   ],
+   "color": "#8a8d8f",
+   "height": 1,
+   "texture": "stone"
+  },
+  {
    "id": "ll_hospital_1",
    "name": "Hospital main block",
    "kind": "building",
    "roof": "flat",
    "pos": [
-    -122,
+    -95,
     0,
-    -8
+    62
    ],
    "rot": 0,
    "scale": 1,
@@ -1460,9 +1586,9 @@
    "kind": "building",
    "roof": "flat",
    "pos": [
-    -124,
+    -95,
     0,
-    14
+    84
    ],
    "rot": 0,
    "scale": 1,
@@ -1481,9 +1607,9 @@
    "kind": "building",
    "roof": "flat",
    "pos": [
-    -104,
+    -76,
     0,
-    4
+    74
    ],
    "rot": 0,
    "scale": 1,
@@ -1502,9 +1628,9 @@
    "kind": "building",
    "roof": "gable",
    "pos": [
-    -100,
+    -76,
     0,
-    -14
+    52
    ],
    "rot": 0,
    "scale": 1,
@@ -1522,7 +1648,7 @@
    "name": "Hospital car park",
    "kind": "field",
    "pos": [
-    -120,
+    -100,
     0,
     38
    ],
@@ -1537,9 +1663,9 @@
    "name": "Hospital label",
    "kind": "label",
    "pos": [
-    -118,
+    -95,
     19,
-    2
+    66
    ],
    "text": "UNIVERSITY HOSPITAL LLANDOUGH",
    "color": "#ffffff",
@@ -1551,9 +1677,9 @@
    "kind": "building",
    "roof": "gable",
    "pos": [
-    66,
+    -32,
     0,
-    8
+    -46
    ],
    "rot": 0,
    "scale": 1,
@@ -1571,9 +1697,9 @@
    "name": "School playground",
    "kind": "field",
    "pos": [
-    66,
+    -32,
     0,
-    24
+    -62
    ],
    "size": [
     18,
@@ -1586,96 +1712,13 @@
    "name": "School label",
    "kind": "label",
    "pos": [
-    66,
+    -32,
     8,
-    8
+    -46
    ],
    "text": "PRIMARY SCHOOL",
    "color": "#ffffff",
    "rot": 0
-  },
-  {
-   "id": "ll_kgv_field",
-   "name": "King George V Playing Field",
-   "kind": "field",
-   "pos": [
-    33,
-    0,
-    -30
-   ],
-   "size": [
-    36,
-    26
-   ],
-   "color": "#5fa043"
-  },
-  {
-   "id": "ll_kgv_fence",
-   "name": "Playing field fence",
-   "kind": "fence",
-   "points": [
-    [
-     15,
-     -17
-    ],
-    [
-     51,
-     -17
-    ],
-    [
-     51,
-     -43
-    ],
-    [
-     15,
-     -43
-    ],
-    [
-     15,
-     -17.01
-    ]
-   ],
-   "color": "#8b5a2b",
-   "height": 1.2
-  },
-  {
-   "id": "ll_kgv_label",
-   "name": "Playing field label",
-   "kind": "label",
-   "pos": [
-    33,
-    6,
-    -30
-   ],
-   "text": "KING GEORGE V PLAYING FIELD",
-   "color": "#ffffff",
-   "rot": 0
-  },
-  {
-   "id": "ll_bench_17",
-   "name": "Bench",
-   "kind": "bench",
-   "pos": [
-    17,
-    0,
-    -14.5
-   ],
-   "rot": 0,
-   "scale": 1,
-   "color": "#8b5a2b"
-  },
-  {
-   "id": "ll_bench_25",
-   "name": "Bench",
-   "kind": "bench",
-   "pos": [
-    25,
-    0,
-    -14.5
-   ],
-   "rot": 0,
-   "scale": 1,
-   "color": "#8b5a2b"
   },
   {
    "id": "ll_village_green",
@@ -1687,8 +1730,8 @@
     -24
    ],
    "size": [
-    16,
-    12
+    14,
+    10
    ],
    "color": "#6cae4a"
   },
@@ -1706,13 +1749,96 @@
    "rot": 0
   },
   {
+   "id": "ll_kgv_field",
+   "name": "King George V Playing Field",
+   "kind": "field",
+   "pos": [
+    26,
+    0,
+    -44
+   ],
+   "size": [
+    30,
+    24
+   ],
+   "color": "#5fa043"
+  },
+  {
+   "id": "ll_kgv_fence",
+   "name": "Playing field fence",
+   "kind": "fence",
+   "points": [
+    [
+     11,
+     -32
+    ],
+    [
+     41,
+     -32
+    ],
+    [
+     41,
+     -56
+    ],
+    [
+     11,
+     -56
+    ],
+    [
+     11,
+     -32.01
+    ]
+   ],
+   "color": "#8b5a2b",
+   "height": 1.2
+  },
+  {
+   "id": "ll_kgv_label",
+   "name": "Playing field label",
+   "kind": "label",
+   "pos": [
+    26,
+    6,
+    -44
+   ],
+   "text": "KING GEORGE V PLAYING FIELD",
+   "color": "#ffffff",
+   "rot": 0
+  },
+  {
+   "id": "ll_bench_14",
+   "name": "Bench",
+   "kind": "bench",
+   "pos": [
+    14,
+    0,
+    -30
+   ],
+   "rot": 0,
+   "scale": 1,
+   "color": "#8b5a2b"
+  },
+  {
+   "id": "ll_bench_22",
+   "name": "Bench",
+   "kind": "bench",
+   "pos": [
+    22,
+    0,
+    -30
+   ],
+   "rot": 0,
+   "scale": 1,
+   "color": "#8b5a2b"
+  },
+  {
    "id": "ll_allotments",
    "name": "Allotments",
    "kind": "field",
    "pos": [
-    -112,
+    -118,
     0,
-    88
+    140
    ],
    "size": [
     36,
@@ -1727,24 +1853,24 @@
    "kind": "hedge",
    "points": [
     [
-     -130,
-     77
+     -136,
+     129
     ],
     [
-     -94,
-     77
+     -100,
+     129
     ],
     [
-     -94,
-     99
+     -100,
+     151
     ],
     [
-     -130,
-     99
+     -136,
+     151
     ],
     [
-     -130,
-     77.01
+     -136,
+     129.01
     ]
    ],
    "color": "#2f5a2a",
@@ -1755,9 +1881,9 @@
    "name": "Allotments label",
    "kind": "label",
    "pos": [
-    -112,
+    -118,
     5,
-    88
+    140
    ],
    "text": "ALLOTMENTS",
    "color": "#ffffff",
@@ -1769,16 +1895,12 @@
    "kind": "path",
    "points": [
     [
-     -132,
-     66
+     -112,
+     114
     ],
     [
-     -112,
-     74
-    ],
-    [
-     -112,
-     77
+     -118,
+     129
     ]
    ],
    "width": 2.2,
@@ -1791,9 +1913,9 @@
    "kind": "building",
    "roof": "flat",
    "pos": [
-    -124,
+    -130,
     0,
-    84
+    136
    ],
    "rot": 0,
    "scale": 1,
@@ -1812,9 +1934,9 @@
    "kind": "building",
    "roof": "flat",
    "pos": [
-    -117,
+    -123,
     0,
-    93
+    145
    ],
    "rot": 0,
    "scale": 1,
@@ -1833,9 +1955,9 @@
    "kind": "building",
    "roof": "flat",
    "pos": [
-    -110,
+    -116,
     0,
-    84
+    136
    ],
    "rot": 0,
    "scale": 1,
@@ -1854,9 +1976,9 @@
    "kind": "building",
    "roof": "flat",
    "pos": [
-    -103,
+    -109,
     0,
-    93
+    145
    ],
    "rot": 0,
    "scale": 1,
@@ -1875,9 +1997,9 @@
    "kind": "building",
    "roof": "flat",
    "pos": [
-    -96,
+    -102,
     0,
-    84
+    136
    ],
    "rot": 0,
    "scale": 1,
@@ -1896,9 +2018,9 @@
    "kind": "building",
    "roof": "flat",
    "pos": [
-    -89,
+    -95,
     0,
-    93
+    145
    ],
    "rot": 0,
    "scale": 1,
@@ -1917,11 +2039,11 @@
    "kind": "building",
    "roof": "gable",
    "pos": [
-    86,
+    -22,
     0,
-    114
+    140
    ],
-   "rot": 20,
+   "rot": 30,
    "scale": 1,
    "size": [
     14,
@@ -1938,11 +2060,24 @@
    "name": "Merrie Harrier label",
    "kind": "label",
    "pos": [
-    86,
+    -22,
     9,
-    114
+    140
    ],
    "text": "THE MERRIE HARRIER",
+   "color": "#ffffff",
+   "rot": 0
+  },
+  {
+   "id": "ll_cogan_label",
+   "name": "Cogan label",
+   "kind": "label",
+   "pos": [
+    88,
+    7,
+    128
+   ],
+   "text": "COGAN",
    "color": "#ffffff",
    "rot": 0
   },
@@ -1952,33 +2087,55 @@
    "kind": "building",
    "roof": "gable",
    "pos": [
-    -116.83,
+    -71.66,
     0,
-    -51.12
+    2.63
    ],
-   "rot": 229.4,
+   "rot": -90.99,
    "scale": 1,
    "size": [
-    9.66,
-    4.52,
-    7.26
+    8.87,
+    4.53,
+    6.64
    ],
-   "color": "#e9e2d0",
-   "roofColor": "#4d5862",
+   "color": "#cfd8dc",
+   "roofColor": "#8a5a3a",
    "texture": "plaster",
    "chimneys": 1
   },
   {
    "id": "ll_house_002",
+   "name": "Semi-detached house",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -72.04,
+    0,
+    -10.17
+   ],
+   "rot": -90.99,
+   "scale": 1,
+   "size": [
+    13.55,
+    4.46,
+    6.95
+   ],
+   "color": "#d8cdb4",
+   "roofColor": "#5b4a42",
+   "texture": "plaster",
+   "chimneys": 2
+  },
+  {
+   "id": "ll_house_003",
    "name": "House",
    "kind": "building",
    "roof": "gable",
    "pos": [
-    -101.89,
+    -72.55,
     0,
-    -63.93
+    -35.47
    ],
-   "rot": 49.4,
+   "rot": -90.99,
    "scale": 1,
    "size": [
     8.04,
@@ -1991,48 +2148,26 @@
    "chimneys": 1
   },
   {
-   "id": "ll_house_003",
+   "id": "ll_house_004",
    "name": "Semi-detached house",
    "kind": "building",
    "roof": "gable",
    "pos": [
-    -85.29,
+    -51.16,
     0,
-    -44.08
+    -60.26
    ],
-   "rot": 49.4,
+   "rot": 102.41,
    "scale": 1,
    "size": [
-    12.52,
-    4.87,
-    6.47
+    13.36,
+    4.79,
+    6.22
    ],
-   "color": "#b9715a",
+   "color": "#cfd8dc",
    "roofColor": "#4d5862",
-   "texture": "brick",
+   "texture": "plaster",
    "chimneys": 2
-  },
-  {
-   "id": "ll_house_004",
-   "name": "House",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    -75.82,
-    0,
-    -28.17
-   ],
-   "rot": 62.78,
-   "scale": 1,
-   "size": [
-    8.31,
-    5.54,
-    6.47
-   ],
-   "color": "#a8624d",
-   "roofColor": "#7a4b32",
-   "texture": "brick",
-   "chimneys": 1
   },
   {
    "id": "ll_house_005",
@@ -2040,65 +2175,65 @@
    "kind": "building",
    "roof": "gable",
    "pos": [
-    -64.24,
+    -69.79,
     0,
-    -6.11
+    -64.36
    ],
-   "rot": 62.78,
+   "rot": -77.59,
    "scale": 1,
    "size": [
-    8.7,
-    5.31,
-    6.88
+    7.82,
+    4.45,
+    6.94
    ],
-   "color": "#cfd8dc",
-   "roofColor": "#5b4a42",
-   "texture": "plaster",
+   "color": "#b9715a",
+   "roofColor": "#8a5a3a",
+   "texture": "brick",
    "chimneys": 1
   },
   {
    "id": "ll_house_006",
-   "name": "House",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    -80.24,
-    0,
-    12.86
-   ],
-   "rot": 262.41,
-   "scale": 1,
-   "size": [
-    7.9,
-    4.6,
-    7.24
-   ],
-   "color": "#e8d9b0",
-   "roofColor": "#5b4a42",
-   "texture": "plaster",
-   "chimneys": 1
-  },
-  {
-   "id": "ll_house_007",
    "name": "Semi-detached house",
    "kind": "building",
    "roof": "gable",
    "pos": [
-    -76.46,
+    -67.29,
     0,
-    39.1
+    -76.37
    ],
-   "rot": 262.41,
+   "rot": -77.59,
    "scale": 1,
    "size": [
-    12.74,
-    4.72,
-    6.68
+    12.97,
+    4.58,
+    7.21
+   ],
+   "color": "#e9e2d0",
+   "roofColor": "#8a5a3a",
+   "texture": "plaster",
+   "chimneys": 2
+  },
+  {
+   "id": "ll_house_007",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -45.78,
+    0,
+    -84.58
+   ],
+   "rot": 102.41,
+   "scale": 1,
+   "size": [
+    9.02,
+    4.94,
+    6.28
    ],
    "color": "#b9715a",
-   "roofColor": "#3b4148",
+   "roofColor": "#8a5a3a",
    "texture": "brick",
-   "chimneys": 2
+   "chimneys": 1
   },
   {
    "id": "ll_house_008",
@@ -2106,19 +2241,19 @@
    "kind": "building",
    "roof": "gable",
    "pos": [
-    -57.3,
+    -64.35,
     0,
-    41.35
+    -88.67
    ],
-   "rot": 67.22,
+   "rot": -77.59,
    "scale": 1,
    "size": [
-    7.39,
-    4.84,
-    6.37
+    7.67,
+    5.08,
+    6.75
    ],
-   "color": "#f1e6c8",
-   "roofColor": "#5b4a42",
+   "color": "#c9c2b0",
+   "roofColor": "#3b4148",
    "texture": "plaster",
    "chimneys": 1
   },
@@ -2128,18 +2263,18 @@
    "kind": "building",
    "roof": "gable",
    "pos": [
-    -65.07,
+    -55.58,
     0,
-    72.36
+    -114.7
    ],
-   "rot": 247.22,
+   "rot": -64.09,
    "scale": 1,
    "size": [
-    12.35,
-    5.08,
-    6.97
+    13.9,
+    4.45,
+    6.78
    ],
-   "color": "#d8cdb4",
+   "color": "#e9e2d0",
    "roofColor": "#5b4a42",
    "texture": "plaster",
    "chimneys": 2
@@ -2150,19 +2285,19 @@
    "kind": "building",
    "roof": "gable",
    "pos": [
-    -37.47,
+    -32.3,
     0,
-    110.02
+    -118.35
    ],
-   "rot": 209.05,
+   "rot": 115.91,
    "scale": 1,
    "size": [
-    9.16,
-    4.71,
-    6.45
+    7.32,
+    4.41,
+    6.92
    ],
-   "color": "#f1e6c8",
-   "roofColor": "#5b4a42",
+   "color": "#cfd8dc",
+   "roofColor": "#3b4148",
    "texture": "plaster",
    "chimneys": 1
   },
@@ -2172,65 +2307,65 @@
    "kind": "building",
    "roof": "gable",
    "pos": [
-    -16.94,
+    -43.69,
     0,
-    99.57
+    -138.39
    ],
-   "rot": 29.05,
+   "rot": -64.09,
    "scale": 1,
    "size": [
-    9.98,
-    4.6,
-    6.76
+    9.3,
+    5.24,
+    6.11
    ],
-   "color": "#f1e6c8",
-   "roofColor": "#8a5a3a",
+   "color": "#e9e2d0",
+   "roofColor": "#3b4148",
    "texture": "plaster",
    "chimneys": 1
   },
   {
    "id": "ll_house_012",
-   "name": "House",
+   "name": "Semi-detached house",
    "kind": "building",
    "roof": "gable",
    "pos": [
-    -6.35,
+    -25.75,
     0,
-    105.77
+    -160.6
    ],
-   "rot": 29.05,
+   "rot": -50.19,
    "scale": 1,
    "size": [
-    9.09,
-    4.65,
-    6.2
+    13.4,
+    5.28,
+    6.07
    ],
-   "color": "#b9715a",
-   "roofColor": "#4d5862",
-   "texture": "brick",
-   "chimneys": 1
+   "color": "#d8cdb4",
+   "roofColor": "#5b4a42",
+   "texture": "plaster",
+   "chimneys": 2
   },
   {
    "id": "ll_house_013",
-   "name": "House",
+   "name": "Semi-detached house",
    "kind": "building",
    "roof": "gable",
    "pos": [
-    10.53,
+    -68.65,
     0,
-    131.38
+    27.58
    ],
-   "rot": 190.39,
+   "rot": 261.57,
    "scale": 1,
    "size": [
-    7.53,
-    4.9,
-    6.08
+    13.28,
+    5.2,
+    6.4
    ],
-   "color": "#cfd8dc",
-   "roofColor": "#8a5a3a",
+   "color": "#e9e2d0",
+   "roofColor": "#5b4a42",
    "texture": "plaster",
-   "chimneys": 1
+   "chimneys": 2
   },
   {
    "id": "ll_house_014",
@@ -2238,20 +2373,20 @@
    "kind": "building",
    "roof": "gable",
    "pos": [
-    13.95,
+    -59.36,
     0,
-    112.7
+    109.89
    ],
-   "rot": 10.39,
+   "rot": 246.8,
    "scale": 1,
    "size": [
-    13.14,
-    4.68,
-    6.89
+    12.16,
+    5.19,
+    7.24
    ],
-   "color": "#cfd8dc",
+   "color": "#b9715a",
    "roofColor": "#7a4b32",
-   "texture": "plaster",
+   "texture": "brick",
    "chimneys": 2
   },
   {
@@ -2260,43 +2395,43 @@
    "kind": "building",
    "roof": "gable",
    "pos": [
-    23.31,
+    -41.32,
     0,
-    134.37
+    102.16
    ],
-   "rot": 190.39,
+   "rot": 66.8,
    "scale": 1,
    "size": [
-    7.74,
-    5.49,
-    7.36
+    9.22,
+    4.69,
+    7
    ],
-   "color": "#a8624d",
-   "roofColor": "#5b4a42",
-   "texture": "brick",
+   "color": "#e9e2d0",
+   "roofColor": "#3b4148",
+   "texture": "plaster",
    "chimneys": 1
   },
   {
    "id": "ll_house_016",
-   "name": "House",
+   "name": "Semi-detached house",
    "kind": "building",
    "roof": "gable",
    "pos": [
-    36.59,
+    -45.19,
     0,
-    136.34
+    137.79
    ],
-   "rot": 190.39,
+   "rot": 213.69,
    "scale": 1,
    "size": [
-    7.79,
-    4.64,
-    6.45
+    13.78,
+    4.96,
+    6.23
    ],
-   "color": "#e9e2d0",
-   "roofColor": "#4d5862",
+   "color": "#c9c2b0",
+   "roofColor": "#8a5a3a",
    "texture": "plaster",
-   "chimneys": 1
+   "chimneys": 2
   },
   {
    "id": "ll_house_017",
@@ -2304,165 +2439,11 @@
    "kind": "building",
    "roof": "gable",
    "pos": [
-    -129.83,
+    -24.54,
     0,
-    -68.23
+    -22.89
    ],
-   "rot": -113.2,
-   "scale": 1,
-   "size": [
-    7.6,
-    4.78,
-    7.46
-   ],
-   "color": "#a8624d",
-   "roofColor": "#8a5a3a",
-   "texture": "brick",
-   "chimneys": 1
-  },
-  {
-   "id": "ll_house_018",
-   "name": "Semi-detached house",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    -116.76,
-    0,
-    -86.14
-   ],
-   "rot": 66.8,
-   "scale": 1,
-   "size": [
-    12.1,
-    4.78,
-    6.67
-   ],
-   "color": "#a8624d",
-   "roofColor": "#8a5a3a",
-   "texture": "brick",
-   "chimneys": 2
-  },
-  {
-   "id": "ll_house_019",
-   "name": "House",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    -133.65,
-    0,
-    -78.9
-   ],
-   "rot": -113.2,
-   "scale": 1,
-   "size": [
-    9.32,
-    4.57,
-    6.08
-   ],
-   "color": "#b9715a",
-   "roofColor": "#3b4148",
-   "texture": "brick",
-   "chimneys": 1
-  },
-  {
-   "id": "ll_house_020",
-   "name": "House",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    -121.86,
-    0,
-    -98.72
-   ],
-   "rot": 66.8,
-   "scale": 1,
-   "size": [
-    9.35,
-    4.65,
-    7.2
-   ],
-   "color": "#a8624d",
-   "roofColor": "#4d5862",
-   "texture": "brick",
-   "chimneys": 1
-  },
-  {
-   "id": "ll_house_021",
-   "name": "Semi-detached house",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    -138.99,
-    0,
-    -91.38
-   ],
-   "rot": -113.2,
-   "scale": 1,
-   "size": [
-    13.41,
-    4.54,
-    6.06
-   ],
-   "color": "#9c5b48",
-   "roofColor": "#5b4a42",
-   "texture": "brick",
-   "chimneys": 2
-  },
-  {
-   "id": "ll_house_022",
-   "name": "House",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    -126.22,
-    0,
-    -108.29
-   ],
-   "rot": 69.44,
-   "scale": 1,
-   "size": [
-    9.84,
-    5.18,
-    6.76
-   ],
-   "color": "#a8624d",
-   "roofColor": "#5b4a42",
-   "texture": "brick",
-   "chimneys": 1
-  },
-  {
-   "id": "ll_house_023",
-   "name": "House",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    -130.16,
-    0,
-    -119.55
-   ],
-   "rot": 69.44,
-   "scale": 1,
-   "size": [
-    8.27,
-    5.46,
-    7.28
-   ],
-   "color": "#d8cdb4",
-   "roofColor": "#5b4a42",
-   "texture": "plaster",
-   "chimneys": 1
-  },
-  {
-   "id": "ll_house_024",
-   "name": "House",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    -147.82,
-    0,
-    -112.93
-   ],
-   "rot": -110.56,
+   "rot": -8.53,
    "scale": 1,
    "size": [
     8.57,
@@ -2475,26 +2456,180 @@
    "chimneys": 1
   },
   {
-   "id": "ll_house_025",
+   "id": "ll_house_018",
+   "name": "Semi-detached house",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    19.64,
+    0,
+    -25.31
+   ],
+   "rot": 9.73,
+   "scale": 1,
+   "size": [
+    13.01,
+    4.6,
+    7.36
+   ],
+   "color": "#9c5b48",
+   "roofColor": "#4d5862",
+   "texture": "brick",
+   "chimneys": 2
+  },
+  {
+   "id": "ll_house_019",
    "name": "House",
    "kind": "building",
    "roof": "gable",
    "pos": [
-    -134.72,
+    58.49,
     0,
-    -130.64
+    35.53
    ],
-   "rot": 69.44,
+   "rot": 248.2,
    "scale": 1,
    "size": [
-    7.86,
+    9.45,
     5.59,
-    6.53
+    6.05
    ],
-   "color": "#e9e2d0",
+   "color": "#b9715a",
    "roofColor": "#7a4b32",
+   "texture": "brick",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_020",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    65.5,
+    0,
+    54.86
+   ],
+   "rot": 251.08,
+   "scale": 1,
+   "size": [
+    8.17,
+    4.83,
+    6.15
+   ],
+   "color": "#c9c2b0",
+   "roofColor": "#4d5862",
    "texture": "plaster",
    "chimneys": 1
+  },
+  {
+   "id": "ll_house_021",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    69.05,
+    0,
+    66.1
+   ],
+   "rot": 251.08,
+   "scale": 1,
+   "size": [
+    9.51,
+    4.54,
+    6.72
+   ],
+   "color": "#9c5b48",
+   "roofColor": "#4d5862",
+   "texture": "brick",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_022",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    75.94,
+    0,
+    90.18
+   ],
+   "rot": 256.37,
+   "scale": 1,
+   "size": [
+    9.95,
+    5.03,
+    6.94
+   ],
+   "color": "#9c5b48",
+   "roofColor": "#3b4148",
+   "texture": "brick",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_023",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    94.12,
+    0,
+    85.77
+   ],
+   "rot": 76.37,
+   "scale": 1,
+   "size": [
+    7.98,
+    4.74,
+    6.48
+   ],
+   "color": "#f1e6c8",
+   "roofColor": "#4d5862",
+   "texture": "plaster",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_024",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    78.31,
+    0,
+    101.1
+   ],
+   "rot": 256.37,
+   "scale": 1,
+   "size": [
+    9.13,
+    5.23,
+    7.46
+   ],
+   "color": "#a8624d",
+   "roofColor": "#3b4148",
+   "texture": "brick",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_025",
+   "name": "Semi-detached house",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    59.34,
+    0,
+    123.87
+   ],
+   "rot": -33.69,
+   "scale": 1,
+   "size": [
+    12.02,
+    5.05,
+    6.9
+   ],
+   "color": "#d8cdb4",
+   "roofColor": "#3b4148",
+   "texture": "plaster",
+   "chimneys": 2
   },
   {
    "id": "ll_house_026",
@@ -2502,43 +2637,43 @@
    "kind": "building",
    "roof": "gable",
    "pos": [
-    -152.01,
+    154.8,
     0,
-    -124.16
+    53.58
    ],
-   "rot": -110.56,
+   "rot": -35.54,
    "scale": 1,
    "size": [
-    9.85,
-    4.88,
-    6.39
+    8.79,
+    4.6,
+    7.15
    ],
-   "color": "#d8cdb4",
-   "roofColor": "#7a4b32",
+   "color": "#e8d9b0",
+   "roofColor": "#5b4a42",
    "texture": "plaster",
    "chimneys": 1
   },
   {
    "id": "ll_house_027",
-   "name": "House",
+   "name": "Semi-detached house",
    "kind": "building",
    "roof": "gable",
    "pos": [
-    -138.79,
+    173.96,
     0,
-    -142.22
+    39.74
    ],
-   "rot": 69.44,
+   "rot": -35.54,
    "scale": 1,
    "size": [
-    8.75,
-    4.86,
-    7.04
+    13.22,
+    4.49,
+    7.39
    ],
-   "color": "#f1e6c8",
-   "roofColor": "#3b4148",
+   "color": "#e8d9b0",
+   "roofColor": "#5b4a42",
    "texture": "plaster",
-   "chimneys": 1
+   "chimneys": 2
   },
   {
    "id": "ll_house_028",
@@ -2546,19 +2681,19 @@
    "kind": "building",
    "roof": "gable",
    "pos": [
-    -156.81,
+    -53.57,
     0,
-    -135.46
+    173.51
    ],
-   "rot": -110.56,
+   "rot": 167.69,
    "scale": 1,
    "size": [
-    7.65,
-    5.41,
-    7.46
+    8.21,
+    5.4,
+    6.61
    ],
    "color": "#a8624d",
-   "roofColor": "#5b4a42",
+   "roofColor": "#4d5862",
    "texture": "brick",
    "chimneys": 1
   },
@@ -2568,407 +2703,11 @@
    "kind": "building",
    "roof": "gable",
    "pos": [
-    -90.76,
+    15.28,
     0,
-    -75.25
+    143.31
    ],
-   "rot": 150.95,
-   "scale": 1,
-   "size": [
-    7.53,
-    5.03,
-    7.22
-   ],
-   "color": "#cfd8dc",
-   "roofColor": "#3b4148",
-   "texture": "plaster",
-   "chimneys": 1
-  },
-  {
-   "id": "ll_house_030",
-   "name": "Semi-detached house",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    -80.7,
-    0,
-    -80.82
-   ],
-   "rot": 150.95,
-   "scale": 1,
-   "size": [
-    12.58,
-    4.59,
-    7.27
-   ],
-   "color": "#9c5b48",
-   "roofColor": "#7a4b32",
-   "texture": "brick",
-   "chimneys": 2
-  },
-  {
-   "id": "ll_house_031",
-   "name": "House",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    -89.87,
-    0,
-    -97.34
-   ],
-   "rot": -29.05,
-   "scale": 1,
-   "size": [
-    9.96,
-    5.31,
-    6.53
-   ],
-   "color": "#cfd8dc",
-   "roofColor": "#3b4148",
-   "texture": "plaster",
-   "chimneys": 1
-  },
-  {
-   "id": "ll_house_032",
-   "name": "House",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    -77.77,
-    0,
-    -103.97
-   ],
-   "rot": -17.18,
-   "scale": 1,
-   "size": [
-    9.63,
-    5.54,
-    6.78
-   ],
-   "color": "#c9c2b0",
-   "roofColor": "#7a4b32",
-   "texture": "plaster",
-   "chimneys": 1
-  },
-  {
-   "id": "ll_house_033",
-   "name": "House",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    -66.83,
-    0,
-    -107.17
-   ],
-   "rot": -17.18,
-   "scale": 1,
-   "size": [
-    7.83,
-    4.86,
-    6.44
-   ],
-   "color": "#cfd8dc",
-   "roofColor": "#4d5862",
-   "texture": "plaster",
-   "chimneys": 1
-  },
-  {
-   "id": "ll_house_034",
-   "name": "Semi-detached house",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    -50.3,
-    0,
-    -93.05
-   ],
-   "rot": 162.82,
-   "scale": 1,
-   "size": [
-    12.05,
-    5.2,
-    6.32
-   ],
-   "color": "#e9e2d0",
-   "roofColor": "#8a5a3a",
-   "texture": "plaster",
-   "chimneys": 2
-  },
-  {
-   "id": "ll_house_035",
-   "name": "Semi-detached house",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    -36.98,
-    0,
-    -97.26
-   ],
-   "rot": 162.82,
-   "scale": 1,
-   "size": [
-    13.84,
-    4.93,
-    6.14
-   ],
-   "color": "#a8624d",
-   "roofColor": "#4d5862",
-   "texture": "brick",
-   "chimneys": 2
-  },
-  {
-   "id": "ll_house_036",
-   "name": "House",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    -42.33,
-    0,
-    -114.55
-   ],
-   "rot": -17.18,
-   "scale": 1,
-   "size": [
-    9.63,
-    4.41,
-    6.07
-   ],
-   "color": "#e8d9b0",
-   "roofColor": "#8a5a3a",
-   "texture": "plaster",
-   "chimneys": 1
-  },
-  {
-   "id": "ll_house_037",
-   "name": "House",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    -17.98,
-    0,
-    -102.69
-   ],
-   "rot": 167.77,
-   "scale": 1,
-   "size": [
-    9.86,
-    4.74,
-    7.05
-   ],
-   "color": "#9c5b48",
-   "roofColor": "#3b4148",
-   "texture": "brick",
-   "chimneys": 1
-  },
-  {
-   "id": "ll_house_038",
-   "name": "Semi-detached house",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    -6.18,
-    0,
-    -105.09
-   ],
-   "rot": 167.77,
-   "scale": 1,
-   "size": [
-    12.84,
-    5.58,
-    7.35
-   ],
-   "color": "#d8cdb4",
-   "roofColor": "#3b4148",
-   "texture": "plaster",
-   "chimneys": 2
-  },
-  {
-   "id": "ll_house_039",
-   "name": "House",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    -10.27,
-    0,
-    -123.95
-   ],
-   "rot": -12.23,
-   "scale": 1,
-   "size": [
-    8.76,
-    5.15,
-    7.24
-   ],
-   "color": "#9c5b48",
-   "roofColor": "#4d5862",
-   "texture": "brick",
-   "chimneys": 1
-  },
-  {
-   "id": "ll_house_040",
-   "name": "House",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    2.79,
-    0,
-    -126.47
-   ],
-   "rot": -12.23,
-   "scale": 1,
-   "size": [
-    9.08,
-    5.21,
-    6.64
-   ],
-   "color": "#9c5b48",
-   "roofColor": "#3b4148",
-   "texture": "brick",
-   "chimneys": 1
-  },
-  {
-   "id": "ll_house_041",
-   "name": "House",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    17.87,
-    0,
-    -110.29
-   ],
-   "rot": 167.77,
-   "scale": 1,
-   "size": [
-    7.89,
-    4.52,
-    7.39
-   ],
-   "color": "#e9e2d0",
-   "roofColor": "#4d5862",
-   "texture": "plaster",
-   "chimneys": 1
-  },
-  {
-   "id": "ll_house_042",
-   "name": "Semi-detached house",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    13.86,
-    0,
-    -128.78
-   ],
-   "rot": -12.23,
-   "scale": 1,
-   "size": [
-    13.41,
-    4.51,
-    6.46
-   ],
-   "color": "#d8cdb4",
-   "roofColor": "#5b4a42",
-   "texture": "plaster",
-   "chimneys": 2
-  },
-  {
-   "id": "ll_house_043",
-   "name": "House",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    28.67,
-    0,
-    -113.21
-   ],
-   "rot": 167.77,
-   "scale": 1,
-   "size": [
-    9.29,
-    5.58,
-    6.25
-   ],
-   "color": "#cfd8dc",
-   "roofColor": "#8a5a3a",
-   "texture": "plaster",
-   "chimneys": 1
-  },
-  {
-   "id": "ll_house_044",
-   "name": "House",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    37.49,
-    0,
-    -134.33
-   ],
-   "rot": -12.23,
-   "scale": 1,
-   "size": [
-    7.78,
-    4.71,
-    7.29
-   ],
-   "color": "#b9715a",
-   "roofColor": "#8a5a3a",
-   "texture": "brick",
-   "chimneys": 1
-  },
-  {
-   "id": "ll_house_045",
-   "name": "Semi-detached house",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    51.64,
-    0,
-    -135.65
-   ],
-   "rot": -6.65,
-   "scale": 1,
-   "size": [
-    13.27,
-    4.52,
-    6.45
-   ],
-   "color": "#c9c2b0",
-   "roofColor": "#4d5862",
-   "texture": "plaster",
-   "chimneys": 2
-  },
-  {
-   "id": "ll_house_046",
-   "name": "House",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    66.77,
-    0,
-    -118.65
-   ],
-   "rot": 173.35,
-   "scale": 1,
-   "size": [
-    9.98,
-    5.23,
-    6.83
-   ],
-   "color": "#9c5b48",
-   "roofColor": "#5b4a42",
-   "texture": "brick",
-   "chimneys": 1
-  },
-  {
-   "id": "ll_house_047",
-   "name": "House",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    79.03,
-    0,
-    -120.12
-   ],
-   "rot": 173.35,
+   "rot": 8.53,
    "scale": 1,
    "size": [
     7.89,
@@ -2981,21 +2720,131 @@
    "chimneys": 1
   },
   {
-   "id": "ll_house_048",
+   "id": "ll_house_030",
    "name": "House",
    "kind": "building",
    "roof": "gable",
    "pos": [
-    76.82,
+    -3.63,
     0,
-    -139.06
+    -31
    ],
-   "rot": -6.65,
+   "rot": -90,
    "scale": 1,
    "size": [
-    9.72,
-    5.26,
-    7.39
+    8.26,
+    5.32,
+    6.26
+   ],
+   "color": "#a8624d",
+   "roofColor": "#4d5862",
+   "texture": "brick",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_031",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -4.15,
+    0,
+    -42.39
+   ],
+   "rot": -90,
+   "scale": 1,
+   "size": [
+    9.71,
+    4.62,
+    7.3
+   ],
+   "color": "#d8cdb4",
+   "roofColor": "#7a4b32",
+   "texture": "plaster",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_032",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -7.33,
+    0,
+    -51.2
+   ],
+   "rot": -111.25,
+   "scale": 1,
+   "size": [
+    9.13,
+    4.71,
+    6.78
+   ],
+   "color": "#c9c2b0",
+   "roofColor": "#4d5862",
+   "texture": "plaster",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_033",
+   "name": "Semi-detached house",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -80.3,
+    0,
+    116.88
+   ],
+   "rot": 162.47,
+   "scale": 1,
+   "size": [
+    12.5,
+    4.47,
+    7.15
+   ],
+   "color": "#d8cdb4",
+   "roofColor": "#4d5862",
+   "texture": "plaster",
+   "chimneys": 2
+  },
+  {
+   "id": "ll_house_034",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -91.22,
+    0,
+    120.28
+   ],
+   "rot": 162.47,
+   "scale": 1,
+   "size": [
+    9.48,
+    5.56,
+    7.08
+   ],
+   "color": "#c9c2b0",
+   "roofColor": "#7a4b32",
+   "texture": "plaster",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_035",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -96.53,
+    0,
+    103.06
+   ],
+   "rot": 350.27,
+   "scale": 1,
+   "size": [
+    9.52,
+    5.09,
+    7.13
    ],
    "color": "#9c5b48",
    "roofColor": "#3b4148",
@@ -3003,395 +2852,21 @@
    "chimneys": 1
   },
   {
-   "id": "ll_house_049",
+   "id": "ll_house_036",
    "name": "House",
    "kind": "building",
    "roof": "gable",
    "pos": [
-    88.31,
+    -117.55,
     0,
-    -139.9
+    106.54
    ],
-   "rot": -6.65,
+   "rot": 350.27,
    "scale": 1,
    "size": [
-    9.09,
-    5.06,
-    6.4
-   ],
-   "color": "#c9c2b0",
-   "roofColor": "#3b4148",
-   "texture": "plaster",
-   "chimneys": 1
-  },
-  {
-   "id": "ll_house_050",
-   "name": "Semi-detached house",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    99.08,
-    0,
-    -122.79
-   ],
-   "rot": 185.71,
-   "scale": 1,
-   "size": [
-    12.56,
-    5.48,
-    6.5
-   ],
-   "color": "#c9c2b0",
-   "roofColor": "#3b4148",
-   "texture": "plaster",
-   "chimneys": 2
-  },
-  {
-   "id": "ll_house_051",
-   "name": "Semi-detached house",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    111.79,
-    0,
-    -121.69
-   ],
-   "rot": 185.71,
-   "scale": 1,
-   "size": [
-    13.23,
+    7.69,
     5.53,
-    6.17
-   ],
-   "color": "#f1e6c8",
-   "roofColor": "#5b4a42",
-   "texture": "plaster",
-   "chimneys": 2
-  },
-  {
-   "id": "ll_house_052",
-   "name": "House",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    113.66,
-    0,
-    -140.39
-   ],
-   "rot": 5.71,
-   "scale": 1,
-   "size": [
-    7.5,
-    5.05,
-    7.42
-   ],
-   "color": "#f1e6c8",
-   "roofColor": "#8a5a3a",
-   "texture": "plaster",
-   "chimneys": 1
-  },
-  {
-   "id": "ll_house_053",
-   "name": "Semi-detached house",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    124.42,
-    0,
-    -120.27
-   ],
-   "rot": 185.71,
-   "scale": 1,
-   "size": [
-    12.73,
-    5.1,
-    6.48
-   ],
-   "color": "#c9c2b0",
-   "roofColor": "#5b4a42",
-   "texture": "plaster",
-   "chimneys": 2
-  },
-  {
-   "id": "ll_house_054",
-   "name": "Semi-detached house",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    126.3,
-    0,
-    -139.03
-   ],
-   "rot": 5.71,
-   "scale": 1,
-   "size": [
-    12.02,
-    4.77,
-    7.23
-   ],
-   "color": "#c9c2b0",
-   "roofColor": "#3b4148",
-   "texture": "plaster",
-   "chimneys": 2
-  },
-  {
-   "id": "ll_house_055",
-   "name": "House",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    138.26,
-    0,
-    -137.53
-   ],
-   "rot": 5.71,
-   "scale": 1,
-   "size": [
-    9.62,
-    4.61,
-    6.63
-   ],
-   "color": "#cfd8dc",
-   "roofColor": "#3b4148",
-   "texture": "plaster",
-   "chimneys": 1
-  },
-  {
-   "id": "ll_house_056",
-   "name": "Semi-detached house",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    150.18,
-    0,
-    -129.3
-   ],
-   "rot": 80.22,
-   "scale": 1,
-   "size": [
-    12.24,
-    4.45,
-    6.5
-   ],
-   "color": "#cfd8dc",
-   "roofColor": "#5b4a42",
-   "texture": "plaster",
-   "chimneys": 2
-  },
-  {
-   "id": "ll_house_057",
-   "name": "Semi-detached house",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    137.98,
-    0,
-    -78
-   ],
-   "rot": 260.22,
-   "scale": 1,
-   "size": [
-    13.51,
-    5.18,
-    6.97
-   ],
-   "color": "#a8624d",
-   "roofColor": "#3b4148",
-   "texture": "brick",
-   "chimneys": 2
-  },
-  {
-   "id": "ll_house_058",
-   "name": "House",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    160.13,
-    0,
-    -16.31
-   ],
-   "rot": 90,
-   "scale": 1,
-   "size": [
-    7.85,
-    5.35,
-    6.25
-   ],
-   "color": "#cfd8dc",
-   "roofColor": "#5b4a42",
-   "texture": "plaster",
-   "chimneys": 1
-  },
-  {
-   "id": "ll_house_059",
-   "name": "Semi-detached house",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    156.7,
-    0,
-    49.78
-   ],
-   "rot": 94.09,
-   "scale": 1,
-   "size": [
-    13.34,
-    4.87,
-    6.45
-   ],
-   "color": "#a8624d",
-   "roofColor": "#4d5862",
-   "texture": "brick",
-   "chimneys": 2
-  },
-  {
-   "id": "ll_house_060",
-   "name": "House",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    131.46,
-    0,
-    78.14
-   ],
-   "rot": 286.7,
-   "scale": 1,
-   "size": [
-    9.09,
-    4.5,
-    7.26
-   ],
-   "color": "#f1e6c8",
-   "roofColor": "#8a5a3a",
-   "texture": "plaster",
-   "chimneys": 1
-  },
-  {
-   "id": "ll_house_061",
-   "name": "Semi-detached house",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    148.31,
-    0,
-    95.54
-   ],
-   "rot": 106.7,
-   "scale": 1,
-   "size": [
-    13.22,
-    4.72,
-    7.02
-   ],
-   "color": "#f1e6c8",
-   "roofColor": "#3b4148",
-   "texture": "plaster",
-   "chimneys": 2
-  },
-  {
-   "id": "ll_house_062",
-   "name": "House",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    95.22,
-    0,
-    140.85
-   ],
-   "rot": 158.91,
-   "scale": 1,
-   "size": [
-    7.67,
-    5.28,
-    6.53
-   ],
-   "color": "#c9c2b0",
-   "roofColor": "#5b4a42",
-   "texture": "plaster",
-   "chimneys": 1
-  },
-  {
-   "id": "ll_house_063",
-   "name": "House",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    -65.19,
-    0,
-    -23.63
-   ],
-   "rot": 13.71,
-   "scale": 1,
-   "size": [
-    9.2,
-    4.47,
-    6.92
-   ],
-   "color": "#b9715a",
-   "roofColor": "#5b4a42",
-   "texture": "brick",
-   "chimneys": 1
-  },
-  {
-   "id": "ll_house_064",
-   "name": "House",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    55.96,
-    0,
-    -8.43
-   ],
-   "rot": 158.2,
-   "scale": 1,
-   "size": [
-    8.04,
-    5.14,
-    6.98
-   ],
-   "color": "#b9715a",
-   "roofColor": "#8a5a3a",
-   "texture": "brick",
-   "chimneys": 1
-  },
-  {
-   "id": "ll_house_065",
-   "name": "House",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    68.37,
-    0,
-    -13.31
-   ],
-   "rot": 158.2,
-   "scale": 1,
-   "size": [
-    9.6,
-    5.39,
-    7.13
-   ],
-   "color": "#b9715a",
-   "roofColor": "#4d5862",
-   "texture": "brick",
-   "chimneys": 1
-  },
-  {
-   "id": "ll_house_066",
-   "name": "House",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    78.55,
-    0,
-    -17.53
-   ],
-   "rot": 158.2,
-   "scale": 1,
-   "size": [
-    7.63,
-    5.51,
-    6.86
+    7.38
    ],
    "color": "#e9e2d0",
    "roofColor": "#8a5a3a",
@@ -3399,244 +2874,24 @@
    "chimneys": 1
   },
   {
-   "id": "ll_house_067",
+   "id": "ll_house_037",
    "name": "Semi-detached house",
    "kind": "building",
    "roof": "gable",
    "pos": [
-    71.83,
+    -127.67,
     0,
-    -34.32
+    108.63
    ],
-   "rot": -21.8,
+   "rot": 350.27,
    "scale": 1,
    "size": [
-    13.91,
-    5.15,
-    6.3
-   ],
-   "color": "#a8624d",
-   "roofColor": "#5b4a42",
-   "texture": "brick",
-   "chimneys": 2
-  },
-  {
-   "id": "ll_house_068",
-   "name": "House",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    -59.16,
-    0,
-    13.69
-   ],
-   "rot": 200.32,
-   "scale": 1,
-   "size": [
-    7.01,
-    5.13,
-    6.25
-   ],
-   "color": "#a8624d",
-   "roofColor": "#3b4148",
-   "texture": "brick",
-   "chimneys": 1
-  },
-  {
-   "id": "ll_house_069",
-   "name": "House",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    -0.12,
-    0,
-    -24.96
-   ],
-   "rot": -110.56,
-   "scale": 1,
-   "size": [
-    7.1,
-    5.23,
-    6.34
-   ],
-   "color": "#a8624d",
-   "roofColor": "#4d5862",
-   "texture": "brick",
-   "chimneys": 1
-  },
-  {
-   "id": "ll_house_070",
-   "name": "Semi-detached house",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    -4.47,
-    0,
-    -36.57
-   ],
-   "rot": -110.56,
-   "scale": 1,
-   "size": [
-    12.49,
-    5.41,
-    6.32
-   ],
-   "color": "#a8624d",
-   "roofColor": "#3b4148",
-   "texture": "brick",
-   "chimneys": 2
-  },
-  {
-   "id": "ll_house_071",
-   "name": "House",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    -84.1,
-    0,
-    19.3
-   ],
-   "rot": 334.54,
-   "scale": 1,
-   "size": [
-    7.89,
-    4.45,
-    6.87
+    13.39,
+    4.85,
+    6.68
    ],
    "color": "#d8cdb4",
-   "roofColor": "#3b4148",
-   "texture": "plaster",
-   "chimneys": 1
-  },
-  {
-   "id": "ll_house_072",
-   "name": "Semi-detached house",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    -90.34,
-    0,
-    46.54
-   ],
-   "rot": 129.81,
-   "scale": 1,
-   "size": [
-    12.48,
-    5.22,
-    7.09
-   ],
-   "color": "#b9715a",
    "roofColor": "#8a5a3a",
-   "texture": "brick",
-   "chimneys": 2
-  },
-  {
-   "id": "ll_house_073",
-   "name": "House",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    -75.61,
-    0,
-    61.09
-   ],
-   "rot": 160.56,
-   "scale": 1,
-   "size": [
-    9.32,
-    5.16,
-    7.3
-   ],
-   "color": "#cfd8dc",
-   "roofColor": "#7a4b32",
-   "texture": "plaster",
-   "chimneys": 1
-  },
-  {
-   "id": "ll_house_074",
-   "name": "House",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    -86.56,
-    0,
-    64.64
-   ],
-   "rot": 160.56,
-   "scale": 1,
-   "size": [
-    8.65,
-    4.73,
-    6.69
-   ],
-   "color": "#d8cdb4",
-   "roofColor": "#5b4a42",
-   "texture": "plaster",
-   "chimneys": 1
-  },
-  {
-   "id": "ll_house_075",
-   "name": "House",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    -101.7,
-    0,
-    50.93
-   ],
-   "rot": 349.38,
-   "scale": 1,
-   "size": [
-    9.92,
-    4.86,
-    7.46
-   ],
-   "color": "#b9715a",
-   "roofColor": "#3b4148",
-   "texture": "brick",
-   "chimneys": 1
-  },
-  {
-   "id": "ll_house_076",
-   "name": "Semi-detached house",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    -112.14,
-    0,
-    53.56
-   ],
-   "rot": 349.38,
-   "scale": 1,
-   "size": [
-    12.34,
-    5.59,
-    6.14
-   ],
-   "color": "#c9c2b0",
-   "roofColor": "#5b4a42",
-   "texture": "plaster",
-   "chimneys": 2
-  },
-  {
-   "id": "ll_house_077",
-   "name": "Semi-detached house",
-   "kind": "building",
-   "roof": "gable",
-   "pos": [
-    -124.37,
-    0,
-    55.17
-   ],
-   "rot": 349.38,
-   "scale": 1,
-   "size": [
-    13.11,
-    4.63,
-    7.47
-   ],
-   "color": "#e8d9b0",
-   "roofColor": "#3b4148",
    "texture": "plaster",
    "chimneys": 2
   },
@@ -3646,39 +2901,39 @@
    "kind": "tree",
    "species": "beech",
    "pos": [
-    -99.29,
+    -58.36,
     0,
-    -53.14
+    -48.98
    ],
-   "height": 10.85,
+   "height": 10,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_002",
-   "name": "Birch tree",
+   "name": "Ash tree",
    "kind": "tree",
-   "species": "birch",
+   "species": "ash",
    "pos": [
-    -64.77,
+    -56.27,
     0,
-    18.26
+    -102.08
    ],
-   "height": 7.09,
+   "height": 10.61,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_003",
-   "name": "Hawthorn tree",
+   "name": "Oak tree",
    "kind": "tree",
-   "species": "hawthorn",
+   "species": "oak",
    "pos": [
-    -25.13,
+    -54.39,
     0,
-    100.6
+    26.94
    ],
-   "height": 8.71,
+   "height": 9.67,
    "rot": 0,
    "scale": 1
   },
@@ -3688,67 +2943,67 @@
    "kind": "tree",
    "species": "hawthorn",
    "pos": [
-    -0.86,
+    68.78,
     0,
-    124.67
+    24.84
    ],
-   "height": 6.71,
+   "height": 6.02,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_005",
-   "name": "Ash tree",
+   "name": "Beech tree",
    "kind": "tree",
-   "species": "ash",
+   "species": "beech",
    "pos": [
-    35.33,
+    86.37,
     0,
-    121.65
+    73.94
    ],
-   "height": 9.1,
+   "height": 10.19,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_006",
-   "name": "Beech tree",
+   "name": "Birch tree",
    "kind": "tree",
-   "species": "beech",
+   "species": "birch",
    "pos": [
-    60.36,
+    82.16,
     0,
-    135.74
+    94.75
    ],
-   "height": 11,
+   "height": 9.22,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_007",
-   "name": "Beech tree",
+   "name": "Ash tree",
    "kind": "tree",
-   "species": "beech",
+   "species": "ash",
    "pos": [
-    -76.58,
+    34.62,
     0,
-    -88.97
+    146.31
    ],
-   "height": 10.37,
+   "height": 9.19,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_008",
-   "name": "Beech tree",
+   "name": "Oak tree",
    "kind": "tree",
-   "species": "beech",
+   "species": "oak",
    "pos": [
-    100.45,
+    54.1,
     0,
-    -136.48
+    146.55
    ],
-   "height": 6.44,
+   "height": 6.73,
    "rot": 0,
    "scale": 1
   },
@@ -3758,123 +3013,123 @@
    "kind": "tree",
    "species": "ash",
    "pos": [
-    135.36,
+    71.14,
     0,
-    -123.94
+    135.18
    ],
-   "height": 6.62,
+   "height": 9.39,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_010",
-   "name": "Oak tree",
+   "name": "Ash tree",
    "kind": "tree",
-   "species": "oak",
+   "species": "ash",
    "pos": [
-    149.21,
+    86.7,
     0,
-    -106.96
+    111.6
    ],
-   "height": 6.27,
+   "height": 9.17,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_011",
-   "name": "Hawthorn tree",
+   "name": "Ash tree",
    "kind": "tree",
-   "species": "hawthorn",
+   "species": "ash",
    "pos": [
-    155.08,
+    153.2,
     0,
-    -72.93
+    74.48
    ],
-   "height": 9.64,
+   "height": 10.79,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_012",
-   "name": "Birch tree",
+   "name": "Oak tree",
    "kind": "tree",
-   "species": "birch",
+   "species": "oak",
    "pos": [
-    144.5,
+    184.33,
     0,
-    -10.51
+    52.24
    ],
-   "height": 7.41,
+   "height": 10.12,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_013",
-   "name": "Ash tree",
+   "name": "Beech tree",
    "kind": "tree",
-   "species": "ash",
+   "species": "beech",
    "pos": [
-    155.49,
+    -91.09,
     0,
-    0.39
+    165.52
    ],
-   "height": 6.61,
+   "height": 10.98,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_014",
-   "name": "Hawthorn tree",
+   "name": "Oak tree",
    "kind": "tree",
-   "species": "hawthorn",
+   "species": "oak",
    "pos": [
-    140.66,
+    -41.74,
     0,
-    53.56
+    154.78
    ],
-   "height": 9.47,
+   "height": 9.84,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_015",
-   "name": "Oak tree",
+   "name": "Hawthorn tree",
    "kind": "tree",
-   "species": "oak",
+   "species": "hawthorn",
    "pos": [
-    139.73,
+    25.64,
     0,
-    68.42
+    160.91
    ],
-   "height": 8.09,
+   "height": 9.79,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_016",
-   "name": "Hawthorn tree",
+   "name": "Birch tree",
    "kind": "tree",
-   "species": "hawthorn",
+   "species": "birch",
    "pos": [
-    127.93,
+    8.73,
     0,
-    107.77
+    -45.45
    ],
-   "height": 10.36,
+   "height": 8.89,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_017",
-   "name": "Oak tree",
+   "name": "Beech tree",
    "kind": "tree",
-   "species": "oak",
+   "species": "beech",
    "pos": [
-    30.04,
+    -61.26,
     0,
-    149.09
+    -160.58
    ],
-   "height": 10.45,
+   "height": 12.88,
    "rot": 0,
    "scale": 1
   },
@@ -3884,25 +3139,25 @@
    "kind": "tree",
    "species": "beech",
    "pos": [
-    66.08,
+    -58.92,
     0,
-    135.19
+    -154.06
    ],
-   "height": 9.51,
+   "height": 10.49,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_019",
-   "name": "Birch tree",
+   "name": "Oak tree",
    "kind": "tree",
-   "species": "birch",
+   "species": "oak",
    "pos": [
-    97.61,
+    -37.92,
     0,
-    123.05
+    -171.37
    ],
-   "height": 10.04,
+   "height": 12.18,
    "rot": 0,
    "scale": 1
   },
@@ -3912,25 +3167,613 @@
    "kind": "tree",
    "species": "oak",
    "pos": [
-    -73.12,
+    -10.83,
     0,
-    -20.45
+    -151.58
    ],
-   "height": 10.04,
+   "height": 9.78,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_021",
+   "name": "Beech tree",
+   "kind": "tree",
+   "species": "beech",
+   "pos": [
+    -6.7,
+    0,
+    -147.24
+   ],
+   "height": 10.1,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_022",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    -0.17,
+    0,
+    -147.36
+   ],
+   "height": 12.17,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_023",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    -11.74,
+    0,
+    -120.69
+   ],
+   "height": 11.24,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_024",
    "name": "Ash tree",
    "kind": "tree",
    "species": "ash",
    "pos": [
-    -66.17,
+    2.91,
     0,
-    6.16
+    -141.71
    ],
-   "height": 9.33,
+   "height": 11.54,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_025",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    12.98,
+    0,
+    -132.25
+   ],
+   "height": 12.36,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_026",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    -0.09,
+    0,
+    -104.92
+   ],
+   "height": 10.21,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_027",
+   "name": "Beech tree",
+   "kind": "tree",
+   "species": "beech",
+   "pos": [
+    25.12,
+    0,
+    -127.83
+   ],
+   "height": 13.64,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_028",
+   "name": "Beech tree",
+   "kind": "tree",
+   "species": "beech",
+   "pos": [
+    29.55,
+    0,
+    -123.91
+   ],
+   "height": 9.44,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_029",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    7.43,
+    0,
+    -96.48
+   ],
+   "height": 10.95,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_030",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    31.38,
+    0,
+    -118.24
+   ],
+   "height": 9.36,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_031",
+   "name": "Birch tree",
+   "kind": "tree",
+   "species": "birch",
+   "pos": [
+    12.77,
+    0,
+    -92.75
+   ],
+   "height": 11.78,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_032",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    37.8,
+    0,
+    -107.67
+   ],
+   "height": 9.29,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_033",
+   "name": "Beech tree",
+   "kind": "tree",
+   "species": "beech",
+   "pos": [
+    22.2,
+    0,
+    -85.36
+   ],
+   "height": 9.67,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_034",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    40.28,
+    0,
+    -101.8
+   ],
+   "height": 13.62,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_035",
+   "name": "Beech tree",
+   "kind": "tree",
+   "species": "beech",
+   "pos": [
+    50.24,
+    0,
+    -101.07
+   ],
+   "height": 10.11,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_036",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    57.03,
+    0,
+    -84.05
+   ],
+   "height": 13.2,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_037",
+   "name": "Birch tree",
+   "kind": "tree",
+   "species": "birch",
+   "pos": [
+    63.44,
+    0,
+    -72.92
+   ],
+   "height": 9.84,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_038",
+   "name": "Birch tree",
+   "kind": "tree",
+   "species": "birch",
+   "pos": [
+    70.68,
+    0,
+    -64.23
+   ],
+   "height": 10.28,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_039",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    43.84,
+    0,
+    -42.29
+   ],
+   "height": 13.9,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_040",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    80.4,
+    0,
+    -43.56
+   ],
+   "height": 13.9,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_041",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    54.03,
+    0,
+    -22.63
+   ],
+   "height": 10.32,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_042",
+   "name": "Birch tree",
+   "kind": "tree",
+   "species": "birch",
+   "pos": [
+    84.22,
+    0,
+    -31.69
+   ],
+   "height": 12.09,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_043",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    80.45,
+    0,
+    -24.11
+   ],
+   "height": 12.18,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_044",
+   "name": "Beech tree",
+   "kind": "tree",
+   "species": "beech",
+   "pos": [
+    58.17,
+    0,
+    -5.63
+   ],
+   "height": 12.41,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_045",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    90.54,
+    0,
+    -9.99
+   ],
+   "height": 13.1,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_046",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    67.22,
+    0,
+    16.41
+   ],
+   "height": 9.31,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_047",
+   "name": "Beech tree",
+   "kind": "tree",
+   "species": "beech",
+   "pos": [
+    94.95,
+    0,
+    7.66
+   ],
+   "height": 10.06,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_048",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    74.32,
+    0,
+    31.57
+   ],
+   "height": 11.25,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_049",
+   "name": "Beech tree",
+   "kind": "tree",
+   "species": "beech",
+   "pos": [
+    93.62,
+    0,
+    24.46
+   ],
+   "height": 10.44,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_050",
+   "name": "Birch tree",
+   "kind": "tree",
+   "species": "birch",
+   "pos": [
+    76.47,
+    0,
+    37.32
+   ],
+   "height": 11.94,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_051",
+   "name": "Birch tree",
+   "kind": "tree",
+   "species": "birch",
+   "pos": [
+    95.95,
+    0,
+    30.15
+   ],
+   "height": 11.72,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_052",
+   "name": "Birch tree",
+   "kind": "tree",
+   "species": "birch",
+   "pos": [
+    102.51,
+    0,
+    48.11
+   ],
+   "height": 9.73,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_053",
+   "name": "Birch tree",
+   "kind": "tree",
+   "species": "birch",
+   "pos": [
+    86.52,
+    0,
+    67.13
+   ],
+   "height": 13.58,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_054",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    107.67,
+    0,
+    59.34
+   ],
+   "height": 12.38,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_055",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    113.15,
+    0,
+    64.01
+   ],
+   "height": 8.89,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_056",
+   "name": "Birch tree",
+   "kind": "tree",
+   "species": "birch",
+   "pos": [
+    117.54,
+    0,
+    67.67
+   ],
+   "height": 12.53,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_057",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    122.18,
+    0,
+    79.64
+   ],
+   "height": 9.3,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_058",
+   "name": "Birch tree",
+   "kind": "tree",
+   "species": "birch",
+   "pos": [
+    118.59,
+    0,
+    75.5
+   ],
+   "height": 11.09,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_059",
+   "name": "Beech tree",
+   "kind": "tree",
+   "species": "beech",
+   "pos": [
+    123.67,
+    0,
+    110.51
+   ],
+   "height": 12.8,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_060",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    128.7,
+    0,
+    110.87
+   ],
+   "height": 12.75,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_061",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    147.55,
+    0,
+    109.69
+   ],
+   "height": 9.95,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_062",
+   "name": "Beech tree",
+   "kind": "tree",
+   "species": "beech",
+   "pos": [
+    164.57,
+    0,
+    100.58
+   ],
+   "height": 11.69,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_063",
+   "name": "Beech tree",
+   "kind": "tree",
+   "species": "beech",
+   "pos": [
+    186.1,
+    0,
+    70.57
+   ],
+   "height": 11.19,
    "rot": 0,
    "scale": 1
   },
@@ -3939,13 +3782,13 @@
    "name": "Pasture",
    "kind": "field",
    "pos": [
-    112.25,
+    69.27,
     0,
-    -11.69
+    -104.39
    ],
    "size": [
-    29.39,
-    32.63
+    33.61,
+    30.14
    ],
    "color": "#5f8a38"
   },
@@ -3954,13 +3797,13 @@
    "name": "Pasture",
    "kind": "field",
    "pos": [
-    7.24,
+    -178.96,
     0,
-    -66.62
+    -28.91
    ],
    "size": [
-    41.55,
-    35.98
+    35.61,
+    24.71
    ],
    "color": "#7a9a40"
   },
@@ -3970,24 +3813,24 @@
    "kind": "hedge",
    "points": [
     [
-     -13.53,
-     -84.61
+     -196.76,
+     -41.26
     ],
     [
-     28.02,
-     -84.61
+     -161.16,
+     -41.26
     ],
     [
-     28.02,
-     -48.63
+     -161.16,
+     -16.55
     ],
     [
-     -13.53,
-     -48.63
+     -196.76,
+     -16.55
     ],
     [
-     -13.53,
-     -84.6
+     -196.76,
+     -41.25
     ]
    ],
    "color": "#2f5a2a",
@@ -3998,28 +3841,28 @@
    "name": "Pasture",
    "kind": "field",
    "pos": [
-    -45.88,
+    -160.57,
     0,
-    143
+    26.66
    ],
    "size": [
-    28.12,
-    24.38
+    45.27,
+    34.88
    ],
-   "color": "#5f8a38"
+   "color": "#6b8f3a"
   },
   {
    "id": "ll_pasture_4",
    "name": "Wheat field",
    "kind": "field",
    "pos": [
-    80.54,
+    136.33,
     0,
-    73.6
+    26.49
    ],
    "size": [
-    40.44,
-    31.88
+    33.45,
+    28.25
    ],
    "color": "#a39a4a",
    "crop": "wheat"
@@ -4030,24 +3873,24 @@
    "kind": "hedge",
    "points": [
     [
-     60.32,
-     57.65
+     119.6,
+     12.37
     ],
     [
-     100.76,
-     57.65
+     153.05,
+     12.37
     ],
     [
-     100.76,
-     89.54
+     153.05,
+     40.62
     ],
     [
-     60.32,
-     89.54
+     119.6,
+     40.62
     ],
     [
-     60.32,
-     57.66
+     119.6,
+     12.38
     ]
    ],
    "color": "#2f5a2a",
@@ -4058,28 +3901,28 @@
    "name": "Pasture",
    "kind": "field",
    "pos": [
-    -162.08,
+    135.67,
     0,
-    -0.94
+    -78.16
    ],
    "size": [
-    33.15,
-    27.23
+    45.62,
+    30.41
    ],
-   "color": "#6b8f3a"
+   "color": "#5f8a38"
   },
   {
    "id": "ll_pasture_6",
    "name": "Pasture",
    "kind": "field",
    "pos": [
-    -41.71,
+    -11.45,
     0,
-    -63.01
+    111.97
    ],
    "size": [
-    49.4,
-    26.16
+    32.6,
+    26.09
    ],
    "color": "#5f8a38"
   },
@@ -4089,24 +3932,24 @@
    "kind": "hedge",
    "points": [
     [
-     -66.41,
-     -76.09
+     -27.75,
+     98.93
     ],
     [
-     -17.01,
-     -76.09
+     4.85,
+     98.93
     ],
     [
-     -17.01,
-     -49.93
+     4.85,
+     125.02
     ],
     [
-     -66.41,
-     -49.93
+     -27.75,
+     125.02
     ],
     [
-     -66.41,
-     -76.08
+     -27.75,
+     98.94
     ]
    ],
    "color": "#2f5a2a",
@@ -4117,13 +3960,13 @@
    "name": "Pasture",
    "kind": "field",
    "pos": [
-    105.76,
+    -86.69,
     0,
-    33.34
+    -129.01
    ],
    "size": [
-    32.96,
-    30.19
+    28.7,
+    22.99
    ],
    "color": "#5f8a38"
   },
@@ -4132,13 +3975,13 @@
    "name": "Wheat field",
    "kind": "field",
    "pos": [
-    109.87,
+    -142.81,
     0,
-    -61.71
+    -100.9
    ],
    "size": [
-    32.7,
-    28.05
+    36.1,
+    26.1
    ],
    "color": "#a39a4a",
    "crop": "wheat"
@@ -4149,628 +3992,114 @@
    "kind": "hedge",
    "points": [
     [
-     93.52,
-     -75.74
+     -160.86,
+     -113.95
     ],
     [
-     126.22,
-     -75.74
+     -124.76,
+     -113.95
     ],
     [
-     126.22,
-     -47.69
+     -124.76,
+     -87.85
     ],
     [
-     93.52,
-     -47.69
+     -160.86,
+     -87.85
     ],
     [
-     93.52,
-     -75.73
+     -160.86,
+     -113.94
     ]
    ],
    "color": "#2f5a2a",
    "height": 1.4
   },
   {
-   "id": "ll_tree_022",
-   "name": "Oak tree",
-   "kind": "tree",
-   "species": "oak",
+   "id": "ll_pasture_9",
+   "name": "Pasture",
+   "kind": "field",
    "pos": [
-    70.27,
+    -100.94,
     0,
-    -56.37
+    -43.81
    ],
-   "height": 9.7,
-   "rot": 0,
-   "scale": 1
+   "size": [
+    32.61,
+    30.08
+   ],
+   "color": "#7a9a40"
   },
   {
-   "id": "ll_tree_023",
-   "name": "Beech tree",
-   "kind": "tree",
-   "species": "beech",
+   "id": "ll_pasture_10",
+   "name": "Pasture",
+   "kind": "field",
    "pos": [
-    80.07,
+    114.55,
     0,
-    -53.99
+    -28.08
    ],
-   "height": 8.94,
-   "rot": 0,
-   "scale": 1
+   "size": [
+    47.35,
+    28.36
+   ],
+   "color": "#7a9a40"
   },
   {
-   "id": "ll_tree_024",
-   "name": "Oak tree",
-   "kind": "tree",
-   "species": "oak",
-   "pos": [
-    69.11,
-    0,
-    -49.85
+   "id": "ll_hedge_10",
+   "name": "Hedgerow",
+   "kind": "hedge",
+   "points": [
+    [
+     90.87,
+     -42.26
+    ],
+    [
+     138.22,
+     -42.26
+    ],
+    [
+     138.22,
+     -13.9
+    ],
+    [
+     90.87,
+     -13.9
+    ],
+    [
+     90.87,
+     -42.25
+    ]
    ],
-   "height": 11.13,
-   "rot": 0,
-   "scale": 1
+   "color": "#2f5a2a",
+   "height": 1.4
   },
   {
-   "id": "ll_tree_025",
-   "name": "Oak tree",
-   "kind": "tree",
-   "species": "oak",
+   "id": "ll_pasture_11",
+   "name": "Pasture",
+   "kind": "field",
    "pos": [
-    78.45,
+    57.54,
     0,
-    -49.13
+    -146.61
    ],
-   "height": 10.34,
-   "rot": 0,
-   "scale": 1
-  },
-  {
-   "id": "ll_tree_026",
-   "name": "Beech tree",
-   "kind": "tree",
-   "species": "beech",
-   "pos": [
-    80.95,
-    0,
-    -43.34
+   "size": [
+    48.24,
+    35.75
    ],
-   "height": 10.52,
-   "rot": 0,
-   "scale": 1
-  },
-  {
-   "id": "ll_tree_027",
-   "name": "Oak tree",
-   "kind": "tree",
-   "species": "oak",
-   "pos": [
-    84.28,
-    0,
-    -57.16
-   ],
-   "height": 8.27,
-   "rot": 0,
-   "scale": 1
-  },
-  {
-   "id": "ll_tree_028",
-   "name": "Beech tree",
-   "kind": "tree",
-   "species": "beech",
-   "pos": [
-    -142.72,
-    0,
-    -42.4
-   ],
-   "height": 8.06,
-   "rot": 0,
-   "scale": 1
-  },
-  {
-   "id": "ll_tree_029",
-   "name": "Oak tree",
-   "kind": "tree",
-   "species": "oak",
-   "pos": [
-    -149.64,
-    0,
-    -37.79
-   ],
-   "height": 9.68,
-   "rot": 0,
-   "scale": 1
-  },
-  {
-   "id": "ll_tree_030",
-   "name": "Ash tree",
-   "kind": "tree",
-   "species": "ash",
-   "pos": [
-    -138.83,
-    0,
-    -48.55
-   ],
-   "height": 10.84,
-   "rot": 0,
-   "scale": 1
-  },
-  {
-   "id": "ll_tree_031",
-   "name": "Oak tree",
-   "kind": "tree",
-   "species": "oak",
-   "pos": [
-    6.02,
-    0,
-    146.08
-   ],
-   "height": 11.33,
-   "rot": 0,
-   "scale": 1
-  },
-  {
-   "id": "ll_tree_032",
-   "name": "Beech tree",
-   "kind": "tree",
-   "species": "beech",
-   "pos": [
-    12.91,
-    0,
-    146.07
-   ],
-   "height": 10.04,
-   "rot": 0,
-   "scale": 1
-  },
-  {
-   "id": "ll_tree_033",
-   "name": "Oak tree",
-   "kind": "tree",
-   "species": "oak",
-   "pos": [
-    2.14,
-    0,
-    152.52
-   ],
-   "height": 9.33,
-   "rot": 0,
-   "scale": 1
-  },
-  {
-   "id": "ll_tree_034",
-   "name": "Oak tree",
-   "kind": "tree",
-   "species": "oak",
-   "pos": [
-    19.44,
-    0,
-    146.41
-   ],
-   "height": 8.63,
-   "rot": 0,
-   "scale": 1
-  },
-  {
-   "id": "ll_tree_035",
-   "name": "Beech tree",
-   "kind": "tree",
-   "species": "beech",
-   "pos": [
-    5.52,
-    0,
-    157.19
-   ],
-   "height": 12.2,
-   "rot": 0,
-   "scale": 1
-  },
-  {
-   "id": "ll_tree_036",
-   "name": "Oak tree",
-   "kind": "tree",
-   "species": "oak",
-   "pos": [
-    12.37,
-    0,
-    153.35
-   ],
-   "height": 9.64,
-   "rot": 0,
-   "scale": 1
-  },
-  {
-   "id": "ll_tree_037",
-   "name": "Ash tree",
-   "kind": "tree",
-   "species": "ash",
-   "pos": [
-    -66.39,
-    0,
-    116.75
-   ],
-   "height": 8.75,
-   "rot": 0,
-   "scale": 1
-  },
-  {
-   "id": "ll_tree_038",
-   "name": "Oak tree",
-   "kind": "tree",
-   "species": "oak",
-   "pos": [
-    -52.92,
-    0,
-    110.23
-   ],
-   "height": 11.73,
-   "rot": 0,
-   "scale": 1
-  },
-  {
-   "id": "ll_tree_039",
-   "name": "Oak tree",
-   "kind": "tree",
-   "species": "oak",
-   "pos": [
-    -62.97,
-    0,
-    109.91
-   ],
-   "height": 10.67,
-   "rot": 0,
-   "scale": 1
-  },
-  {
-   "id": "ll_tree_040",
-   "name": "Oak tree",
-   "kind": "tree",
-   "species": "oak",
-   "pos": [
-    -67.27,
-    0,
-    111.8
-   ],
-   "height": 10.16,
-   "rot": 0,
-   "scale": 1
-  },
-  {
-   "id": "ll_tree_041",
-   "name": "Beech tree",
-   "kind": "tree",
-   "species": "beech",
-   "pos": [
-    -58.12,
-    0,
-    102.82
-   ],
-   "height": 11.27,
-   "rot": 0,
-   "scale": 1
-  },
-  {
-   "id": "ll_tree_042",
-   "name": "Oak tree",
-   "kind": "tree",
-   "species": "oak",
-   "pos": [
-    -88.67,
-    0,
-    111.32
-   ],
-   "height": 9.85,
-   "rot": 0,
-   "scale": 1
-  },
-  {
-   "id": "ll_tree_043",
-   "name": "Beech tree",
-   "kind": "tree",
-   "species": "beech",
-   "pos": [
-    -98.4,
-    0,
-    121.55
-   ],
-   "height": 10.7,
-   "rot": 0,
-   "scale": 1
-  },
-  {
-   "id": "ll_tree_044",
-   "name": "Beech tree",
-   "kind": "tree",
-   "species": "beech",
-   "pos": [
-    -102.61,
-    0,
-    115.67
-   ],
-   "height": 9.52,
-   "rot": 0,
-   "scale": 1
-  },
-  {
-   "id": "ll_tree_045",
-   "name": "Ash tree",
-   "kind": "tree",
-   "species": "ash",
-   "pos": [
-    -107.1,
-    0,
-    113.92
-   ],
-   "height": 12.56,
-   "rot": 0,
-   "scale": 1
-  },
-  {
-   "id": "ll_tree_046",
-   "name": "Ash tree",
-   "kind": "tree",
-   "species": "ash",
-   "pos": [
-    -93.18,
-    0,
-    108.79
-   ],
-   "height": 12.41,
-   "rot": 0,
-   "scale": 1
-  },
-  {
-   "id": "ll_tree_047",
-   "name": "Oak tree",
-   "kind": "tree",
-   "species": "oak",
-   "pos": [
-    -7.85,
-    0,
-    151.17
-   ],
-   "height": 8.46,
-   "rot": 0,
-   "scale": 1
-  },
-  {
-   "id": "ll_tree_048",
-   "name": "Oak tree",
-   "kind": "tree",
-   "species": "oak",
-   "pos": [
-    -13.46,
-    0,
-    143.34
-   ],
-   "height": 9.15,
-   "rot": 0,
-   "scale": 1
-  },
-  {
-   "id": "ll_tree_049",
-   "name": "Oak tree",
-   "kind": "tree",
-   "species": "oak",
-   "pos": [
-    -9.72,
-    0,
-    155.22
-   ],
-   "height": 11.7,
-   "rot": 0,
-   "scale": 1
-  },
-  {
-   "id": "ll_tree_050",
-   "name": "Beech tree",
-   "kind": "tree",
-   "species": "beech",
-   "pos": [
-    -16.8,
-    0,
-    149.34
-   ],
-   "height": 12.8,
-   "rot": 0,
-   "scale": 1
-  },
-  {
-   "id": "ll_tree_051",
-   "name": "Oak tree",
-   "kind": "tree",
-   "species": "oak",
-   "pos": [
-    -15.69,
-    0,
-    123.95
-   ],
-   "height": 7.86,
-   "rot": 0,
-   "scale": 1
-  },
-  {
-   "id": "ll_tree_052",
-   "name": "Hawthorn tree",
-   "kind": "tree",
-   "species": "hawthorn",
-   "pos": [
-    -24.06,
-    0,
-    -82.49
-   ],
-   "height": 8.64,
-   "rot": 0,
-   "scale": 1
-  },
-  {
-   "id": "ll_tree_053",
-   "name": "Ash tree",
-   "kind": "tree",
-   "species": "ash",
-   "pos": [
-    -149.36,
-    0,
-    58.77
-   ],
-   "height": 6.82,
-   "rot": 0,
-   "scale": 1
-  },
-  {
-   "id": "ll_tree_054",
-   "name": "Ash tree",
-   "kind": "tree",
-   "species": "ash",
-   "pos": [
-    2.59,
-    0,
-    101.18
-   ],
-   "height": 6.2,
-   "rot": 0,
-   "scale": 1
-  },
-  {
-   "id": "ll_tree_055",
-   "name": "Birch tree",
-   "kind": "tree",
-   "species": "birch",
-   "pos": [
-    -143.28,
-    0,
-    -79.64
-   ],
-   "height": 6.05,
-   "rot": 0,
-   "scale": 1
-  },
-  {
-   "id": "ll_tree_056",
-   "name": "Ash tree",
-   "kind": "tree",
-   "species": "ash",
-   "pos": [
-    120.46,
-    0,
-    -106.1
-   ],
-   "height": 9.03,
-   "rot": 0,
-   "scale": 1
-  },
-  {
-   "id": "ll_tree_057",
-   "name": "Oak tree",
-   "kind": "tree",
-   "species": "oak",
-   "pos": [
-    -128.86,
-    0,
-    -53.17
-   ],
-   "height": 6.97,
-   "rot": 0,
-   "scale": 1
-  },
-  {
-   "id": "ll_tree_058",
-   "name": "Birch tree",
-   "kind": "tree",
-   "species": "birch",
-   "pos": [
-    -109.57,
-    0,
-    -29.85
-   ],
-   "height": 5.6,
-   "rot": 0,
-   "scale": 1
-  },
-  {
-   "id": "ll_tree_059",
-   "name": "Hawthorn tree",
-   "kind": "tree",
-   "species": "hawthorn",
-   "pos": [
-    38.99,
-    0,
-    -103.14
-   ],
-   "height": 8.79,
-   "rot": 0,
-   "scale": 1
-  },
-  {
-   "id": "ll_tree_060",
-   "name": "Ash tree",
-   "kind": "tree",
-   "species": "ash",
-   "pos": [
-    68.09,
-    0,
-    109.65
-   ],
-   "height": 6.47,
-   "rot": 0,
-   "scale": 1
-  },
-  {
-   "id": "ll_tree_061",
-   "name": "Ash tree",
-   "kind": "tree",
-   "species": "ash",
-   "pos": [
-    108.83,
-    0,
-    100.46
-   ],
-   "height": 8.17,
-   "rot": 0,
-   "scale": 1
-  },
-  {
-   "id": "ll_tree_062",
-   "name": "Oak tree",
-   "kind": "tree",
-   "species": "oak",
-   "pos": [
-    128.7,
-    0,
-    10.5
-   ],
-   "height": 8.23,
-   "rot": 0,
-   "scale": 1
-  },
-  {
-   "id": "ll_tree_063",
-   "name": "Beech tree",
-   "kind": "tree",
-   "species": "beech",
-   "pos": [
-    104.46,
-    0,
-    -38.99
-   ],
-   "height": 7.55,
-   "rot": 0,
-   "scale": 1
+   "color": "#6b8f3a"
   },
   {
    "id": "ll_tree_064",
-   "name": "Beech tree",
+   "name": "Ash tree",
    "kind": "tree",
-   "species": "beech",
+   "species": "ash",
    "pos": [
-    -65.07,
+    -81.08,
     0,
-    91.8
+    -98.59
    ],
-   "height": 8.02,
+   "height": 9.5,
    "rot": 0,
    "scale": 1
   },
@@ -4780,109 +4109,109 @@
    "kind": "tree",
    "species": "oak",
    "pos": [
-    93.17,
+    -90.55,
     0,
-    -114.85
+    -107.04
    ],
-   "height": 7.31,
+   "height": 11.39,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_066",
-   "name": "Beech tree",
+   "name": "Ash tree",
    "kind": "tree",
-   "species": "beech",
+   "species": "ash",
    "pos": [
-    -139.98,
+    -84.93,
     0,
-    -70.06
+    -107.71
    ],
-   "height": 7.11,
+   "height": 11.82,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_067",
-   "name": "Oak tree",
+   "name": "Ash tree",
    "kind": "tree",
-   "species": "oak",
+   "species": "ash",
    "pos": [
-    122.09,
+    27.62,
     0,
-    68.77
+    108.46
    ],
-   "height": 5.05,
+   "height": 11.81,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_068",
-   "name": "Birch tree",
+   "name": "Oak tree",
    "kind": "tree",
-   "species": "birch",
+   "species": "oak",
    "pos": [
-    46.86,
+    31.98,
     0,
-    -67.11
+    106.4
    ],
-   "height": 5.21,
+   "height": 9.6,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_069",
-   "name": "Beech tree",
+   "name": "Ash tree",
    "kind": "tree",
-   "species": "beech",
+   "species": "ash",
    "pos": [
-    137.86,
+    24.36,
     0,
-    -23.85
+    113.73
    ],
-   "height": 8.33,
+   "height": 8.3,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_070",
-   "name": "Hawthorn tree",
+   "name": "Oak tree",
    "kind": "tree",
-   "species": "hawthorn",
+   "species": "oak",
    "pos": [
-    -63.6,
+    26.87,
     0,
-    85.87
+    117.98
    ],
-   "height": 7.11,
+   "height": 11.17,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_071",
-   "name": "Ash tree",
+   "name": "Beech tree",
    "kind": "tree",
-   "species": "ash",
+   "species": "beech",
    "pos": [
-    73.5,
+    22.17,
     0,
-    118.85
+    105.49
    ],
-   "height": 7.63,
+   "height": 11.82,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_072",
-   "name": "Beech tree",
+   "name": "Oak tree",
    "kind": "tree",
-   "species": "beech",
+   "species": "oak",
    "pos": [
-    81.2,
+    37.37,
     0,
-    -104.73
+    113.68
    ],
-   "height": 9.09,
+   "height": 9.05,
    "rot": 0,
    "scale": 1
   },
@@ -4892,11 +4221,11 @@
    "kind": "tree",
    "species": "oak",
    "pos": [
-    124.3,
+    37.73,
     0,
-    -82.13
+    105.74
    ],
-   "height": 8.46,
+   "height": 10.47,
    "rot": 0,
    "scale": 1
   },
@@ -4906,11 +4235,11 @@
    "kind": "tree",
    "species": "oak",
    "pos": [
-    -143.49,
+    76.53,
     0,
-    78.83
+    -54.44
    ],
-   "height": 6.22,
+   "height": 8.47,
    "rot": 0,
    "scale": 1
   },
@@ -4920,67 +4249,67 @@
    "kind": "tree",
    "species": "ash",
    "pos": [
-    120.13,
+    89.8,
     0,
-    127.33
+    -57.35
    ],
-   "height": 5.75,
+   "height": 8.83,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_076",
-   "name": "Ash tree",
+   "name": "Oak tree",
    "kind": "tree",
-   "species": "ash",
+   "species": "oak",
    "pos": [
-    -49.98,
+    81.73,
     0,
-    -120.73
+    -48.79
    ],
-   "height": 8.75,
+   "height": 9.62,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_077",
-   "name": "Oak tree",
+   "name": "Ash tree",
    "kind": "tree",
-   "species": "oak",
+   "species": "ash",
    "pos": [
-    106.28,
+    -99.81,
     0,
-    -106.3
+    1.93
    ],
-   "height": 6.97,
+   "height": 9.66,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_078",
-   "name": "Birch tree",
+   "name": "Beech tree",
    "kind": "tree",
-   "species": "birch",
+   "species": "beech",
    "pos": [
-    65.08,
+    -105.45,
     0,
-    114.12
+    -1.37
    ],
-   "height": 8.92,
+   "height": 9.52,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_079",
-   "name": "Oak tree",
+   "name": "Ash tree",
    "kind": "tree",
-   "species": "oak",
+   "species": "ash",
    "pos": [
-    -75.33,
+    -107.09,
     0,
-    -52.54
+    11.57
    ],
-   "height": 9.14,
+   "height": 8.25,
    "rot": 0,
    "scale": 1
   },
@@ -4990,11 +4319,11 @@
    "kind": "tree",
    "species": "oak",
    "pos": [
-    -147.95,
+    -113.34,
     0,
-    -73.78
+    3.73
    ],
-   "height": 8.33,
+   "height": 11.02,
    "rot": 0,
    "scale": 1
   },
@@ -5004,123 +4333,123 @@
    "kind": "tree",
    "species": "oak",
    "pos": [
-    -23.91,
+    -100.23,
     0,
-    -27.97
+    10.72
    ],
-   "height": 6.11,
+   "height": 11.34,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_082",
-   "name": "Ash tree",
+   "name": "Oak tree",
    "kind": "tree",
-   "species": "ash",
+   "species": "oak",
    "pos": [
-    -82.07,
+    -96.06,
     0,
-    -115.34
+    7.49
    ],
-   "height": 7.57,
+   "height": 8.16,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_083",
-   "name": "Ash tree",
+   "name": "Oak tree",
    "kind": "tree",
-   "species": "ash",
+   "species": "oak",
    "pos": [
-    -144.82,
+    26.97,
     0,
-    69.34
+    138.11
    ],
-   "height": 6.07,
+   "height": 11.54,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_084",
-   "name": "Ash tree",
+   "name": "Oak tree",
    "kind": "tree",
-   "species": "ash",
+   "species": "oak",
    "pos": [
-    82.47,
+    22.32,
     0,
-    -111.8
+    131.62
    ],
-   "height": 6.59,
+   "height": 12.16,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_085",
-   "name": "Oak tree",
+   "name": "Beech tree",
    "kind": "tree",
-   "species": "oak",
+   "species": "beech",
    "pos": [
-    -28.29,
+    24.95,
     0,
-    -85.77
+    124.44
    ],
-   "height": 6.33,
+   "height": 8.31,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_086",
-   "name": "Ash tree",
+   "name": "Oak tree",
    "kind": "tree",
-   "species": "ash",
+   "species": "oak",
    "pos": [
-    -124.48,
+    32.48,
     0,
-    -33.62
+    124.47
    ],
-   "height": 8.75,
+   "height": 9.66,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_087",
-   "name": "Ash tree",
+   "name": "Oak tree",
    "kind": "tree",
-   "species": "ash",
+   "species": "oak",
    "pos": [
-    -116.32,
+    -113.08,
     0,
-    -28.76
+    -78.64
    ],
-   "height": 7.74,
+   "height": 12.13,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_088",
-   "name": "Birch tree",
+   "name": "Oak tree",
    "kind": "tree",
-   "species": "birch",
+   "species": "oak",
    "pos": [
-    -57,
+    -108.77,
     0,
-    -36.68
+    -90.23
    ],
-   "height": 8.56,
+   "height": 12.19,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_089",
-   "name": "Hawthorn tree",
+   "name": "Oak tree",
    "kind": "tree",
-   "species": "hawthorn",
+   "species": "oak",
    "pos": [
-    30.92,
+    -108.15,
     0,
-    117.01
+    -80.5
    ],
-   "height": 7.36,
+   "height": 12.93,
    "rot": 0,
    "scale": 1
   },
@@ -5130,11 +4459,11 @@
    "kind": "tree",
    "species": "oak",
    "pos": [
-    37.43,
+    -120,
     0,
-    -57.8
+    -86.83
    ],
-   "height": 9.56,
+   "height": 11.58,
    "rot": 0,
    "scale": 1
   },
@@ -5144,123 +4473,123 @@
    "kind": "tree",
    "species": "ash",
    "pos": [
-    -82.72,
+    -83.7,
     0,
-    -53.59
+    -5.6
    ],
-   "height": 7.2,
+   "height": 7.89,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_092",
-   "name": "Oak tree",
+   "name": "Ash tree",
    "kind": "tree",
-   "species": "oak",
+   "species": "ash",
    "pos": [
-    -16.84,
+    -13.86,
     0,
-    -30.18
+    -37.33
    ],
-   "height": 6.61,
+   "height": 5.01,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_093",
-   "name": "Hawthorn tree",
+   "name": "Ash tree",
    "kind": "tree",
-   "species": "hawthorn",
+   "species": "ash",
    "pos": [
-    -31.82,
+    -34.39,
     0,
-    -80.85
+    -73.33
    ],
-   "height": 7.27,
+   "height": 9.18,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_094",
-   "name": "Ash tree",
+   "name": "Birch tree",
    "kind": "tree",
-   "species": "ash",
+   "species": "birch",
    "pos": [
-    -62.88,
+    -144.07,
     0,
-    -123.95
+    124.37
    ],
-   "height": 5.4,
+   "height": 7.68,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_095",
-   "name": "Ash tree",
+   "name": "Hawthorn tree",
    "kind": "tree",
-   "species": "ash",
+   "species": "hawthorn",
    "pos": [
-    -23.64,
+    57.36,
     0,
-    -129.9
+    54.96
    ],
-   "height": 9.34,
+   "height": 5.15,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_096",
-   "name": "Beech tree",
+   "name": "Oak tree",
    "kind": "tree",
-   "species": "beech",
+   "species": "oak",
    "pos": [
-    135.71,
+    2.16,
     0,
-    -100.4
+    -76.23
    ],
-   "height": 6.82,
+   "height": 5.86,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_097",
-   "name": "Hawthorn tree",
+   "name": "Ash tree",
    "kind": "tree",
-   "species": "hawthorn",
+   "species": "ash",
    "pos": [
-    -105.07,
+    131.51,
     0,
-    -90.81
+    69.31
    ],
-   "height": 7.14,
+   "height": 6.09,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_098",
-   "name": "Hawthorn tree",
+   "name": "Beech tree",
    "kind": "tree",
-   "species": "hawthorn",
+   "species": "beech",
    "pos": [
-    13.37,
+    -80.41,
     0,
-    -98.45
+    11.68
    ],
-   "height": 5.35,
+   "height": 5.1,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_099",
-   "name": "Hawthorn tree",
+   "name": "Oak tree",
    "kind": "tree",
-   "species": "hawthorn",
+   "species": "oak",
    "pos": [
-    38.93,
+    104.45,
     0,
-    -93.65
+    123.75
    ],
-   "height": 8.02,
+   "height": 5.25,
    "rot": 0,
    "scale": 1
   },
@@ -5270,39 +4599,39 @@
    "kind": "tree",
    "species": "oak",
    "pos": [
-    -68.39,
+    -50.98,
     0,
-    -44.46
+    -33.08
    ],
-   "height": 5.84,
+   "height": 6.65,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_101",
-   "name": "Oak tree",
+   "name": "Ash tree",
    "kind": "tree",
-   "species": "oak",
+   "species": "ash",
    "pos": [
-    95.8,
+    121.04,
     0,
-    -106.72
+    59.98
    ],
-   "height": 5.63,
+   "height": 7.16,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_102",
-   "name": "Birch tree",
+   "name": "Oak tree",
    "kind": "tree",
-   "species": "birch",
+   "species": "oak",
    "pos": [
-    -104.1,
+    -70.12,
     0,
-    -104.45
+    114.05
    ],
-   "height": 7,
+   "height": 6.49,
    "rot": 0,
    "scale": 1
   },
@@ -5312,39 +4641,571 @@
    "kind": "tree",
    "species": "ash",
    "pos": [
-    113.74,
+    40.53,
     0,
-    -104.18
+    -26.56
    ],
-   "height": 8.76,
+   "height": 6.27,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_104",
-   "name": "Oak tree",
+   "name": "Ash tree",
    "kind": "tree",
-   "species": "oak",
+   "species": "ash",
    "pos": [
-    -140.89,
+    77.58,
     0,
-    63.87
+    114.18
    ],
-   "height": 6.58,
+   "height": 5.65,
    "rot": 0,
    "scale": 1
   },
   {
    "id": "ll_tree_105",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    -5.48,
+    0,
+    -73.63
+   ],
+   "height": 9.06,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_106",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    118.4,
+    0,
+    128.39
+   ],
+   "height": 5.83,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_107",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    -128.8,
+    0,
+    94.71
+   ],
+   "height": 5.55,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_108",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    59.01,
+    0,
+    68.82
+   ],
+   "height": 5.23,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_109",
+   "name": "Hawthorn tree",
+   "kind": "tree",
+   "species": "hawthorn",
+   "pos": [
+    60.84,
+    0,
+    101.68
+   ],
+   "height": 8.75,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_110",
+   "name": "Beech tree",
+   "kind": "tree",
+   "species": "beech",
+   "pos": [
+    -18.07,
+    0,
+    -50.6
+   ],
+   "height": 6.86,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_111",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    -19.04,
+    0,
+    -59.23
+   ],
+   "height": 6.85,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_112",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    -9.58,
+    0,
+    -59.28
+   ],
+   "height": 6.33,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_113",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    67.46,
+    0,
+    104.03
+   ],
+   "height": 5.52,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_114",
+   "name": "Hawthorn tree",
+   "kind": "tree",
+   "species": "hawthorn",
+   "pos": [
+    -36.76,
+    0,
+    -32.79
+   ],
+   "height": 5.25,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_115",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    -4.02,
+    0,
+    -68.46
+   ],
+   "height": 9.05,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_116",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    59.25,
+    0,
+    75.35
+   ],
+   "height": 8.03,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_117",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    -17.81,
+    0,
+    -115.13
+   ],
+   "height": 5.7,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_118",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    -140.96,
+    0,
+    111.31
+   ],
+   "height": 6.71,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_119",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    10.87,
+    0,
+    -64.21
+   ],
+   "height": 9.65,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_120",
+   "name": "Hawthorn tree",
+   "kind": "tree",
+   "species": "hawthorn",
+   "pos": [
+    -41.69,
+    0,
+    -75.24
+   ],
+   "height": 8.37,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_121",
    "name": "Birch tree",
    "kind": "tree",
    "species": "birch",
    "pos": [
-    -134.06,
+    -89.88,
     0,
-    -60.52
+    -18.24
    ],
-   "height": 8.5,
+   "height": 8.38,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_122",
+   "name": "Hawthorn tree",
+   "kind": "tree",
+   "species": "hawthorn",
+   "pos": [
+    -11.53,
+    0,
+    -75.88
+   ],
+   "height": 9.54,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_123",
+   "name": "Hawthorn tree",
+   "kind": "tree",
+   "species": "hawthorn",
+   "pos": [
+    9.25,
+    0,
+    -71.44
+   ],
+   "height": 7.96,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_124",
+   "name": "Birch tree",
+   "kind": "tree",
+   "species": "birch",
+   "pos": [
+    -19.14,
+    0,
+    -73.91
+   ],
+   "height": 5.21,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_125",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    13.04,
+    0,
+    127.91
+   ],
+   "height": 5.54,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_126",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    60.53,
+    0,
+    96.46
+   ],
+   "height": 7.06,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_127",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    124.59,
+    0,
+    117.94
+   ],
+   "height": 5.39,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_128",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    -82.64,
+    0,
+    17.47
+   ],
+   "height": 7.94,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_129",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    -81.08,
+    0,
+    -93.2
+   ],
+   "height": 7.34,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_130",
+   "name": "Birch tree",
+   "kind": "tree",
+   "species": "birch",
+   "pos": [
+    -89.47,
+    0,
+    128.45
+   ],
+   "height": 7.52,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_131",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    -71.5,
+    0,
+    -105.98
+   ],
+   "height": 5.6,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_132",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    -65.94,
+    0,
+    -122.33
+   ],
+   "height": 7.31,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_133",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    46.93,
+    0,
+    -21.63
+   ],
+   "height": 9.79,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_134",
+   "name": "Hawthorn tree",
+   "kind": "tree",
+   "species": "hawthorn",
+   "pos": [
+    145.9,
+    0,
+    44.88
+   ],
+   "height": 9.77,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_135",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    64.85,
+    0,
+    72.86
+   ],
+   "height": 5.96,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_136",
+   "name": "Beech tree",
+   "kind": "tree",
+   "species": "beech",
+   "pos": [
+    139.51,
+    0,
+    51.66
+   ],
+   "height": 7.08,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_137",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    -132.59,
+    0,
+    90.48
+   ],
+   "height": 5.5,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_138",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    130.27,
+    0,
+    118.21
+   ],
+   "height": 6.85,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_139",
+   "name": "Hawthorn tree",
+   "kind": "tree",
+   "species": "hawthorn",
+   "pos": [
+    -74.31,
+    0,
+    -84.09
+   ],
+   "height": 7.08,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_140",
+   "name": "Beech tree",
+   "kind": "tree",
+   "species": "beech",
+   "pos": [
+    -146.55,
+    0,
+    102.51
+   ],
+   "height": 7.87,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_141",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    -144.51,
+    0,
+    116.97
+   ],
+   "height": 5.6,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_142",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    -75.9,
+    0,
+    -70.34
+   ],
+   "height": 6.46,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_143",
+   "name": "Birch tree",
+   "kind": "tree",
+   "species": "birch",
+   "pos": [
+    64.88,
+    0,
+    84.68
+   ],
+   "height": 6.64,
    "rot": 0,
    "scale": 1
   },
@@ -5353,9 +5214,9 @@
    "name": "PENLAN ROAD",
    "kind": "label",
    "pos": [
-    -81,
+    -57.5,
     3.2,
-    -17.5
+    78.5
    ],
    "text": "PENLAN ROAD",
    "color": "#f2c94c",
@@ -5366,9 +5227,9 @@
    "name": "LECKWITH ROAD",
    "kind": "label",
    "pos": [
-    -127.5,
+    -57.5,
     3.2,
-    -87.5
+    -75
    ],
    "text": "LECKWITH ROAD",
    "color": "#f2c94c",
@@ -5379,9 +5240,9 @@
    "name": "LLANDOUGH HILL",
    "kind": "label",
    "pos": [
-    -47.5,
+    22.5,
     3.2,
-    -103.5
+    -15
    ],
    "text": "LLANDOUGH HILL",
    "color": "#f2c94c",
@@ -5392,9 +5253,9 @@
    "name": "PENARTH ROAD",
    "kind": "label",
    "pos": [
-    150,
+    60,
     3.2,
-    -35
+    136
    ],
    "text": "PENARTH ROAD",
    "color": "#f2c94c",
@@ -5405,24 +5266,11 @@
    "name": "BARRY ROAD",
    "kind": "label",
    "pos": [
-    65,
+    -67.5,
     3.2,
-    141.5
+    166
    ],
    "text": "BARRY ROAD",
-   "color": "#f2c94c",
-   "rot": 0
-  },
-  {
-   "id": "ll_label_lewis_road",
-   "name": "LEWIS ROAD",
-   "kind": "label",
-   "pos": [
-    -20,
-    3.2,
-    -7
-   ],
-   "text": "LEWIS ROAD",
    "color": "#f2c94c",
    "rot": 0
   },
@@ -5431,9 +5279,9 @@
    "name": "CHURCH ROAD",
    "kind": "label",
    "pos": [
-    -58.5,
+    -47.9,
     3.2,
-    5
+    16.5
    ],
    "text": "CHURCH ROAD",
    "color": "#f2c94c",
@@ -5444,9 +5292,9 @@
    "name": "CORBETT ROAD",
    "kind": "label",
    "pos": [
-    -83,
+    -76,
     3.2,
-    54
+    106
    ],
    "text": "CORBETT ROAD",
    "color": "#f2c94c",
@@ -5457,25 +5305,51 @@
    "name": "GREENWAY CLOSE",
    "kind": "label",
    "pos": [
-    8,
+    5,
     3.2,
-    -17
+    -31
    ],
    "text": "GREENWAY CLOSE",
    "color": "#f2c94c",
    "rot": 0
   },
   {
-   "id": "ll_label_spencer_drive",
-   "name": "SPENCER DRIVE",
+   "id": "ll_label_river",
+   "name": "River Ely label",
    "kind": "label",
    "pos": [
-    -79.5,
-    3.2,
-    27
+    90,
+    5,
+    38
    ],
-   "text": "SPENCER DRIVE",
-   "color": "#f2c94c",
+   "text": "RIVER ELY",
+   "color": "#8fd0ff",
+   "rot": 0
+  },
+  {
+   "id": "ll_label_north",
+   "name": "North label",
+   "kind": "label",
+   "pos": [
+    -30,
+    6,
+    -150
+   ],
+   "text": "TO LECKWITH AND CARDIFF CITY STADIUM",
+   "color": "#ffffff",
+   "rot": 0
+  },
+  {
+   "id": "ll_label_bay",
+   "name": "Bay label",
+   "kind": "label",
+   "pos": [
+    165,
+    6,
+    100
+   ],
+   "text": "TO CARDIFF BAY",
+   "color": "#8fd0ff",
    "rot": 0
   }
  ],

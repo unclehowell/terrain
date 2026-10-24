@@ -61,21 +61,28 @@ for (const o of rest) {
 }
 rect(0, 38, 104, 108); // keep the whole Great House Farm / churchyard area clear
 
-// ---------- roads ----------
-const ROAD = "#3a3d40", LANE = "#6b5a45";
+// ---------- river and roads ----------
+// Anchors used (real coordinates): St Dochdwy's church 51.4496N 3.1979W; University
+// Hospital Llandough 51.4492N 3.2028W (about 340 m west of the church); Cogan station
+// 51.4461N 3.1891W; Pont y Werin over the Ely 51.4477N 3.1864W (about 800 m east); the
+// Ely mouth in Cardiff Bay 51.4561N 3.1739W; Cardiff City Stadium at Leckwith
+// 51.4728N 3.2031W (about 2.6 km north of the hospital). The Ely therefore runs down the
+// EAST side of the village from the Leckwith end in the north, and Leckwith Road
+// (B4267) leaves the village northwards to cross it by Leckwith Bridge.
+// Distances are compressed (roughly 1 unit = 7 m) and the farm area stays oversize.
+const RIVER = { id: "river_ely", name: "River Ely", w: 12, pts: [[-55, -170], [-28, -148], [5, -125], [35, -92], [60, -50], [72, -10], [84, 28], [98, 66], [112, 92], [150, 94], [195, 82]] };
+const ROAD = "#3a3d40", LANE = "#6b5a45", WATER = "#2f6f9f";
 const roads = [
-  { id: "penlan_road", name: "Penlan Road (B4267)", w: 5.5, pts: [[-120, -70], [-90, -35], [-72, 0], [-66, 45], [-45, 95], [0, 120], [60, 131], [100, 128]] },
-  { id: "leckwith_road", name: "Leckwith Road", w: 5, pts: [[-120, -70], [-135, -105], [-150, -145]] },
-  { id: "llandough_hill", name: "Llandough Hill", w: 5, pts: [[-120, -70], [-75, -95], [-20, -112], [40, -125], [100, -132], [140, -128]] },
-  { id: "penarth_road", name: "Penarth Road (A4160)", w: 7, pts: [[140, -128], [150, -70], [150, 0], [145, 70], [130, 120]] },
-  { id: "barry_road", name: "Barry Road (A4055)", w: 7, pts: [[30, 155], [100, 128], [158, 100]] },
-  { id: "lewis_road", name: "Lewis Road", w: 4.5, pts: [[-81, -18], [-40, -8], [0, -6], [40, -12], [80, -28]] },
-  { id: "church_road", name: "Church Road", w: 3.5, pts: [[-72, 0], [-45, 10], [-20, 14], [0, 14]] },
-  { id: "greenway_close", name: "Greenway Close", w: 4, pts: [[8, -6], [8, -28], [2, -44]], minor: true },
-  { id: "spencer_drive", name: "Spencer Drive", w: 4, pts: [[-69, 22], [-90, 32], [-100, 44]], minor: true },
-  { id: "corbett_road", name: "Corbett Road", w: 4, pts: [[-66, 48], [-100, 60], [-132, 66]], minor: true },
-  { id: "hospital_drive", name: "Hospital drive", w: 4.5, pts: [[-72, 4], [-98, 6]], minor: true },
-  { id: "authorities_track", name: "Authorities track", w: 3, pts: [[56, -70], [56, -128]], lane: true },
+  { id: "leckwith_road", name: "Leckwith Road (B4267)", w: 5.5, pts: [[-62, 8], [-63, -50], [-52, -100], [-35, -135], [-10, -165]] },
+  { id: "penlan_road", name: "Penlan Road (B4267)", w: 5.5, pts: [[-62, 8], [-58, 35], [-60, 62], [-55, 95], [-40, 130], [-10, 150]] },
+  { id: "llandough_hill", name: "Llandough Hill", w: 5, pts: [[-62, 8], [-35, -12], [5, -18], [40, -12], [58, 10], [70, 40], [82, 75], [90, 108]] },
+  { id: "penarth_road", name: "Penarth Road (A4160)", w: 7, pts: [[30, 156], [90, 116], [118, 95], [150, 70], [185, 45]] },
+  { id: "barry_road", name: "Barry Road (A4055)", w: 7, pts: [[-95, 172], [-40, 160], [-10, 150], [30, 156]] },
+  { id: "church_road", name: "Church Road", w: 3.5, pts: [[-60.8, 16], [-35, 17], [-10, 14], [0, 14]] },
+  { id: "greenway_close", name: "Greenway Close", w: 4, pts: [[5, -18], [5, -44], [-2, -62]], minor: true },
+  { id: "corbett_road", name: "Corbett Road", w: 4, pts: [[-57, 100], [-95, 112], [-130, 118]], minor: true },
+  { id: "hospital_drive", name: "Hospital drive", w: 4.5, pts: [[-60, 74], [-72, 74]], minor: true },
+  { id: "authorities_track", name: "Authorities track", w: 3, pts: [[-52, -98], [-32, -95]], lane: true },
 ];
 const out = [];
 for (const r of roads) {
@@ -83,6 +90,40 @@ for (const r of roads) {
   line(r.pts, r.w / 2 + 0.6);
 }
 const road = id => roads.find(r => r.id === id);
+
+// The Ely: cut where a road crosses it, and give each crossing a bridge (parapet walls).
+{
+  const cum = [0]; for (let i = 1; i < RIVER.pts.length; i++) cum.push(cum[i - 1] + Math.hypot(RIVER.pts[i][0] - RIVER.pts[i - 1][0], RIVER.pts[i][1] - RIVER.pts[i - 1][1]));
+  const total = cum.at(-1);
+  const at = s => { let i = 1; while (i < cum.length - 1 && cum[i] < s) i++; const t = (s - cum[i - 1]) / (cum[i] - cum[i - 1]); return [RIVER.pts[i - 1][0] + (RIVER.pts[i][0] - RIVER.pts[i - 1][0]) * t, RIVER.pts[i - 1][1] + (RIVER.pts[i][1] - RIVER.pts[i - 1][1]) * t]; };
+  const cuts = [], bridges = [];
+  for (const r of roads) {
+    for (let j = 1; j < r.pts.length; j++) for (let i = 1; i < RIVER.pts.length; i++) {
+      const [x1, z1] = RIVER.pts[i - 1], [x2, z2] = RIVER.pts[i], [x3, z3] = r.pts[j - 1], [x4, z4] = r.pts[j];
+      const den = (x2 - x1) * (z4 - z3) - (z2 - z1) * (x4 - x3); if (Math.abs(den) < 1e-9) continue;
+      const t = ((x3 - x1) * (z4 - z3) - (z3 - z1) * (x4 - x3)) / den, u = ((x3 - x1) * (z2 - z1) - (z3 - z1) * (x2 - x1)) / den;
+      if (t < 0 || t > 1 || u < 0 || u > 1) continue;
+      const px = x1 + (x2 - x1) * t, pz = z1 + (z2 - z1) * t;
+      const rl = Math.hypot(x2 - x1, z2 - z1), ql = Math.hypot(x4 - x3, z4 - z3), sinT = Math.abs(((x2 - x1) * (z4 - z3) - (z2 - z1) * (x4 - x3)) / (rl * ql));
+      const g = r.w / 2 / Math.max(0.5, sinT) + 6.8, s = cum[i - 1] + rl * t;
+      cuts.push({ s0: s - g, s1: s + g }); bridges.push({ r, px, pz, dx: (x4 - x3) / ql, dz: (z4 - z3) / ql });
+    }
+  }
+  cuts.sort((a, b) => a.s0 - b.s0);
+  let start = 0; const spans = [];
+  for (const c of cuts) { if (c.s0 > start + 1) spans.push([start, c.s0]); start = Math.max(start, c.s1); }
+  if (start < total - 1) spans.push([start, total]);
+  spans.forEach(([a, b], k) => {
+    const pts = [at(a)]; for (let i = 1; i < RIVER.pts.length - 1; i++) if (cum[i] > a && cum[i] < b) pts.push(RIVER.pts[i]); pts.push(at(b));
+    out.push({ id: "ll_river_ely_" + (k + 1), name: "River Ely", kind: "path", points: pts.map(p => [r2(p[0]), r2(p[1])]), width: RIVER.w, color: WATER });
+  });
+  line(RIVER.pts, RIVER.w / 2 + 1.5);
+  bridges.forEach((b, k) => {
+    const nx = -b.dz, nz = b.dx, hw = b.r.w / 2 + 0.5, g = 11;
+    for (const sd of [1, -1]) out.push({ id: `ll_bridge_${k + 1}_${sd > 0 ? "a" : "b"}`, name: "Bridge parapet", kind: "wall", points: [[r2(b.px - b.dx * g + nx * hw * sd), r2(b.pz - b.dz * g + nz * hw * sd)], [r2(b.px + b.dx * g + nx * hw * sd), r2(b.pz + b.dz * g + nz * hw * sd)]], color: "#8a8d8f", height: 1, texture: "stone" });
+    if (b.r.id === "leckwith_road") out.push({ id: "ll_label_leckwith_bridge", name: "Leckwith Bridge", kind: "label", pos: [r2(b.px + 12), 4, r2(b.pz)], text: "LECKWITH BRIDGE", color: "#ffffff", rot: 0 });
+  });
+}
 
 // ---------- helpers along polylines ----------
 function sample(pts, step, jitter = 0) {
@@ -98,43 +139,42 @@ const normal = p => [-p.dz, p.dx]; // door-facing side at rot = a
 const rotFor = (p, s) => r2(p.a + (s === 1 ? 180 : 0));
 
 // ---------- special places ----------
-const place = [];
-// hospital (University Hospital Llandough)
+// hospital (University Hospital Llandough): west of Penlan Road, level with the church
 const hosp = [
-  { n: "Hospital main block", pos: [-122, 0, -8], size: [30, 10, 14], rot: 0, color: "#c9c2b0", roof: "flat", roofColor: "#8a8d8f" },
-  { n: "Hospital ward block", pos: [-124, 0, 14], size: [24, 9, 12], rot: 0, color: "#cdbfa4", roof: "flat", roofColor: "#8a8d8f" },
-  { n: "Hospital tower", pos: [-104, 0, 4], size: [10, 17, 10], rot: 0, color: "#d8d2c0", roof: "flat", roofColor: "#6b6f73" },
-  { n: "Hospital outpatients", pos: [-100, 0, -14], size: [14, 6, 10], rot: 0, color: "#b9715a", roof: "gable", roofColor: "#4d5862" },
+  { n: "Hospital main block", pos: [-95, 0, 62], size: [30, 10, 14], color: "#c9c2b0", roof: "flat", roofColor: "#8a8d8f" },
+  { n: "Hospital ward block", pos: [-95, 0, 84], size: [24, 9, 12], color: "#cdbfa4", roof: "flat", roofColor: "#8a8d8f" },
+  { n: "Hospital tower", pos: [-76, 0, 74], size: [10, 17, 10], color: "#d8d2c0", roof: "flat", roofColor: "#6b6f73" },
+  { n: "Hospital outpatients", pos: [-76, 0, 52], size: [14, 6, 10], color: "#b9715a", roof: "gable", roofColor: "#4d5862" },
 ];
-hosp.forEach((h, i) => { out.push({ id: "ll_hospital_" + (i + 1), name: h.n, kind: "building", roof: h.roof, pos: h.pos, rot: h.rot, scale: 1, size: h.size, color: h.color, roofColor: h.roofColor, texture: "plaster" }); circle(h.pos[0], h.pos[2], Math.hypot(h.size[0], h.size[2]) / 2); });
-out.push({ id: "ll_hospital_carpark", name: "Hospital car park", kind: "field", pos: [-120, 0, 38], size: [26, 14], color: "#55585c" }); rect(-120, 38, 26, 14);
-out.push({ id: "ll_hospital_label", name: "Hospital label", kind: "label", pos: [-118, 19, 2], text: "UNIVERSITY HOSPITAL LLANDOUGH", color: "#ffffff", rot: 0 });
-rect(-118, 6, 46, 52);
-// primary school
-out.push({ id: "ll_school", name: "Primary school", kind: "building", roof: "gable", pos: [66, 0, 8], rot: 0, scale: 1, size: [18, 4.5, 10], color: "#b9715a", roofColor: "#7a4b32", texture: "brick" }); rect(66, 8, 20, 12);
-out.push({ id: "ll_school_playground", name: "School playground", kind: "field", pos: [66, 0, 24], size: [18, 12], color: "#6b6f73" }); rect(66, 24, 18, 12);
-out.push({ id: "ll_school_label", name: "School label", kind: "label", pos: [66, 8, 8], text: "PRIMARY SCHOOL", color: "#ffffff", rot: 0 });
-// King George V Playing Field (between Lewis Road and Greenway Close)
-out.push({ id: "ll_kgv_field", name: "King George V Playing Field", kind: "field", pos: [33, 0, -30], size: [36, 26], color: "#5fa043" }); rect(33, -30, 36, 26);
-out.push({ id: "ll_kgv_fence", name: "Playing field fence", kind: "fence", points: [[15, -17], [51, -17], [51, -43], [15, -43], [15, -17.01]], color: "#8b5a2b", height: 1.2 });
-out.push({ id: "ll_kgv_label", name: "Playing field label", kind: "label", pos: [33, 6, -30], text: "KING GEORGE V PLAYING FIELD", color: "#ffffff", rot: 0 });
-for (const [bx, bz] of [[17, -14.5], [25, -14.5]]) { out.push({ id: `ll_bench_${bx}`, name: "Bench", kind: "bench", pos: [bx, 0, bz], rot: 0, scale: 1, color: "#8b5a2b" }); }
-// village green
-out.push({ id: "ll_village_green", name: "Village green", kind: "field", pos: [-44, 0, -24], size: [16, 12], color: "#6cae4a" }); rect(-44, -24, 16, 12);
+hosp.forEach((h, i) => { out.push({ id: "ll_hospital_" + (i + 1), name: h.n, kind: "building", roof: h.roof, pos: h.pos, rot: 0, scale: 1, size: h.size, color: h.color, roofColor: h.roofColor, texture: "plaster" }); circle(h.pos[0], h.pos[2], Math.hypot(h.size[0], h.size[2]) / 2); });
+out.push({ id: "ll_hospital_carpark", name: "Hospital car park", kind: "field", pos: [-100, 0, 38], size: [26, 14], color: "#55585c" }); rect(-100, 38, 26, 14);
+out.push({ id: "ll_hospital_label", name: "Hospital label", kind: "label", pos: [-95, 19, 66], text: "UNIVERSITY HOSPITAL LLANDOUGH", color: "#ffffff", rot: 0 });
+rect(-90, 66, 56, 62);
+// primary school and village green near the Leckwith Road / Llandough Hill junction
+out.push({ id: "ll_school", name: "Primary school", kind: "building", roof: "gable", pos: [-32, 0, -46], rot: 0, scale: 1, size: [18, 4.5, 10], color: "#b9715a", roofColor: "#7a4b32", texture: "brick" }); rect(-32, -46, 20, 12);
+out.push({ id: "ll_school_playground", name: "School playground", kind: "field", pos: [-32, 0, -62], size: [18, 12], color: "#6b6f73" }); rect(-32, -62, 18, 12);
+out.push({ id: "ll_school_label", name: "School label", kind: "label", pos: [-32, 8, -46], text: "PRIMARY SCHOOL", color: "#ffffff", rot: 0 });
+out.push({ id: "ll_village_green", name: "Village green", kind: "field", pos: [-44, 0, -24], size: [14, 10], color: "#6cae4a" }); rect(-44, -24, 14, 10);
 out.push({ id: "ll_village_green_label", name: "Village green label", kind: "label", pos: [-44, 5, -24], text: "VILLAGE GREEN", color: "#ffffff", rot: 0 });
+// King George V Playing Field (Greenway Close side of Llandough Hill)
+out.push({ id: "ll_kgv_field", name: "King George V Playing Field", kind: "field", pos: [26, 0, -44], size: [30, 24], color: "#5fa043" }); rect(26, -44, 30, 24);
+out.push({ id: "ll_kgv_fence", name: "Playing field fence", kind: "fence", points: [[11, -32], [41, -32], [41, -56], [11, -56], [11, -32.01]], color: "#8b5a2b", height: 1.2 });
+out.push({ id: "ll_kgv_label", name: "Playing field label", kind: "label", pos: [26, 6, -44], text: "KING GEORGE V PLAYING FIELD", color: "#ffffff", rot: 0 });
+for (const [bx, bz] of [[14, -30], [22, -30]]) out.push({ id: `ll_bench_${bx}`, name: "Bench", kind: "bench", pos: [bx, 0, bz], rot: 0, scale: 1, color: "#8b5a2b" });
 // allotments (Corbett Road)
-out.push({ id: "ll_allotments", name: "Allotments", kind: "field", pos: [-112, 0, 88], size: [36, 22], color: "#6f8a3a", crop: "wheat" }); rect(-112, 88, 36, 22, 2);
-out.push({ id: "ll_allotments_hedge", name: "Allotments hedge", kind: "hedge", points: [[-130, 77], [-94, 77], [-94, 99], [-130, 99], [-130, 77.01]], color: "#2f5a2a", height: 1.4 });
-out.push({ id: "ll_allotments_label", name: "Allotments label", kind: "label", pos: [-112, 5, 88], text: "ALLOTMENTS", color: "#ffffff", rot: 0 });
-out.push({ id: "ll_allotments_lane", name: "Allotments lane", kind: "path", points: [[-132, 66], [-112, 74], [-112, 77]], width: 2.2, color: LANE, texture: "gravel" });
-line([[-132, 66], [-112, 74], [-112, 77]], 2);
-for (let i = 0; i < 6; i++) { const x = -124 + i * 7, z = 84 + (i % 2) * 9; out.push({ id: "ll_shed_" + (i + 1), name: "Allotment shed", kind: "building", roof: "flat", pos: [x, 0, z], rot: 0, scale: 1, size: [2.4, 2.2, 2], color: "#6b5a45", roofColor: "#3a3d40", texture: "wood" }); }
-// Merrie Harrier (junction of Penlan Road and Barry Road)
-out.push({ id: "ll_merrie_harrier", name: "The Merrie Harrier", kind: "building", roof: "gable", pos: [86, 0, 114], rot: 20, scale: 1, size: [14, 6, 8], color: "#e9e2d0", roofColor: "#4d5862", texture: "plaster", chimneys: 2 }); circle(86, 114, 9);
-out.push({ id: "ll_merrie_harrier_label", name: "Merrie Harrier label", kind: "label", pos: [86, 9, 114], text: "THE MERRIE HARRIER", color: "#ffffff", rot: 0 });
-// enemy camp (Public Authorities) keeps its fence and sign, on its own plot off Llandough Hill
+out.push({ id: "ll_allotments", name: "Allotments", kind: "field", pos: [-118, 0, 140], size: [36, 22], color: "#6f8a3a", crop: "wheat" }); rect(-118, 140, 36, 22, 2);
+out.push({ id: "ll_allotments_hedge", name: "Allotments hedge", kind: "hedge", points: [[-136, 129], [-100, 129], [-100, 151], [-136, 151], [-136, 129.01]], color: "#2f5a2a", height: 1.4 });
+out.push({ id: "ll_allotments_label", name: "Allotments label", kind: "label", pos: [-118, 5, 140], text: "ALLOTMENTS", color: "#ffffff", rot: 0 });
+out.push({ id: "ll_allotments_lane", name: "Allotments lane", kind: "path", points: [[-112, 114], [-118, 129]], width: 2.2, color: LANE, texture: "gravel" });
+line([[-112, 114], [-118, 129]], 2);
+for (let i = 0; i < 6; i++) { const x = -130 + i * 7, z = 136 + (i % 2) * 9; out.push({ id: "ll_shed_" + (i + 1), name: "Allotment shed", kind: "building", roof: "flat", pos: [x, 0, z], rot: 0, scale: 1, size: [2.4, 2.2, 2], color: "#6b5a45", roofColor: "#3a3d40", texture: "wood" }); }
+// Merrie Harrier (Penlan Road meets Barry Road) and Cogan, east of the village by the river
+out.push({ id: "ll_merrie_harrier", name: "The Merrie Harrier", kind: "building", roof: "gable", pos: [-22, 0, 140], rot: 30, scale: 1, size: [14, 6, 8], color: "#e9e2d0", roofColor: "#4d5862", texture: "plaster", chimneys: 2 }); circle(-22, 140, 9);
+out.push({ id: "ll_merrie_harrier_label", name: "Merrie Harrier label", kind: "label", pos: [-22, 9, 140], text: "THE MERRIE HARRIER", color: "#ffffff", rot: 0 });
+out.push({ id: "ll_cogan_label", name: "Cogan label", kind: "label", pos: [88, 7, 128], text: "COGAN", color: "#ffffff", rot: 0 });
+// enemy camp (Public Authorities) keeps its fence and sign, on its own plot off Leckwith Road
 if (enemy) {
-  const ex = 56, ez = -88;
+  const ex = -20, ez = -95;
   enemy.pos = [ex, 0, ez]; enemy.rot = 180;
   circle(ex, ez, 14);
   if (campFence) campFence.points = [[ex - 5.8, ez - 9], [ex + 0.0, ez - 9], [ex + 12, ez - 9], [ex + 12, ez + 9], [ex - 12, ez + 9], [ex - 12, ez - 9], [ex - 5.8, ez - 9]];
@@ -143,7 +183,7 @@ if (enemy) {
 }
 
 // ---------- site buildings on the roads ----------
-const siteRoadOrder = ["lewis_road", "penlan_road", "llandough_hill", "penarth_road", "leckwith_road"];
+const siteRoadOrder = ["llandough_hill", "leckwith_road", "penlan_road", "penarth_road"];
 const slots = [];
 for (const rid of siteRoadOrder) {
   const r = road(rid); let side = 1;
@@ -195,12 +235,17 @@ let tn = 0;
 const tree = (x, z, sp, h) => { out.push({ id: "ll_tree_" + String(++tn).padStart(3, "0"), name: sp[0].toUpperCase() + sp.slice(1) + " tree", kind: "tree", species: sp, pos: [r2(x), 0, r2(z)], height: r2(h), rot: 0, scale: 1 }); circle(x, z, 2.2); };
 // street trees
 for (const r of roads) { if (r.lane) continue; for (const p of sample(r.pts, 19, 6)) { const n = normal(p), s = rnd() < 0.5 ? 1 : -1, off = r.w / 2 + 2; const x = p.x + n[0] * s * off, z = p.z + n[1] * s * off; if (rnd() < 0.45 && free(x, z, 2.2, 1)) tree(x, z, pick(SPECIES), 6 + rnd() * 5); } }
+// Leckwith Woods style banks along the Ely
+for (const p of sample(RIVER.pts, 6, 2)) for (const sd of [1, -1]) {
+  if (rnd() < 0.5) continue; const n = normal(p), off = RIVER.w / 2 + 3 + rnd() * 9; const x = p.x + n[0] * sd * off, z = p.z + n[1] * sd * off;
+  if (Math.hypot(x, z) < 205 && free(x, z, 2.2, 2.5)) tree(x, z, pick(["ash", "beech", "oak", "birch"]), 8 + rnd() * 6);
+}
 // pastures around the edge
 const PASTURE = ["#6b8f3a", "#7a9a40", "#5f8a38"];
 const pastures = [];
 for (let tries = 0; tries < 400 && pastures.length < 11; tries++) {
-  const a = rnd() * Math.PI * 2, rad = 85 + rnd() * 75, x = Math.cos(a) * rad - 5, z = Math.sin(a) * rad * 0.9 + 10, w = 28 + rnd() * 22, d = 22 + rnd() * 14;
-  if (Math.hypot(x, z) > 168) continue;
+  const a = rnd() * Math.PI * 2, rad = 85 + rnd() * 100, x = Math.cos(a) * rad - 5, z = Math.sin(a) * rad * 0.9 + 10, w = 28 + rnd() * 22, d = 22 + rnd() * 14;
+  if (Math.hypot(x, z) > 190) continue;
   if (!freeRect(x, z, w, d)) continue;
   const wheat = pastures.length % 4 === 3;
   out.push({ id: "ll_pasture_" + (pastures.length + 1), name: wheat ? "Wheat field" : "Pasture", kind: "field", pos: [r2(x), 0, r2(z)], size: [r2(w), r2(d)], color: wheat ? "#a39a4a" : pick(PASTURE), ...(wheat ? { crop: "wheat" } : {}) });
@@ -224,13 +269,16 @@ for (let tries = 0, got = 0; tries < 600 && got < 55; tries++) {
 // churchyard yew and the existing oak ring are kept as they are
 
 // ---------- road name labels ----------
-const lab = [["penlan_road", 2, "PENLAN ROAD"], ["leckwith_road", 1, "LECKWITH ROAD"], ["llandough_hill", 2, "LLANDOUGH HILL"], ["penarth_road", 2, "PENARTH ROAD"], ["barry_road", 1, "BARRY ROAD"], ["lewis_road", 2, "LEWIS ROAD"], ["church_road", 1, "CHURCH ROAD"], ["corbett_road", 1, "CORBETT ROAD"], ["greenway_close", 1, "GREENWAY CLOSE"], ["spencer_drive", 1, "SPENCER DRIVE"]];
+const lab = [["penlan_road", 3, "PENLAN ROAD"], ["leckwith_road", 2, "LECKWITH ROAD"], ["llandough_hill", 3, "LLANDOUGH HILL"], ["penarth_road", 1, "PENARTH ROAD"], ["barry_road", 1, "BARRY ROAD"], ["church_road", 1, "CHURCH ROAD"], ["corbett_road", 1, "CORBETT ROAD"], ["greenway_close", 1, "GREENWAY CLOSE"]];
 for (const [rid, seg, text] of lab) { const r = road(rid); const a = r.pts[seg - 1], b = r.pts[seg]; out.push({ id: "ll_label_" + rid, name: text, kind: "label", pos: [r2((a[0] + b[0]) / 2), 3.2, r2((a[1] + b[1]) / 2)], text, color: "#f2c94c", rot: 0 }); }
+out.push({ id: "ll_label_river", name: "River Ely label", kind: "label", pos: [90, 5, 38], text: "RIVER ELY", color: "#8fd0ff", rot: 0 });
+out.push({ id: "ll_label_north", name: "North label", kind: "label", pos: [-30, 6, -150], text: "TO LECKWITH AND CARDIFF CITY STADIUM", color: "#ffffff", rot: 0 });
+out.push({ id: "ll_label_bay", name: "Bay label", kind: "label", pos: [165, 6, 100], text: "TO CARDIFF BAY", color: "#8fd0ff", rot: 0 });
 
 // ---------- assemble ----------
 // farm and church objects first, then the linked site buildings, then the new village
 scene.objects = [...rest, ...sites, ...out];
-scene.env = { ...scene.env, camera: { pos: [95, 115, 190], target: [-10, 0, 5] } };
+scene.env = { ...scene.env, camera: { pos: [95, 145, 215], target: [-5, 0, 0] } };
 scene.meta = { ...(scene.meta || {}), version: "Llandough", layout: "llandough-schematic" };
 const pretty = raw.trimStart().startsWith("{\n");
 fs.writeFileSync(outPath, pretty ? JSON.stringify(scene, null, 1) + "\n" : JSON.stringify(scene));
