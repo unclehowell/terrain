@@ -5,24 +5,22 @@
     "20261021T222010-45220f",
     "20261021T222152-f08472",
     "20261021T225148-96cdd3",
-    "20261024T094646-226960"
+    "20261024T094646-226960",
+    "20261024T161458-3daf39",
+    "20261024T164018-0d0f0d"
   ],
-  "rev": 68,
-  "updated": "2026-10-24T09:48:27.905Z",
+  "rev": 117,
+  "updated": "2026-10-24T16:40:31.261Z",
   "last": {
-    "id": "20261024T094646-226960",
-    "started": 1792835206,
-    "last": 1792835308,
+    "id": "20261024T164018-0d0f0d",
+    "started": 1792860018,
+    "last": 1792860031,
     "edits": [
-      "The St Dochdwy's churchyard is yellow now.",
-      "The Farm pond is black now.",
-      "Removed the dragon.",
-      "Renamed it Llandough.",
-      "Saved as \"Llandough\".",
-      "Removed the Oak tree.",
-      "Added 20 oaks by the Llandough."
+      "Added a jumanji.",
+      "The Jumanji is thatch now.",
+      "Added a sheep."
     ],
     "reason": "idle",
-    "closed": "2026-10-24T09:58:28.000Z"
+    "closed": "2026-10-24T16:50:31.000Z"
   }
 }
