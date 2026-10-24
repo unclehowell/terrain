@@ -1,5 +1,5 @@
 // terrain.bucklerfamily.estate — Worker: static app, scene API, passphrase gate, voice agent. — Sion's Tab agent
-import { apply, summary, resolve, norm, parseColor, KINDS, TEXTURES, WEATHER } from "./scene-ops.js";
+import { apply, summary, resolve, norm, parseColor, KINDS, TEXTURES, WEATHER, llandoughRelayout } from "./scene-ops.js";
 import INITIAL_TXT from "./initial-scene.json";
 const INITIAL = JSON.parse(INITIAL_TXT);
 import HTML from "./index.html";
@@ -46,7 +46,20 @@ const cookie = (v, age) => `terrain_admin=${v}; Path=/; Max-Age=${age}; HttpOnly
 // ---------- storage (R2: strongly consistent, one object per thing) ----------
 async function getJ(env, key) { const o = await env.BUCKET.get(key); return o ? o.json() : null; }
 const putJ = (env, key, v, meta) => env.BUCKET.put(key, JSON.stringify(v), { httpMetadata: { contentType: "application/json" }, customMetadata: meta });
-async function load(env) { return (await getJ(env, "state.json")) || { scene: JSON.parse(JSON.stringify(INITIAL)), undo: [], redo: [], log: [] }; }
+// One-time migration: the first load after this deploy re-lays the LIVE scene as the Llandough
+// schematic (keeping every edit made so far), saves an undo step, and marks meta.layout so it
+// never runs twice. "undo" restores the previous scene. Failure leaves the scene untouched.
+async function load(env) {
+  const st = (await getJ(env, "state.json")) || { scene: JSON.parse(JSON.stringify(INITIAL)), undo: [], redo: [], log: [] };
+  if (st.scene && !(st.scene.meta && st.scene.meta.layout === "llandough-schematic")) {
+    try {
+      const before = JSON.stringify(st.scene), next = llandoughRelayout(JSON.parse(before));
+      st.undo = st.undo || []; st.undo.push(before); if (st.undo.length > UNDO_MAX) st.undo.splice(0, st.undo.length - UNDO_MAX); st.redo = [];
+      st.scene = next; await store(env, st);
+    } catch (e) { /* keep the current scene */ }
+  }
+  return st;
+}
 async function store(env, st) { st.rev = Math.max(st.rev || 0, st.scene.rev || 0) + 1; st.scene.rev = st.rev; st.scene.updated = new Date().toISOString(); await putJ(env, "state.json", st, { rev: String(st.rev), updated: st.scene.updated }); }
 const ipKey = ip => ip.replace(/[^0-9a-fA-F:.]/g, "").slice(0, 64) || "x";
 async function hits(env, ip, kind, win) { const a = (await getJ(env, `rl/${kind}/${ipKey(ip)}.json`)) || []; return a.filter(t => t > now() - win).length; }
