@@ -1,1138 +1,5286 @@
 {
-  "version": 1,
-  "rev": 59,
-  "env": {
-    "time": "afternoon",
-    "weather": "clear",
-    "camera": {
-      "pos": [
-        42,
-        34,
-        92
-      ],
-      "target": [
-        0,
-        0,
-        28
-      ]
-    }
+ "version": 1,
+ "rev": 59,
+ "env": {
+  "time": "afternoon",
+  "weather": "clear",
+  "camera": {
+   "pos": [
+    95,
+    115,
+    190
+   ],
+   "target": [
+    -10,
+    0,
+    5
+   ]
+  }
+ },
+ "objects": [
+  {
+   "id": "enemy_camp_fence",
+   "name": "Enemy camp fence",
+   "kind": "fence",
+   "points": [
+    [
+     50.2,
+     -97
+    ],
+    [
+     56,
+     -97
+    ],
+    [
+     68,
+     -97
+    ],
+    [
+     68,
+     -79
+    ],
+    [
+     44,
+     -79
+    ],
+    [
+     44,
+     -97
+    ],
+    [
+     50.2,
+     -97
+    ]
+   ],
+   "color": "#6b2b2b",
+   "height": 2.2,
+   "aliases": [
+    "enemy camp"
+   ]
   },
-  "objects": [
-    {
-      "id": "site_records",
-      "name": "Primary Records",
-      "kind": "building",
-      "roof": "gable",
-      "pos": [
-        -9.5,
-        0,
-        -15.8
-      ],
-      "rot": -180,
-      "scale": 1,
-      "size": [
-        5.6,
-        3.4,
-        4.6
-      ],
-      "color": "#215214",
-      "roofColor": "#48DB24",
-      "texture": "plain",
-      "label": {
-        "n": 7,
-        "title": "Primary Records",
-        "tag": "REGISTER"
-      },
-      "url": "https://records.bucklerfamily.estate/",
-      "aliases": [
-        "records",
-        "register"
-      ]
-    },
-    {
-      "id": "site_wayback",
-      "name": "Wayback Vault",
-      "kind": "building",
-      "roof": "tower",
-      "pos": [
-        -22.95,
-        0,
-        -27.59
-      ],
-      "rot": -50.4,
-      "scale": 1,
-      "size": [
-        3.6,
-        7.5,
-        4.6
-      ],
-      "color": "#144E52",
-      "roofColor": "#0FE1F0",
-      "texture": "plain",
-      "label": {
-        "n": 8,
-        "title": "The Wayback Vault",
-        "tag": "ARCHIVE"
-      },
-      "url": "https://wayback.bucklerfamily.estate/",
-      "aliases": [
-        "wayback",
-        "archive"
-      ]
-    },
-    {
-      "id": "site_email",
-      "name": "Post Office",
-      "kind": "building",
-      "roof": "gable",
-      "pos": [
-        -34.05,
-        0,
-        -50.59
-      ],
-      "rot": 50.4,
-      "scale": 1,
-      "size": [
-        5.6,
-        3.4,
-        4.6
-      ],
-      "color": "#145227",
-      "roofColor": "#24DB5B",
-      "texture": "plain",
-      "label": {
-        "n": 9,
-        "title": "The Post Office",
-        "tag": "CORRESPONDENCE"
-      },
-      "url": "https://email.bucklerfamily.estate/",
-      "aliases": [
-        "email",
-        "correspondence"
-      ]
-    },
-    {
-      "id": "site_authorities",
-      "name": "Public Authorities",
-      "kind": "building",
-      "roof": "flat",
-      "pos": [
-        -9.5,
-        0,
-        -31
-      ],
-      "rot": 180,
-      "scale": 1,
-      "size": [
-        5.6,
-        3.4,
-        4.6
-      ],
-      "color": "#263238",
-      "roofColor": "#B0BEC5",
-      "texture": "plain",
-      "label": {
-        "n": 10,
-        "title": "Public Authorities",
-        "tag": "WHO WAS ASKED"
-      },
-      "url": "https://authorities.bucklerfamily.estate/",
-      "aliases": [
-        "authorities",
-        "who was asked"
-      ],
-      "enemy": true
-    },
-    {
-      "id": "enemy_camp_fence",
-      "name": "Enemy camp fence",
-      "kind": "fence",
-      "points": [
-        [
-          -6.3,
-          -40
-        ],
-        [
-          -0.5,
-          -40
-        ],
-        [
-          -0.5,
-          -22
-        ],
-        [
-          -18.5,
-          -22
-        ],
-        [
-          -18.5,
-          -40
-        ],
-        [
-          -12.7,
-          -40
-        ]
-      ],
-      "color": "#6b2b2b",
-      "height": 2.2,
-      "aliases": [
-        "enemy camp"
-      ]
-    },
-    {
-      "id": "enemy_camp_sign",
-      "name": "Enemy camp sign",
-      "kind": "label",
-      "pos": [
-        -9.5,
-        3.3,
-        -40.3
-      ],
-      "text": "ENEMY CAMP",
-      "color": "#ff6b6b",
-      "rot": 180
-    },
-    {
-      "id": "site_dartboard",
-      "name": "Disclosure Dartboard",
-      "kind": "building",
-      "roof": "dome",
-      "pos": [
-        9.5,
-        0,
-        -53.2
-      ],
-      "rot": 0,
-      "scale": 1,
-      "size": [
-        5.6,
-        3.4,
-        4.6
-      ],
-      "color": "#671B6A",
-      "roofColor": "#EE4EF4",
-      "texture": "plain",
-      "label": {
-        "n": 11,
-        "title": "The Disclosure Dartboard",
-        "tag": "DISCLOSURE"
-      },
-      "url": "https://dartboard.bucklerfamily.estate/",
-      "aliases": [
-        "dartboard",
-        "disclosure"
-      ]
-    },
-    {
-      "id": "site_qa",
-      "name": "Q&A Hall",
-      "kind": "building",
-      "roof": "tower",
-      "pos": [
-        34.05,
-        0,
-        -41.41
-      ],
-      "rot": -129.6,
-      "scale": 1,
-      "size": [
-        3.6,
-        7.5,
-        4.6
-      ],
-      "color": "#14523F",
-      "roofColor": "#24DBA4",
-      "texture": "plain",
-      "label": {
-        "n": 12,
-        "title": "The Q&A Hall",
-        "tag": "FOI"
-      },
-      "url": "https://qa.bucklerfamily.estate/",
-      "aliases": [
-        "qa",
-        "foi"
-      ]
-    },
-    {
-      "id": "site_clerk",
-      "name": "Council House",
-      "kind": "building",
-      "roof": "gable",
-      "pos": [
-        22.95,
-        0,
-        -64.41
-      ],
-      "rot": 129.6,
-      "scale": 1,
-      "size": [
-        5.6,
-        3.4,
-        4.6
-      ],
-      "color": "#1B4D6A",
-      "roofColor": "#0F9DF0",
-      "texture": "plain",
-      "label": {
-        "n": 13,
-        "title": "The Council House",
-        "tag": "LOCAL COUNCIL"
-      },
-      "url": "https://clerk.bucklerfamily.estate/",
-      "aliases": [
-        "clerk",
-        "local council"
-      ]
-    },
-    {
-      "id": "site_chamber",
-      "name": "Council Chamber",
-      "kind": "building",
-      "roof": "flat",
-      "pos": [
-        9.5,
-        0,
-        -76.2
-      ],
-      "rot": 0,
-      "scale": 1,
-      "size": [
-        5.6,
-        3.4,
-        4.6
-      ],
-      "color": "#484912",
-      "roofColor": "#D5DB24",
-      "texture": "plain",
-      "label": {
-        "n": 14,
-        "title": "The Council Chamber",
-        "tag": "22 OCT 2026"
-      },
-      "url": "https://2026-10-22.bucklerfamily.estate/",
-      "aliases": [
-        "chamber",
-        "22 oct 2026"
-      ]
-    },
-    {
-      "id": "site_review",
-      "name": "Independent Review",
-      "kind": "building",
-      "roof": "dome",
-      "pos": [
-        -9.5,
-        0,
-        -61.8
-      ],
-      "rot": -180,
-      "scale": 1,
-      "size": [
-        5.6,
-        3.4,
-        4.6
-      ],
-      "color": "#1B1D6A",
-      "roofColor": "#878BF7",
-      "texture": "plain",
-      "label": {
-        "n": 15,
-        "title": "Independent Review",
-        "tag": "CHECKS"
-      },
-      "url": "https://review.bucklerfamily.estate/",
-      "aliases": [
-        "review",
-        "checks"
-      ]
-    },
-    {
-      "id": "site_research",
-      "name": "Research Library",
-      "kind": "building",
-      "roof": "dome",
-      "pos": [
-        -22.95,
-        0,
-        -73.59
-      ],
-      "rot": -50.4,
-      "scale": 1,
-      "size": [
-        5.6,
-        3.4,
-        4.6
-      ],
-      "color": "#301B6A",
-      "roofColor": "#A182F7",
-      "texture": "plain",
-      "label": {
-        "n": 16,
-        "title": "The Research Library",
-        "tag": "SEARCH"
-      },
-      "url": "https://research.bucklerfamily.estate/",
-      "aliases": [
-        "research",
-        "search"
-      ]
-    },
-    {
-      "id": "site_kissed_frogs",
-      "name": "Kissed Frogs",
-      "kind": "building",
-      "roof": "gable",
-      "pos": [
-        -34.05,
-        0,
-        -96.59
-      ],
-      "rot": 50.4,
-      "scale": 1,
-      "size": [
-        5.6,
-        3.4,
-        4.6
-      ],
-      "color": "#1B4D6A",
-      "roofColor": "#0F9DF0",
-      "texture": "plain",
-      "label": {
-        "n": 17,
-        "title": "Kissed Frogs",
-        "tag": "LEADS SET ASIDE"
-      },
-      "url": "https://greathousefarmwiki.wordpress.com/anomalies-register/bpvsbuckler-archive-research-leads/#kissed-frogs-register",
-      "aliases": [
-        "kissed-frogs",
-        "leads set aside"
-      ]
-    },
-    {
-      "id": "site_projects",
-      "name": "Project Office",
-      "kind": "building",
-      "roof": "flat",
-      "pos": [
-        -9.5,
-        0,
-        -84.8
-      ],
-      "rot": 180,
-      "scale": 1,
-      "size": [
-        5.6,
-        3.4,
-        4.6
-      ],
-      "color": "#1B356A",
-      "roofColor": "#6695F5",
-      "texture": "plain",
-      "label": {
-        "n": 18,
-        "title": "The Project Office",
-        "tag": "PRINCE2"
-      },
-      "url": "https://projects.bucklerfamily.estate/",
-      "aliases": [
-        "projects",
-        "prince2"
-      ]
-    },
-    {
-      "id": "site_film",
-      "name": "Film House",
-      "kind": "building",
-      "roof": "flat",
-      "pos": [
-        9.5,
-        0,
-        -99.2
-      ],
-      "rot": 0,
-      "scale": 1,
-      "size": [
-        5.6,
-        3.4,
-        4.6
-      ],
-      "color": "#6A1B50",
-      "roofColor": "#F55CC2",
-      "texture": "plain",
-      "label": {
-        "n": 19,
-        "title": "The Film House",
-        "tag": "FILMS & REELS"
-      },
-      "url": "https://www.facebook.com/901925066346636",
-      "aliases": [
-        "film",
-        "films & reels"
-      ]
-    },
-    {
-      "id": "site_album",
-      "name": "Farm Album",
-      "kind": "building",
-      "roof": "tower",
-      "pos": [
-        34.05,
-        0,
-        -87.41
-      ],
-      "rot": -129.6,
-      "scale": 1,
-      "size": [
-        3.6,
-        7.5,
-        4.6
-      ],
-      "color": "#6A1B50",
-      "roofColor": "#F55CC2",
-      "texture": "plain",
-      "label": {
-        "n": 20,
-        "title": "The Farm Album",
-        "tag": "PHOTOGRAPHS"
-      },
-      "url": "https://fb.bucklerfamily.estate/",
-      "aliases": [
-        "album",
-        "photographs"
-      ]
-    },
-    {
-      "id": "site_campus",
-      "name": "Estate Campus",
-      "kind": "building",
-      "roof": "gable",
-      "pos": [
-        22.95,
-        0,
-        -110.41
-      ],
-      "rot": 129.6,
-      "scale": 1,
-      "size": [
-        5.6,
-        3.4,
-        4.6
-      ],
-      "color": "#0A0A0A",
-      "roofColor": "#F2C94C",
-      "texture": "plain",
-      "label": {
-        "n": 21,
-        "title": "The Estate Campus",
-        "tag": "THE FIRST MAP"
-      },
-      "url": "https://bucklerfamily.estate/campus/",
-      "aliases": [
-        "campus",
-        "the first map"
-      ]
-    },
-    {
-      "id": "site_accounts",
-      "name": "Counting House",
-      "kind": "building",
-      "roof": "portico",
-      "pos": [
-        9.5,
-        0,
-        -122.2
-      ],
-      "rot": 0,
-      "scale": 1,
-      "size": [
-        5.6,
-        3.4,
-        4.6
-      ],
-      "color": "#6A1B38",
-      "roofColor": "#F56197",
-      "texture": "plain",
-      "label": {
-        "n": 22,
-        "title": "The Counting House",
-        "tag": "PUBLIC ACCOUNTS"
-      },
-      "url": "https://accounts.bucklerfamily.estate/",
-      "aliases": [
-        "accounts",
-        "public accounts"
-      ]
-    },
-    {
-      "id": "site_apps",
-      "name": "Case Office",
-      "kind": "building",
-      "roof": "dome",
-      "pos": [
-        -9.5,
-        0,
-        -107.8
-      ],
-      "rot": -180,
-      "scale": 1,
-      "size": [
-        5.6,
-        3.4,
-        4.6
-      ],
-      "color": "#6A1B1B",
-      "roofColor": "#FF5252",
-      "texture": "plain",
-      "label": {
-        "n": 23,
-        "title": "The Case Office",
-        "tag": "YOUR OWN CASE"
-      },
-      "url": "https://app.bucklerfamily.estate/",
-      "aliases": [
-        "apps",
-        "your own case"
-      ]
-    },
-    {
-      "id": "site_shop",
-      "name": "Gift Shop & Marketplace",
-      "kind": "building",
-      "roof": "awning",
-      "pos": [
-        -28.5,
-        0,
-        -122.2
-      ],
-      "rot": 0,
-      "scale": 1,
-      "size": [
-        5.6,
-        3.4,
-        4.6
-      ],
-      "color": "#0A0A0A",
-      "roofColor": "#F2C94C",
-      "texture": "plain",
-      "label": {
-        "n": 24,
-        "title": "Gift Shop & Marketplace",
-        "tag": "JOURNEY'S END"
-      },
-      "url": "https://bucklerfamily.estate/#shop",
-      "aliases": [
-        "shop",
-        "journey's end"
-      ]
-    },
-    {
-      "id": "stone_path",
-      "name": "Stepping-stone path",
-      "kind": "path",
-      "points": [
-        [
-          -28.5,
-          14
-        ],
-        [
-          -28.5,
-          0
-        ],
-        [
-          -9.5,
-          0
-        ],
-        [
-          9.5,
-          0
-        ],
-        [
-          28.5,
-          0
-        ],
-        [
-          28.5,
-          -23
-        ],
-        [
-          9.5,
-          -23
-        ],
-        [
-          -9.5,
-          -23
-        ],
-        [
-          -28.5,
-          -23
-        ],
-        [
-          -28.5,
-          -46
-        ],
-        [
-          -9.5,
-          -46
-        ],
-        [
-          9.5,
-          -46
-        ],
-        [
-          28.5,
-          -46
-        ],
-        [
-          28.5,
-          -69
-        ],
-        [
-          9.5,
-          -69
-        ],
-        [
-          -9.5,
-          -69
-        ],
-        [
-          -28.5,
-          -69
-        ],
-        [
-          -28.5,
-          -92
-        ],
-        [
-          -9.5,
-          -92
-        ],
-        [
-          9.5,
-          -92
-        ],
-        [
-          28.5,
-          -92
-        ],
-        [
-          28.5,
-          -115
-        ],
-        [
-          9.5,
-          -115
-        ],
-        [
-          -9.5,
-          -115
-        ],
-        [
-          -28.5,
-          -115
-        ]
-      ],
-      "width": 1.6,
-      "color": "#4a4d52",
-      "texture": "stone"
-    },
-    {
-      "id": "farmyard_wall",
-      "name": "Farmyard wall",
-      "kind": "wall",
-      "points": [
-        [
-          -20,
-          29
-        ],
-        [
-          -20,
-          44
-        ],
-        [
-          8,
-          44
-        ]
-      ],
-      "color": "#8a8d8f",
-      "height": 1.2,
-      "texture": "stone"
-    },
-    {
-      "id": "church",
-      "name": "St Dochdwy's Church",
-      "kind": "building",
-      "roof": "gable",
-      "pos": [
-        0,
-        0,
-        62
-      ],
-      "rot": 0,
-      "scale": 1,
-      "size": [
-        6,
-        6,
-        14
-      ],
-      "color": "#9a978f",
-      "roofColor": "#3a3f45",
-      "texture": "stone",
-      "tower": true,
-      "aliases": [
-        "church",
-        "st dochdwy",
-        "saint dochdwy",
-        "dochdwy"
-      ]
-    },
-    {
-      "id": "churchyard",
-      "name": "St Dochdwy's churchyard",
-      "kind": "field",
-      "pos": [
-        0,
-        0,
-        62
-      ],
-      "size": [
-        30,
-        26
-      ],
-      "color": "#3f6b3a",
-      "aliases": [
-        "churchyard",
-        "graveyard",
-        "cemetery"
-      ]
-    },
-    {
-      "id": "churchyard_wall",
-      "name": "Churchyard wall",
-      "kind": "wall",
-      "points": [
-        [
-          -15,
-          49
-        ],
-        [
-          -2,
-          49
-        ]
-      ],
-      "color": "#8a8d8f",
-      "height": 1.4,
-      "texture": "stone",
-      "aliases": [
-        "churchyard wall"
-      ]
-    },
-    {
-      "id": "churchyard_wall_2",
-      "name": "Churchyard wall (east)",
-      "kind": "wall",
-      "points": [
-        [
-          2,
-          49
-        ],
-        [
-          15,
-          49
-        ],
-        [
-          15,
-          75
-        ],
-        [
-          -15,
-          75
-        ],
-        [
-          -15,
-          49
-        ]
-      ],
-      "color": "#8a8d8f",
-      "height": 1.4,
-      "texture": "stone"
-    },
-    {
-      "id": "farm_field_west",
-      "name": "West field",
-      "kind": "field",
-      "pos": [
-        -36,
-        0,
-        40
-      ],
-      "size": [
-        24,
-        30
-      ],
-      "color": "#9a978f",
-      "aliases": [
-        "west field"
-      ],
-      "texture": "stone"
-    },
-    {
-      "id": "farm_field_east",
-      "name": "East field",
-      "kind": "field",
-      "pos": [
-        32,
-        0,
-        40
-      ],
-      "size": [
-        24,
-        30
-      ],
-      "color": "#a39a4a",
-      "crop": "wheat",
-      "aliases": [
-        "east field",
-        "wheat field"
-      ]
-    },
-    {
-      "id": "farm_pond",
-      "name": "Farm pond",
-      "kind": "water",
-      "pos": [
-        15,
-        0,
-        24
-      ],
-      "radius": 4,
-      "color": "#2d6a8a",
-      "aliases": [
-        "pond",
-        "water"
-      ]
-    },
-    {
-      "id": "oak_1",
-      "name": "Old oak",
-      "kind": "tree",
-      "species": "oak",
-      "pos": [
-        -9,
-        0,
-        24
-      ],
-      "height": 9,
-      "color": "#b8963e",
-      "texture": "thatch"
-    },
-    {
-      "id": "yew_1",
-      "name": "Churchyard yew",
-      "kind": "tree",
-      "species": "yew",
-      "pos": [
-        10,
-        0,
-        70
-      ],
-      "height": 7,
-      "color": "#b8963e",
-      "aliases": [
-        "yew"
-      ],
-      "texture": "thatch"
-    },
-    {
-      "id": "pine_1",
-      "name": "Pine",
-      "kind": "tree",
-      "species": "pine",
-      "pos": [
-        22,
-        0,
-        10
-      ],
-      "height": 10,
-      "color": "#8b5a2b",
-      "texture": "wood"
-    },
-    {
-      "id": "farm_sign",
-      "name": "Great House Farm sign",
-      "kind": "label",
-      "pos": [
-        0,
-        6.5,
-        22
-      ],
-      "text": "GREAT HOUSE FARM · TŶ MAWR",
-      "color": "#f2c94c",
-      "rot": 0
-    },
-    {
-      "id": "farm_lane",
-      "name": "Farm lane",
-      "kind": "path",
-      "points": [
-        [
-          0,
-          14
-        ],
-        [
-          0,
-          30.5
-        ]
-      ],
-      "width": 3,
-      "color": "#6b5a45",
-      "texture": "gravel"
-    },
-    {
-      "id": "church_lane",
-      "name": "Church lane",
-      "kind": "path",
-      "points": [
-        [
-          0,
-          37.5
-        ],
-        [
-          0,
-          55
-        ]
-      ],
-      "width": 2,
-      "color": "#6b5a45",
-      "texture": "gravel"
-    },
-    {
-      "kind": "marker",
-      "id": "hill",
-      "name": "Hill",
-      "pos": [
-        0,
-        0,
-        -16
-      ],
-      "rot": 0,
-      "scale": 1
-    },
-    {
-      "kind": "water",
-      "radius": 4,
-      "id": "pond",
-      "name": "Pond",
-      "pos": [
-        0,
-        0,
-        54
-      ],
-      "rot": 0,
-      "scale": 1
-    },
-    {
-      "kind": "tree",
-      "species": "oak",
-      "height": 9,
-      "id": "oak_tree",
-      "name": "Oak tree",
-      "pos": [
-        30,
-        0,
-        34
-      ],
-      "rot": 0,
-      "scale": 1
-    },
-    {
-      "kind": "path",
-      "width": 1.6,
-      "color": "#8a7f70",
-      "texture": "gravel",
-      "id": "path",
-      "name": "Path",
-      "points": [
-        [
-          0,
-          34
-        ],
-        [
-          0,
-          62
-        ]
-      ]
-    },
-    {
-      "kind": "tree",
-      "species": "oak",
-      "height": 9,
-      "id": "oak_tree_2",
-      "name": "Oak tree",
-      "pos": [
-        10,
-        0,
-        65
-      ],
-      "rot": 0,
-      "scale": 1
-    },
-    {
-      "kind": "marker",
-      "id": "button",
-      "name": "Button",
-      "text": "Full screen",
-      "pos": [
-        30,
-        0,
-        27.35
-      ],
-      "rot": 0,
-      "scale": 1
-    },
-    {
-      "kind": "marker",
-      "id": "button_2",
-      "name": "Button",
-      "pos": [
-        30,
-        0,
-        27.35
-      ],
-      "rot": 0,
-      "scale": 1
-    },
-    {
-      "kind": "marker",
-      "id": "button_3",
-      "name": "Button",
-      "pos": [
-        30,
-        0,
-        27.35
-      ],
-      "rot": 0,
-      "scale": 1
-    },
-    {
-      "kind": "marker",
-      "color": "#e53935",
-      "id": "dragon",
-      "name": "dragon",
-      "texture": "plain",
-      "pos": [
-        3.71,
-        0,
-        2.54
-      ],
-      "rot": 0,
-      "scale": 10
-    }
-  ],
-  "meta": {
-    "version": "original",
-    "camera_seq": 22414,
-    "last": "dragon"
+  {
+   "id": "enemy_camp_sign",
+   "name": "Enemy camp sign",
+   "kind": "label",
+   "pos": [
+    56,
+    3.3,
+    -78.7
+   ],
+   "text": "ENEMY CAMP",
+   "color": "#ff6b6b",
+   "rot": 180
   },
-  "updated": "2026-10-21T22:51:47.973Z"
+  {
+   "id": "farmyard_wall",
+   "name": "Farmyard wall",
+   "kind": "wall",
+   "points": [
+    [
+     -20,
+     29
+    ],
+    [
+     -20,
+     44
+    ],
+    [
+     8,
+     44
+    ]
+   ],
+   "color": "#8a8d8f",
+   "height": 1.2,
+   "texture": "stone"
+  },
+  {
+   "id": "church",
+   "name": "St Dochdwy's Church",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    0,
+    0,
+    62
+   ],
+   "rot": 0,
+   "scale": 1,
+   "size": [
+    6,
+    6,
+    14
+   ],
+   "color": "#9a978f",
+   "roofColor": "#3a3f45",
+   "texture": "stone",
+   "tower": true,
+   "aliases": [
+    "church",
+    "st dochdwy",
+    "saint dochdwy",
+    "dochdwy"
+   ]
+  },
+  {
+   "id": "churchyard",
+   "name": "St Dochdwy's churchyard",
+   "kind": "field",
+   "pos": [
+    0,
+    0,
+    62
+   ],
+   "size": [
+    30,
+    26
+   ],
+   "color": "#3f6b3a",
+   "aliases": [
+    "churchyard",
+    "graveyard",
+    "cemetery"
+   ]
+  },
+  {
+   "id": "churchyard_wall",
+   "name": "Churchyard wall",
+   "kind": "wall",
+   "points": [
+    [
+     -15,
+     49
+    ],
+    [
+     -2,
+     49
+    ]
+   ],
+   "color": "#8a8d8f",
+   "height": 1.4,
+   "texture": "stone",
+   "aliases": [
+    "churchyard wall"
+   ]
+  },
+  {
+   "id": "churchyard_wall_2",
+   "name": "Churchyard wall (east)",
+   "kind": "wall",
+   "points": [
+    [
+     2,
+     49
+    ],
+    [
+     15,
+     49
+    ],
+    [
+     15,
+     75
+    ],
+    [
+     -15,
+     75
+    ],
+    [
+     -15,
+     49
+    ]
+   ],
+   "color": "#8a8d8f",
+   "height": 1.4,
+   "texture": "stone"
+  },
+  {
+   "id": "farm_field_west",
+   "name": "West field",
+   "kind": "field",
+   "pos": [
+    -36,
+    0,
+    40
+   ],
+   "size": [
+    24,
+    30
+   ],
+   "color": "#9a978f",
+   "aliases": [
+    "west field"
+   ],
+   "texture": "stone"
+  },
+  {
+   "id": "farm_field_east",
+   "name": "East field",
+   "kind": "field",
+   "pos": [
+    32,
+    0,
+    40
+   ],
+   "size": [
+    24,
+    30
+   ],
+   "color": "#a39a4a",
+   "crop": "wheat",
+   "aliases": [
+    "east field",
+    "wheat field"
+   ]
+  },
+  {
+   "id": "farm_pond",
+   "name": "Farm pond",
+   "kind": "water",
+   "pos": [
+    15,
+    0,
+    24
+   ],
+   "radius": 4,
+   "color": "#2d6a8a",
+   "aliases": [
+    "pond",
+    "water"
+   ]
+  },
+  {
+   "id": "oak_1",
+   "name": "Old oak",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    -9,
+    0,
+    24
+   ],
+   "height": 9,
+   "color": "#b8963e",
+   "texture": "thatch"
+  },
+  {
+   "id": "yew_1",
+   "name": "Churchyard yew",
+   "kind": "tree",
+   "species": "yew",
+   "pos": [
+    10,
+    0,
+    70
+   ],
+   "height": 7,
+   "color": "#b8963e",
+   "aliases": [
+    "yew"
+   ],
+   "texture": "thatch"
+  },
+  {
+   "id": "pine_1",
+   "name": "Pine",
+   "kind": "tree",
+   "species": "pine",
+   "pos": [
+    22,
+    0,
+    10
+   ],
+   "height": 10,
+   "color": "#8b5a2b",
+   "texture": "wood"
+  },
+  {
+   "id": "farm_sign",
+   "name": "Great House Farm sign",
+   "kind": "label",
+   "pos": [
+    0,
+    6.5,
+    22
+   ],
+   "text": "GREAT HOUSE FARM · TŶ MAWR",
+   "color": "#f2c94c",
+   "rot": 0
+  },
+  {
+   "id": "farm_lane",
+   "name": "Farm lane",
+   "kind": "path",
+   "points": [
+    [
+     0,
+     14
+    ],
+    [
+     0,
+     30.5
+    ]
+   ],
+   "width": 3,
+   "color": "#6b5a45",
+   "texture": "gravel"
+  },
+  {
+   "id": "church_lane",
+   "name": "Church lane",
+   "kind": "path",
+   "points": [
+    [
+     0,
+     37.5
+    ],
+    [
+     0,
+     55
+    ]
+   ],
+   "width": 2,
+   "color": "#6b5a45",
+   "texture": "gravel"
+  },
+  {
+   "kind": "water",
+   "radius": 4,
+   "id": "pond",
+   "name": "Pond",
+   "pos": [
+    0,
+    0,
+    54
+   ],
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "kind": "tree",
+   "species": "oak",
+   "height": 9,
+   "id": "oak_tree",
+   "name": "Oak tree",
+   "pos": [
+    30,
+    0,
+    34
+   ],
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "kind": "path",
+   "width": 1.6,
+   "color": "#8a7f70",
+   "texture": "gravel",
+   "id": "path",
+   "name": "Path",
+   "points": [
+    [
+     0,
+     34
+    ],
+    [
+     0,
+     62
+    ]
+   ]
+  },
+  {
+   "kind": "tree",
+   "species": "oak",
+   "height": 9,
+   "id": "oak_tree_2",
+   "name": "Oak tree",
+   "pos": [
+    10,
+    0,
+    65
+   ],
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "kind": "marker",
+   "color": "#e53935",
+   "id": "dragon",
+   "name": "dragon",
+   "texture": "plain",
+   "pos": [
+    3.71,
+    0,
+    2.54
+   ],
+   "rot": 0,
+   "scale": 10
+  },
+  {
+   "id": "site_records",
+   "name": "Primary Records",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    58.74,
+    0,
+    -29.78
+   ],
+   "rot": -21.8,
+   "scale": 1,
+   "size": [
+    5.6,
+    3.4,
+    4.6
+   ],
+   "color": "#215214",
+   "roofColor": "#48DB24",
+   "texture": "plain",
+   "label": {
+    "n": 7,
+    "title": "Primary Records",
+    "tag": "REGISTER"
+   },
+   "url": "https://records.bucklerfamily.estate/",
+   "aliases": [
+    "records",
+    "register"
+   ]
+  },
+  {
+   "id": "site_wayback",
+   "name": "Wayback Vault",
+   "kind": "building",
+   "roof": "tower",
+   "pos": [
+    -123.44,
+    0,
+    -58.57
+   ],
+   "rot": 229.4,
+   "scale": 1,
+   "size": [
+    3.6,
+    7.5,
+    4.6
+   ],
+   "color": "#144E52",
+   "roofColor": "#0FE1F0",
+   "texture": "plain",
+   "label": {
+    "n": 8,
+    "title": "The Wayback Vault",
+    "tag": "ARCHIVE"
+   },
+   "url": "https://wayback.bucklerfamily.estate/",
+   "aliases": [
+    "wayback",
+    "archive"
+   ]
+  },
+  {
+   "id": "site_email",
+   "name": "Post Office",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -92.56,
+    0,
+    -53.43
+   ],
+   "rot": 49.4,
+   "scale": 1,
+   "size": [
+    5.6,
+    3.4,
+    4.6
+   ],
+   "color": "#145227",
+   "roofColor": "#24DB5B",
+   "texture": "plain",
+   "label": {
+    "n": 9,
+    "title": "The Post Office",
+    "tag": "CORRESPONDENCE"
+   },
+   "url": "https://email.bucklerfamily.estate/",
+   "aliases": [
+    "email",
+    "correspondence"
+   ]
+  },
+  {
+   "id": "site_authorities",
+   "name": "Public Authorities",
+   "kind": "building",
+   "roof": "flat",
+   "pos": [
+    56,
+    0,
+    -88
+   ],
+   "rot": 180,
+   "scale": 1,
+   "size": [
+    5.6,
+    3.4,
+    4.6
+   ],
+   "color": "#263238",
+   "roofColor": "#B0BEC5",
+   "texture": "plain",
+   "label": {
+    "n": 10,
+    "title": "Public Authorities",
+    "tag": "WHO WAS ASKED"
+   },
+   "url": "https://authorities.bucklerfamily.estate/",
+   "aliases": [
+    "authorities",
+    "who was asked"
+   ],
+   "enemy": true
+  },
+  {
+   "id": "site_dartboard",
+   "name": "Disclosure Dartboard",
+   "kind": "building",
+   "roof": "dome",
+   "pos": [
+    -98.94,
+    0,
+    -30.4
+   ],
+   "rot": 242.78,
+   "scale": 1,
+   "size": [
+    5.6,
+    3.4,
+    4.6
+   ],
+   "color": "#671B6A",
+   "roofColor": "#EE4EF4",
+   "texture": "plain",
+   "label": {
+    "n": 11,
+    "title": "The Disclosure Dartboard",
+    "tag": "DISCLOSURE"
+   },
+   "url": "https://dartboard.bucklerfamily.estate/",
+   "aliases": [
+    "dartboard",
+    "disclosure"
+   ]
+  },
+  {
+   "id": "site_qa",
+   "name": "Q&A Hall",
+   "kind": "building",
+   "roof": "tower",
+   "pos": [
+    -58.87,
+    0,
+    22.46
+   ],
+   "rot": 82.41,
+   "scale": 1,
+   "size": [
+    3.6,
+    7.5,
+    4.6
+   ],
+   "color": "#14523F",
+   "roofColor": "#24DBA4",
+   "texture": "plain",
+   "label": {
+    "n": 12,
+    "title": "The Q&A Hall",
+    "tag": "FOI"
+   },
+   "url": "https://qa.bucklerfamily.estate/",
+   "aliases": [
+    "qa",
+    "foi"
+   ]
+  },
+  {
+   "id": "site_clerk",
+   "name": "Council House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -56.68,
+    0,
+    93.15
+   ],
+   "rot": 247.22,
+   "scale": 1,
+   "size": [
+    5.6,
+    3.4,
+    4.6
+   ],
+   "color": "#1B4D6A",
+   "roofColor": "#0F9DF0",
+   "texture": "plain",
+   "label": {
+    "n": 13,
+    "title": "The Council House",
+    "tag": "LOCAL COUNCIL"
+   },
+   "url": "https://clerk.bucklerfamily.estate/",
+   "aliases": [
+    "clerk",
+    "local council"
+   ]
+  },
+  {
+   "id": "site_chamber",
+   "name": "Council Chamber",
+   "kind": "building",
+   "roof": "flat",
+   "pos": [
+    -28.9,
+    0,
+    115.44
+   ],
+   "rot": 209.05,
+   "scale": 1,
+   "size": [
+    5.6,
+    3.4,
+    4.6
+   ],
+   "color": "#484912",
+   "roofColor": "#D5DB24",
+   "texture": "plain",
+   "label": {
+    "n": 14,
+    "title": "The Council Chamber",
+    "tag": "22 OCT 2026"
+   },
+   "url": "https://2026-10-22.bucklerfamily.estate/",
+   "aliases": [
+    "chamber",
+    "22 oct 2026"
+   ]
+  },
+  {
+   "id": "site_review",
+   "name": "Independent Review",
+   "kind": "building",
+   "roof": "dome",
+   "pos": [
+    1.84,
+    0,
+    109.53
+   ],
+   "rot": 29.05,
+   "scale": 1,
+   "size": [
+    5.6,
+    3.4,
+    4.6
+   ],
+   "color": "#1B1D6A",
+   "roofColor": "#878BF7",
+   "texture": "plain",
+   "label": {
+    "n": 15,
+    "title": "Independent Review",
+    "tag": "CHECKS"
+   },
+   "url": "https://review.bucklerfamily.estate/",
+   "aliases": [
+    "review",
+    "checks"
+   ]
+  },
+  {
+   "id": "site_research",
+   "name": "Research Library",
+   "kind": "building",
+   "roof": "dome",
+   "pos": [
+    -1.81,
+    0,
+    129.89
+   ],
+   "rot": 190.39,
+   "scale": 1,
+   "size": [
+    5.6,
+    3.4,
+    4.6
+   ],
+   "color": "#301B6A",
+   "roofColor": "#A182F7",
+   "texture": "plain",
+   "label": {
+    "n": 16,
+    "title": "The Research Library",
+    "tag": "SEARCH"
+   },
+   "url": "https://research.bucklerfamily.estate/",
+   "aliases": [
+    "research",
+    "search"
+   ]
+  },
+  {
+   "id": "site_kissed_frogs",
+   "name": "Kissed Frogs",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    25.42,
+    0,
+    114.44
+   ],
+   "rot": 10.39,
+   "scale": 1,
+   "size": [
+    5.6,
+    3.4,
+    4.6
+   ],
+   "color": "#1B4D6A",
+   "roofColor": "#0F9DF0",
+   "texture": "plain",
+   "label": {
+    "n": 17,
+    "title": "Kissed Frogs",
+    "tag": "LEADS SET ASIDE"
+   },
+   "url": "https://greathousefarmwiki.wordpress.com/anomalies-register/bpvsbuckler-archive-research-leads/#kissed-frogs-register",
+   "aliases": [
+    "kissed-frogs",
+    "leads set aside"
+   ]
+  },
+  {
+   "id": "site_projects",
+   "name": "Project Office",
+   "kind": "building",
+   "roof": "flat",
+   "pos": [
+    45.4,
+    0,
+    138.54
+   ],
+   "rot": 190.39,
+   "scale": 1,
+   "size": [
+    5.6,
+    3.4,
+    4.6
+   ],
+   "color": "#1B356A",
+   "roofColor": "#6695F5",
+   "texture": "plain",
+   "label": {
+    "n": 18,
+    "title": "The Project Office",
+    "tag": "PRINCE2"
+   },
+   "url": "https://projects.bucklerfamily.estate/",
+   "aliases": [
+    "projects",
+    "prince2"
+   ]
+  },
+  {
+   "id": "site_film",
+   "name": "Film House",
+   "kind": "building",
+   "roof": "flat",
+   "pos": [
+    59.25,
+    0,
+    120.98
+   ],
+   "rot": -4.29,
+   "scale": 1,
+   "size": [
+    5.6,
+    3.4,
+    4.6
+   ],
+   "color": "#6A1B50",
+   "roofColor": "#F55CC2",
+   "texture": "plain",
+   "label": {
+    "n": 19,
+    "title": "The Film House",
+    "tag": "FILMS & REELS"
+   },
+   "url": "https://www.facebook.com/901925066346636",
+   "aliases": [
+    "film",
+    "films & reels"
+   ]
+  },
+  {
+   "id": "site_album",
+   "name": "Farm Album",
+   "kind": "building",
+   "roof": "tower",
+   "pos": [
+    -97.11,
+    0,
+    -93.93
+   ],
+   "rot": -29.05,
+   "scale": 1,
+   "size": [
+    3.6,
+    7.5,
+    4.6
+   ],
+   "color": "#6A1B50",
+   "roofColor": "#F55CC2",
+   "texture": "plain",
+   "label": {
+    "n": 20,
+    "title": "The Farm Album",
+    "tag": "PHOTOGRAPHS"
+   },
+   "url": "https://fb.bucklerfamily.estate/",
+   "aliases": [
+    "album",
+    "photographs"
+   ]
+  },
+  {
+   "id": "site_campus",
+   "name": "Estate Campus",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -72.11,
+    0,
+    -85.64
+   ],
+   "rot": 162.82,
+   "scale": 1,
+   "size": [
+    5.6,
+    3.4,
+    4.6
+   ],
+   "color": "#0A0A0A",
+   "roofColor": "#F2C94C",
+   "texture": "plain",
+   "label": {
+    "n": 21,
+    "title": "The Estate Campus",
+    "tag": "THE FIRST MAP"
+   },
+   "url": "https://bucklerfamily.estate/campus/",
+   "aliases": [
+    "campus",
+    "the first map"
+   ]
+  },
+  {
+   "id": "site_accounts",
+   "name": "Counting House",
+   "kind": "building",
+   "roof": "portico",
+   "pos": [
+    -54.96,
+    0,
+    -111.45
+   ],
+   "rot": -17.18,
+   "scale": 1,
+   "size": [
+    5.6,
+    3.4,
+    4.6
+   ],
+   "color": "#6A1B38",
+   "roofColor": "#F56197",
+   "texture": "plain",
+   "label": {
+    "n": 22,
+    "title": "The Counting House",
+    "tag": "PUBLIC ACCOUNTS"
+   },
+   "url": "https://accounts.bucklerfamily.estate/",
+   "aliases": [
+    "accounts",
+    "public accounts"
+   ]
+  },
+  {
+   "id": "site_apps",
+   "name": "Case Office",
+   "kind": "building",
+   "roof": "dome",
+   "pos": [
+    -26.25,
+    0,
+    -99.81
+   ],
+   "rot": 162.82,
+   "scale": 1,
+   "size": [
+    5.6,
+    3.4,
+    4.6
+   ],
+   "color": "#6A1B1B",
+   "roofColor": "#FF5252",
+   "texture": "plain",
+   "label": {
+    "n": 23,
+    "title": "The Case Office",
+    "tag": "YOUR OWN CASE"
+   },
+   "url": "https://app.bucklerfamily.estate/",
+   "aliases": [
+    "apps",
+    "your own case"
+   ]
+  },
+  {
+   "id": "site_shop",
+   "name": "Gift Shop & Marketplace",
+   "kind": "building",
+   "roof": "awning",
+   "pos": [
+    -22.08,
+    0,
+    -121.58
+   ],
+   "rot": -12.23,
+   "scale": 1,
+   "size": [
+    5.6,
+    3.4,
+    4.6
+   ],
+   "color": "#0A0A0A",
+   "roofColor": "#F2C94C",
+   "texture": "plain",
+   "label": {
+    "n": 24,
+    "title": "Gift Shop & Marketplace",
+    "tag": "JOURNEY'S END"
+   },
+   "url": "https://bucklerfamily.estate/#shop",
+   "aliases": [
+    "shop",
+    "journey's end"
+   ]
+  },
+  {
+   "id": "ll_penlan_road",
+   "name": "Penlan Road (B4267)",
+   "kind": "path",
+   "points": [
+    [
+     -120,
+     -70
+    ],
+    [
+     -90,
+     -35
+    ],
+    [
+     -72,
+     0
+    ],
+    [
+     -66,
+     45
+    ],
+    [
+     -45,
+     95
+    ],
+    [
+     0,
+     120
+    ],
+    [
+     60,
+     131
+    ],
+    [
+     100,
+     128
+    ]
+   ],
+   "width": 5.5,
+   "color": "#3a3d40"
+  },
+  {
+   "id": "ll_leckwith_road",
+   "name": "Leckwith Road",
+   "kind": "path",
+   "points": [
+    [
+     -120,
+     -70
+    ],
+    [
+     -135,
+     -105
+    ],
+    [
+     -150,
+     -145
+    ]
+   ],
+   "width": 5,
+   "color": "#3a3d40"
+  },
+  {
+   "id": "ll_llandough_hill",
+   "name": "Llandough Hill",
+   "kind": "path",
+   "points": [
+    [
+     -120,
+     -70
+    ],
+    [
+     -75,
+     -95
+    ],
+    [
+     -20,
+     -112
+    ],
+    [
+     40,
+     -125
+    ],
+    [
+     100,
+     -132
+    ],
+    [
+     140,
+     -128
+    ]
+   ],
+   "width": 5,
+   "color": "#3a3d40"
+  },
+  {
+   "id": "ll_penarth_road",
+   "name": "Penarth Road (A4160)",
+   "kind": "path",
+   "points": [
+    [
+     140,
+     -128
+    ],
+    [
+     150,
+     -70
+    ],
+    [
+     150,
+     0
+    ],
+    [
+     145,
+     70
+    ],
+    [
+     130,
+     120
+    ]
+   ],
+   "width": 7,
+   "color": "#3a3d40"
+  },
+  {
+   "id": "ll_barry_road",
+   "name": "Barry Road (A4055)",
+   "kind": "path",
+   "points": [
+    [
+     30,
+     155
+    ],
+    [
+     100,
+     128
+    ],
+    [
+     158,
+     100
+    ]
+   ],
+   "width": 7,
+   "color": "#3a3d40"
+  },
+  {
+   "id": "ll_lewis_road",
+   "name": "Lewis Road",
+   "kind": "path",
+   "points": [
+    [
+     -81,
+     -18
+    ],
+    [
+     -40,
+     -8
+    ],
+    [
+     0,
+     -6
+    ],
+    [
+     40,
+     -12
+    ],
+    [
+     80,
+     -28
+    ]
+   ],
+   "width": 4.5,
+   "color": "#3a3d40"
+  },
+  {
+   "id": "ll_church_road",
+   "name": "Church Road",
+   "kind": "path",
+   "points": [
+    [
+     -72,
+     0
+    ],
+    [
+     -45,
+     10
+    ],
+    [
+     -20,
+     14
+    ],
+    [
+     0,
+     14
+    ]
+   ],
+   "width": 3.5,
+   "color": "#3a3d40"
+  },
+  {
+   "id": "ll_greenway_close",
+   "name": "Greenway Close",
+   "kind": "path",
+   "points": [
+    [
+     8,
+     -6
+    ],
+    [
+     8,
+     -28
+    ],
+    [
+     2,
+     -44
+    ]
+   ],
+   "width": 4,
+   "color": "#3a3d40"
+  },
+  {
+   "id": "ll_spencer_drive",
+   "name": "Spencer Drive",
+   "kind": "path",
+   "points": [
+    [
+     -69,
+     22
+    ],
+    [
+     -90,
+     32
+    ],
+    [
+     -100,
+     44
+    ]
+   ],
+   "width": 4,
+   "color": "#3a3d40"
+  },
+  {
+   "id": "ll_corbett_road",
+   "name": "Corbett Road",
+   "kind": "path",
+   "points": [
+    [
+     -66,
+     48
+    ],
+    [
+     -100,
+     60
+    ],
+    [
+     -132,
+     66
+    ]
+   ],
+   "width": 4,
+   "color": "#3a3d40"
+  },
+  {
+   "id": "ll_hospital_drive",
+   "name": "Hospital drive",
+   "kind": "path",
+   "points": [
+    [
+     -72,
+     4
+    ],
+    [
+     -98,
+     6
+    ]
+   ],
+   "width": 4.5,
+   "color": "#3a3d40"
+  },
+  {
+   "id": "ll_authorities_track",
+   "name": "Authorities track",
+   "kind": "path",
+   "points": [
+    [
+     56,
+     -70
+    ],
+    [
+     56,
+     -128
+    ]
+   ],
+   "width": 3,
+   "color": "#6b5a45",
+   "texture": "gravel"
+  },
+  {
+   "id": "ll_hospital_1",
+   "name": "Hospital main block",
+   "kind": "building",
+   "roof": "flat",
+   "pos": [
+    -122,
+    0,
+    -8
+   ],
+   "rot": 0,
+   "scale": 1,
+   "size": [
+    30,
+    10,
+    14
+   ],
+   "color": "#c9c2b0",
+   "roofColor": "#8a8d8f",
+   "texture": "plaster"
+  },
+  {
+   "id": "ll_hospital_2",
+   "name": "Hospital ward block",
+   "kind": "building",
+   "roof": "flat",
+   "pos": [
+    -124,
+    0,
+    14
+   ],
+   "rot": 0,
+   "scale": 1,
+   "size": [
+    24,
+    9,
+    12
+   ],
+   "color": "#cdbfa4",
+   "roofColor": "#8a8d8f",
+   "texture": "plaster"
+  },
+  {
+   "id": "ll_hospital_3",
+   "name": "Hospital tower",
+   "kind": "building",
+   "roof": "flat",
+   "pos": [
+    -104,
+    0,
+    4
+   ],
+   "rot": 0,
+   "scale": 1,
+   "size": [
+    10,
+    17,
+    10
+   ],
+   "color": "#d8d2c0",
+   "roofColor": "#6b6f73",
+   "texture": "plaster"
+  },
+  {
+   "id": "ll_hospital_4",
+   "name": "Hospital outpatients",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -100,
+    0,
+    -14
+   ],
+   "rot": 0,
+   "scale": 1,
+   "size": [
+    14,
+    6,
+    10
+   ],
+   "color": "#b9715a",
+   "roofColor": "#4d5862",
+   "texture": "plaster"
+  },
+  {
+   "id": "ll_hospital_carpark",
+   "name": "Hospital car park",
+   "kind": "field",
+   "pos": [
+    -120,
+    0,
+    38
+   ],
+   "size": [
+    26,
+    14
+   ],
+   "color": "#55585c"
+  },
+  {
+   "id": "ll_hospital_label",
+   "name": "Hospital label",
+   "kind": "label",
+   "pos": [
+    -118,
+    19,
+    2
+   ],
+   "text": "UNIVERSITY HOSPITAL LLANDOUGH",
+   "color": "#ffffff",
+   "rot": 0
+  },
+  {
+   "id": "ll_school",
+   "name": "Primary school",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    66,
+    0,
+    8
+   ],
+   "rot": 0,
+   "scale": 1,
+   "size": [
+    18,
+    4.5,
+    10
+   ],
+   "color": "#b9715a",
+   "roofColor": "#7a4b32",
+   "texture": "brick"
+  },
+  {
+   "id": "ll_school_playground",
+   "name": "School playground",
+   "kind": "field",
+   "pos": [
+    66,
+    0,
+    24
+   ],
+   "size": [
+    18,
+    12
+   ],
+   "color": "#6b6f73"
+  },
+  {
+   "id": "ll_school_label",
+   "name": "School label",
+   "kind": "label",
+   "pos": [
+    66,
+    8,
+    8
+   ],
+   "text": "PRIMARY SCHOOL",
+   "color": "#ffffff",
+   "rot": 0
+  },
+  {
+   "id": "ll_kgv_field",
+   "name": "King George V Playing Field",
+   "kind": "field",
+   "pos": [
+    33,
+    0,
+    -30
+   ],
+   "size": [
+    36,
+    26
+   ],
+   "color": "#5fa043"
+  },
+  {
+   "id": "ll_kgv_fence",
+   "name": "Playing field fence",
+   "kind": "fence",
+   "points": [
+    [
+     15,
+     -17
+    ],
+    [
+     51,
+     -17
+    ],
+    [
+     51,
+     -43
+    ],
+    [
+     15,
+     -43
+    ],
+    [
+     15,
+     -17.01
+    ]
+   ],
+   "color": "#8b5a2b",
+   "height": 1.2
+  },
+  {
+   "id": "ll_kgv_label",
+   "name": "Playing field label",
+   "kind": "label",
+   "pos": [
+    33,
+    6,
+    -30
+   ],
+   "text": "KING GEORGE V PLAYING FIELD",
+   "color": "#ffffff",
+   "rot": 0
+  },
+  {
+   "id": "ll_bench_17",
+   "name": "Bench",
+   "kind": "bench",
+   "pos": [
+    17,
+    0,
+    -14.5
+   ],
+   "rot": 0,
+   "scale": 1,
+   "color": "#8b5a2b"
+  },
+  {
+   "id": "ll_bench_25",
+   "name": "Bench",
+   "kind": "bench",
+   "pos": [
+    25,
+    0,
+    -14.5
+   ],
+   "rot": 0,
+   "scale": 1,
+   "color": "#8b5a2b"
+  },
+  {
+   "id": "ll_village_green",
+   "name": "Village green",
+   "kind": "field",
+   "pos": [
+    -44,
+    0,
+    -24
+   ],
+   "size": [
+    16,
+    12
+   ],
+   "color": "#6cae4a"
+  },
+  {
+   "id": "ll_village_green_label",
+   "name": "Village green label",
+   "kind": "label",
+   "pos": [
+    -44,
+    5,
+    -24
+   ],
+   "text": "VILLAGE GREEN",
+   "color": "#ffffff",
+   "rot": 0
+  },
+  {
+   "id": "ll_allotments",
+   "name": "Allotments",
+   "kind": "field",
+   "pos": [
+    -112,
+    0,
+    88
+   ],
+   "size": [
+    36,
+    22
+   ],
+   "color": "#6f8a3a",
+   "crop": "wheat"
+  },
+  {
+   "id": "ll_allotments_hedge",
+   "name": "Allotments hedge",
+   "kind": "hedge",
+   "points": [
+    [
+     -130,
+     77
+    ],
+    [
+     -94,
+     77
+    ],
+    [
+     -94,
+     99
+    ],
+    [
+     -130,
+     99
+    ],
+    [
+     -130,
+     77.01
+    ]
+   ],
+   "color": "#2f5a2a",
+   "height": 1.4
+  },
+  {
+   "id": "ll_allotments_label",
+   "name": "Allotments label",
+   "kind": "label",
+   "pos": [
+    -112,
+    5,
+    88
+   ],
+   "text": "ALLOTMENTS",
+   "color": "#ffffff",
+   "rot": 0
+  },
+  {
+   "id": "ll_allotments_lane",
+   "name": "Allotments lane",
+   "kind": "path",
+   "points": [
+    [
+     -132,
+     66
+    ],
+    [
+     -112,
+     74
+    ],
+    [
+     -112,
+     77
+    ]
+   ],
+   "width": 2.2,
+   "color": "#6b5a45",
+   "texture": "gravel"
+  },
+  {
+   "id": "ll_shed_1",
+   "name": "Allotment shed",
+   "kind": "building",
+   "roof": "flat",
+   "pos": [
+    -124,
+    0,
+    84
+   ],
+   "rot": 0,
+   "scale": 1,
+   "size": [
+    2.4,
+    2.2,
+    2
+   ],
+   "color": "#6b5a45",
+   "roofColor": "#3a3d40",
+   "texture": "wood"
+  },
+  {
+   "id": "ll_shed_2",
+   "name": "Allotment shed",
+   "kind": "building",
+   "roof": "flat",
+   "pos": [
+    -117,
+    0,
+    93
+   ],
+   "rot": 0,
+   "scale": 1,
+   "size": [
+    2.4,
+    2.2,
+    2
+   ],
+   "color": "#6b5a45",
+   "roofColor": "#3a3d40",
+   "texture": "wood"
+  },
+  {
+   "id": "ll_shed_3",
+   "name": "Allotment shed",
+   "kind": "building",
+   "roof": "flat",
+   "pos": [
+    -110,
+    0,
+    84
+   ],
+   "rot": 0,
+   "scale": 1,
+   "size": [
+    2.4,
+    2.2,
+    2
+   ],
+   "color": "#6b5a45",
+   "roofColor": "#3a3d40",
+   "texture": "wood"
+  },
+  {
+   "id": "ll_shed_4",
+   "name": "Allotment shed",
+   "kind": "building",
+   "roof": "flat",
+   "pos": [
+    -103,
+    0,
+    93
+   ],
+   "rot": 0,
+   "scale": 1,
+   "size": [
+    2.4,
+    2.2,
+    2
+   ],
+   "color": "#6b5a45",
+   "roofColor": "#3a3d40",
+   "texture": "wood"
+  },
+  {
+   "id": "ll_shed_5",
+   "name": "Allotment shed",
+   "kind": "building",
+   "roof": "flat",
+   "pos": [
+    -96,
+    0,
+    84
+   ],
+   "rot": 0,
+   "scale": 1,
+   "size": [
+    2.4,
+    2.2,
+    2
+   ],
+   "color": "#6b5a45",
+   "roofColor": "#3a3d40",
+   "texture": "wood"
+  },
+  {
+   "id": "ll_shed_6",
+   "name": "Allotment shed",
+   "kind": "building",
+   "roof": "flat",
+   "pos": [
+    -89,
+    0,
+    93
+   ],
+   "rot": 0,
+   "scale": 1,
+   "size": [
+    2.4,
+    2.2,
+    2
+   ],
+   "color": "#6b5a45",
+   "roofColor": "#3a3d40",
+   "texture": "wood"
+  },
+  {
+   "id": "ll_merrie_harrier",
+   "name": "The Merrie Harrier",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    86,
+    0,
+    114
+   ],
+   "rot": 20,
+   "scale": 1,
+   "size": [
+    14,
+    6,
+    8
+   ],
+   "color": "#e9e2d0",
+   "roofColor": "#4d5862",
+   "texture": "plaster",
+   "chimneys": 2
+  },
+  {
+   "id": "ll_merrie_harrier_label",
+   "name": "Merrie Harrier label",
+   "kind": "label",
+   "pos": [
+    86,
+    9,
+    114
+   ],
+   "text": "THE MERRIE HARRIER",
+   "color": "#ffffff",
+   "rot": 0
+  },
+  {
+   "id": "ll_house_001",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -116.83,
+    0,
+    -51.12
+   ],
+   "rot": 229.4,
+   "scale": 1,
+   "size": [
+    9.66,
+    4.52,
+    7.26
+   ],
+   "color": "#e9e2d0",
+   "roofColor": "#4d5862",
+   "texture": "plaster",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_002",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -101.89,
+    0,
+    -63.93
+   ],
+   "rot": 49.4,
+   "scale": 1,
+   "size": [
+    8.04,
+    4.83,
+    7.1
+   ],
+   "color": "#e9e2d0",
+   "roofColor": "#5b4a42",
+   "texture": "plaster",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_003",
+   "name": "Semi-detached house",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -85.29,
+    0,
+    -44.08
+   ],
+   "rot": 49.4,
+   "scale": 1,
+   "size": [
+    12.52,
+    4.87,
+    6.47
+   ],
+   "color": "#b9715a",
+   "roofColor": "#4d5862",
+   "texture": "brick",
+   "chimneys": 2
+  },
+  {
+   "id": "ll_house_004",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -75.82,
+    0,
+    -28.17
+   ],
+   "rot": 62.78,
+   "scale": 1,
+   "size": [
+    8.31,
+    5.54,
+    6.47
+   ],
+   "color": "#a8624d",
+   "roofColor": "#7a4b32",
+   "texture": "brick",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_005",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -64.24,
+    0,
+    -6.11
+   ],
+   "rot": 62.78,
+   "scale": 1,
+   "size": [
+    8.7,
+    5.31,
+    6.88
+   ],
+   "color": "#cfd8dc",
+   "roofColor": "#5b4a42",
+   "texture": "plaster",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_006",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -80.24,
+    0,
+    12.86
+   ],
+   "rot": 262.41,
+   "scale": 1,
+   "size": [
+    7.9,
+    4.6,
+    7.24
+   ],
+   "color": "#e8d9b0",
+   "roofColor": "#5b4a42",
+   "texture": "plaster",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_007",
+   "name": "Semi-detached house",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -76.46,
+    0,
+    39.1
+   ],
+   "rot": 262.41,
+   "scale": 1,
+   "size": [
+    12.74,
+    4.72,
+    6.68
+   ],
+   "color": "#b9715a",
+   "roofColor": "#3b4148",
+   "texture": "brick",
+   "chimneys": 2
+  },
+  {
+   "id": "ll_house_008",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -57.3,
+    0,
+    41.35
+   ],
+   "rot": 67.22,
+   "scale": 1,
+   "size": [
+    7.39,
+    4.84,
+    6.37
+   ],
+   "color": "#f1e6c8",
+   "roofColor": "#5b4a42",
+   "texture": "plaster",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_009",
+   "name": "Semi-detached house",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -65.07,
+    0,
+    72.36
+   ],
+   "rot": 247.22,
+   "scale": 1,
+   "size": [
+    12.35,
+    5.08,
+    6.97
+   ],
+   "color": "#d8cdb4",
+   "roofColor": "#5b4a42",
+   "texture": "plaster",
+   "chimneys": 2
+  },
+  {
+   "id": "ll_house_010",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -37.47,
+    0,
+    110.02
+   ],
+   "rot": 209.05,
+   "scale": 1,
+   "size": [
+    9.16,
+    4.71,
+    6.45
+   ],
+   "color": "#f1e6c8",
+   "roofColor": "#5b4a42",
+   "texture": "plaster",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_011",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -16.94,
+    0,
+    99.57
+   ],
+   "rot": 29.05,
+   "scale": 1,
+   "size": [
+    9.98,
+    4.6,
+    6.76
+   ],
+   "color": "#f1e6c8",
+   "roofColor": "#8a5a3a",
+   "texture": "plaster",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_012",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -6.35,
+    0,
+    105.77
+   ],
+   "rot": 29.05,
+   "scale": 1,
+   "size": [
+    9.09,
+    4.65,
+    6.2
+   ],
+   "color": "#b9715a",
+   "roofColor": "#4d5862",
+   "texture": "brick",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_013",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    10.53,
+    0,
+    131.38
+   ],
+   "rot": 190.39,
+   "scale": 1,
+   "size": [
+    7.53,
+    4.9,
+    6.08
+   ],
+   "color": "#cfd8dc",
+   "roofColor": "#8a5a3a",
+   "texture": "plaster",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_014",
+   "name": "Semi-detached house",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    13.95,
+    0,
+    112.7
+   ],
+   "rot": 10.39,
+   "scale": 1,
+   "size": [
+    13.14,
+    4.68,
+    6.89
+   ],
+   "color": "#cfd8dc",
+   "roofColor": "#7a4b32",
+   "texture": "plaster",
+   "chimneys": 2
+  },
+  {
+   "id": "ll_house_015",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    23.31,
+    0,
+    134.37
+   ],
+   "rot": 190.39,
+   "scale": 1,
+   "size": [
+    7.74,
+    5.49,
+    7.36
+   ],
+   "color": "#a8624d",
+   "roofColor": "#5b4a42",
+   "texture": "brick",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_016",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    36.59,
+    0,
+    136.34
+   ],
+   "rot": 190.39,
+   "scale": 1,
+   "size": [
+    7.79,
+    4.64,
+    6.45
+   ],
+   "color": "#e9e2d0",
+   "roofColor": "#4d5862",
+   "texture": "plaster",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_017",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -129.83,
+    0,
+    -68.23
+   ],
+   "rot": -113.2,
+   "scale": 1,
+   "size": [
+    7.6,
+    4.78,
+    7.46
+   ],
+   "color": "#a8624d",
+   "roofColor": "#8a5a3a",
+   "texture": "brick",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_018",
+   "name": "Semi-detached house",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -116.76,
+    0,
+    -86.14
+   ],
+   "rot": 66.8,
+   "scale": 1,
+   "size": [
+    12.1,
+    4.78,
+    6.67
+   ],
+   "color": "#a8624d",
+   "roofColor": "#8a5a3a",
+   "texture": "brick",
+   "chimneys": 2
+  },
+  {
+   "id": "ll_house_019",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -133.65,
+    0,
+    -78.9
+   ],
+   "rot": -113.2,
+   "scale": 1,
+   "size": [
+    9.32,
+    4.57,
+    6.08
+   ],
+   "color": "#b9715a",
+   "roofColor": "#3b4148",
+   "texture": "brick",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_020",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -121.86,
+    0,
+    -98.72
+   ],
+   "rot": 66.8,
+   "scale": 1,
+   "size": [
+    9.35,
+    4.65,
+    7.2
+   ],
+   "color": "#a8624d",
+   "roofColor": "#4d5862",
+   "texture": "brick",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_021",
+   "name": "Semi-detached house",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -138.99,
+    0,
+    -91.38
+   ],
+   "rot": -113.2,
+   "scale": 1,
+   "size": [
+    13.41,
+    4.54,
+    6.06
+   ],
+   "color": "#9c5b48",
+   "roofColor": "#5b4a42",
+   "texture": "brick",
+   "chimneys": 2
+  },
+  {
+   "id": "ll_house_022",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -126.22,
+    0,
+    -108.29
+   ],
+   "rot": 69.44,
+   "scale": 1,
+   "size": [
+    9.84,
+    5.18,
+    6.76
+   ],
+   "color": "#a8624d",
+   "roofColor": "#5b4a42",
+   "texture": "brick",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_023",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -130.16,
+    0,
+    -119.55
+   ],
+   "rot": 69.44,
+   "scale": 1,
+   "size": [
+    8.27,
+    5.46,
+    7.28
+   ],
+   "color": "#d8cdb4",
+   "roofColor": "#5b4a42",
+   "texture": "plaster",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_024",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -147.82,
+    0,
+    -112.93
+   ],
+   "rot": -110.56,
+   "scale": 1,
+   "size": [
+    8.57,
+    5.19,
+    6.44
+   ],
+   "color": "#d8cdb4",
+   "roofColor": "#3b4148",
+   "texture": "plaster",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_025",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -134.72,
+    0,
+    -130.64
+   ],
+   "rot": 69.44,
+   "scale": 1,
+   "size": [
+    7.86,
+    5.59,
+    6.53
+   ],
+   "color": "#e9e2d0",
+   "roofColor": "#7a4b32",
+   "texture": "plaster",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_026",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -152.01,
+    0,
+    -124.16
+   ],
+   "rot": -110.56,
+   "scale": 1,
+   "size": [
+    9.85,
+    4.88,
+    6.39
+   ],
+   "color": "#d8cdb4",
+   "roofColor": "#7a4b32",
+   "texture": "plaster",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_027",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -138.79,
+    0,
+    -142.22
+   ],
+   "rot": 69.44,
+   "scale": 1,
+   "size": [
+    8.75,
+    4.86,
+    7.04
+   ],
+   "color": "#f1e6c8",
+   "roofColor": "#3b4148",
+   "texture": "plaster",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_028",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -156.81,
+    0,
+    -135.46
+   ],
+   "rot": -110.56,
+   "scale": 1,
+   "size": [
+    7.65,
+    5.41,
+    7.46
+   ],
+   "color": "#a8624d",
+   "roofColor": "#5b4a42",
+   "texture": "brick",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_029",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -90.76,
+    0,
+    -75.25
+   ],
+   "rot": 150.95,
+   "scale": 1,
+   "size": [
+    7.53,
+    5.03,
+    7.22
+   ],
+   "color": "#cfd8dc",
+   "roofColor": "#3b4148",
+   "texture": "plaster",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_030",
+   "name": "Semi-detached house",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -80.7,
+    0,
+    -80.82
+   ],
+   "rot": 150.95,
+   "scale": 1,
+   "size": [
+    12.58,
+    4.59,
+    7.27
+   ],
+   "color": "#9c5b48",
+   "roofColor": "#7a4b32",
+   "texture": "brick",
+   "chimneys": 2
+  },
+  {
+   "id": "ll_house_031",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -89.87,
+    0,
+    -97.34
+   ],
+   "rot": -29.05,
+   "scale": 1,
+   "size": [
+    9.96,
+    5.31,
+    6.53
+   ],
+   "color": "#cfd8dc",
+   "roofColor": "#3b4148",
+   "texture": "plaster",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_032",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -77.77,
+    0,
+    -103.97
+   ],
+   "rot": -17.18,
+   "scale": 1,
+   "size": [
+    9.63,
+    5.54,
+    6.78
+   ],
+   "color": "#c9c2b0",
+   "roofColor": "#7a4b32",
+   "texture": "plaster",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_033",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -66.83,
+    0,
+    -107.17
+   ],
+   "rot": -17.18,
+   "scale": 1,
+   "size": [
+    7.83,
+    4.86,
+    6.44
+   ],
+   "color": "#cfd8dc",
+   "roofColor": "#4d5862",
+   "texture": "plaster",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_034",
+   "name": "Semi-detached house",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -50.3,
+    0,
+    -93.05
+   ],
+   "rot": 162.82,
+   "scale": 1,
+   "size": [
+    12.05,
+    5.2,
+    6.32
+   ],
+   "color": "#e9e2d0",
+   "roofColor": "#8a5a3a",
+   "texture": "plaster",
+   "chimneys": 2
+  },
+  {
+   "id": "ll_house_035",
+   "name": "Semi-detached house",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -36.98,
+    0,
+    -97.26
+   ],
+   "rot": 162.82,
+   "scale": 1,
+   "size": [
+    13.84,
+    4.93,
+    6.14
+   ],
+   "color": "#a8624d",
+   "roofColor": "#4d5862",
+   "texture": "brick",
+   "chimneys": 2
+  },
+  {
+   "id": "ll_house_036",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -42.33,
+    0,
+    -114.55
+   ],
+   "rot": -17.18,
+   "scale": 1,
+   "size": [
+    9.63,
+    4.41,
+    6.07
+   ],
+   "color": "#e8d9b0",
+   "roofColor": "#8a5a3a",
+   "texture": "plaster",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_037",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -17.98,
+    0,
+    -102.69
+   ],
+   "rot": 167.77,
+   "scale": 1,
+   "size": [
+    9.86,
+    4.74,
+    7.05
+   ],
+   "color": "#9c5b48",
+   "roofColor": "#3b4148",
+   "texture": "brick",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_038",
+   "name": "Semi-detached house",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -6.18,
+    0,
+    -105.09
+   ],
+   "rot": 167.77,
+   "scale": 1,
+   "size": [
+    12.84,
+    5.58,
+    7.35
+   ],
+   "color": "#d8cdb4",
+   "roofColor": "#3b4148",
+   "texture": "plaster",
+   "chimneys": 2
+  },
+  {
+   "id": "ll_house_039",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -10.27,
+    0,
+    -123.95
+   ],
+   "rot": -12.23,
+   "scale": 1,
+   "size": [
+    8.76,
+    5.15,
+    7.24
+   ],
+   "color": "#9c5b48",
+   "roofColor": "#4d5862",
+   "texture": "brick",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_040",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    6.71,
+    0,
+    -108.37
+   ],
+   "rot": 167.77,
+   "scale": 1,
+   "size": [
+    8.93,
+    4.84,
+    6.4
+   ],
+   "color": "#c9c2b0",
+   "roofColor": "#3b4148",
+   "texture": "plaster",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_041",
+   "name": "Semi-detached house",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    2.81,
+    0,
+    -126.4
+   ],
+   "rot": -12.23,
+   "scale": 1,
+   "size": [
+    13.39,
+    4.87,
+    6.5
+   ],
+   "color": "#9c5b48",
+   "roofColor": "#5b4a42",
+   "texture": "brick",
+   "chimneys": 2
+  },
+  {
+   "id": "ll_house_042",
+   "name": "Semi-detached house",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    24.76,
+    0,
+    -131.25
+   ],
+   "rot": -12.23,
+   "scale": 1,
+   "size": [
+    12.18,
+    4.8,
+    6.68
+   ],
+   "color": "#9c5b48",
+   "roofColor": "#8a5a3a",
+   "texture": "brick",
+   "chimneys": 2
+  },
+  {
+   "id": "ll_house_043",
+   "name": "Semi-detached house",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    41.52,
+    0,
+    -115.68
+   ],
+   "rot": 167.77,
+   "scale": 1,
+   "size": [
+    13.97,
+    4.81,
+    6.86
+   ],
+   "color": "#f1e6c8",
+   "roofColor": "#7a4b32",
+   "texture": "plaster",
+   "chimneys": 2
+  },
+  {
+   "id": "ll_house_044",
+   "name": "Semi-detached house",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    37.48,
+    0,
+    -134.37
+   ],
+   "rot": -12.23,
+   "scale": 1,
+   "size": [
+    13.22,
+    4.49,
+    7.39
+   ],
+   "color": "#e8d9b0",
+   "roofColor": "#5b4a42",
+   "texture": "plaster",
+   "chimneys": 2
+  },
+  {
+   "id": "ll_house_045",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    51.65,
+    0,
+    -135.53
+   ],
+   "rot": -6.65,
+   "scale": 1,
+   "size": [
+    9.2,
+    5.37,
+    6.22
+   ],
+   "color": "#cfd8dc",
+   "roofColor": "#8a5a3a",
+   "texture": "plaster",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_046",
+   "name": "Semi-detached house",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    66.8,
+    0,
+    -118.44
+   ],
+   "rot": 173.35,
+   "scale": 1,
+   "size": [
+    12.82,
+    4.47,
+    7.25
+   ],
+   "color": "#d8cdb4",
+   "roofColor": "#3b4148",
+   "texture": "plaster",
+   "chimneys": 2
+  },
+  {
+   "id": "ll_house_047",
+   "name": "Semi-detached house",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    64.62,
+    0,
+    -137.12
+   ],
+   "rot": -6.65,
+   "scale": 1,
+   "size": [
+    12.57,
+    5.44,
+    6.37
+   ],
+   "color": "#e8d9b0",
+   "roofColor": "#4d5862",
+   "texture": "plaster",
+   "chimneys": 2
+  },
+  {
+   "id": "ll_house_048",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    76.81,
+    0,
+    -139.07
+   ],
+   "rot": -6.65,
+   "scale": 1,
+   "size": [
+    9.34,
+    5.24,
+    7.42
+   ],
+   "color": "#a8624d",
+   "roofColor": "#4d5862",
+   "texture": "brick",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_049",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    90.46,
+    0,
+    -121.53
+   ],
+   "rot": 173.35,
+   "scale": 1,
+   "size": [
+    7.39,
+    5.05,
+    6.59
+   ],
+   "color": "#f1e6c8",
+   "roofColor": "#7a4b32",
+   "texture": "plaster",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_050",
+   "name": "Semi-detached house",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    88.29,
+    0,
+    -140.06
+   ],
+   "rot": -6.65,
+   "scale": 1,
+   "size": [
+    13.18,
+    5.59,
+    6.72
+   ],
+   "color": "#c9c2b0",
+   "roofColor": "#8a5a3a",
+   "texture": "plaster",
+   "chimneys": 2
+  },
+  {
+   "id": "ll_house_051",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    99.06,
+    0,
+    -122.64
+   ],
+   "rot": 185.71,
+   "scale": 1,
+   "size": [
+    7.81,
+    5.28,
+    6.82
+   ],
+   "color": "#e8d9b0",
+   "roofColor": "#3b4148",
+   "texture": "plaster",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_052",
+   "name": "Semi-detached house",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    100.96,
+    0,
+    -141.63
+   ],
+   "rot": 5.71,
+   "scale": 1,
+   "size": [
+    12.67,
+    5.57,
+    7.36
+   ],
+   "color": "#e9e2d0",
+   "roofColor": "#5b4a42",
+   "texture": "plaster",
+   "chimneys": 2
+  },
+  {
+   "id": "ll_house_053",
+   "name": "Semi-detached house",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    111.78,
+    0,
+    -121.56
+   ],
+   "rot": 185.71,
+   "scale": 1,
+   "size": [
+    12.2,
+    4.56,
+    6.42
+   ],
+   "color": "#a8624d",
+   "roofColor": "#5b4a42",
+   "texture": "brick",
+   "chimneys": 2
+  },
+  {
+   "id": "ll_house_054",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    113.65,
+    0,
+    -140.3
+   ],
+   "rot": 5.71,
+   "scale": 1,
+   "size": [
+    8.37,
+    4.66,
+    7.23
+   ],
+   "color": "#e9e2d0",
+   "roofColor": "#8a5a3a",
+   "texture": "plaster",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_055",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    124.38,
+    0,
+    -119.83
+   ],
+   "rot": 185.71,
+   "scale": 1,
+   "size": [
+    9.15,
+    4.81,
+    7.37
+   ],
+   "color": "#a8624d",
+   "roofColor": "#3b4148",
+   "texture": "brick",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_056",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    126.31,
+    0,
+    -139.13
+   ],
+   "rot": 5.71,
+   "scale": 1,
+   "size": [
+    8.68,
+    4.98,
+    7.43
+   ],
+   "color": "#b9715a",
+   "roofColor": "#7a4b32",
+   "texture": "brick",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_057",
+   "name": "Semi-detached house",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    138.28,
+    0,
+    -137.77
+   ],
+   "rot": 5.71,
+   "scale": 1,
+   "size": [
+    12.98,
+    5.52,
+    7.11
+   ],
+   "color": "#f1e6c8",
+   "roofColor": "#4d5862",
+   "texture": "plaster",
+   "chimneys": 2
+  },
+  {
+   "id": "ll_house_058",
+   "name": "Semi-detached house",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    155.03,
+    0,
+    -101.14
+   ],
+   "rot": 80.22,
+   "scale": 1,
+   "size": [
+    12.24,
+    4.45,
+    6.5
+   ],
+   "color": "#cfd8dc",
+   "roofColor": "#5b4a42",
+   "texture": "plaster",
+   "chimneys": 2
+  },
+  {
+   "id": "ll_house_059",
+   "name": "Semi-detached house",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    139.52,
+    0,
+    -58
+   ],
+   "rot": 270,
+   "scale": 1,
+   "size": [
+    13.51,
+    5.18,
+    6.97
+   ],
+   "color": "#a8624d",
+   "roofColor": "#3b4148",
+   "texture": "brick",
+   "chimneys": 2
+  },
+  {
+   "id": "ll_house_060",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    160.1,
+    0,
+    0.72
+   ],
+   "rot": 94.09,
+   "scale": 1,
+   "size": [
+    7.85,
+    5.35,
+    6.25
+   ],
+   "color": "#cfd8dc",
+   "roofColor": "#5b4a42",
+   "texture": "plaster",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_061",
+   "name": "Semi-detached house",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    154.8,
+    0,
+    72.94
+   ],
+   "rot": 106.7,
+   "scale": 1,
+   "size": [
+    13.34,
+    4.87,
+    6.45
+   ],
+   "color": "#a8624d",
+   "roofColor": "#4d5862",
+   "texture": "brick",
+   "chimneys": 2
+  },
+  {
+   "id": "ll_house_062",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    124.43,
+    0,
+    101.6
+   ],
+   "rot": 286.7,
+   "scale": 1,
+   "size": [
+    9.09,
+    4.5,
+    7.26
+   ],
+   "color": "#f1e6c8",
+   "roofColor": "#8a5a3a",
+   "texture": "plaster",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_063",
+   "name": "Semi-detached house",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    141,
+    0,
+    119.92
+   ],
+   "rot": 106.7,
+   "scale": 1,
+   "size": [
+    13.22,
+    4.72,
+    7.02
+   ],
+   "color": "#f1e6c8",
+   "roofColor": "#3b4148",
+   "texture": "plaster",
+   "chimneys": 2
+  },
+  {
+   "id": "ll_house_064",
+   "name": "Semi-detached house",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    34.67,
+    0,
+    164.53
+   ],
+   "rot": 158.91,
+   "scale": 1,
+   "size": [
+    13.41,
+    5.23,
+    7.14
+   ],
+   "color": "#a8624d",
+   "roofColor": "#8a5a3a",
+   "texture": "brick",
+   "chimneys": 2
+  },
+  {
+   "id": "ll_house_065",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    79.51,
+    0,
+    146.91
+   ],
+   "rot": 158.91,
+   "scale": 1,
+   "size": [
+    7.67,
+    5.28,
+    6.53
+   ],
+   "color": "#c9c2b0",
+   "roofColor": "#5b4a42",
+   "texture": "plaster",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_066",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    104.67,
+    0,
+    137.67
+   ],
+   "rot": 154.23,
+   "scale": 1,
+   "size": [
+    8.4,
+    4.75,
+    7.48
+   ],
+   "color": "#a8624d",
+   "roofColor": "#4d5862",
+   "texture": "brick",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_067",
+   "name": "Semi-detached house",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -66.14,
+    0,
+    -23.91
+   ],
+   "rot": 13.71,
+   "scale": 1,
+   "size": [
+    12.78,
+    5.1,
+    7.03
+   ],
+   "color": "#f1e6c8",
+   "roofColor": "#5b4a42",
+   "texture": "plaster",
+   "chimneys": 2
+  },
+  {
+   "id": "ll_house_068",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    66.68,
+    0,
+    -12.48
+   ],
+   "rot": 158.2,
+   "scale": 1,
+   "size": [
+    8.29,
+    4.64,
+    7.43
+   ],
+   "color": "#cfd8dc",
+   "roofColor": "#3b4148",
+   "texture": "plaster",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_069",
+   "name": "Semi-detached house",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    78.92,
+    0,
+    -17.9
+   ],
+   "rot": 158.2,
+   "scale": 1,
+   "size": [
+    13.53,
+    5.2,
+    6.46
+   ],
+   "color": "#9c5b48",
+   "roofColor": "#5b4a42",
+   "texture": "brick",
+   "chimneys": 2
+  },
+  {
+   "id": "ll_house_070",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    72.33,
+    0,
+    -34.38
+   ],
+   "rot": -21.8,
+   "scale": 1,
+   "size": [
+    8.82,
+    5.02,
+    6.05
+   ],
+   "color": "#9c5b48",
+   "roofColor": "#4d5862",
+   "texture": "brick",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_071",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -62.1,
+    0,
+    13.22
+   ],
+   "rot": 200.32,
+   "scale": 1,
+   "size": [
+    9.97,
+    4.84,
+    7.43
+   ],
+   "color": "#d8cdb4",
+   "roofColor": "#8a5a3a",
+   "texture": "plaster",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_072",
+   "name": "Semi-detached house",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -0.45,
+    0,
+    -24.83
+   ],
+   "rot": -110.56,
+   "scale": 1,
+   "size": [
+    13.03,
+    4.89,
+    7.05
+   ],
+   "color": "#a8624d",
+   "roofColor": "#3b4148",
+   "texture": "brick",
+   "chimneys": 2
+  },
+  {
+   "id": "ll_house_073",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -4.68,
+    0,
+    -36.29
+   ],
+   "rot": -110.56,
+   "scale": 1,
+   "size": [
+    8.24,
+    4.75,
+    6.93
+   ],
+   "color": "#cfd8dc",
+   "roofColor": "#4d5862",
+   "texture": "plaster",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_074",
+   "name": "Semi-detached house",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -89.56,
+    0,
+    45.84
+   ],
+   "rot": 129.81,
+   "scale": 1,
+   "size": [
+    13.08,
+    5.25,
+    7.4
+   ],
+   "color": "#f1e6c8",
+   "roofColor": "#4d5862",
+   "texture": "plaster",
+   "chimneys": 2
+  },
+  {
+   "id": "ll_house_075",
+   "name": "Semi-detached house",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -74.94,
+    0,
+    60.31
+   ],
+   "rot": 160.56,
+   "scale": 1,
+   "size": [
+    12.7,
+    4.73,
+    6.27
+   ],
+   "color": "#b9715a",
+   "roofColor": "#5b4a42",
+   "texture": "brick",
+   "chimneys": 2
+  },
+  {
+   "id": "ll_house_076",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -101.61,
+    0,
+    51.42
+   ],
+   "rot": 349.38,
+   "scale": 1,
+   "size": [
+    9.32,
+    5.5,
+    6.46
+   ],
+   "color": "#d8cdb4",
+   "roofColor": "#5b4a42",
+   "texture": "plaster",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_077",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -98.36,
+    0,
+    68.76
+   ],
+   "rot": 169.38,
+   "scale": 1,
+   "size": [
+    8.14,
+    5.58,
+    6.83
+   ],
+   "color": "#9c5b48",
+   "roofColor": "#4d5862",
+   "texture": "brick",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_house_078",
+   "name": "Semi-detached house",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -112.82,
+    0,
+    53.43
+   ],
+   "rot": 349.38,
+   "scale": 1,
+   "size": [
+    12.49,
+    4.75,
+    6.63
+   ],
+   "color": "#f1e6c8",
+   "roofColor": "#5b4a42",
+   "texture": "plaster",
+   "chimneys": 2
+  },
+  {
+   "id": "ll_house_079",
+   "name": "House",
+   "kind": "building",
+   "roof": "gable",
+   "pos": [
+    -123.53,
+    0,
+    55.14
+   ],
+   "rot": 349.38,
+   "scale": 1,
+   "size": [
+    9.98,
+    5.22,
+    7.23
+   ],
+   "color": "#9c5b48",
+   "roofColor": "#4d5862",
+   "texture": "brick",
+   "chimneys": 1
+  },
+  {
+   "id": "ll_tree_001",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    -62.22,
+    0,
+    37.41
+   ],
+   "height": 9.28,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_002",
+   "name": "Beech tree",
+   "kind": "tree",
+   "species": "beech",
+   "pos": [
+    -47.31,
+    0,
+    99.15
+   ],
+   "height": 11,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_003",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    16.12,
+    0,
+    -115.22
+   ],
+   "height": 8.02,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_004",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    120.7,
+    0,
+    -134.45
+   ],
+   "height": 6.21,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_005",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    148.78,
+    0,
+    -109.45
+   ],
+   "height": 10.03,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_006",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    154.83,
+    0,
+    -74.36
+   ],
+   "height": 8.75,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_007",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    144.5,
+    0,
+    -49.18
+   ],
+   "height": 8.05,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_008",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    155.5,
+    0,
+    -27.47
+   ],
+   "height": 7.05,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_009",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    141.88,
+    0,
+    36.51
+   ],
+   "height": 7.2,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_010",
+   "name": "Hawthorn tree",
+   "kind": "tree",
+   "species": "hawthorn",
+   "pos": [
+    49.58,
+    0,
+    153.34
+   ],
+   "height": 9.24,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_011",
+   "name": "Birch tree",
+   "kind": "tree",
+   "species": "birch",
+   "pos": [
+    97.61,
+    0,
+    123.05
+   ],
+   "height": 10.29,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_pasture_1",
+   "name": "Pasture",
+   "kind": "field",
+   "pos": [
+    112.25,
+    0,
+    -11.69
+   ],
+   "size": [
+    29.39,
+    32.63
+   ],
+   "color": "#5f8a38"
+  },
+  {
+   "id": "ll_pasture_2",
+   "name": "Pasture",
+   "kind": "field",
+   "pos": [
+    7.24,
+    0,
+    -66.62
+   ],
+   "size": [
+    41.55,
+    35.98
+   ],
+   "color": "#7a9a40"
+  },
+  {
+   "id": "ll_hedge_2",
+   "name": "Hedgerow",
+   "kind": "hedge",
+   "points": [
+    [
+     -13.53,
+     -84.61
+    ],
+    [
+     28.02,
+     -84.61
+    ],
+    [
+     28.02,
+     -48.63
+    ],
+    [
+     -13.53,
+     -48.63
+    ],
+    [
+     -13.53,
+     -84.6
+    ]
+   ],
+   "color": "#2f5a2a",
+   "height": 1.4
+  },
+  {
+   "id": "ll_pasture_3",
+   "name": "Pasture",
+   "kind": "field",
+   "pos": [
+    -45.88,
+    0,
+    143
+   ],
+   "size": [
+    28.12,
+    24.38
+   ],
+   "color": "#5f8a38"
+  },
+  {
+   "id": "ll_pasture_4",
+   "name": "Wheat field",
+   "kind": "field",
+   "pos": [
+    80.54,
+    0,
+    73.6
+   ],
+   "size": [
+    40.44,
+    31.88
+   ],
+   "color": "#a39a4a",
+   "crop": "wheat"
+  },
+  {
+   "id": "ll_hedge_4",
+   "name": "Hedgerow",
+   "kind": "hedge",
+   "points": [
+    [
+     60.32,
+     57.65
+    ],
+    [
+     100.76,
+     57.65
+    ],
+    [
+     100.76,
+     89.54
+    ],
+    [
+     60.32,
+     89.54
+    ],
+    [
+     60.32,
+     57.66
+    ]
+   ],
+   "color": "#2f5a2a",
+   "height": 1.4
+  },
+  {
+   "id": "ll_pasture_5",
+   "name": "Pasture",
+   "kind": "field",
+   "pos": [
+    76.14,
+    0,
+    -52.01
+   ],
+   "size": [
+    45.44,
+    25.28
+   ],
+   "color": "#7a9a40"
+  },
+  {
+   "id": "ll_pasture_6",
+   "name": "Pasture",
+   "kind": "field",
+   "pos": [
+    -51.46,
+    0,
+    -62.41
+   ],
+   "size": [
+    42.07,
+    24.07
+   ],
+   "color": "#7a9a40"
+  },
+  {
+   "id": "ll_hedge_6",
+   "name": "Hedgerow",
+   "kind": "hedge",
+   "points": [
+    [
+     -72.49,
+     -74.44
+    ],
+    [
+     -30.43,
+     -74.44
+    ],
+    [
+     -30.43,
+     -50.38
+    ],
+    [
+     -72.49,
+     -50.38
+    ],
+    [
+     -72.49,
+     -74.43
+    ]
+   ],
+   "color": "#2f5a2a",
+   "height": 1.4
+  },
+  {
+   "id": "ll_pasture_7",
+   "name": "Pasture",
+   "kind": "field",
+   "pos": [
+    101.57,
+    0,
+    34.23
+   ],
+   "size": [
+    43.25,
+    29.3
+   ],
+   "color": "#5f8a38"
+  },
+  {
+   "id": "ll_pasture_8",
+   "name": "Wheat field",
+   "kind": "field",
+   "pos": [
+    94.34,
+    0,
+    -88.59
+   ],
+   "size": [
+    32.92,
+    23.94
+   ],
+   "color": "#a39a4a",
+   "crop": "wheat"
+  },
+  {
+   "id": "ll_hedge_8",
+   "name": "Hedgerow",
+   "kind": "hedge",
+   "points": [
+    [
+     77.89,
+     -100.56
+    ],
+    [
+     110.8,
+     -100.56
+    ],
+    [
+     110.8,
+     -76.62
+    ],
+    [
+     77.89,
+     -76.62
+    ],
+    [
+     77.89,
+     -100.55
+    ]
+   ],
+   "color": "#2f5a2a",
+   "height": 1.4
+  },
+  {
+   "id": "ll_tree_012",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    -129.83,
+    0,
+    -40.81
+   ],
+   "height": 8.29,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_013",
+   "name": "Beech tree",
+   "kind": "tree",
+   "species": "beech",
+   "pos": [
+    -138.84,
+    0,
+    -45.53
+   ],
+   "height": 8.41,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_014",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    -141.3,
+    0,
+    -50.16
+   ],
+   "height": 9.21,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_015",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    -143.95,
+    0,
+    -40.34
+   ],
+   "height": 11.13,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_016",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    -134.61,
+    0,
+    -39.61
+   ],
+   "height": 10.34,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_017",
+   "name": "Beech tree",
+   "kind": "tree",
+   "species": "beech",
+   "pos": [
+    -132.11,
+    0,
+    -33.83
+   ],
+   "height": 10.52,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_018",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    -128.77,
+    0,
+    -47.64
+   ],
+   "height": 8.27,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_019",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    134.81,
+    0,
+    70.07
+   ],
+   "height": 9.43,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_020",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    119.52,
+    0,
+    70.18
+   ],
+   "height": 10.28,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_021",
+   "name": "Beech tree",
+   "kind": "tree",
+   "species": "beech",
+   "pos": [
+    118.06,
+    0,
+    64.74
+   ],
+   "height": 12.34,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_022",
+   "name": "Beech tree",
+   "kind": "tree",
+   "species": "beech",
+   "pos": [
+    126.79,
+    0,
+    70.44
+   ],
+   "height": 8.06,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_023",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    119.87,
+    0,
+    75.05
+   ],
+   "height": 9.68,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_024",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    130.69,
+    0,
+    64.29
+   ],
+   "height": 10.84,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_025",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    6.02,
+    0,
+    146.08
+   ],
+   "height": 11.33,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_026",
+   "name": "Beech tree",
+   "kind": "tree",
+   "species": "beech",
+   "pos": [
+    12.91,
+    0,
+    146.07
+   ],
+   "height": 10.04,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_027",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    2.14,
+    0,
+    152.52
+   ],
+   "height": 9.33,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_028",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    19.44,
+    0,
+    146.41
+   ],
+   "height": 8.63,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_029",
+   "name": "Beech tree",
+   "kind": "tree",
+   "species": "beech",
+   "pos": [
+    5.52,
+    0,
+    157.19
+   ],
+   "height": 12.2,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_030",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    12.37,
+    0,
+    153.35
+   ],
+   "height": 9.64,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_031",
+   "name": "Beech tree",
+   "kind": "tree",
+   "species": "beech",
+   "pos": [
+    17.21,
+    0,
+    -96.84
+   ],
+   "height": 11.92,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_032",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    17.21,
+    0,
+    -105.56
+   ],
+   "height": 12.04,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_033",
+   "name": "Beech tree",
+   "kind": "tree",
+   "species": "beech",
+   "pos": [
+    30.04,
+    0,
+    -102.51
+   ],
+   "height": 11.35,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_034",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    22.86,
+    0,
+    -101.01
+   ],
+   "height": 11.1,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_035",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    -66.39,
+    0,
+    116.75
+   ],
+   "height": 8.75,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_036",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    -52.92,
+    0,
+    110.23
+   ],
+   "height": 11.73,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_037",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    -62.97,
+    0,
+    109.91
+   ],
+   "height": 10.67,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_038",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    -67.27,
+    0,
+    111.8
+   ],
+   "height": 10.16,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_039",
+   "name": "Beech tree",
+   "kind": "tree",
+   "species": "beech",
+   "pos": [
+    -58.12,
+    0,
+    102.82
+   ],
+   "height": 11.27,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_040",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    -88.67,
+    0,
+    111.32
+   ],
+   "height": 9.85,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_041",
+   "name": "Beech tree",
+   "kind": "tree",
+   "species": "beech",
+   "pos": [
+    -98.4,
+    0,
+    121.55
+   ],
+   "height": 10.7,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_042",
+   "name": "Beech tree",
+   "kind": "tree",
+   "species": "beech",
+   "pos": [
+    -102.61,
+    0,
+    115.67
+   ],
+   "height": 9.52,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_043",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    -107.1,
+    0,
+    113.92
+   ],
+   "height": 12.56,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_044",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    -93.18,
+    0,
+    108.79
+   ],
+   "height": 12.41,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_045",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    128.16,
+    0,
+    -102.51
+   ],
+   "height": 6.82,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_046",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    5.68,
+    0,
+    96.53
+   ],
+   "height": 7.69,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_047",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    -115.89,
+    0,
+    -37.06
+   ],
+   "height": 7.86,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_048",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    -33.01,
+    0,
+    -119.24
+   ],
+   "height": 9.47,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_049",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    48.98,
+    0,
+    112.29
+   ],
+   "height": 7.5,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_050",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    -15.69,
+    0,
+    123.95
+   ],
+   "height": 7.86,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_051",
+   "name": "Hawthorn tree",
+   "kind": "tree",
+   "species": "hawthorn",
+   "pos": [
+    -24.06,
+    0,
+    -82.49
+   ],
+   "height": 8.64,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_052",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    -149.36,
+    0,
+    58.77
+   ],
+   "height": 6.82,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_053",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    2.59,
+    0,
+    101.18
+   ],
+   "height": 6.2,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_054",
+   "name": "Birch tree",
+   "kind": "tree",
+   "species": "birch",
+   "pos": [
+    -143.28,
+    0,
+    -79.64
+   ],
+   "height": 6.05,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_055",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    120.46,
+    0,
+    -106.1
+   ],
+   "height": 9.03,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_056",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    -128.86,
+    0,
+    -53.17
+   ],
+   "height": 6.97,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_057",
+   "name": "Birch tree",
+   "kind": "tree",
+   "species": "birch",
+   "pos": [
+    -109.57,
+    0,
+    -29.85
+   ],
+   "height": 5.6,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_058",
+   "name": "Hawthorn tree",
+   "kind": "tree",
+   "species": "hawthorn",
+   "pos": [
+    38.99,
+    0,
+    -103.14
+   ],
+   "height": 8.79,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_059",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    68.09,
+    0,
+    109.65
+   ],
+   "height": 6.47,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_060",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    124.14,
+    0,
+    -56.75
+   ],
+   "height": 7.65,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_061",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    108.83,
+    0,
+    100.46
+   ],
+   "height": 8.17,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_062",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    -9.47,
+    0,
+    -42.66
+   ],
+   "height": 6.07,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_063",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    128.7,
+    0,
+    10.5
+   ],
+   "height": 8.23,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_064",
+   "name": "Beech tree",
+   "kind": "tree",
+   "species": "beech",
+   "pos": [
+    104.46,
+    0,
+    -38.99
+   ],
+   "height": 7.55,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_065",
+   "name": "Beech tree",
+   "kind": "tree",
+   "species": "beech",
+   "pos": [
+    -65.07,
+    0,
+    91.8
+   ],
+   "height": 8.02,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_066",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    93.17,
+    0,
+    -114.85
+   ],
+   "height": 7.31,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_067",
+   "name": "Beech tree",
+   "kind": "tree",
+   "species": "beech",
+   "pos": [
+    -139.98,
+    0,
+    -70.06
+   ],
+   "height": 7.11,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_068",
+   "name": "Birch tree",
+   "kind": "tree",
+   "species": "birch",
+   "pos": [
+    46.86,
+    0,
+    -67.11
+   ],
+   "height": 5.21,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_069",
+   "name": "Beech tree",
+   "kind": "tree",
+   "species": "beech",
+   "pos": [
+    137.86,
+    0,
+    -23.85
+   ],
+   "height": 8.33,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_070",
+   "name": "Hawthorn tree",
+   "kind": "tree",
+   "species": "hawthorn",
+   "pos": [
+    -63.6,
+    0,
+    85.87
+   ],
+   "height": 7.11,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_071",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    73.5,
+    0,
+    118.85
+   ],
+   "height": 7.63,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_072",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    57.41,
+    0,
+    -9.08
+   ],
+   "height": 5.49,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_073",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    133.51,
+    0,
+    -71.96
+   ],
+   "height": 9.79,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_074",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    124.3,
+    0,
+    -82.13
+   ],
+   "height": 8.46,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_075",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    -143.49,
+    0,
+    78.83
+   ],
+   "height": 6.22,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_076",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    120.13,
+    0,
+    127.33
+   ],
+   "height": 5.75,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_077",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    -49.98,
+    0,
+    -120.73
+   ],
+   "height": 8.75,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_078",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    106.28,
+    0,
+    -106.3
+   ],
+   "height": 6.97,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_079",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    125.35,
+    0,
+    -63.21
+   ],
+   "height": 9.69,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_080",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    -147.95,
+    0,
+    -73.78
+   ],
+   "height": 8.33,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_081",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    -23.91,
+    0,
+    -27.97
+   ],
+   "height": 6.11,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_082",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    -82.07,
+    0,
+    -115.34
+   ],
+   "height": 7.57,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_083",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    -144.82,
+    0,
+    69.34
+   ],
+   "height": 6.07,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_084",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    82.47,
+    0,
+    -111.8
+   ],
+   "height": 6.59,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_085",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    -28.29,
+    0,
+    -85.77
+   ],
+   "height": 6.33,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_086",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    -124.48,
+    0,
+    -33.62
+   ],
+   "height": 8.75,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_087",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    129.77,
+    0,
+    77.91
+   ],
+   "height": 9.78,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_088",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    -116.32,
+    0,
+    -28.76
+   ],
+   "height": 7.74,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_089",
+   "name": "Birch tree",
+   "kind": "tree",
+   "species": "birch",
+   "pos": [
+    -57,
+    0,
+    -36.68
+   ],
+   "height": 8.56,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_090",
+   "name": "Hawthorn tree",
+   "kind": "tree",
+   "species": "hawthorn",
+   "pos": [
+    30.92,
+    0,
+    117.01
+   ],
+   "height": 7.36,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_091",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    37.43,
+    0,
+    -57.8
+   ],
+   "height": 9.56,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_092",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    -82.72,
+    0,
+    -53.59
+   ],
+   "height": 7.2,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_093",
+   "name": "Oak tree",
+   "kind": "tree",
+   "species": "oak",
+   "pos": [
+    -16.84,
+    0,
+    -30.18
+   ],
+   "height": 6.61,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_094",
+   "name": "Hawthorn tree",
+   "kind": "tree",
+   "species": "hawthorn",
+   "pos": [
+    -31.82,
+    0,
+    -80.85
+   ],
+   "height": 7.27,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_095",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    -62.88,
+    0,
+    -123.95
+   ],
+   "height": 5.4,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_096",
+   "name": "Ash tree",
+   "kind": "tree",
+   "species": "ash",
+   "pos": [
+    -23.64,
+    0,
+    -129.9
+   ],
+   "height": 9.34,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_097",
+   "name": "Beech tree",
+   "kind": "tree",
+   "species": "beech",
+   "pos": [
+    135.71,
+    0,
+    -100.4
+   ],
+   "height": 6.82,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_098",
+   "name": "Hawthorn tree",
+   "kind": "tree",
+   "species": "hawthorn",
+   "pos": [
+    -105.07,
+    0,
+    -90.81
+   ],
+   "height": 7.14,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_tree_099",
+   "name": "Hawthorn tree",
+   "kind": "tree",
+   "species": "hawthorn",
+   "pos": [
+    38.93,
+    0,
+    -93.65
+   ],
+   "height": 8.02,
+   "rot": 0,
+   "scale": 1
+  },
+  {
+   "id": "ll_label_penlan_road",
+   "name": "PENLAN ROAD",
+   "kind": "label",
+   "pos": [
+    -81,
+    3.2,
+    -17.5
+   ],
+   "text": "PENLAN ROAD",
+   "color": "#f2c94c",
+   "rot": 0
+  },
+  {
+   "id": "ll_label_leckwith_road",
+   "name": "LECKWITH ROAD",
+   "kind": "label",
+   "pos": [
+    -127.5,
+    3.2,
+    -87.5
+   ],
+   "text": "LECKWITH ROAD",
+   "color": "#f2c94c",
+   "rot": 0
+  },
+  {
+   "id": "ll_label_llandough_hill",
+   "name": "LLANDOUGH HILL",
+   "kind": "label",
+   "pos": [
+    -47.5,
+    3.2,
+    -103.5
+   ],
+   "text": "LLANDOUGH HILL",
+   "color": "#f2c94c",
+   "rot": 0
+  },
+  {
+   "id": "ll_label_penarth_road",
+   "name": "PENARTH ROAD",
+   "kind": "label",
+   "pos": [
+    150,
+    3.2,
+    -35
+   ],
+   "text": "PENARTH ROAD",
+   "color": "#f2c94c",
+   "rot": 0
+  },
+  {
+   "id": "ll_label_barry_road",
+   "name": "BARRY ROAD",
+   "kind": "label",
+   "pos": [
+    65,
+    3.2,
+    141.5
+   ],
+   "text": "BARRY ROAD",
+   "color": "#f2c94c",
+   "rot": 0
+  },
+  {
+   "id": "ll_label_lewis_road",
+   "name": "LEWIS ROAD",
+   "kind": "label",
+   "pos": [
+    -20,
+    3.2,
+    -7
+   ],
+   "text": "LEWIS ROAD",
+   "color": "#f2c94c",
+   "rot": 0
+  },
+  {
+   "id": "ll_label_church_road",
+   "name": "CHURCH ROAD",
+   "kind": "label",
+   "pos": [
+    -58.5,
+    3.2,
+    5
+   ],
+   "text": "CHURCH ROAD",
+   "color": "#f2c94c",
+   "rot": 0
+  },
+  {
+   "id": "ll_label_corbett_road",
+   "name": "CORBETT ROAD",
+   "kind": "label",
+   "pos": [
+    -83,
+    3.2,
+    54
+   ],
+   "text": "CORBETT ROAD",
+   "color": "#f2c94c",
+   "rot": 0
+  },
+  {
+   "id": "ll_label_greenway_close",
+   "name": "GREENWAY CLOSE",
+   "kind": "label",
+   "pos": [
+    8,
+    3.2,
+    -17
+   ],
+   "text": "GREENWAY CLOSE",
+   "color": "#f2c94c",
+   "rot": 0
+  },
+  {
+   "id": "ll_label_spencer_drive",
+   "name": "SPENCER DRIVE",
+   "kind": "label",
+   "pos": [
+    -79.5,
+    3.2,
+    27
+   ],
+   "text": "SPENCER DRIVE",
+   "color": "#f2c94c",
+   "rot": 0
+  }
+ ],
+ "meta": {
+  "version": "Llandough",
+  "camera_seq": 22414,
+  "last": "dragon",
+  "layout": "llandough-schematic"
+ },
+ "updated": "2026-10-21T22:51:47.973Z"
 }
