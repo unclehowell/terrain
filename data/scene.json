@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "rev": 59,
+  "rev": 68,
   "env": {
     "time": "afternoon",
     "weather": "clear",
@@ -799,7 +799,7 @@
         30,
         26
       ],
-      "color": "#3f6b3a",
+      "color": "#f1c40f",
       "aliases": [
         "churchyard",
         "graveyard",
@@ -898,7 +898,7 @@
     },
     {
       "id": "farm_pond",
-      "name": "Farm pond",
+      "name": "Llandough",
       "kind": "water",
       "pos": [
         15,
@@ -906,7 +906,7 @@
         24
       ],
       "radius": 4,
-      "color": "#2d6a8a",
+      "color": "#111111",
       "aliases": [
         "pond",
         "water"
@@ -1064,20 +1064,6 @@
       ]
     },
     {
-      "kind": "tree",
-      "species": "oak",
-      "height": 9,
-      "id": "oak_tree_2",
-      "name": "Oak tree",
-      "pos": [
-        10,
-        0,
-        65
-      ],
-      "rot": 0,
-      "scale": 1
-    },
-    {
       "kind": "marker",
       "id": "button",
       "name": "Button",
@@ -1115,24 +1101,290 @@
       "scale": 1
     },
     {
-      "kind": "marker",
-      "color": "#e53935",
-      "id": "dragon",
-      "name": "dragon",
-      "texture": "plain",
+      "kind": "tree",
+      "species": "oak",
+      "height": 9.81,
+      "id": "oak_tree_2",
+      "name": "Oak tree 1",
       "pos": [
-        3.71,
+        22.14,
         0,
-        2.54
+        28.88
       ],
       "rot": 0,
-      "scale": 10
+      "scale": 1
+    },
+    {
+      "kind": "tree",
+      "species": "oak",
+      "height": 8.73,
+      "id": "oak_tree_3",
+      "name": "Oak tree 2",
+      "pos": [
+        14.34,
+        0,
+        32.62
+      ],
+      "rot": 0,
+      "scale": 1
+    },
+    {
+      "kind": "tree",
+      "species": "oak",
+      "height": 7.65,
+      "id": "oak_tree_4",
+      "name": "Oak tree 3",
+      "pos": [
+        7.2,
+        0,
+        27.74
+      ],
+      "rot": 0,
+      "scale": 1
+    },
+    {
+      "kind": "tree",
+      "species": "oak",
+      "height": 9.27,
+      "id": "oak_tree_5",
+      "name": "Oak tree 4",
+      "pos": [
+        7.86,
+        0,
+        19.12
+      ],
+      "rot": 0,
+      "scale": 1
+    },
+    {
+      "kind": "tree",
+      "species": "oak",
+      "height": 8.19,
+      "id": "oak_tree_6",
+      "name": "Oak tree 5",
+      "pos": [
+        15.66,
+        0,
+        15.38
+      ],
+      "rot": 0,
+      "scale": 1
+    },
+    {
+      "kind": "tree",
+      "species": "oak",
+      "height": 9.81,
+      "id": "oak_tree_7",
+      "name": "Oak tree 6",
+      "pos": [
+        22.8,
+        0,
+        20.26
+      ],
+      "rot": 0,
+      "scale": 1
+    },
+    {
+      "kind": "tree",
+      "species": "oak",
+      "height": 8.73,
+      "id": "oak_tree_8",
+      "name": "Oak tree 7",
+      "pos": [
+        12.76,
+        0,
+        39.99
+      ],
+      "rot": 0,
+      "scale": 1
+    },
+    {
+      "kind": "tree",
+      "species": "oak",
+      "height": 7.65,
+      "id": "oak_tree_9",
+      "name": "Oak tree 8",
+      "pos": [
+        5.06,
+        0,
+        36.73
+      ],
+      "rot": 0,
+      "scale": 1
+    },
+    {
+      "kind": "tree",
+      "species": "oak",
+      "height": 9.27,
+      "id": "oak_tree_10",
+      "name": "Oak tree 9",
+      "pos": [
+        0.03,
+        0,
+        30.06
+      ],
+      "rot": 0,
+      "scale": 1
+    },
+    {
+      "kind": "tree",
+      "species": "oak",
+      "height": 8.19,
+      "id": "oak_tree_11",
+      "name": "Oak tree 10",
+      "pos": [
+        -0.99,
+        0,
+        21.76
+      ],
+      "rot": 0,
+      "scale": 1
+    },
+    {
+      "kind": "tree",
+      "species": "oak",
+      "height": 9.81,
+      "id": "oak_tree_12",
+      "name": "Oak tree 11",
+      "pos": [
+        2.27,
+        0,
+        14.06
+      ],
+      "rot": 0,
+      "scale": 1
+    },
+    {
+      "kind": "tree",
+      "species": "oak",
+      "height": 8.73,
+      "id": "oak_tree_13",
+      "name": "Oak tree 12",
+      "pos": [
+        8.94,
+        0,
+        9.03
+      ],
+      "rot": 0,
+      "scale": 1
+    },
+    {
+      "kind": "tree",
+      "species": "oak",
+      "height": 7.65,
+      "id": "oak_tree_14",
+      "name": "Oak tree 13",
+      "pos": [
+        29.97,
+        0,
+        17.94
+      ],
+      "rot": 0,
+      "scale": 1
+    },
+    {
+      "kind": "tree",
+      "species": "oak",
+      "height": 9.27,
+      "id": "oak_tree_15",
+      "name": "Oak tree 14",
+      "pos": [
+        21.06,
+        0,
+        38.97
+      ],
+      "rot": 0,
+      "scale": 1
+    },
+    {
+      "kind": "tree",
+      "species": "oak",
+      "height": 8.19,
+      "id": "oak_tree_16",
+      "name": "Oak tree 15",
+      "pos": [
+        14.73,
+        0,
+        5.35
+      ],
+      "rot": 0,
+      "scale": 1
+    },
+    {
+      "kind": "tree",
+      "species": "oak",
+      "height": 9.81,
+      "id": "oak_tree_17",
+      "name": "Oak tree 16",
+      "pos": [
+        -1.29,
+        0,
+        37.49
+      ],
+      "rot": 0,
+      "scale": 1
+    },
+    {
+      "kind": "tree",
+      "species": "oak",
+      "height": 8.73,
+      "id": "oak_tree_18",
+      "name": "Oak tree 17",
+      "pos": [
+        31.29,
+        0,
+        10.51
+      ],
+      "rot": 0,
+      "scale": 1
+    },
+    {
+      "kind": "tree",
+      "species": "oak",
+      "height": 7.65,
+      "id": "oak_tree_19",
+      "name": "Oak tree 18",
+      "pos": [
+        35.85,
+        0,
+        20.46
+      ],
+      "rot": 0,
+      "scale": 1
+    },
+    {
+      "kind": "tree",
+      "species": "oak",
+      "height": 9.27,
+      "id": "oak_tree_20",
+      "name": "Oak tree 19",
+      "pos": [
+        23.65,
+        0,
+        24
+      ],
+      "rot": 0,
+      "scale": 1
+    },
+    {
+      "kind": "tree",
+      "species": "oak",
+      "height": 8.19,
+      "id": "oak_tree_21",
+      "name": "Oak tree 20",
+      "pos": [
+        23.65,
+        0,
+        24
+      ],
+      "rot": 0,
+      "scale": 1
     }
   ],
   "meta": {
-    "version": "original",
+    "version": "Llandough",
     "camera_seq": 22414,
-    "last": "dragon"
+    "last": "oak_tree_21"
   },
-  "updated": "2026-10-21T22:51:47.973Z"
+  "updated": "2026-10-24T09:48:27.905Z"
 }

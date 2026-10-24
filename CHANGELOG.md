@@ -1,5 +1,14 @@
 # Scene changes
 
+## 2026-10-24 09:58 UTC (10 min idle)
+- The St Dochdwy's churchyard is yellow now.
+- The Farm pond is black now.
+- Removed the dragon.
+- Renamed it Llandough.
+- Saved as "Llandough".
+- Removed the Oak tree.
+- Added 20 oaks by the Llandough.
+
 ## 2026-10-21 22:21 UTC (locked)
 - It's night now.
 - Undid the last change.
