@@ -613,7 +613,8 @@ $("rmall").onclick = () => { highlight(null); flyTo(OVERVIEW, 1400, true); };
 if (/[?&]layer=roadmap/.test(location.search)) setTimeout(() => $("rmbtn").click(), 600);
 
 // ---------- scene sync ----------
-async function loadScene(force) { try { const r = await fetch("/api/scene" + (SCENE && !force ? "?rev=" + SCENE.rev : ""), { cache: "no-store" }); const j = await r.json(); if (!j.same) render(j); } catch (e) {} }
+let STATIC_SCENE = false;
+async function loadScene(force) { try { if (STATIC_SCENE && !force) return; let r = STATIC_SCENE ? null : await fetch("/api/scene" + (SCENE && !force ? "?rev=" + SCENE.rev : ""), { cache: "no-store" }).catch(() => null); if (!r || !r.ok) { STATIC_SCENE = true; r = await fetch("/agent/scene.json", { cache: "no-cache" }); } const j = await r.json(); if (!j.same) render(j); } catch (e) {} }
 await loadScene(true);
 setInterval(() => { if (document.visibilityState === "visible" && !busy) loadScene(); }, 3000);
 
