@@ -392,6 +392,207 @@ const BUILD = { building, tree, fence, wall, hedge, path, water, field, label, s
 // ---------- the world ----------
 const world = new THREE.Group(); scene.add(world);
 let SCENE = null, camSeq = -1, firstCam = true; const pickables = [];
+
+// ---------- georeferenced historic parcel layer ----------
+const parcelGroup = new THREE.Group();
+parcelGroup.name = "historic-stewart-parcels";
+scene.add(parcelGroup);
+const parcelLabelGroup = new THREE.Group();
+parcelGroup.add(parcelLabelGroup);
+const parcelPickables = [];
+let parcelDataset = null, parcelLayerVisible = true, parcelOrigin = null;
+const H3_MAP_URL = "https://cedwyn.bucklerfamily.estate/tithe-h3/";
+
+function parcelProject(lat, lon) {
+  const scale = 7; // Existing Llandough scene scale: approximately 7 m per world unit.
+  const lat0 = parcelOrigin ? parcelOrigin.lat : 51.452388;
+  const lon0 = parcelOrigin ? parcelOrigin.lon : -3.19938;
+  return [
+    (lon - lon0) * 111320 * Math.cos(lat0 * Math.PI / 180) / scale,
+    34 + (lat0 - lat) * 111320 / scale
+  ];
+}
+function parcelLandColour(use) {
+  const s = String(use || "").toLowerCase();
+  if (s.includes("wood")) return "#315b39";
+  if (s.includes("orchard")) return "#789a51";
+  if (s.includes("arable")) return "#987c49";
+  if (s.includes("meadow")) return "#73975b";
+  if (s.includes("pasture")) return "#5f8d4e";
+  if (s.includes("garden")) return "#719a58";
+  if (s.includes("waste")) return "#89816d";
+  return "#687f57";
+}
+function parcelReadingColour(reading) {
+  return reading === "yes" ? "#d2b978" : reading === "unclear" ? "#e6a04a" : "#98a3a4";
+}
+function parcelShapePath(ring, PathType) {
+  const path = new PathType();
+  const first = parcelProject(Number(ring[0][0]), Number(ring[0][1]));
+  path.moveTo(first[0], -first[1]);
+  for (let i = 1; i < ring.length; i++) {
+    const xy = parcelProject(Number(ring[i][0]), Number(ring[i][1]));
+    path.lineTo(xy[0], -xy[1]);
+  }
+  path.closePath();
+  return path;
+}
+function addHistoricParcel(p) {
+  if (!Array.isArray(p.poly) || !p.poly.length || !Array.isArray(p.poly[0]) || p.poly[0].length < 4) return null;
+  const rings = p.poly.filter(r => Array.isArray(r) && r.length >= 4);
+  const shape = parcelShapePath(rings[0], THREE.Shape);
+  for (const ring of rings.slice(1)) shape.holes.push(parcelShapePath(ring, THREE.Path));
+  const geometry = new THREE.ShapeGeometry(shape, 1);
+  geometry.rotateX(-Math.PI / 2);
+  const fill = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({
+    color: parcelLandColour(p.tithe_land_use),
+    transparent: true,
+    opacity: 0.24,
+    side: THREE.DoubleSide,
+    depthWrite: false
+  }));
+  fill.position.y = 0.34;
+  fill.renderOrder = 2;
+  fill.userData.parcel = p;
+  parcelGroup.add(fill);
+  parcelPickables.push(fill);
+
+  const edgeMaterial = new THREE.LineBasicMaterial({
+    color: parcelReadingColour(p.number_read),
+    transparent: true,
+    opacity: 0.96
+  });
+  for (const ring of rings) {
+    const points = ring.map(c => {
+      const xy = parcelProject(Number(c[0]), Number(c[1]));
+      return new THREE.Vector3(xy[0], 0.43, xy[1]);
+    });
+    const outline = new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints(points), edgeMaterial);
+    outline.renderOrder = 4;
+    parcelGroup.add(outline);
+  }
+
+  const points = rings[0].map(c => parcelProject(Number(c[0]), Number(c[1])));
+  const centre = p.centroid_lat && p.centroid_lon
+    ? parcelProject(Number(p.centroid_lat), Number(p.centroid_lon))
+    : [
+        points.reduce((sum, v) => sum + v[0], 0) / points.length,
+        points.reduce((sum, v) => sum + v[1], 0) / points.length
+      ];
+  let label = "";
+  if (/^\\d+$/.test(String(p.stewart_no))) label = String(p.stewart_no);
+  else if (/homestead group/i.test(p.stewart_no)) label = "1–4";
+  else if (/not read A/i.test(p.stewart_no)) label = "A";
+  else if (/not read B/i.test(p.stewart_no)) label = "B";
+  if (label) {
+    const sprite = textSprite(label, parcelReadingColour(p.number_read), 2.4);
+    sprite.position.set(centre[0], 0.95, centre[1]);
+    parcelLabelGroup.add(sprite);
+  }
+  return fill;
+}
+function parcelGroupForNumber(p) {
+  if (!p || p.poly || !/homestead group/i.test(String(p.status || ""))) return null;
+  return (parcelDataset?.records || []).find(x =>
+    /homestead group/i.test(String(x.stewart_no || "")) && x.poly
+  );
+}
+function parcelCard(p, mappedAs) {
+  mappedAs = mappedAs || p;
+  const numbered = /^\\d+$/.test(String(p.stewart_no));
+  const details = [
+    "Plan entry: " + p.stewart_no,
+    "Number reading: " + (p.number_read || "not recorded"),
+    "1841 tithe plot(s): " + (p.tithe_plots_1841 || "not matched / not recorded"),
+    "Land use: " + (p.tithe_land_use || "not recorded"),
+    "Area as entered: " + (p.tithe_area_as_entered || "not recorded"),
+    "Landowner column: " + (p.tithe_landowner_as_entered || "not recorded"),
+    "Occupier column: " + (p.tithe_occupier_as_entered || "not recorded"),
+    "Geometry source: " + (mappedAs && mappedAs.poly ? (mappedAs.geometry_source || "mapped outline") : "no separate outline in the current register"),
+    "OS grid reference: " + (p.os_grid_ref || "not recorded"),
+    "H3 resolution 8: " + (p.h3_res8 || "not recorded")
+  ];
+  if (mappedAs && mappedAs !== p) details.push("Mapped together as: " + mappedAs.stewart_no);
+  details.push("Register status: " + (p.status || (p.poly ? "placed" : "not placed")));
+  details.push("Historical reconstruction only — not a current title boundary.");
+  SELECTED = null;
+  $("cardt").textContent = (numbered ? "Stewart plan no. " : "") + p.stewart_no;
+  $("cardd").textContent = details.join("\\n");
+  const link = $("cardl");
+  link.textContent = "Open Uber H3 map";
+  link.href = H3_MAP_URL;
+  link.hidden = false;
+  $("card").hidden = false;
+}
+function focusHistoricParcel(p) {
+  const mapped = p.poly ? p : parcelGroupForNumber(p);
+  if (mapped && mapped.poly) {
+    const points = mapped.poly[0].map(c => parcelProject(Number(c[0]), Number(c[1])));
+    const cx = points.reduce((sum, q) => sum + q[0], 0) / points.length;
+    const cz = points.reduce((sum, q) => sum + q[1], 0) / points.length;
+    flyTo({ pos: [cx + 18, 72, cz + 72], target: [cx, 0, cz] }, 900, true);
+  }
+  parcelCard(p, mapped);
+}
+function fillParcelRegister(data) {
+  const list = $("parcelregister");
+  const groups = $("parcelgroups");
+  list.replaceChildren();
+  groups.replaceChildren();
+  const numbered = data.records
+    .filter(p => /^\\d+$/.test(String(p.stewart_no)))
+    .sort((a, b) => Number(a.stewart_no) - Number(b.stewart_no));
+  for (const p of numbered) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.textContent = p.stewart_no;
+    button.title = p.status || p.number_read || "No further note";
+    const isGrouped = !p.poly && /homestead group/i.test(String(p.status || ""));
+    button.className = p.poly
+      ? (p.number_read === "unclear" ? "unclear" : "clear")
+      : (isGrouped ? "grouped" : "missing");
+    button.addEventListener("click", () => focusHistoricParcel(p));
+    list.appendChild(button);
+  }
+  const extras = data.records.filter(p => !/^\\d+$/.test(String(p.stewart_no)));
+  for (const p of extras) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.textContent = /homestead group/i.test(p.stewart_no)
+      ? "Homestead"
+      : /not read A/i.test(p.stewart_no)
+        ? "Area A"
+        : /not read B/i.test(p.stewart_no) ? "Area B" : p.stewart_no;
+    button.title = p.stewart_no;
+    button.addEventListener("click", () => focusHistoricParcel(p));
+    groups.appendChild(button);
+  }
+  const placed = numbered.filter(p => p.poly).length;
+  $("parcelstats").textContent =
+    numbered.length + " numbered entries · " + placed + " separately outlined · " +
+    extras.length + " additional mapped groups";
+}
+async function loadHistoricParcelLayer() {
+  try {
+    const response = await fetch("/parcels.json", { cache: "force-cache" });
+    if (!response.ok) throw new Error("Parcel data request returned " + response.status);
+    const data = await response.json();
+    parcelDataset = data;
+    const origin = data.records.find(p =>
+      /homestead group/i.test(String(p.stewart_no || "")) && p.centroid_lat && p.centroid_lon
+    );
+    if (origin) parcelOrigin = { lat: Number(origin.centroid_lat), lon: Number(origin.centroid_lon) };
+    for (const p of data.records) if (p.poly) addHistoricParcel(p);
+    fillParcelRegister(data);
+    parcelGroup.visible = parcelLayerVisible;
+    $("parcelbtn").disabled = false;
+  } catch (error) {
+    console.warn("Historic parcel layer unavailable", error);
+    $("parcelstats").textContent = "Historical parcel data could not be loaded. The 3D scene remains available.";
+    $("parcelbtn").disabled = true;
+  }
+}
+
 function disposeGroup(g) {
   const shared = new Set(Object.values(MATC)), materials = new Set(), geometries = new Set();
   g.traverse(o => {
@@ -452,10 +653,29 @@ canvas.addEventListener("pointerdown", e => { down = { x: e.clientX, y: e.client
 canvas.addEventListener("pointerup", e => { if (!down || walking) return; const moved = Math.hypot(e.clientX - down.x, e.clientY - down.y); if (moved > 8 || performance.now() - down.t > 600) return;
   const r = canvas.getBoundingClientRect(); ptr.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1); ray.setFromCamera(ptr, camera);
   if (RM_ON && rmPick()) return;
-  const hit = ray.intersectObjects(pickables, true)[0]; if (!hit) { closeCard(); return; } let g = hit.object; while (g && !g.userData.id) g = g.parent; if (!g) return;
+  const hits = ray.intersectObjects([...pickables, ...(parcelLayerVisible ? parcelPickables : [])], true);
+  const hit = hits[0];
+  if (!hit) { closeCard(); return; }
+  if (hit.object.userData.parcel) { parcelCard(hit.object.userData.parcel); return; }
+  let g = hit.object; while (g && !g.userData.id) g = g.parent; if (!g) return;
   const o = SCENE.objects.find(x => x.id === g.userData.id); if (o) openCard(o); });
 function openCard(o) { SELECTED = o.id; $("cardt").textContent = o.name || o.id; const kind = o.kind === "tree" ? (o.species || "") + " tree" : o.kind; $("cardd").textContent = (o.label && o.label.tag ? o.label.tag + " · " : "") + kind + (ADMIN ? " · say “this” to change it" : ""); const l = $("cardl"); l.textContent = "Open site"; if (o.url) { l.href = o.url; l.hidden = false; } else l.hidden = true; $("card").hidden = false; }
 function closeCard() { $("card").hidden = true; SELECTED = null; }
+$("parcelbtn").onclick = () => {
+  parcelLayerVisible = !parcelLayerVisible;
+  parcelGroup.visible = parcelLayerVisible;
+  $("parcelbtn").setAttribute("aria-pressed", String(parcelLayerVisible));
+  $("parcelleg").hidden = !parcelLayerVisible;
+  if (!parcelLayerVisible) closeCard();
+  else flyTo({ pos: [0, 168, 218], target: [0, 0, 34] }, 1100, true);
+};
+$("parcelx").onclick = () => {
+  parcelLayerVisible = false;
+  parcelGroup.visible = false;
+  $("parcelbtn").setAttribute("aria-pressed", "false");
+  $("parcelleg").hidden = true;
+  closeCard();
+};
 $("cardx").onclick = closeCard;
 $("home").onclick = () => SCENE && flyTo(SCENE.env.camera || { pos: [42, 34, 92], target: [0, 0, 28] }, 1200);
 
@@ -485,6 +705,7 @@ renderer.setAnimationLoop(() => {
     camera.position.x += (-Math.sin(yaw) * f + Math.cos(yaw) * st) * sp; camera.position.z += (-Math.cos(yaw) * f - Math.sin(yaw) * st) * sp; camera.position.y = 1.7; camera.rotation.set(pitch, yaw, 0, "YXZ"); }
   else controls.update();
   if (precip) { const a = precip.geometry.attributes.position, v = precip.userData.kind === "snow" ? 4 : 38; for (let i = 0; i < a.count; i++) { let y = a.getY(i) - v * dt; if (y < 0) y += 90; a.setY(i, y); } a.needsUpdate = true; precip.position.set(camera.position.x, 0, camera.position.z); }
+  parcelLabelGroup.visible = parcelLayerVisible && camera.position.distanceTo(controls.target) < 155;
   if (rmHL) rmHL.children.forEach(o => { if (o.userData.pulse) { const s = 1 + 0.25 * Math.sin(performance.now() / 220); o.scale.set(s, s, s); } });
   renderer.render(scene, camera);
 });
@@ -616,6 +837,7 @@ if (/[?&]layer=roadmap/.test(location.search)) setTimeout(() => $("rmbtn").click
 let STATIC_SCENE = false;
 async function loadScene(force) { try { if (STATIC_SCENE && !force) return; let r = STATIC_SCENE ? null : await fetch("/api/scene" + (SCENE && !force ? "?rev=" + SCENE.rev : ""), { cache: "no-store" }).catch(() => null); if (!r || !r.ok) { STATIC_SCENE = true; r = await fetch("/agent/scene.json", { cache: "no-cache" }); } const j = await r.json(); if (!j.same) render(j); } catch (e) {} }
 await loadScene(true);
+loadHistoricParcelLayer();
 setInterval(() => { if (document.visibilityState === "visible" && !busy) loadScene(); }, 3000);
 
 // ---------- admin ----------
