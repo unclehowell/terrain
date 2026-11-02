@@ -9,7 +9,18 @@ The Cedwyn Estate 3D walk (https://bucklerfamily.estate/3d/) as a live, editable
 - One Cloudflare Worker (`worker/index.js`) serves the page, the scene API and the voice agent.
 - The scene is a JSON scene graph (`worker/initial-scene.json`): named objects (buildings, trees, fences, walls, paths, water, fields, labels, markers, rocks, lamps, benches) plus time of day, weather and camera. `worker/scene-ops.js` holds every edit as a pure function, tested in `test/`.
 - The live scene, undo/redo history and saved versions are stored in R2 (`terrain-scene` bucket), so every visitor sees the latest scene; open pages refresh every 5 seconds.
-- The browser renders it with three.js (`worker/app.js.txt`).
+- The browser renders it with three.js (`worker/app.js.txt`). The historic parcel overlay is served separately from `worker/parcels-data.json`; it does not alter the editable live scene graph.
+
+## Historic Stewart-plan parcel layer
+
+The **Parcels** control overlays the Stewart-plan reconstruction from the Cedwyn Tithe H3 app. The Worker serves `worker/parcels-data.json`, which retains all 59 numbered register entries and three additional mapped group records. Source CSV fields are joined with polygon coordinates from the H3 `parcels.json` only where the exact Stewart number or group label matches.
+
+- 40 numbered entries have their own mapped outline. Numbers 1–4 are represented together by the homestead-group geometry; number 18 and numbers 46–59 have no separate outline in the current reading. Two further mapped areas are labelled not read A and not read B.
+- H3 georeferencing v0.2.0: seven-control-point affine correction to OpenStreetMap / OS six-inch c.1900, RMS 6.8 m. The separate Stewart-plan-to-tithe affine match uses 20 fields and is about 13 m RMS. These are fit residuals, not parcel-specific accuracy guarantees.
+- A polygon retains its source (Stewart plan outline or the relevant 1841 tithe plot boundary), plan-number reading status, tithe plot(s), land-use and owner/occupier columns. Missing boundaries stay missing; no geometry is invented.
+- This is a historical reconstruction, not a current cadastral or title boundary. The surrounding 3D ground and buildings remain schematic. LiDAR-derived elevation and Gaussian-splat rendering are not yet implemented.
+
+Source: [Tithe H3 map](https://cedwyn.bucklerfamily.estate/tithe-h3/), [59-number register](https://cedwyn.bucklerfamily.estate/tithe-h3/data/stewart-parcels.csv), [georeferenced parcel geometry](https://cedwyn.bucklerfamily.estate/tithe-h3/data/parcels.json).
 
 ## The call
 
