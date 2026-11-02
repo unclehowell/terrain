@@ -4,16 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Terrain · Cedwyn Estate in 3D</title>
-<meta name="description" content="The Cedwyn Estate and Great House Farm (Tŷ Mawr), Llandough, as a live 3D landscape. Orbit, zoom and walk; tap a building to open its site.">
+<meta name="description" content="Explore Cedwyn Estate, Llandough and Leckwith in 3D with a selectable reconstruction of the 59-number Stewart-plan parcel register.">
 <meta property="og:title" content="Terrain · Cedwyn Estate in 3D">
-<meta property="og:description" content="The Cedwyn Estate and Great House Farm (Tŷ Mawr) as a live 3D landscape.">
+<meta property="og:description" content="A 3D view of Cedwyn Estate with the historical Stewart-plan parcel layer.">
 <meta property="og:url" content="https://terrain.bucklerfamily.estate/">
 <meta name="theme-color" content="#000000">
 <link rel="canonical" href="https://terrain.bucklerfamily.estate/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="alternate" type="application/json" href="/agent/scene.json" title="Current scene (data)">
-<link rel="stylesheet" href="/style.css?v=1.5.2">
+<link rel="stylesheet" href="/style.css?v=1.6.0">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"Terrain · Cedwyn Estate in 3D","url":"https://terrain.bucklerfamily.estate/","inLanguage":"en-GB","publisher":{"@id":"https://bucklerfamily.estate/#org"}},{"@type":"Organization","@id":"https://bucklerfamily.estate/#org","name":"Williams–Buckler family","url":"https://bucklerfamily.estate/"}]}</script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 <script src="https://bucklerfamily.estate/ghf-lang/ghf-webmcp.js" defer></script>
@@ -24,7 +24,18 @@
   <h1 class="vh">Terrain · Cedwyn Estate in 3D</h1>
   <canvas id="c" aria-label="3D view of the Cedwyn Estate and Great House Farm" tabindex="0"></canvas>
   <div id="tl"><span id="mode" class="chip">View only</span></div>
-  <div id="tr"><button id="rmbtn" class="tbtn" type="button" aria-pressed="false">Roadmap</button><button id="walk" class="tbtn" type="button" aria-pressed="false">Walk</button><button id="home" class="tbtn" type="button" aria-label="Reset view">⌂</button></div>
+  <div id="tr"><button id="parcelbtn" class="tbtn" type="button" aria-pressed="true">Parcels</button><button id="rmbtn" class="tbtn" type="button" aria-pressed="false">Roadmap</button><button id="walk" class="tbtn" type="button" aria-pressed="false">Walk</button><button id="home" class="tbtn" type="button" aria-label="Reset view">⌂</button></div>
+  <section id="parcelleg" aria-label="Historic parcel register and map accuracy">
+    <div class="parcelhead"><b>Stewart plan · 59 numbers</b><span class="parcel-actions"><button id="parcelfit" type="button">Fit area</button><button id="parcelx" type="button" aria-label="Hide parcel layer">×</button></span></div>
+    <p id="parcelstats">Loading historical parcel data…</p>
+    <p class="parcel-explain">40 individually mapped numbered entries. Nos. 1–4 are shown together as the homestead group; no. 18 and nos. 46–59 have no separate outline in the current reading. Two further mapped areas are labelled not read A and B.</p>
+    <div class="parcel-key"><span><i class="p-clear"></i>Read</span><span><i class="p-unclear"></i>Unclear</span><span><i class="p-group"></i>Grouped / unread</span><span><i class="p-missing"></i>No outline</span></div>
+    <div class="land-key"><span><i class="l-wood"></i>Wood</span><span><i class="l-meadow"></i>Meadow / pasture</span><span><i class="l-arable"></i>Arable</span><span><i class="l-orchard"></i>Orchard</span></div>
+    <div id="parcelregister" aria-label="Stewart plan numbers 1 to 59"></div>
+    <div id="parcelgroups" aria-label="Additional mapped group areas"></div>
+    <p class="parcel-source">H3 data v0.2.0 · plan-to-map fit 6.8 m RMS; separate plan-to-tithe fit about 13 m RMS. Fit residuals are not survey guarantees. Historical reconstruction, not current title boundaries.</p>
+    <a class="tbtn" href="https://cedwyn.bucklerfamily.estate/tithe-h3/" target="_blank" rel="noopener">Open Uber H3 map</a>
+  </section>
   <div id="card" role="dialog" aria-live="polite" hidden><button id="cardx" class="x" type="button" aria-label="Close">×</button><b id="cardt"></b><p id="cardd"></p><a id="cardl" class="tbtn gold" target="_blank" rel="noopener">Open site</a></div>
   <div id="rmleg" hidden><span class="lg"><i style="background:#43b649"></i>Done</span><span class="lg"><i style="background:#e53935"></i>Missed</span><span class="lg"><i style="background:#f2c94c"></i>Next</span><span class="lg"><i style="background:#9aa3ad"></i>Later</span><span class="lg"><i style="background:#ffd54a;border-radius:50% 50% 2px 2px"></i>Today</span>
     <span class="rmb"><button id="rmdue" class="tbtn" type="button">Due this week</button><button id="rmsop" class="tbtn" type="button">Trigger SOP</button><button id="rmall" class="tbtn" type="button">All trails</button></span>
@@ -47,11 +58,12 @@
 </main>
 <section class="about">
   <h2>Cedwyn Estate in 3D</h2>
-  <p>Every Great House Farm site stands as a building on the stone path. Tŷ Mawr farmhouse, the barn, the fields, the pond and St Dochdwy's churchyard lie to the south. Drag to look around, pinch or scroll to zoom, and tap a building to open its site. The scene is live: changes appear here as they are made.</p>
+  <p>The historic parcel layer follows the Stewart plan of Cedfin alias Tŷ Mawr as traced through the 1841 Llandough, Cogan and Leckwith tithe map and aligned to modern mapping. Toggle <b>Parcels</b> to explore the 59-number register; tap an outline or number to inspect its transcribed tithe details and source status. Grouped and unplaced entries remain identified rather than being given invented boundaries.</p>
+  <p>The surrounding ground surface and buildings are still schematic in this version. The parcel overlay uses the georeferenced H3 source geometry; it is not yet a LiDAR-derived elevation surface or photogrammetric reconstruction. Drag to look around, pinch or scroll to zoom, and tap a building to open its site.</p>
   <p>Tap <b>Roadmap</b> for the disclosure trails: one path per institution from Tŷ Mawr, climbing from the first request through the deadline, internal review, the ICO, the Tribunal, complaint and the pre-action letter to court. Branches show where a reply ends a trail or opens the trigger event procedure; red crosses mark routes that close. The walker on each trail stands at today's date.</p>
   <p id="upd" class="upd"></p>
   <p><a href="https://bucklerfamily.estate/3d/">First-person walk</a> · <a href="/agent/scene.json">Scene data</a> · <a href="/api/roadmap">Roadmap data</a> · <a href="https://github.com/unclehowell/terrain/commits/main/data/scene.json">Published changes</a></p>
 </section>
-<script type="module" src="/app.js?v=1.5.2"></script>
+<script type="module" src="/app.js?v=1.6.0"></script>
 </body>
 </html>
