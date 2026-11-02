@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Terrain · Cedwyn Estate in 3D</title>
-<meta name="description" content="The Cedwyn Estate and Great House Farm (Tŷ Mawr), Llandough, as a live 3D landscape. Orbit, zoom and walk; tap a building to open its site.">
+<meta name="description" content="Explore Cedwyn Estate, Llandough and Leckwith in 3D with a selectable reconstruction of the 59-number Stewart-plan parcel register.">
 <meta property="og:title" content="Terrain · Cedwyn Estate in 3D">
-<meta property="og:description" content="The Cedwyn Estate and Great House Farm (Tŷ Mawr) as a live 3D landscape.">
+<meta property="og:description" content="A 3D view of Cedwyn Estate with the historical Stewart-plan parcel layer.">
 <meta property="og:url" content="https://terrain.bucklerfamily.estate/">
 <meta name="theme-color" content="#000000">
 <link rel="canonical" href="https://terrain.bucklerfamily.estate/">
@@ -26,10 +26,11 @@
   <div id="tl"><span id="mode" class="chip">View only</span></div>
   <div id="tr"><button id="parcelbtn" class="tbtn" type="button" aria-pressed="true">Parcels</button><button id="rmbtn" class="tbtn" type="button" aria-pressed="false">Roadmap</button><button id="walk" class="tbtn" type="button" aria-pressed="false">Walk</button><button id="home" class="tbtn" type="button" aria-label="Reset view">⌂</button></div>
   <section id="parcelleg" aria-label="Historic parcel register and map accuracy">
-    <div class="parcelhead"><b>Stewart plan · 59 numbers</b><button id="parcelx" type="button" aria-label="Hide parcel layer">×</button></div>
+    <div class="parcelhead"><b>Stewart plan · 59 numbers</b><span class="parcel-actions"><button id="parcelfit" type="button">Fit area</button><button id="parcelx" type="button" aria-label="Hide parcel layer">×</button></span></div>
     <p id="parcelstats">Loading historical parcel data…</p>
     <p class="parcel-explain">40 individually mapped numbered entries. Nos. 1–4 are shown together as the homestead group; no. 18 and nos. 46–59 have no separate outline in the current reading. Two further mapped areas are labelled not read A and B.</p>
     <div class="parcel-key"><span><i class="p-clear"></i>Read</span><span><i class="p-unclear"></i>Unclear</span><span><i class="p-group"></i>Grouped / unread</span><span><i class="p-missing"></i>No outline</span></div>
+    <div class="land-key"><span><i class="l-wood"></i>Wood</span><span><i class="l-meadow"></i>Meadow / pasture</span><span><i class="l-arable"></i>Arable</span><span><i class="l-orchard"></i>Orchard</span></div>
     <div id="parcelregister" aria-label="Stewart plan numbers 1 to 59"></div>
     <div id="parcelgroups" aria-label="Additional mapped group areas"></div>
     <p class="parcel-source">H3 data v0.2.0 · plan-to-map fit 6.8 m RMS; separate plan-to-tithe fit about 13 m RMS. Fit residuals are not survey guarantees. Historical reconstruction, not current title boundaries.</p>
