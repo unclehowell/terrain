@@ -517,7 +517,7 @@ function parcelCard(p, mappedAs) {
   details.push("Historical reconstruction only — not a current title boundary.");
   SELECTED = null;
   $("cardt").textContent = (numbered ? "Stewart plan no. " : "") + p.stewart_no;
-  $("cardd").textContent = details.join("\\n");
+  $("cardd").textContent = details.join("\n");
   const link = $("cardl");
   link.textContent = "Open Uber H3 map";
   link.href = H3_MAP_URL;
