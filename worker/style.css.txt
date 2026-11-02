@@ -79,3 +79,30 @@ canvas#c{position:absolute;inset:0;width:100%;height:100%;display:block;outline:
 .vpill{font-size:11px;padding:3px 8px;border-radius:999px;background:#1d2228;color:#cfd6dd;border:1px solid #39424b;white-space:nowrap}
 .vpill[data-mode="On-device"]{background:#173a1f;color:#a8e6b0;border-color:#2f7a3d}
 .vpill[data-mode="Browser"]{background:#3a3217;color:#f2dc8a;border-color:#7a6a2f}
+
+/* Historic Stewart-plan parcel overlay */
+#parcelleg{position:absolute;top:58px;left:10px;z-index:4;width:min(310px,calc(100% - 20px));max-height:min(58vh,520px);overflow:hidden;display:flex;flex-direction:column;gap:7px;padding:10px 11px;background:rgba(5,9,8,.88);color:#fff;border:1px solid rgba(215,190,130,.55);border-radius:14px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-size:12px}
+#parcelleg[hidden]{display:none!important}
+.parcelhead{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.parcelhead b{font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:#ead6a2}
+#parcelx{width:30px;height:30px;border:0;border-radius:50%;background:rgba(255,255,255,.1);color:#fff;font-size:21px;cursor:pointer}
+#parcelleg p{margin:0;line-height:1.35;color:#d2d7d2}
+#parcelstats{color:#f1d58f!important;font-weight:700}
+.parcel-explain{font-size:11px}
+.parcel-key{display:flex;flex-wrap:wrap;gap:4px 10px;color:#d9ded8;font-size:10px}
+.parcel-key span{display:inline-flex;align-items:center;gap:4px}
+.parcel-key i{display:inline-block;width:9px;height:9px;border-radius:3px}
+.p-clear{background:#c9ad69}.p-unclear{background:#e6a04a}.p-group{background:#8f9b9e}.p-missing{background:#3b4345}
+#parcelregister{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;max-height:180px;overflow:auto;padding:2px}
+#parcelregister button,#parcelgroups button{min-height:30px;border:1px solid rgba(255,255,255,.18);border-radius:7px;background:rgba(255,255,255,.07);color:#fff;font:700 12px var(--font);cursor:pointer}
+#parcelregister button.clear{border-color:#ad985f;background:rgba(201,173,105,.18)}
+#parcelregister button.unclear{border-color:#e6a04a;background:rgba(230,160,74,.17)}
+#parcelregister button.grouped{border-color:#8f9b9e;background:rgba(143,155,158,.22)}
+#parcelregister button.missing{color:#8d979a;background:rgba(40,46,48,.6);border-color:rgba(255,255,255,.08)}
+#parcelregister button:focus-visible,#parcelgroups button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+#parcelgroups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px}
+#parcelgroups button{font-size:10px;letter-spacing:.02em}
+.parcel-source{font-size:10px!important;color:#b5bcb7!important}
+#parcelleg>a{align-self:flex-start;min-height:30px;padding:6px 10px;font-size:10px}
+#cardd{white-space:pre-line}
+@media(max-width:480px){#parcelleg{top:50px;left:8px;width:min(280px,calc(100% - 16px));max-height:50vh;padding:8px}#parcelregister{max-height:138px;grid-template-columns:repeat(6,minmax(0,1fr))}#parcelgroups{grid-template-columns:repeat(3,minmax(0,1fr))}#parcelleg .parcel-explain{font-size:10px}}
