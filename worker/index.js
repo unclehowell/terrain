@@ -1,6 +1,7 @@
 // terrain.bucklerfamily.estate — Worker: static app, scene API, passphrase gate, voice agent. — Sion's Tab agent
 import { apply, summary, resolve, norm, parseColor, KINDS, TEXTURES, WEATHER, llandoughRelayout } from "./scene-ops.js";
 import INITIAL_TXT from "./initial-scene.json";
+import PARCEL_DATA from "./parcels-data.json";
 const INITIAL = JSON.parse(INITIAL_TXT);
 import HTML from "./index.html";
 import APP from "./app.js.txt";
@@ -297,6 +298,7 @@ export default {
         if (p === "/app.js") return T(APP, "text/javascript; charset=utf-8", { "cache-control": "public, max-age=300" });
         if (p === "/voice-worker.js") return T(VOICE_WORKER, "text/javascript; charset=utf-8", { "cache-control": "public, max-age=300" });
         if (p === "/style.css") return T(CSS, "text/css; charset=utf-8", { "cache-control": "public, max-age=300" });
+        if (p === "/parcels.json") return T(PARCEL_DATA, "application/json; charset=utf-8", { "cache-control": "public, max-age=86400", "access-control-allow-origin": "*" });
         if (p === "/favicon.svg" || p === "/favicon.ico") return T(FAVICON, "image/svg+xml", { "cache-control": "public, max-age=86400" });
         if (p === "/robots.txt") return T(ROBOTS, "text/plain; charset=utf-8");
         if (p === "/sitemap.xml") return T(SITEMAP, "application/xml; charset=utf-8");
