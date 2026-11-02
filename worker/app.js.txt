@@ -661,6 +661,7 @@ canvas.addEventListener("pointerup", e => { if (!down || walking) return; const 
   const o = SCENE.objects.find(x => x.id === g.userData.id); if (o) openCard(o); });
 function openCard(o) { SELECTED = o.id; $("cardt").textContent = o.name || o.id; const kind = o.kind === "tree" ? (o.species || "") + " tree" : o.kind; $("cardd").textContent = (o.label && o.label.tag ? o.label.tag + " · " : "") + kind + (ADMIN ? " · say “this” to change it" : ""); const l = $("cardl"); l.textContent = "Open site"; if (o.url) { l.href = o.url; l.hidden = false; } else l.hidden = true; $("card").hidden = false; }
 function closeCard() { $("card").hidden = true; SELECTED = null; }
+$("parcelfit").onclick = () => flyTo({ pos: [0, 168, 218], target: [0, 0, 34] }, 1100, true);
 $("parcelbtn").onclick = () => {
   parcelLayerVisible = !parcelLayerVisible;
   parcelGroup.visible = parcelLayerVisible;
