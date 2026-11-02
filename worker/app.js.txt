@@ -480,7 +480,7 @@ function addHistoricParcel(p) {
         points.reduce((sum, v) => sum + v[1], 0) / points.length
       ];
   let label = "";
-  if (/^\\d+$/.test(String(p.stewart_no))) label = String(p.stewart_no);
+  if (/^\d+$/.test(String(p.stewart_no))) label = String(p.stewart_no);
   else if (/homestead group/i.test(p.stewart_no)) label = "1–4";
   else if (/not read A/i.test(p.stewart_no)) label = "A";
   else if (/not read B/i.test(p.stewart_no)) label = "B";
@@ -499,7 +499,7 @@ function parcelGroupForNumber(p) {
 }
 function parcelCard(p, mappedAs) {
   mappedAs = mappedAs || p;
-  const numbered = /^\\d+$/.test(String(p.stewart_no));
+  const numbered = /^\d+$/.test(String(p.stewart_no));
   const details = [
     "Plan entry: " + p.stewart_no,
     "Number reading: " + (p.number_read || "not recorded"),
@@ -540,7 +540,7 @@ function fillParcelRegister(data) {
   list.replaceChildren();
   groups.replaceChildren();
   const numbered = data.records
-    .filter(p => /^\\d+$/.test(String(p.stewart_no)))
+    .filter(p => /^\d+$/.test(String(p.stewart_no)))
     .sort((a, b) => Number(a.stewart_no) - Number(b.stewart_no));
   for (const p of numbered) {
     const button = document.createElement("button");
@@ -554,7 +554,7 @@ function fillParcelRegister(data) {
     button.addEventListener("click", () => focusHistoricParcel(p));
     list.appendChild(button);
   }
-  const extras = data.records.filter(p => !/^\\d+$/.test(String(p.stewart_no)));
+  const extras = data.records.filter(p => !/^\d+$/.test(String(p.stewart_no)));
   for (const p of extras) {
     const button = document.createElement("button");
     button.type = "button";
