@@ -1,0 +1,24 @@
+import { test } from "node:test"; import assert from "node:assert/strict";
+import { withBasePath, rebaseText } from "../worker/base-path.js";
+const HOST = "terrain.bucklerfamily.estate"; const seen = [];
+const app = { async fetch(req) { const u = new URL(req.url); seen.push({ host: u.hostname, path: u.pathname, origin: req.headers.get("origin") });
+  if (u.pathname === "/") return new Response('<link rel="canonical" href="https://terrain.bucklerfamily.estate/"><script src="/app.js?v=1"></script><a href="/agent/scene.json">x</a>', { headers: { "content-type": "text/html; charset=utf-8" } });
+  if (u.pathname === "/app.js") return new Response('fetch("/api/scene"); new Worker("/voice-worker.js?v=1");', { headers: { "content-type": "text/javascript" } });
+  if (u.pathname === "/api/login") return new Response("{}", { headers: { "content-type": "application/json", "set-cookie": "terrain_admin=a.b; Path=/; Max-Age=60; HttpOnly" } });
+  if (u.pathname === "/api/scene") return new Response('{"note":"/api/x"}', { headers: { "content-type": "application/json" } });
+  return new Response("nf", { status: 404 }); } };
+const w = withBasePath(app, HOST);
+test("own host passes straight through", async () => { const r = await w.fetch(new Request("https://" + HOST + "/app.js")); assert.equal(await r.text(), 'fetch("/api/scene"); new Worker("/voice-worker.js?v=1");'); });
+test("bare base redirects", async () => { const r = await w.fetch(new Request("https://bucklerfamily.estate/terrain?x=1")); assert.equal(r.status, 301); assert.equal(r.headers.get("location"), "https://bucklerfamily.estate/terrain/?x=1"); });
+test("other apex paths are not served", async () => { const r = await w.fetch(new Request("https://bucklerfamily.estate/other/")); assert.equal(r.status, 404); });
+test("page is rebased", async () => { const r = await w.fetch(new Request("https://bucklerfamily.estate/terrain/")); const t = await r.text();
+  assert.equal(seen.at(-1).host, HOST); assert.equal(seen.at(-1).path, "/");
+  assert.ok(t.includes('href="https://bucklerfamily.estate/terrain/"')); assert.ok(t.includes('src="/terrain/app.js?v=1"')); assert.ok(t.includes('href="/terrain/agent/scene.json"')); });
+test("script paths are rebased", async () => { const t = await (await w.fetch(new Request("https://bucklerfamily.estate/terrain/app.js"))).text();
+  assert.equal(t, 'fetch("/terrain/api/scene"); new Worker("/terrain/voice-worker.js?v=1");'); });
+test("api JSON is left alone", async () => { const t = await (await w.fetch(new Request("https://bucklerfamily.estate/terrain/api/scene"))).text(); assert.equal(t, '{"note":"/api/x"}'); });
+test("POST from the apex reaches the app with its own origin; cookie scoped", async () => {
+  const r = await w.fetch(new Request("https://bucklerfamily.estate/terrain/api/login", { method: "POST", body: "{}", headers: { origin: "https://bucklerfamily.estate" } }));
+  assert.equal(seen.at(-1).origin, "https://" + HOST); assert.match(r.headers.get("set-cookie"), /Path=\/terrain\//); });
+test("POST from elsewhere is refused", async () => { const r = await w.fetch(new Request("https://bucklerfamily.estate/terrain/api/login", { method: "POST", body: "{}", headers: { origin: "https://evil.example" } })); assert.equal(r.status, 403); });
+test("rebaseText is idempotent on already-based paths", () => { assert.equal(rebaseText('"/terrain/api/x"', HOST), '"/terrain/api/x"'); });

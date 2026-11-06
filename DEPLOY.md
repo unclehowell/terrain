@@ -2,9 +2,10 @@
 
 Cloudflare account 42a4a8d7bfb96321118ada213638d050, zone bucklerfamily.estate (5307ac7d55a77d914b81d79c79532dde).
 
-- Worker: `terrain` (modules: index.js, scene-ops.js, roadmap.js, initial-scene.json, roadmap-snapshot.json, sop-snapshot.json, index.html, app.js.txt, style.css.txt; every non-.js file is a text module).
+- Worker: `terrain` (modules: index.js, base-path.js, scene-ops.js, roadmap.js, initial-scene.json, roadmap-snapshot.json, sop-snapshot.json, index.html, app.js.txt, style.css.txt; every non-.js file is a text module).
 - Bindings: `BUCKET` → R2 bucket `terrain-scene`; `AI` → Workers AI; secrets `PASS_HASHES`, `SESSION_KEY` and `STT_HINT` (extra words for the transcription prompt) (set once; later versions use `inherit` bindings so they carry over).
 - Route `terrain.bucklerfamily.estate/*` → `terrain`, with a proxied AAAA `terrain` → `100::` record.
+- Path routes (owner rule 6 Nov 2026: webapps at paths of bucklerfamily.estate, never subdomains): `bucklerfamily.estate/terrain` and `bucklerfamily.estate/terrain/*` → `terrain`. `base-path.js` serves the app there unchanged (prefix removed before the app sees the request, root-absolute paths in HTML/JS/CSS moved under /terrain/, cookie scoped to /terrain/, POST accepted only from the apex origin). Add the routes only after a version carrying base-path.js is deployed; once /terrain/ is verified live, the subdomain can 301 to the path (a separate change).
 - Upload: `POST /accounts/{account}/workers/workers/{worker_id}/versions` with the modules base64-encoded, then `POST /accounts/{account}/workers/scripts/terrain/deployments` at 100%.
 
 ## Changing the passphrase
