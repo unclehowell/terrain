@@ -7,6 +7,7 @@ import APP from "./app.js.txt";
 import CSS from "./style.css.txt";
 import VOICE_WORKER from "./voice-worker.js.txt";
 import { loadRoadmap, loadSop, roadmapQuery } from "./roadmap.js";
+import { withBasePath } from "./base-path.js";
 
 const HOST = "terrain.bucklerfamily.estate";
 const LLM = "@cf/meta/llama-3.3-70b-instruct-fp8-fast";
@@ -286,7 +287,8 @@ async function noteEdit(env, says) {
 async function sessClose(env, reason) { const ss = await sessGet(env); if (!ss.open) return; closeOpen(ss, reason); await putJ(env, "session.json", ss); }
 async function sessSweep(env) { const ss = await sessGet(env); const t = now(); if (ss.open && t - ss.open.last > IDLE_S) { closeOpen(ss, t - ss.open.started > SESSION_S ? "timeout" : "idle", ss.open.last + IDLE_S); await putJ(env, "session.json", ss); } return ss; }
 
-export default {
+// The app; exported below through withBasePath so it also serves https://bucklerfamily.estate/terrain/ (base-path.js).
+const app = {
   async fetch(req, env, ctx) {
     const url = new URL(req.url), p = url.pathname, ip = req.headers.get("cf-connecting-ip") || "0";
     if (url.hostname !== HOST && !url.hostname.endsWith(".workers.dev")) return Response.redirect(`https://${HOST}${p}`, 301);
@@ -369,3 +371,5 @@ export default {
     } catch (e) { return J({ error: "server", say: "Something went wrong on my side. Try that again?", detail: String(e && e.message || e).slice(0, 200) }, 500); }
   },
 };
+
+export default withBasePath(app, HOST);
